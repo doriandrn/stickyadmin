@@ -1,0 +1,548 @@
+/**
+ * Sticky Admin - Login CSS
+ *
+ * @version 1.0.0
+ * @copyright 2015
+ * @author Dorian Tudorache 
+ * @link www.stickyadmin.net
+ *
+ * @license See Licensing folder
+ *
+ * @package Sticky Admin
+ *
+ */
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    font: 400 12px/21px "Open Sans", Helvetica, Arial, sans-serif
+}
+
+body.login {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    padding: 35px;
+    min-width: 320px;
+}
+
+body.login-w {
+    color: rgba(255, 255, 255, .5);
+}
+
+body.login-b {
+    color: rgba(0, 0, 0, .5);
+    background: #fff;
+}
+
+body.login:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-size: cover!important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-osx-font-smoothing: grayscale;
+    outline: none
+}
+
+a {
+    text-decoration: none;
+    -webkit-transition: color .15s ease-in-out;
+    -moz-transition: color .15s ease-in-out;
+    -o-transition: color .15s ease-in-out;
+    transition: color .15s ease-in-out;
+}
+
+body.login-w a {
+    color: rgba(255, 255, 255, .75);
+}
+
+body.login-b a {
+    color: rgba(0, 0, 0, .75);
+}
+
+h1 {
+    text-transform: uppercase;
+    display: block;
+    font: 700 28px/32px Montserrat, sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 30px
+}
+
+body.login-w h1,
+body.login-w h1 a {
+    color: rgba(255, 255, 255, 1);
+}
+
+body.login-b h1,
+body.login-b h1 a {
+    color: rgba(0, 0, 0, 1);
+}
+
+input {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+input:focus {
+    outline: none
+}
+
+#login {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    width: 280px;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    padding: 0;
+    -webkit-transform: translate( -50%, -50%);
+    -moz-transform: translate( -50%, -50%);
+    -ms-transform: translate( -50%, -50%);
+    -o-transform: translate( -50%, -50%);
+    transform: translate( -50%, -50%);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all .35s ease-in-out;
+    -moz-transition: all .35s ease-in-out;
+    -o-transition: all .35s ease-in-out;
+    transition: all .35s ease-in-out;
+}
+
+body.login-w #login {
+    background: #000;
+}
+
+body.login-b #login {
+    background: #fff;
+}
+
+@media screen and (min-width: 1025px) {
+    #login {
+        width: 360px;
+    }
+}
+
+body.login-w #login>form>p label input[type=text],
+body.login-w #login>form>p label input[type=password],
+body.login-w #login>form>p label input[type=email] {
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
+    color: rgba(255, 255, 255, .45);
+}
+
+body.login-b #login>form>p label input[type=text],
+body.login-b #login>form>p label input[type=password],
+body.login-b #login>form>p label input[type=email] {
+    /* border-bottom: 1px solid rgba(0,0,0,.15); */
+    color: rgba(0, 0, 0, .45);
+}
+
+body.login-w #login>form>p:not(.forgetmenot) label {
+    color: rgba(255, 255, 255, .45);
+}
+
+body.login-b #login>form>p:not(.forgetmenot) label {
+    color: rgba(0, 0, 0, .45);
+}
+
+#login:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.interim-login #login {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+    padding: 20px!important;
+}
+
+.interim-login #login h1 a {
+    height: 60px;
+}
+
+#login p.forgetmenot {
+    text-align: center;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+body.login-b #login p.forgetmenot {
+    background: rgba(0, 0, 0, .05);
+}
+
+body.login-w #login p.forgetmenot {
+    background: rgba(255, 255, 255, .05);
+}
+
+#login input#wp-submit {
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 10px;
+    font: 400 11px/30px Montserrat, "Open Sans", sans-serif;
+    text-transform: uppercase;
+    outline: none;
+    background: transparent;
+    letter-spacing: .2px;
+    cursor: pointer;
+    -webkit-transition: background .2s ease-in-out, color .2s ease-in-out;
+    -moz-transition: background .2s ease-in-out, color .2s ease-in-out;
+    -o-transition: background .2s ease-in-out, color .2s ease-in-out;
+    transition: background .2s ease-in-out, color .2s ease-in-out;
+}
+
+#login h1 {
+    display: block;
+    max-width: 420px;
+    min-height: 90px;
+    margin: 0px auto;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition: -webkit-transform .35s ease-in-out, margin .35s ease-in-out;
+    -moz-transition: -moz-transform .35s ease-in-out, margin .35s ease-in-out;
+    -o-transition: -o-transform .35s ease-in-out, margin .35s ease-in-out;
+    transition: transform .35s ease-in-out, margin .35s ease-in-out
+}
+
+.interim_login #login h1 {
+    margin-bottom: 20px;
+}
+
+body.is_loading:not(.no-js) #login h1 {
+    margin: 0;
+}
+
+body.is_loading:not(.no-js) #login h1:after {
+    width: 32px;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    position: absolute;
+    top: 100%;
+    top: -webkit-calc( 100% - 12px);
+    top: -moz-calc( 100% - 12px);
+    top: calc( 100% - 12px);
+    left: 50%;
+    left: -webkit-calc( 50% - 16px);
+    left: -moz-calc( 50% - 16px);
+    left: calc( 50% - 16px);
+}
+
+body.login:not(.no-js) .backstretch {
+    opacity: 0;
+    -webkit-transition: opacity 3s ease-in-out;
+    -moz-transition: opacity 3s ease-in-out;
+    -o-transition: opacity 3s ease-in-out;
+    transition: opacity 3s ease-in-out;
+}
+
+body.login.backstretched:not(.no-js) .backstretch {
+    opacity: 1;
+}
+
+#login p.message {
+    -webkit-transition: margin .15s ease-in-out;
+    -moz-transition: margin .15s ease-in-out;
+    -o-transition: margin .15s ease-in-out;
+    transition: margin .15s ease-in-out
+}
+
+body.is_loading:not(.no-js) #login p.message {
+    margin-bottom: 0;
+}
+
+#login h1 a {
+    display: block;
+    text-align: center;
+    opacity: 1;
+    -webkit-transition: opacity .15s ease-in-out;
+    -moz-transition: opacity .15s ease-in-out;
+    -o-transition: opacity .15s ease-in-out;
+    transition: opacity .15s ease-in-out
+}
+
+#login h1 a:hover {
+    opacity: .3
+}
+
+#login p#nav a {
+    font-size: 11px;
+    font-style: italic;
+    line-height: 12px;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 5px;
+}
+
+#login > form {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    display: block;
+    max-width: 420px;
+    max-height: 200px;
+    margin: 0px auto;
+    -webkit-transition: all .15s ease-in-out;
+       -moz-transition: all .15s ease-in-out;
+         -o-transition: all .15s ease-in-out;
+            transition: all .15s ease-in-out;
+}
+
+#login h1 a {
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    margin: 0 auto;
+    max-width: 150px;
+    height: 90px;
+    position: relative;
+    text-indent: -9999px;
+    font-size: 0
+}
+
+#login > form p,
+#login p#nav {
+    display: block;
+    line-height: 16px;
+    opacity: 1;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out
+}
+
+#login > form p.s {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    /*padding: 0 20px; */
+}
+
+body.login-b #login > form p.s {
+    border-color: rgba(0, 0, 0, .05);
+}
+
+body.login-w #login > form p.s {
+    border-color: rgba(255, 255, 255, .05);
+}
+
+#login p#nav {
+    text-align: center;
+    margin-bottom: 0;
+    display: none;
+}
+
+#login > form p.submit {
+    margin-bottom: 0;
+    /* padding: 20px 0; */
+    border-bottom: none!important;
+}
+
+#login > form > p label input[type=text],
+#login > form > p label input[type=password],
+#login > form > p label input[type=email] {
+    display: block;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    letter-spacing: .3px;
+    line-height: 20px;
+    border: 0;
+    width: 100%;
+    height: 48px;
+    padding: 13px 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: color .2s ease-in-out, border-color .2s ease-in-out;
+    -moz-transition: color .2s ease-in-out, border-color .2s ease-in-out;
+    -o-transition: color .2s ease-in-out, border-color .2s ease-in-out;
+    transition: color .2s ease-in-out, border-color .2s ease-in-out;
+}
+
+#login br {
+    display: none!important;
+}
+
+body.is_loading:not(.no-js) #login > form {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+}
+
+body.is_loading:not(.no-js) #login > form > p.s {
+    opacity: 0;
+    -webkit-transform: translateY(-25px);
+    -moz-transform: translateY(-25px);
+    -ms-transform: translateY(-25px);
+    -o-transform: translateY(-25px);
+    transform: translateY(-25px)
+}
+
+#login > form > p:not(.forgetmenot) > label,
+#registerform > p:not(.forgetmenot) > label {
+    display: inline-block;
+    vertical-align: top;
+    width: -webkit-calc( 100% - 32px);
+    width: -moz-calc( 100% - 32px);
+    width: calc( 100% - 50px);
+    white-space: nowrap;
+    position: relative;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 0;
+    text-align: left;
+    font-size: 0;
+}
+
+body:not(.is_loading) #login > form > p:first-child:before,
+body:not(.is_loading) #login > form > p:nth-child(2):before {
+    font: 400 16px/48px 'streamline';
+    display: inline-block;
+    width: 32px;
+    float: left;
+    /* border-right: 1px solid rgba(0,0,0,0.05); */
+    padding: 0 10px;
+    width: 50px;
+    /* margin-left: -20px; */
+    olid rgba(0, 0, 0, .05);
+    /* margin-left: -20px; */
+    box-sizing: border-box;
+    text-align: center;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition: color .15s ease-in-out;
+    -moz-transition: color .15s ease-in-out;
+    -o-transition: color .15s ease-in-out;
+    transition: color .15s ease-in-out;
+}
+
+#login > form > p.forgetmenot > label {
+    letter-spacing: 1.1px;
+    font-size: 11px;
+    line-height: 22px;
+    padding: 10px 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: color .15s ease-in-out;
+    -moz-transition: color .15s ease-in-out;
+    -o-transition: color .15s ease-in-out;
+    transition: color .15s ease-in-out;
+}
+
+#login > form > p.forgetmenot > label > input {
+    display: none;
+}
+
+#login > form > p.forgetmenot > label > label {
+    margin-right: 1px;
+    float: none;
+}
+
+#registerform > p:first-child:before,
+#loginform > p:first-child:before {
+    content: '\eb8f'
+}
+
+#loginform > p:nth-child(2):before {
+    content: '\e9bf'
+}
+
+#lostpasswordform > p:nth-child(1):before,
+#registerform > p:nth-child(2):before {
+    content: '\e849'
+}
+
+#backtoblog {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    -webkit-transition: opacity .15s ease-in-out;
+    -moz-transition: opacity .15s ease-in-out;
+    -o-transition: opacity .15s ease-in-out;
+    transition: opacity .15s ease-in-out;
+}
+
+body:not(.mobile) #login #backtoblog {
+    opacity: 0;
+}
+
+body.is_loading #backtoblog {
+    opacity: 0;
+}
+
+body:not(.mobile) #login:hover #backtoblog {
+    opacity: 1;
+}
+
+#backtoblog a {
+    display: block;
+    font-size: 0;
+    padding: 0;
+    line-height: 24px;
+    width: 24px;
+    white-space: nowrap;
+}
+
+#backtoblog a:after {
+    display: inline-block;
+    content: '\ec0e';
+    font: 400 18px/24px streamline;
+    vertical-align: top;
+}
+
+#login_error,
+#login .message {
+    font-weight: 400;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#login_error a,
+#login .message a {
+    font-weight: 600;
+}
+
+body.login.interim-login {
+    background: transparent!important;
+    padding: 0px!important;
+    min-height: 0!important;
+}
+
+body.login.interim-login:before {
+    background: transparent!important;
+    display: none;
+}

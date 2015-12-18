@@ -1,0 +1,260 @@
+/*!
+ * LABELAUTY jQuery Plugin Styles
+ *
+ * @file: jquery-labelauty.css
+ * @author: Francisco Neves (@fntneves)
+ * @site: www.francisconeves.com
+ * @license: MIT License
+ */
+/* Hide original checkboxes. They are ugly! */
+
+input.labelauty {
+    display: none !important;
+}
+/*
+ * Let's style the input
+ * Feel free to work with it as you wish!
+ */
+
+input.labelauty + label {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    padding: 0;
+    float: left;
+    margin-right: 5px;
+    line-height: 20px;
+    /*opacity: .05;*/
+    cursor: pointer;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    transition: opacity .15s ease-in-out, color .15s ease-in-out;
+    -moz-transition: opacity .15s ease-in-out, color .15s ease-in-out;
+    -webkit-transition: opacity .15s ease-in-out, color .15s ease-in-out;
+    -o-transition: opacity .15s ease-in-out, color .15s ease-in-out;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+body.rtl input.labelauty + label{
+    float: right;
+    
+}
+
+input.labelauty + label + label {
+    display: block;
+    padding-left: 25px;
+}
+
+.labelauty-unchecked,
+.labelauty-checked {
+    display: none!important;
+}
+/* Stylish text inside label */
+
+input.labelauty + label > span.labelauty-unchecked,
+input.labelauty + label > span.labelauty-checked {
+    display: inline-block;
+    line-height: 20px;
+    vertical-align: bottom;
+}
+/* Stylish icons inside label */
+
+input.labelauty + label > span.labelauty-unchecked-image,
+input.labelauty + label > span.labelauty-checked-image {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align:center;
+    vertical-align: top;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+/* When there's a label, add a little margin to the left */
+
+input.labelauty + label > span.labelauty-unchecked-image + span.labelauty-unchecked,
+input.labelauty + label > span.labelauty-checked-image + span.labelauty-checked {
+    margin-left: 7px;
+}
+/* When not Checked */
+
+input.labelauty:not(:checked):not([disabled]) + label:hover {
+    opacity: .75;
+}
+
+input.labelauty:not(:checked) + label > span.labelauty-checked-image {
+    display: none;
+}
+
+input.labelauty:not(:checked) + label > span.labelauty-checked {
+    display: none;
+}
+/* When Checked */
+
+input.labelauty:checked + label {
+    opacity: 1;
+}
+
+input.labelauty:checked:not([disabled]) + label:hover {
+    opacity: .85;
+}
+
+input.labelauty:checked + label > span.labelauty-unchecked-image {
+    display: none;
+}
+
+input.labelauty:checked + label > span.labelauty-unchecked {
+    display: none;
+}
+
+input.labelauty:checked + label > span.labelauty-checked {
+    display: inline-block;
+}
+
+input.labelauty.no-label:checked + label > span.labelauty-checked {
+    display: block;
+}
+/* When Disabled */
+
+input.labelauty[disabled] + label {
+    opacity: 0.5;
+}
+
+input.labelauty + label > span:before {
+    font: 400 12px/20px streamline;
+}
+
+input.labelauty + label > span.labelauty-unchecked-image:before {
+    content: '\e7e9';
+}
+
+input.labelauty + label > span.labelauty-checked-image:before {
+    content: '\e7a5';
+}
+
+input.radio {
+    display: none !important;
+}
+
+/*
+ * Let's style the input
+ * Feel free to work with it as you wish!
+ */
+input.radio + label {
+    font-size: 11px;
+    padding: 0;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+    line-height: 20px;
+    cursor: pointer;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    transition: color 0.15s;
+    -moz-transition: color 0.15s;
+    -webkit-transition: color 0.15s;
+    -o-transition: color 0.15s;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
+.radio-unchecked,
+.radio-checked {
+    display: none!important;
+}
+/* Stylish text inside label */
+
+input.radio + label > span.radio-unchecked,
+input.radio + label > span.radio-checked {
+    display: inline-block;
+    line-height: 20px;
+    vertical-align: bottom;
+}
+/* Stylish icons inside label */
+
+input.radio + label > span.radio-unchecked-image,
+input.radio + label > span.radio-checked-image {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+    transition: color 0.5s linear;
+    -moz-transition: color 0.5s linear;
+    -webkit-transition: color 0.5s linear;
+    -o-transition: color 0.5s linear;
+}
+/* When there's a label, add a little margin to the left */
+
+input.radio + label > span.radio-unchecked-image + span.labelauty-unchecked,
+input.radio + label > span.radio-checked-image + span.labelauty-checked {
+    margin-left: 8px;
+}
+/* When not Checked */
+
+input.radio:not(:checked):not([disabled]) + label:hover {
+    
+}
+
+input.radio:not(:checked) + label > span.labelauty-checked-image {
+    display: none;
+}
+
+input.radio:not(:checked) + label > span.labelauty-checked {
+    display: none;
+}
+/* When Checked */
+
+input.radio:checked + label {
+    
+}
+
+input.radio:checked:not([disabled]) + label:hover {
+    
+}
+
+input.radio:checked + label > span.labelauty-unchecked-image {
+    display: none;
+}
+
+input.radio:checked + label > span.labelauty-unchecked {
+    display: none;
+}
+
+input.radio:checked + label > span.labelauty-checked {
+    display: inline-block;
+}
+
+input.radio.no-label:checked + label > span.labelauty-checked {
+    display: block;
+}
+/* When Disabled */
+
+input.radio[disabled] + label {
+    
+}
+
+input.radio + label > span.labelauty-unchecked-image:before {
+    display: block;
+    height: 20px;
+    width: 20px;
+    content: '\e7e9';
+    font: 400 12px/20px streamline;
+}
+
+input.radio + label > span.labelauty-checked-image {
+    vertical-align: top;
+    display: block;
+    height: 20px;
+    line-height: 20px;
+}
+
+input.radio + label > span.labelauty-checked-image:before {
+    content: '\ec04';
+    font: 400 12px/20px streamline;
+}

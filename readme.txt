@@ -1,0 +1,145 @@
+=== StickyAdmin ===
+Contributors: dorian.tudorache
+Donate link: http://bit.ly/1St79Tr
+Tags: sticky, admin, wp-admin, theme, skin, backend, interface, ui, ux, panel, login, custom, statistics, stats, dashboard, stickyadmin, improved, better, functionality
+Requires at least: 4.2
+Tested up to: 4.4
+Stable tag: 4.4
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Fresh, modern, native WordPress Admin Interface designed & developed with compatibility in mind.
+
+== Description ==
+
+Sticky is a **highly customizable User Interface** designed to give WordPress a better look and improved functionality. It’s modern design and the ability to change the colours make it a perfect match for any WordPress theme. 
+
+The interface was entirely developed with compatibility in mind, permitting it to be expanded and easily adapted to other plugins or themes. Crafted for mobiles, tablets and desktops.
+
+= Features =
+
+* (Optional) Fully fledged (built-in) Statistics Panel & Tracker; 
+* Lightweight. Fast. Optimised. Runs almost as fast as WordPress does.
+* Responsive, mobile-first layout;
+* Retina (HDPI) ready - Everything is a vector;
+* Pixel-perfect User Interface;
+* Re-order menu items;
+* Change UI icons on the go (triggers on right / middle click);
+* Over 2000 icons (Streamline icon set) to choose from;
+* 4 navigation states (folded, normal, grid menu, large grid menu), left-right menu position; 
+* Use your custom logo in any image format, including .SVG;
+* AdminBar state changer;
+* Over 25 pre-made themes;
+* Toastr notifications;
+* qTip tooltips;
+* Search on type, AJAXified live search;
+* Customizable color schemes;
+* Custom ‘Howdy' message, Custom Footer text;
+* Custom CSS and Javascript
+* FavIcons, Shortcut icons, personalised logos;
+* Clean, commented & optimised code, easy to understand and modify.
+* Lifetime support, always up-to-date technologies;
+* 99% compatibility with themes & plugins;
+* bbPress, buddyPress, MultiSite, WPML, WPMU support;
+* RTL version
+
+= Requirements =
+
+* PHP 5.3+ (recommended PHP 7.0+)
+* JavaScript (the no-js version is still under development)
+* WordPress - check for required version in the sidebar
+* Modern Browser
+
+== Contribute ==
+
+StickyAdmin started as a simple project about two years ago and recently I came to the conclusion that it'd be impossible for only one individual to get it done the right way, so hereby I request everyone's help to get involved in developing a better yet compatbile interface for the admin side of WordPress.
+
+Developers of all levels can help!
+
+Like WordPress itself, StickyAdmin is and will remain open-source. You can test planned improvements, check out the code, file and view bug reports, and even submit your own patches. The community’s contributions are what make WordPress and StickyAdmin so strong.
+
+Most software projects, including WordPress, use a version-control system to keep track of source code and revisions. 
+
+StickyAdmin is available on GitHub, all development process happens over here:
+https://github.com/doriandrn/stickyadmin
+
+Start with creating your branch and submitting your patches!
+
+
+== Installation ==
+
+The easiest way to install StickyAdmin is via your site’s Dashboard. 
+Please follow these instructions:
+
+1. Log in to your site’s Dashboard (e.g. www.yourgroovydomain.com/wp-admin)
+2. Click on the “Plugins” tab in the left panel, then click “Add New”.
+3. Search for “StickyAdmin” and the latest version will appear at the top of the list of results.
+4. Install it by clicking the “Install Now” link.
+5. When installation finishes, click “Activate Plugin”.
+
+You’re done!
+
+= Manual Install: =
+
+1. Upload stickyadmin to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+
+If you're having troubles with the installation process please don't hesitate to open up a new support topic by navigating to the Support tab here. 
+
+== Frequently Asked Questions ==
+
+= Why is it so buggy? Is this a finished project even? =
+The reason StickyAdmin is Open-Source is to make it better in every aspect and get rid of any possible bugs. Unfortunately, being a uberly large interface, there are uncountable edge-cases which I could not replicate or simply missed them. Your feedback is essential for me and anyone investing their time and knowledge in making StickyAdmin a better UI, so please take your time to communicate with us, the crew is devoted to make it pixel-perfect and fully functioning. 
+
+== Screenshots ==
+
+Coming soon.
+
+== Changelog ==
+
+= 1.0.4 =
+Dec 18, 2015
+
+Improvements:
+
+* Page Title Action buttons are now more "pushy".
+
+BugFixes:
+
+* Broken comments tab on dashboard activity widget;
+* Sticky action buttons now resize well with the header;
+* Fixed design glitches on comments-php page;
+* Fixed mobile adminmenu background issue;
+* Collapse menu button adjusts position with menu;
+* UI glitches & bugfixes on all pages;
+
+= 1.0.3 =
+Dec 15, 2015
+
+* Fixed incorrect triggering of failsafe;
+* WPAdminBar bugfixes;
+* Major universal UI improvements;
+
+
+= 1.0.2 =
+Dec 13, 2015
+
+* Windows Server support - DIRECTORY_SEPARATOR no longer used for paths;
+* Plugins List default colors fix;
+* Added the backgrounds back to forms;
+* Various UI improvements and bugfixes;
+* Fixed broken update-core.php due to JS;
+* Unticking 'Display Footer' now works properly;
+* Reworked a few of the Sticky Admin panel elements.
+
+= 1.0.1 = 
+Dec 12th, 2015
+
+* Added a fallback for DIRECTORY_SEPARATOR as it might be empty on some installs;
+* Bugfixes for notifications on login page;
+* Header not shrinking issue fixed;
+
+= 1.0.0 = 
+Dec 10th, 2015
+
+* Initial Release.

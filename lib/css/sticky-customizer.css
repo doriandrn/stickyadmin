@@ -1,0 +1,1047 @@
+/**
+ * Sticky Admin - Customizer CSS
+ *
+ * @version 1.0.0
+ * @copyright 2015
+ * @author Dorian Tudorache
+ * @link www.stickyadmin.net
+ *
+ * @license See Licensing folder
+ *
+ * @package Sticky Admin
+ *
+ */
+.wp-full-overlay a.collapse-sidebar {
+    display: block;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    float: right;
+    -webkit-transition: left .15s ease-in-out;
+       -moz-transition: left .15s ease-in-out;
+         -o-transition: left .15s ease-in-out;
+            transition: left .15s ease-in-out;
+}
+.wp-full-overlay.collapsed .collapse-sidebar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+body.rtl .wp-full-overlay.collapsed .collapse-sidebar {
+    right: 0;
+    left: auto;
+}
+.wp-full-overlay .collapse-sidebar-arrow {
+    float: right;
+    display: inline-block;
+    margin-right: 5px;
+}
+body.rtl .wp-full-overlay .collapse-sidebar-arrow {
+    float: left;
+    margin-left: auto;
+    margin-right: 5px;
+}
+.wp-full-overlay .collapse-sidebar-arrow:before {
+    content: "\e258";
+    display: block;
+    font: 400 16px/32px streamline;
+    text-decoration: none !important;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.wp-full-overlay.collapsed .collapse-sidebar-arrow:before,
+.rtl .wp-full-overlay .collapse-sidebar-arrow:before {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+         transform: rotate(180deg);
+}
+.rtl .wp-full-overlay.collapsed .collapse-sidebar-arrow:before {
+    -webkit-transform: none;
+    -ms-transform: none;
+    -moz-transform: none;
+      -o-transform: none;
+         transform: none;
+}
+.wp-full-overlay .collapse-sidebar-label {
+    display: none;
+}
+.wp-full-overlay.collapsed .collapse-sidebar-label {
+    display: none;
+}
+/* Animations */
+.wp-full-overlay,
+.wp-full-overlay-sidebar,
+.wp-full-overlay .collapse-sidebar,
+.wp-full-overlay-main {
+    -webkit-transition-property: left, right, top, bottom, width, margin;
+    -moz-transition-property: left, right, top, bottom, width, margin;
+      -o-transition-property: left, right, top, bottom, width, margin;
+         transition-property: left, right, top, bottom, width, margin;
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+      -o-transition-duration: 0.2s;
+         transition-duration: 0.2s;
+}
+/*------------------------------------------------------------------------------
+  24.0 - Customize Loader
+------------------------------------------------------------------------------*/
+.no-customize-support .hide-if-no-customize,
+.customize-support .hide-if-customize,
+.no-customize-support.wp-core-ui .hide-if-no-customize,
+.no-customize-support .wp-core-ui .hide-if-no-customize,
+.customize-support.wp-core-ui .hide-if-customize,
+.customize-support .wp-core-ui .hide-if-customize {
+    display: none;
+}
+#customize-container {
+    display: none;
+    background: #fff;
+    z-index: 500000;
+    position: fixed;
+    overflow: visible;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+}
+.customize-active #customize-container {
+    display: block;
+}
+.customize-loading #customize-container iframe {
+    opacity: 0;
+}
+.customize-loading #customize-container {
+    background: #fff url(../images/spinner.gif) no-repeat fixed center center;
+    -moz-background-size: 20px 20px;
+      -o-background-size: 20px 20px;
+         background-size: 20px 20px;
+}
+#customize-container iframe,
+.theme-install-overlay iframe {
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+      -o-transition: opacity 0.3s;
+         transition: opacity 0.3s;
+}
+#customize-container .collapse-sidebar {
+    bottom: 16px;
+}
+#customize-controls {
+    margin: 0;
+    padding: 0 20px;
+    position: absolute;
+    left: 0;
+}
+body.rtl #customize-controls {
+    right: 0;
+    left: auto;
+}
+#customize-controls a {
+    text-decoration: none;
+}
+#customize-controls h3 {
+    font-size: 11px;
+    line-height: 40px;
+    display: block;
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    -webkit-transition: all .15s ease-in-out;
+       -moz-transition: all .15s ease-in-out;
+         -o-transition: all .15s ease-in-out;
+            transition: all .15s ease-in-out;
+}
+#customize-controls .submit {
+    text-align: center;
+}
+body.rtl #customize-header-actions .button-primary {
+    float: left;
+    margin-left: 20px;
+    margin-right: auto;
+}
+#customize-header-actions .button-primary {
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+body.rtl #customize-header-actions .button-primary {
+    float: left;
+    margin-left: 20px;
+    margin-right: auto;
+}
+#customize-header-actions .spinner {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+body.rtl #customize-header-actions .spinner {
+    margin-right: auto;
+    margin-left: 10px;
+}
+.saving #customize-header-actions .spinner {
+    display: block;
+    opacity: 1;
+}
+#customize-controls .wp-full-overlay-sidebar-content {}
+#customize-info {
+    border: none;
+}
+#customize-info .accordion-section-title {
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+#customize-info.open .accordion-section-title:after,
+#customize-info .accordion-section-title:hover:after,
+#customize-info .accordion-section-title:focus:after {
+    color: #fff;
+}
+#customize-controls .preview-notice {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+    display: block;
+}
+.customize-controls-preview-toggle {
+    display: none;
+}
+.control-section.control-panel .accordion-section-title .panel-title,
+#customize-info .theme-name {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+    display: block;
+}
+#customize-info .theme-screenshot {
+    width: 258px;
+}
+#customize-info .theme-description {
+    line-height: 20px;
+}
+#customize-theme-controls .control-section {
+    border: none;
+}
+#customize-theme-controls .accordion-section-title {
+    position: relative;
+}
+#customize-info.open,
+#customize-theme-controls .control-section.open {}
+#customize-theme-controls .control-section.open .accordion-section-title {}
+#customize-theme-controls > ul,
+#customize-theme-controls .accordion-section-content {
+    margin: 10px 0 20px;
+}
+.control-section.control-panel > .accordion-section-title {
+    padding-right: 54px;
+}
+body.rtl .control-section.control-panel > .accordion-section-title {
+    padding-right: initial;
+    padding-left: 54px;
+}
+#customize-preview {
+    margin-left: 300px;
+}
+body.rtl #customize-preview {
+    margin-right: 300px;
+    margin-left: auto;
+}
+.collapsed #customize-preview {
+    margin-left: 0;
+}
+body.rtl .collapsed #customize-preview {
+    margin-right: 0;
+    margin-left: auto;
+}
+.collapsed #customize-controls {
+    left: -300px;
+}
+body.rtl .collapsed #customize-controls {
+    right: -300px;
+    left: auto;
+}
+#customize-theme-controls .control-section.control-panel > h3.accordion-section-title:after {
+    content: '\e5b1';
+    width: 40px;
+    height: 40px;
+    right: 0px;
+}
+body.rtl #customize-theme-controls .control-section.control-panel > h3.accordion-section-title:after {
+    left: 0px;
+    right: auto;
+}
+#customize-theme-controls .control-section.control-panel > h3.accordion-section-title:focus:after,
+#customize-theme-controls .control-section.control-panel > h3.accordion-section-title:hover:after {
+    border-right: none;
+    line-height: 44px;
+    z-index: 1;
+}
+.accordion-sub-container.control-panel-content {
+    display: none;
+    position: absolute;
+    left: 300px;
+    top: 0;
+    width: 300px;
+    -webkit-transition: left ease-in-out .15s;
+    -moz-transition: left ease-in-out .15s;
+      -o-transition: left ease-in-out .15s;
+         transition: left ease-in-out .15s;
+}
+body.rtl .accordion-sub-container.control-panel-content {
+    right: 300px;
+    left: auto;
+}
+.accordion-sub-container.control-panel-content.animating {
+    display: block;
+}
+.current-panel .accordion-sub-container.control-panel-content {
+    width: 100%;
+    left: 0;
+    margin: 0;
+    padding: 20px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    z-index: 50;
+}
+body.rtl .current-panel .accordion-sub-container.control-panel-content {
+    right: 0;
+    left: auto;
+}
+.control-panel-back,
+.customize-controls-close {
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 24px;
+    left: 20px; 
+    cursor: pointer;
+    -webkit-transition: color .1s ease-in-out, background .1s ease-in-out;
+    -moz-transition: color .1s ease-in-out, background .1s ease-in-out;
+      -o-transition: color .1s ease-in-out, background .1s ease-in-out;
+         transition: color .1s ease-in-out, background .1s ease-in-out;
+}
+body.rtl .control-panel-back,
+body.rtl .customize-controls-close {
+    left: auto;
+    right: 20px;
+}
+.control-panel-back {
+    display: none;
+}
+.in-sub-panel .control-panel-back {
+    display: block;
+}
+/*.control-panel-back {
+    display: block;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    left: -48px;
+    width: 45px;
+    height: 45px;
+    padding-right: 2px;
+    background: #eee;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+    -webkit-transition: left .18s ease-in-out, color .1s ease-in-out, background .1s ease-in-out;
+    -moz-transition: left .18s ease-in-out, color .1s ease-in-out, background .1s ease-in-out;
+      -o-transition: left .18s ease-in-out, color .1s ease-in-out, background .1s ease-in-out;
+         transition: left .18s ease-in-out, color .1s ease-in-out, background .1s ease-in-out;
+}*/
+.collapsed .control-panel-back {
+    display: none;
+}
+.customize-controls-close:focus,
+.customize-controls-close:hover,
+.control-panel-back:focus,
+.control-panel-back:hover {
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+         box-shadow: none;
+}
+#customize-controls #widgets-right {
+    padding-top: 80px;
+}
+#customize-header-actions .secondary-actions {
+    display: none;
+}
+#customize-controls .customize-section-description-container {
+    margin-bottom: 15px;
+}
+.control-panel-back:before,
+.customize-controls-close:before {
+    font: normal 20px/20px streamline;
+    content: "\e264";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+body.rtl .control-panel-back:before,
+body.rtl .customize-controls-close:before {
+    left: auto;
+    right: 0px;
+}
+.control-panel-back:before {
+    content: '\e5d8';
+}
+.in-sub-panel .control-panel-back {
+    left: 45px;
+}
+body.rtl .in-sub-panel .control-panel-back {
+    left: auto;
+    right: 45px;
+}
+.current-panel > .accordion-section-title {
+    height: 22px;
+}
+.wp-full-overlay-sidebar .wp-full-overlay-header {
+    -webkit-transition: padding ease-in-out .18s;
+    -moz-transition: padding ease-in-out .18s;
+      -o-transition: padding ease-in-out .18s;
+         transition: padding ease-in-out .18s;
+}
+.in-sub-panel .wp-full-overlay-sidebar .wp-full-overlay-header {
+    padding-left: 62px;
+}
+body.rtl .in-sub-panel .wp-full-overlay-sidebar .wp-full-overlay-header {
+    padding-left: auto;
+    padding-right: 62px;
+}
+#customize-info,
+#customize-theme-controls > ul > .accordion-section {
+    display: block;
+}
+.in-sub-panel #customize-info,
+.in-sub-panel #customize-theme-controls > ul > .accordion-section {
+    width: auto;
+    max-width: 100%;
+}
+.in-sub-panel #customize-theme-controls .accordion-section.current-panel {
+    width: 100%;
+}
+#customize-theme-controls .control-section.current-panel {
+    padding: 0;
+}
+#customize-theme-controls .control-section > h3.accordion-section-title {
+    display: block;
+}
+#customize-theme-controls .control-section > h3.accordion-section-title > span {
+    display: block;
+    font-size: 10px;
+    opacity: .3;
+    line-height: 18px;
+}
+#customize-theme-controls .control-section > h3.accordion-section-title:hover {
+    cursor: pointer;
+}
+#customize-controls button.change-theme {
+    float: right;
+    position: relative;
+    top: -18px;
+}
+body.rtl #customize-controls button.change-theme {
+    float: left;
+}
+#customize-theme-controls .control-section.current-panel > h3.accordion-section-title {
+    left: -300px;
+    -webkit-transition: left ease-in-out .18s;
+    -moz-transition: left ease-in-out .18s;
+      -o-transition: left ease-in-out .18s;
+         transition: left ease-in-out .18s;
+}
+body.rtl #customize-theme-controls .control-section.current-panel > h3.accordion-section-title {
+    left: auto;
+    right: -300px;
+}
+p.customize-section-description {
+    font-style: normal;
+}
+.customize-control {
+    display: block;
+    margin-bottom: 15px;
+}
+.customize-control label {
+    display: block;
+}
+.customize-control input[type="radio"],
+.customize-control input[type="checkbox"] {
+    line-height: 20px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 4px;
+}
+.customize-control select,
+.customize-control .sod_select {
+    display: block;
+}
+.customize-control input[type="text"],
+.customize-control input[type="password"],
+.customize-control input[type="email"],
+.customize-control input[type="number"],
+.customize-control input[type="search"],
+.customize-control input[type="tel"],
+.customize-control input[type="url"] {
+    width: 100%;
+    margin: 0;
+}
+.customize-control-textarea textarea {
+    width: 100%;
+    resize: vertical;
+}
+.customize-control select {
+    min-width: 50%;
+    max-width: 100%;
+}
+.customize-control select[multiple] {
+    height: auto;
+}
+.customize-control-title {
+    display: block;
+    font-size: 9px;
+    text-transform: uppercase;
+    line-height: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.customize-control-description {
+    display: block;
+    font-style: italic;
+    line-height: 18px;
+    margin-bottom: 5px;
+}
+.customize-control-color .color-picker,
+.customize-control-checkbox label,
+.customize-control-upload div {
+    line-height: 28px;
+}
+.customize-control-checkbox input {
+    margin-right: 5px;
+}
+body.rtl .customize-control-checkbox input {
+    margin-right: auto;
+    margin-left: 5px;
+}
+.customize-control-radio {
+    padding: 5px 0 10px;
+}
+.customize-control-radio .customize-control-title {
+    margin-bottom: 0;
+    line-height: 22px;
+}
+.customize-control-radio .customize-control-title + .customize-control-description {
+    margin-top: 7px;
+}
+.customize-control-radio input {
+    margin-right: 5px;
+}
+body.rtl .customize-control-radio input {
+    margin-left: 5px;
+    margin-right: auto;
+}
+#customize-preview iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.wp-full-overlay-sidebar {
+    box-shadow: 2px 0 1px rgba(0, 0, 0, .1);
+}
+.collapse-sidebar {
+    background-color: transparent !important;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+         box-shadow: none !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+         border-radius: 0 !important;
+}
+.collapse-sidebar:active,
+.collapse-sidebar:active .collapse-sidebar-label,
+.collapse-sidebar:active .collapse-sidebar-arrow:before {
+    text-shadow: none;
+}
+.collapsed .collapse-sidebar-arrow:before {
+    color: #888;
+}
+/* Style for custom settings */
+/*
+ * Dropdowns
+ */
+.accordion-section .dropdown {
+    float: left;
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+body.rtl .accordion-section .dropdown {
+    float: right;
+}
+.accordion-section .dropdown-content {
+    overflow: hidden;
+    float: left;
+    min-width: 30px;
+    height: 16px;
+    line-height: 16px;
+    margin-right: 16px;
+    padding: 4px 5px;
+    border: 2px solid #eeeeee;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+body.rtl .accordion-section .dropdown-content {
+    float: right;
+    margin-left: 16px;
+    margin-right: auto;
+}
+.customize-control .dropdown-arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    background: #eeeeee;
+}
+body.rtl .customize-control .dropdown-arrow {
+    right: auto;
+    left: 0;
+}
+.customize-control .dropdown-arrow:after {
+    content: "\f140";
+    font: normal 20px/1 'dashicons';
+    speak: none;
+    display: block;
+    padding: 0;
+    text-indent: 0;
+    text-align: center;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: none !important;
+    color: #333;
+}
+.customize-control .dropdown-status {
+    color: #333;
+    background: #eeeeee;
+    display: none;
+    max-width: 112px;
+}
+/* Color Picker */
+.customize-control-color .color-picker-hex {
+    display: none;
+}
+.customize-control-color.open .color-picker-hex {
+    display: block;
+}
+.customize-control-color .dropdown {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+body.rtl .customize-control-color .dropdown {
+    margin-left: 5px;
+    margin-right: auto;
+}
+.customize-control-color .dropdown .dropdown-content {
+    background-color: #555555;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.customize-control-color .dropdown:hover .dropdown-content {
+    border-color: rgba(0, 0, 0, 0.25);
+}
+/*
+ * Image Picker
+ */
+.customize-control-image .library,
+.customize-control-image .actions {
+    display: none;
+    float: left;
+    width: 100%;
+}
+body.rtl .customize-control-image .library,
+body.rtl .customize-control-image .actions {
+    float: right;
+}
+.customize-control-image.open .library,
+.customize-control-image.open .actions {
+    display: block;
+}
+.accordion-section .customize-control-image .dropdown-content {
+    height: auto;
+    min-height: 24px;
+    min-width: 40px;
+    padding: 0;
+}
+.accordion-section .customize-control-image .dropdown-status {
+    padding: 4px 5px;
+}
+.accordion-section .customize-control-image .preview-thumbnail img {
+    display: block;
+    width: 100%;
+    max-width: 122px;
+    max-height: 98px;
+    margin: 0 auto;
+}
+.accordion-section .customize-control-image .actions {
+    text-align: right;
+}
+body.rtl .accordion-section .customize-control-image .actions {
+    text-align: left;
+}
+.accordion-section .customize-control-image .library ul {
+    border-bottom: 1px solid #ddd;
+    float: left;
+    width: 100%;
+    margin: 10px 0 0;
+}
+body.rtl .accordion-section .customize-control-image .library ul {
+    float: right;
+}
+.accordion-section .customize-control-image .library li {
+    color: #ccc;
+    float: left;
+    padding: 3px 15px;
+    margin: 0;
+    border: 1px solid transparent;
+}
+body.rtl .accordion-section .customize-control-image .library li{
+    float: right;
+}
+.accordion-section .customize-control-image .library li.library-selected {
+    margin-bottom: -1px;
+    padding-bottom: 4px;
+    color: #666666;
+    border-color: #ddd;
+    border-bottom-color: #fff;
+}
+.accordion-section .customize-control-image .library .thumbnail {
+    display: block;
+    width: 100%;
+}
+.accordion-section .customize-control-image .library .thumbnail img {
+    display: block;
+    max-width: 90%;
+    max-height: 80px;
+    margin: 5px auto;
+    padding: 2px;
+    background: #666666;
+}
+.accordion-section .customize-control-image .library .thumbnail:hover img {
+    background-color: #2ea2cc;
+}
+.accordion-section .customize-control-image .library-content {
+    display: none;
+    width: 100%;
+    float: left;
+    padding: 10px 0;
+}
+body.rtl .accordion-section .customize-control-image .library-content {
+    float: right;
+}
+.accordion-section .customize-control-image .library-content.library-selected {
+    display: block;
+}
+.accordion-section .customize-control-upload .upload-fallback,
+.accordion-section .customize-control-image .upload-fallback {
+    display: none;
+}
+.accordion-section .customize-control-upload .upload-dropzone,
+.accordion-section .customize-control-image .upload-dropzone {
+    display: none;
+    padding: 15px 10px;
+    border: 3px dashed #dfdfdf;
+    margin: 5px auto;
+    text-align: center;
+    position: relative;
+    cursor: default;
+}
+.accordion-section .customize-control-upload .upload-dropzone.supports-drag-drop,
+.accordion-section .customize-control-image .upload-dropzone.supports-drag-drop {
+    display: block;
+    -webkit-transition: border-color 0.1s;
+    -moz-transition: border-color 0.1s;
+      -o-transition: border-color 0.1s;
+         transition: border-color 0.1s;
+}
+.accordion-section .customize-control-upload .library ul li,
+.accordion-section .customize-control-image .library ul li {
+    cursor: pointer;
+}
+.accordion-section .customize-control-upload .upload-dropzone.supports-drag-drop.drag-over,
+.accordion-section .customize-control-image .upload-dropzone.supports-drag-drop.drag-over {
+    border-color: #83b4d8;
+}
+/**
+ * iOS can't scroll iframes,
+ * instead it expands the iframe size to match the size of the content
+ */
+.ios .wp-full-overlay {
+    position: relative;
+}
+.ios #customize-preview {
+    position: relative;
+}
+.ios #customize-controls .wp-full-overlay-sidebar-content {
+    -webkit-overflow-scrolling: touch;
+}
+/** Header control **/
+#customize-control-header_image .current {
+    margin-bottom: 8px;
+}
+#customize-control-header_image .uploaded {
+    margin-bottom: 18px;
+}
+#customize-control-header_image .uploaded button:not(.random),
+#customize-control-header_image .default button:not(.random) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+}
+#customize-control-header_image button img {
+    display: block;
+}
+#customize-control-header_image button.new,
+#customize-control-header_image button.remove {
+    white-space: normal;
+    width: 48%;
+    height: auto;
+}
+/* Header control: current image container */
+#customize-control-header_image .current .container {
+    overflow: hidden;
+    -webkit-border-radius: 2px;
+    border: 1px solid #eee;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+         border-radius: 2px;
+}
+#customize-control-header_image .placeholder {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    cursor: default;
+}
+#customize-control-header_image .inner {
+    display: none;
+    position: absolute;
+    width: 100%;
+    color: #555;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+    overflow: hidden;
+}
+#customize-control-header_image .inner,
+#customize-control-header_image .inner .dashicons {
+    line-height: 20px;
+    top: 10px;
+}
+#customize-control-header_image .list .inner,
+#customize-control-header_image .list .inner .dashicons {
+    top: 9px;
+}
+#customize-control-header_image .header-view {
+    position: relative;
+    width: 100%;
+    margin-bottom: 5px;
+}
+#customize-control-header_image .header-view:last-child {
+    margin-bottom: 0px;
+}
+/* Convoluted, but 'outline' support isn't good enough yet */
+#customize-control-header_image .header-view:after {
+    border: 0;
+}
+#customize-control-header_image .header-view.selected:after {
+    content: '';
+    position: absolute;
+    height: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 4px solid #2ea2cc;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+         border-radius: 2px;
+}
+#customize-control-header_image .header-view.button.selected {
+    border: 0;
+}
+/* Header control: overlay "close" button */
+#customize-control-header_image .uploaded .header-view .close {
+    font-size: 2em;
+    color: grey;
+    position: absolute;
+    visibility: hidden;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+body.rtl #customize-control-header_image .uploaded .header-view .close {
+    right: auto;
+    left: 10px;
+}
+#customize-control-header_image .uploaded .header-view .close:hover {
+    color: black;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+#customize-control-header_image .header-view:hover .close {
+    visibility: visible;
+}
+/* Header control: randomiz(s)er */
+#customize-control-header_image .random.placeholder {
+    cursor: pointer;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+         border-radius: 2px;
+    height: 40px;
+}
+#customize-control-header_image button.random {
+    width: 100%;
+    height: auto;
+    min-height: 40px;
+    white-space: normal;
+}
+#customize-control-header_image button.random .dice {
+    margin-top: 4px;
+}
+#customize-control-header_image .placeholder:hover .dice,
+#customize-control-header_image .header-view:hover > button.random .dice {
+    -webkit-animation: dice-color-change 3s infinite;
+    -moz-animation: dice-color-change 3s infinite;
+      -o-animation: dice-color-change 3s infinite;
+         animation: dice-color-change 3s infinite;
+}
+@-webkit-keyframes dice-color-change {
+    0% {
+        color: #d4b146;
+    }
+    50% {
+        color: #ef54b0;
+    }
+    75% {
+        color: #7190d3;
+    }
+    100% {
+        color: #d4b146;
+    }
+}
+@-moz-keyframes dice-color-change {
+    0% {
+        color: #d4b146;
+    }
+    50% {
+        color: #ef54b0;
+    }
+    75% {
+        color: #7190d3;
+    }
+    100% {
+        color: #d4b146;
+    }
+}
+@-o-keyframes dice-color-change {
+    0% {
+        color: #d4b146;
+    }
+    50% {
+        color: #ef54b0;
+    }
+    75% {
+        color: #7190d3;
+    }
+    100% {
+        color: #d4b146;
+    }
+}
+@keyframes dice-color-change {
+    0% {
+        color: #d4b146;
+    }
+    50% {
+        color: #ef54b0;
+    }
+    75% {
+        color: #7190d3;
+    }
+    100% {
+        color: #d4b146;
+    }
+}
+/* Header control: actions and choices */
+#customize-control-header_image .actions {
+    margin-bottom: 32px;
+}
+#customize-control-header_image .choice {
+    position: relative;
+    display: block;
+    margin-bottom: 9px;
+}
+#customize-control-header_image .uploaded div:last-child > .choice {
+    margin-bottom: 0;
+}
+#customize-control-header_image img {
+    width: 100%;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+         border-radius: 2px;
+}
+#customize-control-header_image .remove {
+    float: left;
+    margin-right: 3px;
+}
+body.rtl #customize-control-header_image .remove {
+    float: right;
+    margin-left: 3px;
+    margin-right: auto;
+}
+#customize-control-header_image .new {
+    float: right;
+}
+body.rtl #customize-control-header_image .new {
+    float: left;
+}
+#customize-controls .accordion-section.control-section.control-section-themes h3.accordion-section-title {
+    line-height: 16px;
+    border-bottom: none!important;
+}
+#customize-controls .accordion-section.control-section.control-section-themes h3.accordion-section-title:after {
+    content:'';
+    display: none;
+}
+#customize-controls li#accordion-section-themes {
+    margin: 20px 0;
+}
+p.description.customize-section-description {
+    margin-top: 0;
+    margin-bottom: 10px
+}
