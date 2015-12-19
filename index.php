@@ -20,7 +20,7 @@ if ( function_exists( 'add_action' ) ) {
 	if( class_exists( 'StickyAdmin' ) ) {
 		// Hook StickyAdmin
 		register_activation_hook( __FILE__, array( 'StickyAdmin', 'activate' ) );
-	    register_deactivation_hook( __FILE__, array( 'StickyAdmin', 'deactivate' ) );
+		register_deactivation_hook( __FILE__, array( 'StickyAdmin', 'deactivate' ) );
 
 		// Init the plugin
 		add_action( 'plugins_loaded', array( 'StickyAdmin', 'init' ), 1 );
