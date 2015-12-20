@@ -2017,6 +2017,9 @@ body.rtl .wp-picker-open+.wp-picker-input-wrap {
     right: 0;
     top: 0;
     border: none;
+    -webkit-border-radius: 0;
+       -moz-border-radius: 0;
+            border-radius: 0;
 }
 
 body.content-w .postbox .handlediv {
@@ -2792,11 +2795,11 @@ body.rtl .misc-pub-section a.button-cancel {
     font: 400 12px/16px "FontAwesome";
     content: '\f00d';
 }
-.misc-pub-section label {
+/*.misc-pub-section label {
     font-weight: 400;
     font-size: 0;
     vertical-align: top;
-}
+}*/
 .misc-pub-section label.selectit {
     display: inline;
     font-size: 12px;
@@ -2864,7 +2867,6 @@ body.rtl .tabs-panel .mCSB_scrollTools .mCSB_draggerContainer {
     right: auto;
 }
 #post-status-select {
-    margin-top: 15px;
     padding: 15px;
 }
 #delete-action:before {
@@ -5503,7 +5505,7 @@ body.rtl h3.hndle > span:before {
 .ui-sortable-helper h2.hndle > span:before,
 h3.hndle:hover > span:before,
 h2.hndle:hover > span:before {
-    opacity: 1;
+    opacity: .5;
 }
 .accordion-section-content {
     padding: 0 20px!important;
