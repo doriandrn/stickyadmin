@@ -230,7 +230,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    .meta-box-sortables.ui-sortable,
+    /*.meta-box-sortables.ui-sortable,*/
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -247,11 +247,8 @@
     body:not(.mobile):not(.header-small) .wrap > h2:first-child + ul.subsubsub {
         margin-bottom: 25px;
     }
-    
     body.update-core-php ul.core-updates, 
-    .welcome-panel #sticky_stats .instats,
-    .postbox, 
-    .stuffbox {
+    .welcome-panel #sticky_stats .instats {
         margin-bottom: 25px;
         padding-bottom: 25px;
     }
@@ -497,7 +494,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    .meta-box-sortables.ui-sortable,
+    /*.meta-box-sortables.ui-sortable,*/
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -516,10 +513,9 @@
         margin-bottom: 30px;
     }
     
-    body.update-core-php ul.core-updates, 
-    .postbox, 
-    .stuffbox {
+    body.update-core-php ul.core-updates {
         margin-bottom: 30px;
+        padding-bottom: 30px;
     }
 
     .welcome-panel .welcome-panel-content h2 + .inside {
@@ -698,7 +694,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    .meta-box-sortables.ui-sortable,
+    /*.meta-box-sortables.ui-sortable,*/
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -717,10 +713,9 @@
         margin-bottom: 35px;
     }
     
-    body.update-core-php ul.core-updates, 
-    .postbox, 
-    .stuffbox {
+    body.update-core-php ul.core-updates {
         margin-bottom: 35px;
+        padding-bottom: 35px;
     }
     .welcome-panel .welcome-panel-content h2 + .inside {
         margin-top: 35px;
@@ -967,7 +962,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    .meta-box-sortables.ui-sortable,
+    /*.meta-box-sortables.ui-sortable,*/
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -987,12 +982,8 @@
     }
     
     body.update-core-php ul.core-updates, 
-    .welcome-panel #sticky_stats .instats,
-    .postbox, 
-    .stuffbox {
-        margin-bottom: 20px;
-    }
     .welcome-panel #sticky_stats .instats {
+        margin-bottom: 20px;
         padding-bottom: 20px;
     }
     .welcome-panel .welcome-panel-content h2 + .inside {
@@ -2466,7 +2457,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    .meta-box-sortables.ui-sortable,
+    /*.meta-box-sortables.ui-sortable,*/
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -2486,10 +2477,9 @@
     }
     
     body.update-core-php ul.core-updates, 
-    .welcome-panel #sticky_stats .instats,
-    .postbox, 
-    .stuffbox {
+    .welcome-panel #sticky_stats .instats {
         margin-bottom: 25px;
+        padding-bottom: 25px;
     }
     .welcome-panel .welcome-panel-content h2 + .inside {
         margin-top: 25px;
@@ -4011,7 +4001,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    .meta-box-sortables.ui-sortable,
+    /*.meta-box-sortables.ui-sortable,*/
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -4031,10 +4021,9 @@
     }
     
     body.update-core-php ul.core-updates, 
-    .welcome-panel #sticky_stats .instats,
-    .postbox, 
-    .stuffbox {
+    .welcome-panel #sticky_stats .instats {
         margin-bottom: 25px;
+        padding-bottom: 25px;
     }
     .welcome-panel .welcome-panel-content h2 + .inside {
         margin-top: 25px;
