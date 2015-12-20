@@ -132,10 +132,10 @@ p.search-box input[name=s],
     padding-bottom: 0;
     right: 0;
     min-width: 0;
-    -webkit-transition: padding .15s ease-in-out, min-width 0.3s ease-in-out, opacity 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-    -moz-transition: padding .15s ease-in-out, min-width 0.3s ease-in-out, opacity 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-    -o-transition: padding .15s ease-in-out, min-width 0.3s ease-in-out, opacity 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-    transition: padding .15s ease-in-out, min-width 0.3s ease-in-out, opacity 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    -webkit-transition: padding .15s ease-in-out, min-width 0.3s ease-in-out, opacity 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color .2s ease-in;
+    -moz-transition: padding .15s ease-in-out, min-width 0.3s ease-in-out, opacity 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color .2s ease-in;
+    -o-transition: padding .15s ease-in-out, min-width 0.3s ease-in-out, opacity 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color .2s ease-in;
+    transition: padding .15s ease-in-out, min-width 0.3s ease-in-out, opacity 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color .2s ease-in;
 }
 body.rtl p.search-box input[name=s],
 body.rtl .wp-filter .search-form input[type=search] {
@@ -209,6 +209,20 @@ body:not(.is_loading) p.search-box:focus input[name=s],
 body:not(.is_loading) p.search-box.open input[name=s] {
     min-width: 300px;
     padding-left: 25px;
+}
+body.header-w:not(.is_loading) p.search-box.open input[name=s],
+body.header-w:not(.is_loading) .wp-filter .search-form:hover input[type=search],
+body.header-w:not(.is_loading) p.search-box:hover input[name=s],
+body.header-w:not(.is_loading) p.search-box:focus input[name=s],
+body.header-w:not(.is_loading) p.search-box.open input[name=s] {
+    background: rgba(0,0,0,.1);
+}
+body.header-b:not(.is_loading) p.search-box.open input[name=s],
+body.header-b:not(.is_loading) .wp-filter .search-form:hover input[type=search],
+body.header-b:not(.is_loading) p.search-box:hover input[name=s],
+body.header-b:not(.is_loading) p.search-box:focus input[name=s],
+body.header-b:not(.is_loading) p.search-box.open input[name=s] {
+    background: rgba(255,255,255,.1);
 }
 body.rtl p.search-box input[name=s],
 body.rtl p.search-box input[name=s],

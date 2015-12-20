@@ -663,18 +663,19 @@ class StickyAdmin {
         //     ) 
 
         // If user changed the theme, generate the widefat colors.
-        if ( sticky_has_changed( get_current_blog_id() ) ) {
-        	self::$config['widefat']['plugin_active'] = self::$config['hl_colors'][0];
-        	self::$config['widefat']['plugin_inactive'] = self::$config['hl_colors2'][0];
-        	numina_options_updater( 'widefat_plugin_active', self::$config['hl_colors'][0] );
-        	numina_options_updater( 'widefat_plugin_inactive', self::$config['hl_colors2'][0] );
-        }
+        // if ( sticky_has_changed( get_current_blog_id() ) ) {
+        // 	self::$config['widefat']['plugin_active'] = self::$config['hl_colors'][0];
+        // 	self::$config['widefat']['plugin_inactive'] = self::$config['hl_colors2'][0];
+        // 	numina_options_updater( 'widefat_plugin_active', self::$config['hl_colors'][0] );
+        // 	numina_options_updater( 'widefat_plugin_inactive', self::$config['hl_colors2'][0] );
+        // }
 
         // Navigation width
         if ( intval( self::$config['adminmenu']['width'] ) < 60 ) self::$config['adminmenu']['width'] = '220';
 
         self::$config['adminbar']['classes_string'] = 
-             ' wpab-' . ( sticky_luminance( self::$config['colors']['adminbar'] ) ? 'b' : 'w' )
+             ' hl-' . ( sticky_luminance( self::$config['hl_colors'][0] ) ? 'b' : 'w' )
+           . ' wpab-' . ( sticky_luminance( self::$config['colors']['adminbar'] ) ? 'b' : 'w' )
            . ' wpab-t-' . ( sticky_luminance( self::$config['colors']['adminbar_tooltip'] ) ? 'b' : 'w' )
            . ' wpab-' . self::$config['adminbar']['state']
            . ' wpab-sub-' . ( sticky_luminance( self::$config['colors']['adminbar_submenu'] ) ? 'b' : 'w' )
