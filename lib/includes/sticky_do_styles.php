@@ -566,7 +566,9 @@ if ( !function_exists( 'add_action' ) )
                 background:'. StickyAdmin::$config['colors']['header'] .';
             }
             .wrap > h1 > .page-title-action, 
-            .wrap .add-new-h2 {
+            .wrap .add-new-h2,
+            .wp-media-buttons .button,
+            #sticky_bulk_actions input[type=submit] {
                 background:'. StickyAdmin::$config['hl_colors'][0] .';   
             }
             .wrap > h1:first-child #filters-expand ul li.active:before,
@@ -577,8 +579,10 @@ if ( !function_exists( 'add_action' ) )
                 color:' . StickyAdmin::$config['hl_colors'][0] . ' !important;
             }
             #overlay:before,
-            .filter-links, .subsubsub, 
-            .wrap > .nav-tab-wrapper, 
+            .filter-links, 
+            .subsubsub,
+            .media-frame.mode-grid .uploader-inline,
+            .wrap > .nav-tab-wrapper,
             body.update-core-php .wrap > #s-update-notice-container, 
             #welcome-panel,
             #category-tabs,
@@ -689,11 +693,6 @@ if ( !function_exists( 'add_action' ) )
             .widefat > tbody input.labelauty:checked + label {
                 color: '. StickyAdmin::$config['hl_colors'][0] .'!important;
             }
-            .widefat td.column-date .sticky.status:before,
-            .wrap > h1:first-child button.mainaction:before {
-                color:' . StickyAdmin::$config['hl_colors'][0] . ';
-            }
-            
             #sticky_stats .instats #s-circle-falls stop:nth-child(1) {
                 stop-color:' . StickyAdmin::$config['hl_colors2'][0] . ';
             }

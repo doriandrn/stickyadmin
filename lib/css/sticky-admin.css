@@ -2468,6 +2468,10 @@ body.mobile #wpfooter {
             transition: transform .15s ease-in-out;
 }
 
+#sticky_bulk_actions * {
+    -webkit-font-smoothing: subpixel-antialiased !important;
+}
+
 body.bulk-open #sticky_bulk_actions {
     -webkit-transform: translateY(0px);
        -moz-transform: translateY(0px);
@@ -6750,7 +6754,6 @@ body.header-b .wp-filter .search-form input[type=search]:focus,
 body.header-b.themes-php .wp-filter-search:hover,
 body.header-b.themes-php .wp-filter-search:focus {
     color: rgba(0,0,0,.95);
-    border-color: rgba(0,0,0,.75)!important
 }
 body.header-b p.search-box input[type=submit],
 body.header-b .wp-filter .search-form label {
@@ -6907,7 +6910,6 @@ body.header-w .wp-filter .search-form input[type=search]:focus,
 body.header-w.themes-php .wp-filter-search:hover,
 body.header-w.themes-php .wp-filter-search:focus {
     color: rgba(255,255,255,.95)!important;
-    border-color: rgba(255,255,255,.75)!important
 }
 body.header-w p.search-box input[type=submit],
 body.header-w .wp-filter .search-form label {
@@ -9572,6 +9574,7 @@ body.content-b .theme-browser .theme.active .theme-name span {
 }
 body.content-b .attachment .thumbnail {
     color: #000;
+    background:#fff;
 }
 
 body.content-w .tagcloud h3 { color:rgba(255,255,255,.9); }
@@ -9678,6 +9681,7 @@ body.content-w .theme-browser .theme.active .theme-name span {
 }
 body.content-w .attachment .thumbnail {
     color: #fff;
+    background: #000;
 }
 
 body.tip-w .qtip-default,

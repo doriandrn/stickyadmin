@@ -1616,7 +1616,13 @@ body.content-b #activity-widget .slick-dots li.slick-active:after {
     text-align: center!important;
     border: 0;
     position: absolute!important;
-    top: 75px;
+    top: 60px;
+    margin: 0;
+    left: 0;
+    right: 0;
+    border-radius: 85px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 #activity-widget ul.subsubsub li {
     margin: 0;

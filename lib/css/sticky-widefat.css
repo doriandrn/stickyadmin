@@ -116,24 +116,27 @@ body.rtl:not(.update-core-php) .widefat tbody > tr:not(.is-expanded):not(.inline
 }
 .widefat th.check-column {
     width: 55px;
+    cursor: pointer;
 }
 
 body.content-b .widefat th.check-column {
-    border-right: 1px solid rgba(0,0,0,.05);
+    /*border-right: 1px solid rgba(0,0,0,.05);*/
     background: rgba(0,0,0,.025);
     border-bottom: 1px solid rgba(0,0,0,.05);
+    box-shadow: inset -2px 0px 2px -1px rgba(0,0,0,.1);
 }
 body.content-w .widefat th.check-column {
-    border-right: 1px solid rgba(255,255,255,.05);
+    /*border-right: 1px solid rgba(255,255,255,.05);*/
     background: rgba(255,255,255,.025);
     border-bottom: 1px solid rgba(255,255,255,.05);
+    box-shadow: inset -2px 0px 2px -1px rgba(0,0,0,.1);
 }
 body.rtl.content-b .widefat th.check-column {
-    border-left: 1px solid rgba(0,0,0,.05);
+    /*border-left: 1px solid rgba(0,0,0,.05);*/
     border-right: none;
 }
 body.rtl.content-w .widefat th.check-column {
-    border-left: 1px solid rgba(255,255,255,.05);
+    /*border-left: 1px solid rgba(255,255,255,.05);*/
     border-right: none;
 }
 
@@ -422,16 +425,13 @@ body.rtl .widefat td.column-date.date {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
-    -webkit-border-radius: 32px;
-       -moz-border-radius: 32px;
-            border-radius: 32px;
 }
 
 body.content-w .widefat td.column-date .sticky.status {
-    background: rgba(255,255,255,.05);
+    border-left: 1px dashed rgba(255,255,255,.05);
 }
 body.content-b .widefat td.column-date .sticky.status {
-    background: rgba(0,0,0,.05);
+    border-left: 1px dashed rgba(0,0,0,.05);
 }
 
 body.rtl .widefat td.column-date .sticky.status {
@@ -650,9 +650,6 @@ body.content-b .widefat.plugins tr .desc p {
 #the-list tr:last-child th,
 #the-list tr:last-child td {
     border-bottom: none!important;
-    -webkit-box-shadow: none!important;
-    -moz-box-shadow: none!important;
-    box-shadow: none!important;
 }
 #the-list tr:hover {}
 .fixed .column-categories,

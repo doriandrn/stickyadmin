@@ -230,7 +230,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    /*.meta-box-sortables.ui-sortable,*/
+    .meta-box-sortables.ui-sortable,
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -494,7 +494,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    /*.meta-box-sortables.ui-sortable,*/
+    .meta-box-sortables.ui-sortable,
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -694,7 +694,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    /*.meta-box-sortables.ui-sortable,*/
+    .meta-box-sortables.ui-sortable,
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -962,7 +962,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    /*.meta-box-sortables.ui-sortable,*/
+    .meta-box-sortables.ui-sortable,
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -2457,7 +2457,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    /*.meta-box-sortables.ui-sortable,*/
+    .meta-box-sortables.ui-sortable,
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
@@ -3449,9 +3449,9 @@
         max-width: 440px;
     }
     #the-comment-list td.comment.column-comment {
-        -webkit-border-top-left-radius: 0;
-        -moz-border-radius-topleft: 0;
-        border-top-left-radius: 0;
+        -webkit-border-top-left-radius: 0!important;
+        -moz-border-radius-topleft: 0!important;
+        border-top-left-radius: 0!important;
     }
     body:not(.mobile):not(.header-small) p.search-box,
     body:not(.mobile):not(.header-small) .wp-filter .search-form {
@@ -4001,7 +4001,7 @@
     p.submit, 
     .widgets-holder-wrap,
     .metabox-holder,
-    /*.meta-box-sortables.ui-sortable,*/
+    .meta-box-sortables.ui-sortable,
     .media-frame.mode-grid .attachments-browser .attachments,
     ul.core-updates,
     form.upgrade,
