@@ -85,7 +85,7 @@ body.rtl .sod_select .sod_label {
     margin: -1px 0 0 0;
     border-width: 1px;
     border-style: solid;
-    border-top: none;
+    border-top-width: 0;
     font-weight: 400;
     z-index: 39;
     -webkit-border-bottom-left-radius: 16px;
@@ -127,6 +127,7 @@ body.content-w .wrap .sod_select .sod_list_wrapper {
     bottom: 100%;
     border-top: 1px solid;
     border-bottom: none;
+    border-radius: 16px 16px 0 0;
 }
 /* Options list container */
 .sod_select .sod_list {

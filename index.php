@@ -4,7 +4,7 @@ Plugin Name: StickyAdmin
 Plugin URI: https://wordpress.org/plugins/stickyadmin/
 Description: StickyAdmin will revamp your WordPress' Admin User Interface. You can customize it by navigating to Settings -> StickyAdmin Settings.
 Author: Dorian Tuorache
-Version: 1.0.4
+Version: 1.0.5
 Author URI: https://profiles.wordpress.org/doriantudorache/
 */
 if ( function_exists( 'add_action' ) ) {

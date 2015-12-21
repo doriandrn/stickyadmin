@@ -21,6 +21,9 @@ p.search-box,
     margin: 0;
     z-index: 120;
     min-width: 32px;
+    line-height: 68px;
+    min-height: 68px;
+    min-width: 68px;
     -webkit-transition: margin .05s ease-in-out, transform .15s ease-in-out, line-height .15s ease-in-out, min-width .15s ease-in-out, min-height .15s ease-in-out;
        -moz-transition: margin .05s ease-in-out, transform .15s ease-in-out, line-height .15s ease-in-out, min-width .15s ease-in-out, min-height .15s ease-in-out;
          -o-transition: margin .05s ease-in-out, transform .15s ease-in-out, line-height .15s ease-in-out, min-width .15s ease-in-out, min-height .15s ease-in-out;
@@ -88,13 +91,17 @@ p.search-box:after,
     content: '\ec2c';
     position: absolute;
     top: 0;
-    width: 100%;
+    min-width: 68px;
     text-align: center;
     right: 0;
-    -webkit-transition: top .15s ease-in-out, right .15s ease-in-out;
-    -moz-transition: top .15s ease-in-out, right .15s ease-in-out;
-    -o-transition: top .15s ease-in-out, right .15s ease-in-out;
-    transition: top .15s ease-in-out, right .15s ease-in-out;
+    -webkit-transition: min-width .15s ease-in;
+       -moz-transition: min-width .15s ease-in;
+         -o-transition: min-width .15s ease-in;
+            transition: min-width .15s ease-in;
+}
+body.header-small p.search-box:after,
+body.header-small .wp-filter .search-form:after {
+    min-width: 50px;
 }
 
 body.is_loading p.search-box,
@@ -128,7 +135,7 @@ p.search-box input[name=s],
     line-height: inherit;
     text-align: left;
     position: absolute;
-    padding-right: 50px;
+    padding-right: 68px;
     padding-bottom: 0;
     right: 0;
     min-width: 0;
@@ -141,8 +148,17 @@ body.rtl p.search-box input[name=s],
 body.rtl .wp-filter .search-form input[type=search] {
     text-align: right;
     unicode-bidi: bidi-override;
-    padding-left: 50px;
+    padding-left: 68px;
     padding-right: 0;
+}
+body.header-small p.search-box input[name=s],
+body.header-small .wp-filter .search-form input[type=search] {
+    padding-right: 50px;
+}
+body.header-small.rtl p.search-box input[name=s],
+body.header-small.rtl .wp-filter .search-form input[type=search] {
+    padding-right: 0px;
+    padding-left: 50px;
 }
 p.search-box input[type=submit],
 .wp-filter .search-form label {

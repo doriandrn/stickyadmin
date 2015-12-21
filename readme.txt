@@ -97,8 +97,24 @@ Coming soon.
 
 == Changelog ==
 
+= 1.0.5 =
+Dec 21st, 2015
+
+Improvements:
+
+* Screen Options button removed, screen options panel moved to header on click.
+* Tooltips are now even more visible;
+
+BugFixes:
+
+* Searchbar now works properly;
+* Selects were showing wrong when out of screen, now they no longer have this behavious;
+* Major fixes brought to the header;
+* Labels are now bolder;
+* Menu Toggle button now adjusts well with the header on mobile screens;
+
 = 1.0.4 =
-Dec 18, 2015
+Dec 18th, 2015
 
 Improvements:
 
@@ -114,7 +130,7 @@ BugFixes:
 * UI glitches & bugfixes on all pages;
 
 = 1.0.3 =
-Dec 15, 2015
+Dec 15th, 2015
 
 * Fixed incorrect triggering of failsafe;
 * WPAdminBar bugfixes;
@@ -122,7 +138,7 @@ Dec 15, 2015
 
 
 = 1.0.2 =
-Dec 13, 2015
+Dec 13th, 2015
 
 * Windows Server support - DIRECTORY_SEPARATOR no longer used for paths;
 * Plugins List default colors fix;

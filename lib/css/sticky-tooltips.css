@@ -23,13 +23,25 @@
     line-height: 17px;
     font-weight: 400;
     direction: ltr;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-       -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.025);
+       -moz-box-shadow: 0 1px 1px rgba(0,0,0,.025);
+            box-shadow: 0 1px 1px rgba(0,0,0,.025);
     padding: 5px;
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
+}
+body.tip-b .qtip-default {
+    border: 1px solid rgba(0,0,0,.05);
+}
+body.tip-w .qtip-default {
+    border: 1px solid rgba(255,255,255,.05);
+}
+body.tip-b .qtip-default:before {
+    border-top-color: rgba(0,0,0,.05)
+}
+body.tip-w .qtip-default:before {
+    border-top-color: rgba(255,255,255,.05)
 }
 .qtip-content {
     position: relative;
@@ -111,6 +123,19 @@
     border-color: transparent;
     border-width: 5px;
     margin-left: -5px;
+}
+.qtip-default:before {
+    content: '';
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: transparent;
+    border-width: 6px;
+    margin-left: -6px;
 }
 .qtip-default.sticky_wpab:after {
     top: auto;

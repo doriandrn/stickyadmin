@@ -438,9 +438,6 @@ if ( !function_exists( 'add_action' ) )
             {
                 background: ' . StickyAdmin::$config['colors']['content'] . ' ;
             }
-            #screen-meta,#screen-meta-links .show-settings {
-                background: ' . StickyAdmin::$config['colors']['side_meta'] . ';
-            }
             ::-webkit-scrollbar-track {
                 background:' . StickyAdmin::$config['colors']['scrollbar_rail'] . ';
             }
@@ -551,11 +548,11 @@ if ( !function_exists( 'add_action' ) )
             .qtip,
             .qtip-default,
             div.google-visualization-tooltip { 
-                background: rgba(' . hex2rgb( StickyAdmin::$config['colors']['tooltip'] ) . ', .98); 
+                background: ' . StickyAdmin::$config['colors']['tooltip'] . '; 
             }
             .qtip:after,
             .qtip-default:after { 
-                border-top-color: rgba(' . hex2rgb( StickyAdmin::$config['colors']['tooltip'] ) . ', .98) !important;
+                border-top-color: ' . StickyAdmin::$config['colors']['tooltip'] . ' !important;
             }
             
             .wrap > h1:first-child,
@@ -568,6 +565,7 @@ if ( !function_exists( 'add_action' ) )
             .wrap > h1 > .page-title-action, 
             .wrap .add-new-h2,
             .wp-media-buttons .button,
+            #screen-meta input[type="submit"],
             #sticky_bulk_actions input[type=submit] {
                 background:'. StickyAdmin::$config['hl_colors'][0] .';   
             }

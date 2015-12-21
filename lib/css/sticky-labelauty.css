@@ -19,16 +19,11 @@ input.labelauty {
 input.labelauty + label {
     display: inline-block;
     vertical-align: top;
-    font-size: 12px;
     padding: 0;
     float: left;
     margin-right: 5px;
-    line-height: 20px;
-    /*opacity: .05;*/
+    line-height: inherit;
     cursor: pointer;
-    border-radius: 50px;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
     transition: opacity .15s ease-in-out, color .15s ease-in-out;
     -moz-transition: opacity .15s ease-in-out, color .15s ease-in-out;
     -webkit-transition: opacity .15s ease-in-out, color .15s ease-in-out;
@@ -40,7 +35,6 @@ input.labelauty + label {
 }
 body.rtl input.labelauty + label{
     float: right;
-    
 }
 
 input.labelauty + label + label {
@@ -57,7 +51,7 @@ input.labelauty + label + label {
 input.labelauty + label > span.labelauty-unchecked,
 input.labelauty + label > span.labelauty-checked {
     display: inline-block;
-    line-height: 20px;
+    line-height: inherit;
     vertical-align: bottom;
 }
 /* Stylish icons inside label */
@@ -65,8 +59,6 @@ input.labelauty + label > span.labelauty-checked {
 input.labelauty + label > span.labelauty-unchecked-image,
 input.labelauty + label > span.labelauty-checked-image {
     display: inline-block;
-    width: 20px;
-    height: 20px;
     text-align:center;
     vertical-align: top;
     background-repeat: no-repeat;
@@ -122,9 +114,6 @@ input.labelauty[disabled] + label {
     opacity: 0.5;
 }
 
-input.labelauty + label > span:before {
-    font: 400 12px/20px streamline;
-}
 
 input.labelauty + label > span.labelauty-unchecked-image:before {
     content: '\e7e9';
@@ -143,17 +132,12 @@ input.radio {
  * Feel free to work with it as you wish!
  */
 input.radio + label {
-    font-size: 11px;
     padding: 0;
+    min-width: 16px;
     text-align: center;
-    width: 20px;
-    height: 20px;
     vertical-align: top;
-    line-height: 20px;
+    line-height: inherit;
     cursor: pointer;
-    border-radius: 50px;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
     transition: color 0.15s;
     -moz-transition: color 0.15s;
     -webkit-transition: color 0.15s;
@@ -168,21 +152,11 @@ input.radio + label {
 .radio-checked {
     display: none!important;
 }
-/* Stylish text inside label */
-
-input.radio + label > span.radio-unchecked,
-input.radio + label > span.radio-checked {
-    display: inline-block;
-    line-height: 20px;
-    vertical-align: bottom;
-}
 /* Stylish icons inside label */
 
 input.radio + label > span.radio-unchecked-image,
 input.radio + label > span.radio-checked-image {
     display: inline-block;
-    width: 20px;
-    height: 20px;
     vertical-align: top;
     transition: color 0.5s linear;
     -moz-transition: color 0.5s linear;
@@ -238,23 +212,17 @@ input.radio.no-label:checked + label > span.labelauty-checked {
 input.radio[disabled] + label {
     
 }
-
+input.labelauty + label > span:before,
+input.radio + label > span:before {
+    content:'';
+    display: block;
+    font-family: streamline;
+    font-weight: 400;
+    line-height: inherit;
+}
 input.radio + label > span.labelauty-unchecked-image:before {
-    display: block;
-    height: 20px;
-    width: 20px;
     content: '\e7e9';
-    font: 400 12px/20px streamline;
 }
-
-input.radio + label > span.labelauty-checked-image {
-    vertical-align: top;
-    display: block;
-    height: 20px;
-    line-height: 20px;
-}
-
 input.radio + label > span.labelauty-checked-image:before {
     content: '\ec04';
-    font: 400 12px/20px streamline;
 }

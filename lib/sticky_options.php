@@ -420,11 +420,6 @@ $options_panel->OpenTab( 's_header' );
                 'desc'  => __( 'Pick a background color for the header.', '_sticky_' ),
                 'std'   => '#4a6491'
         ) );
-        $options_panel->addColor( 'side_meta_bg', array(
-                'name'  => __( 'Side Meta Background', '_sticky_' ),
-                'desc'  => __( 'Pick a background color for the side meta button and form background.', '_sticky_' ),
-                'std'   => '#4a6491'
-        ) );
     $options_panel->AccordionAEnd();
 $options_panel->CloseTab();
 /* Navigation */
