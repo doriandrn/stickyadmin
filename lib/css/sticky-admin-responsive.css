@@ -2058,8 +2058,8 @@
     }
     .wrap > h1:first-child .page-title-action:before,
     .wrap .add-new-h2:before {
-        font-size: 20px;
-        line-height: 22px;
+        font-size: 16px;
+        margin: 0;
     }
     .media-frame.mode-grid .media-frame-content {
         padding-top:0;
@@ -3453,17 +3453,6 @@
         -moz-border-radius-topleft: 0!important;
         border-top-left-radius: 0!important;
     }
-    body:not(.mobile):not(.header-small) p.search-box,
-    body:not(.mobile):not(.header-small) .wp-filter .search-form {
-        line-height: 68px;
-        min-height: 68px;
-        min-width: 68px;
-    }
-    body:not(.mobile):not(.header-small) p.search-box input,
-    body:not(.mobile):not(.header-small) .wp-filter .search-form label,
-    body:not(.mobile):not(.header-small) .wp-filter .search-form input {
-        padding-right: 68px;
-    }
     body:not(.folded):not(.grid_menu):not(.mobile) #adminmenu li.wp-has-submenu.wp-has-current-submenu.wp-menu-open > ul.wp-submenu {
         background:transparent!important;
     }
@@ -3963,12 +3952,12 @@
         right: auto;
         left: 0;
     }   
-    .subsubsub a,
+/*    .subsubsub a,
     .filter-links a {
         border-bottom: 0;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-    }
+    }*/
     .filter-drawer {
         margin: 0 -5px;
         text-align:center;

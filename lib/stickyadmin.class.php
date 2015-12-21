@@ -4,8 +4,8 @@
  * Class StickyAdmin - Main file for plugin execution
  * ==================================================
  *
- * @version 1.0.4
- * @copyright 2015
+ * @version 1.0.5
+ * @copyright 2016
  * @author Dorian Tudorache
  * @link www.stickyadmin.net
  *
@@ -14,14 +14,13 @@
  * @package Sticky Admin
  *
  */
-
 if ( ! class_exists( 'StickyAdmin' ) ) :
 
 class StickyAdmin {
     protected static $instance = null;
     const PLUGIN_NAME   = 'Sticky Admin';
     const PLUGIN_SLUG   = 'stickyadmin';
-    const VERSION       = '1.0.4';
+    const VERSION       = '1.0.5';
     
     /**
      * The pre-modified admin menu.
@@ -173,8 +172,7 @@ class StickyAdmin {
     public static function sticky_functions() {
         // Sticky required functions
         require_once( STICKY_INCLUDES_URI . 'sticky_functions.php' );
-        
-        // require_once( STICKY_INCLUDES_URI . 'sticky_body_class.php' );
+
         self::sticky_generate_css( self::$config, get_current_blog_id() );
 
         // Sticky styles and scripts definitions
@@ -213,8 +211,6 @@ class StickyAdmin {
         add_action( 'admin_init',           array( 'StickyAdmin', 'numina_wpab_state_controller' ) );
         add_action( 'admin_init',           array( 'StickyAdmin', 'numina_wpab_check' ) );
         add_action( 'init' ,                array( 'StickyAdmin', 'numina_sticky_adminbar' ) );
-        // Enable for debugging output.
-        // add_action( 'init' ,                array( 'StickyAdmin', 'numina_debug' ) );
     }
     
     /**
@@ -305,8 +301,13 @@ class StickyAdmin {
         add_action( 'WP_EX_after_save',				array( 'StickyAdmin', 'sticky_theme_changed' ) );
     }
 
-
-
+    /**
+     * Function to enqueue CSS on the customizer page.
+     *
+     * @since 1.0
+     * @author Dorian Tudorache
+     *
+     */
     public static function numina_customizer_enqeueue() {
         if ( $GLOBALS['pagenow'] != 'customize.php' ) return;
         wp_enqueue_style( STICKY_CUSTOMIZER, STICKY_CSS . STICKY_CUSTOMIZER . '.css' );
@@ -399,9 +400,6 @@ class StickyAdmin {
                 // Content ScrollBar
                 'scrollbar'         =>  ( isset ( $s_ui[ 'scrollbar' ] ) ? $s_ui[ 'scrollbar' ] : '#30395c' ),
                 'scrollbar_rail'    =>  ( isset ( $s_ui[ 'scrollbar_rail' ] ) ? $s_ui[ 'scrollbar_rail' ] : '#ffffff' ),
-
-                // Side Meta
-                'side_meta'         =>  ( isset ( $s_ui[ 'side_meta_bg' ] ) ? $s_ui[ 'side_meta_bg' ] : '#FFFFFF' ),
 
                 // Tooltips
                 'tooltip'           =>  ( isset ( $s_ui[ 'tooltips_bg' ] ) ? $s_ui[ 'tooltips_bg' ] : '#FFFFFF' )
@@ -538,6 +536,7 @@ class StickyAdmin {
                 'bar'   => array(
                     'wp-admin-bar-new-content'      => '\\e60c',
                     'wp-admin-bar-my-sites'         => '\\ed70',
+                    'wp-admin-bar-site-name'        => '\\ed70',
                     'wp-admin-bar-bp-login'         => '\\e98d'
                 ),
             ),
@@ -693,7 +692,6 @@ class StickyAdmin {
            . ' menu-sub-' . ( sticky_luminance( self::$config['colors']['adminmenu_submenu'] ) ? 'b' : 'w' )
            . ' menu-badges-' . ( sticky_luminance( self::$config['colors']['adminmenu_hl'] ) ? 'b' : 'w' )
            . ( ! empty( self::$config['adminmenu']['grid_on'] ) ? ' ' . self::$config['adminmenu']['grid_on'] : '' )
-           . ' side-' . ( sticky_luminance( self::$config['colors']['side_meta'] ) ? 'b' : 'w' )
            . ' footer-' . ( sticky_luminance( self::$config['colors']['footer'] ) ? 'b' : 'w' )
            . ( self::$config['header']['sticky'] ? ' header-sticky' : '' )
            . ( self::$config['header']['type'] == 'minimized' ? ' header-small' : '' );
@@ -718,7 +716,6 @@ class StickyAdmin {
                 'ignore_users'      => ( isset( $s_ui[ 's_s_exclude_user' ] ) ? $s_ui [ 's_s_exclude_user' ] : '' ),
                 'ignore_pages'      => ( isset( $s_ui[ 's_s_exclude_page' ] ) ? $s_ui[ 's_s_exclude_page' ] : '' ),
                 'extend_session'    => ( isset( $s_ui[ 's_s_extend_visit'] ) ? $s_ui[ 's_s_extend_visit' ] : false )
-
             );
 
             if ( $GLOBALS['pagenow'] === 'index.php' ) {

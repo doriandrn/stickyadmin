@@ -18,6 +18,14 @@ p.description {
     margin-bottom: 0;
     margin-top: 10px;
 }
+
+body.content-b p.description {
+    color: rgba(0,0,0,.25);
+}
+body.content-w p.description {
+    color: rgba(0,0,0,.35);
+}
+
 .wrap > form:not(#your-profile):not(.media-upload-form) > p:not(.submit):not(.search-box ) {
     text-align: center;
     margin-bottom: 0!important;
@@ -26,10 +34,14 @@ p.description {
     font-size: 11px;
     line-height: 16px;
 }
+.form-table th,
+.form-table th[scope=row],
 label {
     display: inline-block;
     font-style: normal;
     cursor: default;
+    font-weight: 600;
+    letter-spacing: .2px;
 }
 .form-table th,
 table#newmeta thead th label,
@@ -109,9 +121,20 @@ table#newmeta thead th label {
 .form-table td > textarea:first-child {
     margin-top: 0;
 }
+.form-table th,
+.form-table th[scope=row] {
+    width: 250px;
+    text-align: right;
+    display: block;
+    float: left;
+    letter-spacing: 0;
+}
+
 .form-table fieldset > label {
     /*margin-bottom: 10px;*/
     display: block;
+    line-height: 26px;
+    font-weight: 400;
 }
 
 .form-table fieldset > br + label,
@@ -140,11 +163,11 @@ table#newmeta thead th label {
 }
 
 body.content-w .form-table tr:not(:last-child) {
-    border-bottom: 1px solid rgba(255,255,255,.05);
+    border-bottom: 1px solid rgba(255,255,255,.015);
 }
 
 body.content-b .form-table tr:not(:last-child) {
-    border-bottom: 1px solid rgba(0,0,0,.05);
+    border-bottom: 1px solid rgba(0,0,0,.03);
 }
 
 .form-table tr:first-child {
@@ -187,21 +210,13 @@ body.rtl .form-table th {
     display: block;
     margin-top: 20px;
 }
-.form-table th,
-.form-table th[scope=row] {
-    width: 250px;
-    text-align: right;
-    display: block;
-    vertical-align: top;
-    float: left;
-}
 
 body.content-b .form-table th,
 body.content-b .form-table th[scope=row],
 body.content-b label,
 body.content-b table#newmeta thead th label,
 body.content-b #your-profile label+a {
-    color: rgba(0, 0, 0, .75);
+    color: rgba(0, 0, 0, .65);
 }
 body.content-w .form-table th,
 body.content-w .form-table th[scope=row],
@@ -304,6 +319,7 @@ body.rtl:not(.update-core-php) .wrap > form:not(#template):not(#post):not(#plugi
     max-width: 820px;
     margin: 0 auto;
     padding: 25px 0;
+    text-align: center;
 }
 
 body.content-w:not(.update-core-php) .wrap > form:not(#template):not(#post):not(#plugin-filter):not(#export-filters):not(#form-site-list):not(#form-user-list):not(#bp-admin-component-form):not(.search-form) {
