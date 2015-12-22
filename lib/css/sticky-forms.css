@@ -406,6 +406,10 @@ body.rtl .form-table label + input[type=text] {
 .form-table td {
     min-width: 120px;
     line-height: 20px;
+    text-align: left;
+}
+body.rtl .form-table td {
+    text-align: right;
 }
 .form-table td a {
     margin-bottom:0 !important;

@@ -9915,3 +9915,6 @@ body.rtl .slick-slide,
     height: auto;
     border: 0
 }
+.checkout-header img {
+    display: none!important;
+}
