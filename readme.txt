@@ -12,7 +12,7 @@ Fresh, modern, native WordPress Admin Interface designed & developed with compat
 
 == Description ==
 
-Sticky is a **highly customizable User Interface** designed to give WordPress a better look and improved functionality. It’s modern design and the ability to change the colours make it a perfect match for any WordPress theme. 
+StickyAdmin is a **highly customizable User Interface** designed to give WordPress a better look and improved functionality. It’s modern design and the ability to change the colours make it a perfect match for any WordPress theme. 
 
 The interface was entirely developed with compatibility in mind, permitting it to be expanded and easily adapted to other plugins or themes. Crafted for mobiles, tablets and desktops.
 
