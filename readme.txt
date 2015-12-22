@@ -21,24 +21,22 @@ The interface was entirely developed with compatibility in mind, permitting it t
 * (Optional) Fully fledged (built-in) Statistics Panel & Tracker; 
 * Lightweight. Fast. Optimised. Runs almost as fast as WordPress does.
 * Responsive, mobile-first layout;
-* Retina (HDPI) ready - Everything is a vector;
-* Pixel-perfect User Interface;
-* Re-order menu items;
+* Retina & HiDPI (everything is a vector);
+* Pixel-Perfect User Interface;
+* Reorder menu items using drag & drop;
 * Change UI icons on the go (triggers on right / middle click);
 * Over 2000 icons (Streamline icon set) to choose from;
-* 4 navigation states (folded, normal, grid menu, large grid menu), left-right menu position; 
-* Use your custom logo in any image format, including .SVG;
-* AdminBar state changer;
+* Use your custom logo in any image format including .svg;
+* Minimize / close the admin bar;
 * Over 25 pre-made themes;
 * Toastr notifications;
 * qTip tooltips;
 * Search on type, AJAXified live search;
 * Customizable color schemes;
-* Custom ‘Howdy' message, Custom Footer text;
+* Customize ‘Howdy' message;
+* Change copyright footer text;
 * Custom CSS and Javascript
-* FavIcons, Shortcut icons, personalised logos;
-* Clean, commented & optimised code, easy to understand and modify.
-* Lifetime support, always up-to-date technologies;
+* Support for favicons, smartphone & tablet app icons;
 * 99% compatibility with themes & plugins;
 * bbPress, buddyPress, MultiSite, WPML, WPMU support;
 * RTL version
@@ -48,7 +46,7 @@ The interface was entirely developed with compatibility in mind, permitting it t
 * PHP 5.3+ (recommended PHP 7.0+)
 * JavaScript (the no-js version is still under development)
 * WordPress - check for required version in the sidebar
-* Modern Browser
+* Modern Browsers
 
 == Contribute ==
 
