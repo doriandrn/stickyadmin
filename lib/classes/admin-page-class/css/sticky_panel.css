@@ -252,6 +252,9 @@ textarea + input.button + a {
     line-height: 20px;
     font-weight: 400;
 }
+.setingstab#s_credits .field > p:first-child:last-child {
+    padding: 0 25px;
+}
 .setingstab#s_credits .field > p:before {
     content: '\e695';
     font: 400 6px/20px streamline;
@@ -524,15 +527,17 @@ label[for=sticky_theme_selector] {
 
 body.content-w .sections h3 {
     border-bottom: 1px solid rgba(255,255,255,.1);
+    background: rgba(0,0,0,.05);
 }
 body.content-b .sections h3 {
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    background: rgba(0,0,0,.025);
 }
 body.content-w .sections .field:not(:last-child) {
-    border-bottom: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.05);
 }
 body.content-b .sections .field:not(:last-child) {
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0,0,0,.025);
 }
 
 .sections h1 {
@@ -545,7 +550,9 @@ body.content-b .sections .field:not(:last-child) {
 }
 .sections h3:after {
     float: right;
-    font: 400 8px/22px streamline;
+    font-family: streamline;
+    font-weight: 400;
+    font-size: 8px;
     content: '\e60a';
 }
 .sections h3:hover {
@@ -556,26 +563,17 @@ body.content-b .sections .field:not(:last-child) {
 }
 .nav_tab_link {
     font-size: 0;
-    line-height: 24px;
+    line-height: 44px;
     letter-spacing: 0px;
     text-decoration: none;
     border: none;
     display: block;
     font-weight: 400;
-    padding: 10px 0;
-    height: 24px;
+    padding: 0;
+    height: 44px;
     text-align: center;
     position: relative;
     vertical-align: top;
-    -webkit-border-top-left-radius: 4px;
-       -moz-border-radius-topleft: 4px;
-            border-top-left-radius: 4px;
-    -webkit-border-bottom-left-radius: 4px;
-       -moz-border-radius-bottomleft: 4px;
-            border-bottom-left-radius: 4px;
-/*    -webkit-box-shadow: inset -2px 0 rgba(0, 0, 0, .15);
-       -moz-box-shadow: inset -2px 0 rgba(0, 0, 0, .15);
-            box-shadow: inset -2px 0 rgba(0, 0, 0, .15);*/
     -webkit-transition: all .15s ease-in-out;
        -moz-transition: all .15s ease-in-out;
          -o-transition: all .15s ease-in-out;
@@ -594,29 +592,7 @@ body.menu-b a.nav_tab_link {
 body.menu-b a.nav_tab_link:hover {
     color: rgba(0,0,0, .85);
 }
-/*
-.nav_tab_link:after {
-    content: '';
-    width: 1px;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
 
-body.content-w .nav_tab_link:after {
-    background: rgba(255, 255, 255, .1);
-}
-body.content-b .nav_tab_link:after {
-    background: rgba(0,0,0, .1);
-}
-*/
-/*.active_tab .nav_tab_link:after {
-    content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgNiA0NCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEuNDE0MjE7Ij48cGF0aCBpZD0ic3RpY2t5X2Rhc2hfbGluZSIgZD0iTTUuNzMyNSwwLjAxMDE1bDAsMTAuOTlsLTUuNDkwNjQsMTEuMDA1NWw1LjQ5MDY0LDExLjAwMTNsMCwxMS4wMDI4IiBzdHlsZT0iZmlsbDpub25lO3N0cm9rZS13aWR0aDowLjVweDtzdHJva2U6dXJsKCN0YWcxKTsiLz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9InRhZzEiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgwLjA2MTYwMTYsLTQzLjY3MTIsNDIuNTgwOCwwLjA2MzE3OTEsMy4yMTkwNyw0My44MzE5KSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmZjtzdG9wLW9wYWNpdHk6MC4xMDE5NjEiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmZjtzdG9wLW9wYWNpdHk6MC41MDE5NjEiLz48c3RvcCBvZmZzZXQ9Ijk5JSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmZjtzdG9wLW9wYWNpdHk6MC4xMDE5NjEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZmY7c3RvcC1vcGFjaXR5OjAuMTAxOTYxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PC9zdmc+');
-    width: 6px;
-    background: transparent!important;
-}*/
 .nav_tab_link:hover {
 }
 .description {

@@ -249,10 +249,13 @@ body.menu-right #adminmenuwrao .menu_settings:before {
     margin: 0 0px 10px;
     padding: 10px 20px;
     height: 68px;
-    font-size: 28px;
-    line-height: 58px;
-    font-weight: 800;
+    font-size: 22px;
+    line-height: 48px;
+    font-weight: 700;
+    font-family: "Montserrat", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
     text-align: center;
+    overflow: hidden;
 }
 body.menu-w #adminmenu li#adminmenu_logo {
     background: rgba(0,0,0,.25);
@@ -274,12 +277,14 @@ body.menu-b #adminmenu li#adminmenu_logo {
 }
 /*Sep*/
 #adminmenu li.wp-menu-separator {
-    -webkit-box-sizing: content-box;
-       -moz-box-sizing: content-box;
-            box-sizing: content-box;
     display: block;
     padding: 0;
     margin: 10px 0;
+    max-width: 100%;
+    -webkit-transition: max-width .4s cubic-bezier(0.35, -0.35, 0.3, 1.5);
+       -moz-transition: max-width .4s cubic-bezier(0.35, -0.35, 0.3, 1.5);
+         -o-transition: max-width .4s cubic-bezier(0.35, -0.35, 0.3, 1.5);
+            transition: max-width .4s cubic-bezier(0.35, -0.35, 0.3, 1.5);
 }
 body.mobile #adminmenu li.wp-menu-separator {
 
@@ -546,17 +551,17 @@ body.mobile .wp-submenu li a:before {
     display: none;
 }
 #adminmenu li.menu-top a {
-    -webkit-transition: color .15s linear;
-    -moz-transition: color .15s linear;
-    -o-transition: color .15s linear;
-    transition: color .15s linear
+    -webkit-transition: color .15s linear, padding .4s ease-in-out;
+    -moz-transition: color .15s linear, padding .4s ease-in-out;
+    -o-transition: color .15s linear, padding .4s ease-in-out;
+    transition: color .15s linear, padding .4s ease-in-out
 }
 #adminmenuwrap #adminmenu_logo img,
 #adminmenuwrap #adminmenu_logo svg {
     max-width: 60%;
-    display: inline;
+    display: inline-block;
+    vertical-align: middle;
     margin: 0 auto;
-    height: auto;
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box

@@ -733,7 +733,7 @@ body.rtl #wpadminbar ul:not(.ab-top-secondary) .ab-submenu .menupop .ab-sub-wrap
     height: auto!important;
     margin-top: 0!important
 }
-#wpadminbar #wp-admin-bar-root-default > li > .ab-item:before,
+#wpadminbar #wp-admin-bar-root-default > li:not(#wp-admin-bar-wp-logo) > .ab-item:before,
 #wpadminbar #wp-admin-bar-bp-notifications .ab-item:before,
 #wpadminbar #wp-admin-bar-top-secondary .ab-item .ab-icon:before {
     font: 400 12px/44px streamline;
@@ -938,22 +938,17 @@ body.no-js .wp-responsive-open #wpadminbar #wp-admin-bar-menu-toggle .ab-icon:be
     min-width: 135px;
     left: auto;
 }
-
 body.rtl #wpadminbar .ab-top-secondary .menupop > .ab-sub-wrapper {
     left: 0;
     right: auto;
 }
-
 #wpadminbar div#sticky_icon_picker {
-    left: -15px;
+    left: 0px;
 }
-
 body.rtl #wpadminbar div#sticky_icon_picker {
-    right: -15px;
+    right: 0px;
     left: auto;
 }
-
-
 #wpadminbar ul.ab-top-secondary ul.ab-submenu .menupop .ab-sub-wrapper:after {
     border: solid 5px transparent;
     content: " ";

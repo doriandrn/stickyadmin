@@ -166,10 +166,6 @@ $options_panel->OpenTab( 's_dashboard' );
     $options_panel->h1( __( "Dashboard", '_sticky_' ) );
     $options_panel->AccordionArea( 's_dash_page_acc' );
         $options_panel->Title( __( "Appearance", '_sticky_' ) );
-        $options_panel->addImage( 'dash_image', array(
-                'name'  => __( 'Background Image', '_sticky_' ),
-                'desc'  => __( 'Choose a custom background image to be displayed on the Dashboard - Welcome Screen.', '_sticky_' ),
-        ) );
         $options_panel->addText( 'dash_heading', array(
                 'name'  => __( 'Welcome text', '_sticky_' ),
                 'desc'  => __( 'Input a custom heading title to be displayed on the Dashboard - Welcome Screen. Only works if JavaScript is enabled.', '_sticky_' ), 
@@ -478,7 +474,7 @@ $options_panel->OpenTab( 's_navigation' );
         $options_panel->addText( 'nav_custom_logo_text', array(
                 'name'  => __( 'Custom Logo Text', '_sticky_' ),
                 'desc'  => __( 'Define a custom text to be displayed as the logo in the navigation bar. If left empty, it will fall back to the most appropiate option.', '_sticky_' ),
-                'std'   => __( 'Sticky Admin', '_sticky_' )
+                'std'   => __( 'Sticky', '_sticky_' )
         ) );
         $options_panel->addText( 'nav_custom_logo_letter', array(
                 'name'  => __( 'Folded Logo Letter', '_sticky_' ),
@@ -827,14 +823,14 @@ $options_panel->OpenTab( 's_devs' );
         $options_panel->addCode( 'custom_css', array(
             'name'      => __( 'CSS', '_sticky_' ),
             'desc'      => __( 'Input your own CSS code to add / overwrite in the administration panel.', '_sticky_' ),
-            'class'     => 'numina_custom_css',
+            'class'     => 'sticky_custom_css',
             'syntax'    => 'css',
             'theme'     => 'dark'
         ) );
         $options_panel->addCode( 'custom_js', array(
             'name'      => __( 'JavaScript', '_sticky_' ),
             'desc'      => __( 'Input your own Javascript code to add / overwrite in the administration panel. jQuery rules may be used.', '_sticky_' ),
-            'class'     => 'numina_custom_js',
+            'class'     => 'sticky_custom_js',
             'syntax'    => 'js',
             'theme'     => 'dark'
         ) );

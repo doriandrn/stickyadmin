@@ -2429,24 +2429,20 @@ body:not(.wpab-minimized):not(.wpab-closed) #wpbody {
 body.header-small #wpbody #wpbody-content {
     padding-top: 50px;
 }
-
 #wpcontent {
     position: relative;
     min-width: 320px;
     margin-bottom: 34px;
 }
-
 body.mobile #wpwrap #wpcontent {
     width: 100%;
 }
-
 #wpcontent, #wpfooter {
     -webkit-transition: padding .2s ease-in-out, margin .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), left .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), opacity .15s ease-in-out;
        -moz-transition: padding .2s ease-in-out, margin .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), left .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), opacity .15s ease-in-out;
          -o-transition: padding .2s ease-in-out, margin .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), left .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), opacity .15s ease-in-out;
             transition: padding .2s ease-in-out, margin .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), left .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), opacity .15s ease-in-out; 
 }
-
 body.mobile #wpcontent,
 body.mobile #wpfooter {
     -webkit-transition: padding .2s ease-in-out, margin .4s cubic-bezier(0.22, 0.61, 0.36, 1), left .4s cubic-bezier(0.22, 0.61, 0.36, 1), opacity .15s ease-in-out;
@@ -2454,12 +2450,12 @@ body.mobile #wpfooter {
          -o-transition: padding .2s ease-in-out, margin .4s cubic-bezier(0.22, 0.61, 0.36, 1), left .4s cubic-bezier(0.22, 0.61, 0.36, 1), opacity .15s ease-in-out;
             transition: padding .2s ease-in-out, margin .4s cubic-bezier(0.22, 0.61, 0.36, 1), left .4s cubic-bezier(0.22, 0.61, 0.36, 1), opacity .15s ease-in-out; 
 }
-
 #sticky_bulk_actions {
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
+    text-align: left;
     height: 60px;
     z-index: 100;
     -webkit-box-sizing: border-box;
@@ -2477,11 +2473,14 @@ body.mobile #wpfooter {
          -o-transition: -o-transform .15s ease-in-out;
             transition: transform .15s ease-in-out;
 }
-
+body.rtl #sticky_bulk_actions {
+    text-align: right;
+    left: auto;
+    right: 0;
+}
 #sticky_bulk_actions * {
     -webkit-font-smoothing: subpixel-antialiased !important;
 }
-
 body.bulk-open #sticky_bulk_actions {
     -webkit-transform: translateY(0px);
        -moz-transform: translateY(0px);
@@ -2489,7 +2488,6 @@ body.bulk-open #sticky_bulk_actions {
          -o-transform: translateY(0px);
             transform: translateY(0px);
 }
-
 #sticky_bulk_actions button {
     display: inline-block;
     vertical-align: top;

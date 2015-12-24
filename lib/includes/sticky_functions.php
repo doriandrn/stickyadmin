@@ -353,7 +353,7 @@ if ( !function_exists( 'sticky_make_hl_color' ) ) :
     function sticky_make_hl_color( $hex, $dif = 0 ) {
         // This is only used once when generating the principal HL color.
         // if ( $dif == 0 && sticky_luminance(StickyAdmin::$content_background) == sticky_luminance($hex) ) 
-            // numina_options_updater( 'highlight_color', sticky_adjust_hl_color($hex, 0) );
+            // sticky_options_updater( 'highlight_color', sticky_adjust_hl_color($hex, 0) );
         
         return sticky_adjust_hl_color( $hex, $dif, 0, 0, 1 );
     }
@@ -488,7 +488,7 @@ if ( !function_exists( 'sticky_luminance' ) ) :
         return false;
     }
 endif;
-if ( !function_exists( 'numina_options_updater' ) ) :
+if ( !function_exists( 'sticky_options_updater' ) ) :
     /**
      *
      * Updates an option in the options panel.
@@ -497,7 +497,7 @@ if ( !function_exists( 'numina_options_updater' ) ) :
      * @author Popa Florin
      *
      */
-    function numina_options_updater($key, $value) {
+    function sticky_options_updater($key, $value) {
         global $grab_data;
         $t_sticky_opt = get_option( 'sticky_options' );
 
@@ -688,7 +688,7 @@ if ( !function_exists( 'sticky_stats_display' ) ) :
                     </div>
                  </div>';
         } else {
-            echo '<div id="sticky_notice">' . __( 'Please give the statistics screen up to 30 minutes to gather elemental data in order for it to show up. Unfortunately, the statistics panel IS NOT AVAILABLE for localhost installations at this time.', '_sticky_' ) . '</div>';
+            echo '<div id="sticky_notice"><p>' . __( 'Please give the statistics screen up to 30 minutes to gather elemental data in order for it to show up. Unfortunately, the statistics panel IS NOT AVAILABLE for localhost installations at this time.', '_sticky_' ) . '</p></div>';
         }
     }
 endif;

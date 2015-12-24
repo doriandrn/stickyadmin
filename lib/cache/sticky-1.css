@@ -1,35 +1,47 @@
+<br />
+<b>Notice</b>:  Undefined index: adminbar_badges in <b>/Users/dorian/Documents/htdocs/stickyav/wp-content/plugins/stickyadmin/lib/includes/sticky_css.php</b> on line <b>33</b><br />
 
 #wpadminbar,
 #wpadminbar .sticky_toggle button,
 #wpadminbar .sticky_toggle:before,
 #wpadminbar .sticky_toggle:after {
-    background:!important;
+    background:#ffffff!important;
 }
 #wpadminbar .menupop .ab-sub-wrapper {
-    background:;
+    background:#ffffff;
 }
 #wp-admin-bar-bp-notifications .count, #wp-admin-bar-comments .ab-label, #wp-admin-bar-updates .ab-label {
-    border: 2px solid ;
+    border: 2px solid #ffffff;
 }
 #wpadminbar .menupop .ab-sub-wrapper:before {
-    border-bottom-color:!important;
+    border-bottom-color:#ffffff!important;
 }
 #wpadminbar .ab-top-secondary #wp-admin-bar-my-account { 
-    background: ; 
+    background: #1a1f2b; 
 }
 .sticky_wpab.qtip,
 .sticky_wpab.qtip-default {
-    background: rgba(0,0,0, .95)!important;
+    background: rgba(255,255,255, .95)!important;
 }
 .sticky_wpab.qtip:after,
 .sticky_wpab.qtip-default:after {
-    border-bottom-color: rgba(0,0,0, .95)!important;
+    border-bottom-color: rgba(255,255,255, .95)!important;
 }
 #wp-admin-bar-bp-notifications .count,
 #wp-admin-bar-comments .ab-label,
 #wp-admin-bar-updates .ab-label {
     background:;
 }
+<br />
+<b>Notice</b>:  Undefined index: side_meta in <b>/Users/dorian/Documents/htdocs/stickyav/wp-content/plugins/stickyadmin/lib/includes/sticky_css.php</b> on line <b>53</b><br />
+<br />
+<b>Notice</b>:  Undefined index: adminmenu_badges in <b>/Users/dorian/Documents/htdocs/stickyav/wp-content/plugins/stickyadmin/lib/includes/sticky_css.php</b> on line <b>80</b><br />
+<br />
+<b>Notice</b>:  Undefined index: adminmenu_icons in <b>/Users/dorian/Documents/htdocs/stickyav/wp-content/plugins/stickyadmin/lib/includes/sticky_css.php</b> on line <b>86</b><br />
+<br />
+<b>Notice</b>:  Undefined index: content_boxes in <b>/Users/dorian/Documents/htdocs/stickyav/wp-content/plugins/stickyadmin/lib/includes/sticky_css.php</b> on line <b>146</b><br />
+<br />
+<b>Notice</b>:  Undefined index: content_boxes in <b>/Users/dorian/Documents/htdocs/stickyav/wp-content/plugins/stickyadmin/lib/includes/sticky_css.php</b> on line <b>268</b><br />
 body, 
 body.is_loading #overlay, 
 #wpbody,
@@ -41,16 +53,16 @@ div.mce-toolbar-grp > div,
 .switch-tmce:before,
 .switch-tmce:after
 {
-    background:  ;
+    background: #ECF2F6 ;
 }
 #screen-meta,#screen-meta-links .show-settings {
     background: ;
 }
 ::-webkit-scrollbar-track {
-    background:;
+    background:#1a1f2b;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: ;
+    background-color: #1a1f2b;
 }
 #adminmenuback,
 #adminmenuwrap,
@@ -62,11 +74,11 @@ body.admin-bar #adminmenu,
 .wp-responsive-open .wrap > h1:first-child > a#wp-menu-toggle,
 .wp-responsive-open .wrap > h2:first-child > a#wp-menu-toggle,
 body:not(.grid_menu) #adminmenu .wp-submenu {
-    background:!important;
+    background:#1a1f2b!important;
 }
 #adminmenu .awaiting-mod, #adminmenu span.update-plugins, 
 #sidemenu li a span.update-plugins {
-    border:2px solid ;
+    border:2px solid #1a1f2b;
 }
 #adminmenu .awaiting-mod, 
 #adminmenu span.update-plugins, 
@@ -77,31 +89,31 @@ body:not(.grid_menu) #adminmenu .wp-submenu {
 #adminmenu li.opensub:hover > a .wp-menu-name:before,
 #adminmenu li.menu-top > a:hover .wp-menu-name:before,
 #adminmenu li.opensub > a:hover .wp-menu-name:before {
-    color:#000000 !important;
+    color:#80cc33 !important;
 }
 .picker_open div.sticky_nav_icon_picker,
 body:not(.mobile) #adminmenu .wp-not-current-submenu .wp-submenu,
 body.folded:not(.mobile) #adminmenu .wp-has-current-submenu .wp-submenu {
-    background:!important;
+    background:#ffffff!important;
 }
 #fx stop:nth-child(1) { 
-    stop-color:; 
+    stop-color:#7333cc; 
 }               
 #fx stop:nth-child(2) { 
-    stop-color:;
+    stop-color:#80cc33;
 }
 #fx stop:nth-child(3) { 
-    stop-color:; 
+    stop-color:#73cc33; 
 }
 #overlay svg path {
-    fill:;
+    fill:#80cc33;
 }
 .wrap > .subsubsub a.current .count { 
-    color:rgba(0,0,0,.65); 
+    color:rgba(128,204,51,.65); 
 }
 .current-panel .accordion-sub-container.control-panel-content,
 #customize-controls { 
-    background:; 
+    background:#1a1f2b; 
 }
 .form-table, 
 .form-wrap,
@@ -115,19 +127,19 @@ form#nav-menu-meta,
 .inline-edit-row,
 .menu-item-settings,
 .panel_menu .nav_tab_link { 
-    background:; 
+    background:#4a6491; 
 }
 .wrap > form:not(#file-form):not(#comments-form):not(#posts-filter):not(#bulk-action-form):not(#plugin-filter):not(#post):not(#myblogs) > h3 {
-    background:;
+    background:#1a1f2b;
 }
 .qtip,
 .qtip-default,
 div.google-visualization-tooltip { 
-    background: rgba(, .95); 
+    background: rgba(#ffffff, .95); 
 }
 .qtip:after,
 .qtip-default:after { 
-    border-top-color: rgba(, .95);
+    border-top-color: rgba(#ffffff, .95);
 }
 .stuffbox,
 .postbox,
@@ -144,14 +156,14 @@ div#widgets-right .widgets-sortables,
 .wp-filter .search-form input[type=search],
 p.search-box input[name=s]
 {
-    background:;
+    background:#4a6491;
 }
 .wrap > h1:first-child #filters-expand ul li.active:before,
 .view-switch > a.current { 
-    color:!important;
+    color:#80cc33!important;
 }
 .post-state-format {
-    color: !important;
+    color:#80cc33 !important;
 }
 #overlay:before,
 .filter-links:before, 
@@ -161,93 +173,93 @@ p.search-box input[name=s]
 ul.core-updates,
 .press-this-actions,
 #poststuff > #post-body:before {
-    background:  ;
-    background: -webkit-linear-gradient(180deg, ,  100%);
-    background: -moz-linear-gradient(180deg, ,  100%);
-    background: -o-linear-gradient(180deg, ,  100%);
-    background: linear-gradient(180deg, ,  100%);
+    background: #4a6491 ;
+    background: -webkit-linear-gradient(180deg, #4a6491, #ECF2F6 100%);
+    background: -moz-linear-gradient(180deg, #4a6491, #ECF2F6 100%);
+    background: -o-linear-gradient(180deg, #4a6491, #ECF2F6 100%);
+    background: linear-gradient(180deg, #4a6491, #ECF2F6 100%);
 }
 #wpfooter { 
-    background-color: ;
+    background-color:#5a4a91 ;
 }
 
 #adminmenu li#collapse-menu { 
-    left: -32px; 
+    left: 185px; 
 }
 body.rtl #adminmenu li#collapse-menu { 
     left: auto;
-    right: -32px; 
+    right: 185px; 
 }
 #adminmenuwrap .resize_handle { 
-    background:; 
+    background:#ffffff; 
 }
 @media screen and (min-width: 1025px) {
     body.grid_menu:not(.mobile):not(.folded) #adminmenu .wp-submenu {
-        background:!important;
+        background:#ffffff!important;
     }
     #adminmenumain,
     #wpwrap > #adminmenuwrap,
     #adminmenuback,
     #adminmenu { 
-        width: px;
+        width: 217px;
         min-width: 220px;
     }
     body.header-sticky:not(.mobile) .wrap > h1:first-child, 
     body.header-sticky:not(.mobile) .wrap > h2:first-child, 
     #overlay, 
-    body:not(.mobile):not(.folded) .wrap > .theme-overlay { left: px; }
+    body:not(.mobile):not(.folded) .wrap > .theme-overlay { left: 217px; }
 
 
     body.rtl.header-sticky:not(.mobile) .wrap > h1:first-child, 
     body.rtl.header-sticky:not(.mobile) .wrap > h2:first-child, 
     body.rtl #overlay,
-    body.rtl:not(.mobile):not(.folded) .wrap > .theme-overlay { right: px; left: 0; }
+    body.rtl:not(.mobile):not(.folded) .wrap > .theme-overlay { right: 217px; left: 0; }
 
     body:not(.mobile):not(.folded) #wpfooter,
-    body:not(.mobile):not(.folded) #wpcontent { margin-left: px; }
+    body:not(.mobile):not(.folded) #wpcontent { margin-left: 217px; }
 
     body.rtl:not(.mobile):not(.folded) #wpfooter,
-    body.rtl:not(.mobile):not(.folded) #wpcontent { margin-right: px; margin-left: 0 }
+    body.rtl:not(.mobile):not(.folded) #wpcontent { margin-right: 217px; margin-left: 0 }
 }
 .picker_open div.sticky_nav_icon_picker:before {
-    border-bottom-color: !important; 
+    border-bottom-color: #ffffff!important; 
 }
 .picker_open div.sticky_nav_icon_picker.reposition:before {
     border-bottom-color: transparent!important;
-    border-top-color: !important;
+    border-top-color: #ffffff!important;
 }
 @media screen and (min-width: 783px) and (max-width: 1024px) {
     body.auto-fold:not(.mobile) #adminmenu .wp-has-current-submenu:hover > a + .wp-submenu {
-        background:!important;
+        background:#ffffff!important;
     }
     body:not(.auto-fold) #adminmenumain,
     body:not(.auto-fold) #wpwrap > #adminmenuwrap,
     body:not(.auto-fold) #adminmenuback,
     body:not(.auto-fold) #adminmenu { 
-        width: px;
+        width: 217px;
     }
 
     body:not(.auto-fold) .wrap > h1:first-child,  
     body:not(.auto-fold) .wrap > h2:first-child,  
-    body:not(.auto-fold) .theme-overlay { left: px; }
+    body:not(.auto-fold) .theme-overlay { left: 217px; }
 
     body.rtl:not(.auto-fold) .wrap > h1:first-child,  
     body.rtl:not(.auto-fold) .wrap > h2:first-child,  
-    body.rtl:not(.auto-fold) .theme-overlay { right: px; left: auto; }
+    body.rtl:not(.auto-fold) .theme-overlay { right: 217px; left: auto; }
 
 
 
-    body:not(.mobile):not(.auto-fold) #wpcontent { margin-left: px; }
-    body.rtl:not(.mobile):not(.auto-fold) { margin-right: px; margin-left: 0 }
-    body:not(.mobile):not(.auto-fold) #wpfooter { padding-left: 35px; }
-    body.rtl:not(.mobile):not(.auto-fold) #wpfooter { padding-right: 35px; padding-left: 0 }
+    body:not(.mobile):not(.auto-fold) #wpcontent { margin-left: 217px; }
+    body.rtl:not(.mobile):not(.auto-fold) { margin-right: 217px; margin-left: 0 }
+    body:not(.mobile):not(.auto-fold) #wpfooter { padding-left: 252px; }
+    body.rtl:not(.mobile):not(.auto-fold) #wpfooter { padding-right: 252px; padding-left: 0 }
 
 }
 #adminmenu .wp-submenu:before {
-    border-right-color:!important;
+    border-right-color:#ffffff!important;
 }
 body.s_nav_right #adminmenu .wp-submenu:before {
-    border-left-color:!important;
+    border-left-color:#ffffff!important;
     border-right-color:transparent!important;
 }
 .stuffbox,

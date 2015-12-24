@@ -181,7 +181,6 @@ body.login-b #login>form>p:not(.forgetmenot) label {
 .interim-login #login {
     margin-top: 0!important;
     margin-bottom: 0!important;
-    padding: 20px!important;
 }
 
 .interim-login #login h1 a {

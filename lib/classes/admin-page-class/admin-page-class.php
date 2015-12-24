@@ -184,8 +184,6 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
      *  > icon_url (string) (optional) - URL to the icon, decorating the Top-Level-Menu (Top level Only)
      *  > position (string) (optional) - The position of the Menu in the ACP (Top level Only)
      *  > option_group (string) (required) - the name of the option to create in the database
-     *
-     *
      */
     public function __construct($args) {
       if(is_array($args)) {
@@ -202,7 +200,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       add_filter('init', array($this,'add_query_var_vars'));
       
       // If we are not in admin area exit.
-      if ( ! is_admin() )
+      if ( ! is_admin()  )
         return;
       //load translation
       $this->load_textdomain();
@@ -292,6 +290,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       add_filter('attribute_escape',array($this,'edit_insert_to_post_text'),10,2);
       // Delete file via Ajax
       add_action( 'wp_ajax_apc_delete_mupload', array( $this, 'wp_ajax_delete_image' ) );
+      add_action( 'wp_ajax_sticky_option_save', array( $this, 'sticky_ajax_option_save') );
       //import export
       add_action( 'wp_ajax_apc_import_'.$this->option_group, array( $this, 'import' ) );
       add_action( 'wp_ajax_apc_export_'.$this->option_group, array( $this, 'export' ) );
@@ -610,13 +609,9 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       echo '<div class="wrap">'."\n";
       echo '<h1>'.apply_filters('admin_page_class_h2',$this->args['page_title']).'</h1>'."\n".((isset($this->args['page_header_text']))? $this->args['page_header_text'] : '');
       echo '<form method="post" name="'.apply_filters('apc_form_name', 'admin_page_class',$this).'" class="'.apply_filters('apc_form_class', 'admin_page_class',$this).'" id="'.apply_filters('apc_form_id', 'admin_page_class',$this).'" action="" enctype="multipart/form-data">
-        '."\n".'<div class="header_wrap">'."\n".'
-        <div style="margin:32px 0 0 0">'."\n".'
-          <input type="submit" style="margin-left: 25px;" value="'.esc_attr(__('Save Changes','apc')).'" name="Submit" class="'.apply_filters('admin_page_class_submit_class', 'btn-info').' btn"><br><br>
-        </div>'."\n".'
-      <br style="clear:both"><br>
-      </div>'."\n";
-      wp_nonce_field( basename(__FILE__), 'BF_Admin_Page_Class_nonce' );
+      '."\n".'<div class="header_wrap">'."\n".'</div>'."\n";
+      
+      wp_nonce_field( basename(__FILE__), 'sticky_nonce' );
       if ($this->saved_flag){
         echo '<div class="update-status">'."\n";
         $this->errors = apply_filters('admin_page_class_errors', $this->errors,$this);
@@ -629,8 +624,8 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
         echo '</div>'."\n";
       }
         
-        
       $saved = get_option($this->option_group);
+
       $this->_saved = $saved;
       $skip = array('title','paragraph','subtitle','TABS','CloseDiv','TABS_Listing','OpenTab','custom','import_export', 'h1','AccordionArea','AccordionAEnd');
       foreach($this->_fields as $field) {
@@ -724,8 +719,10 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     if($this->tab_div) echo '</div>'."\n";
     echo '</div>'."\n";
     echo '</div>'."\n";
-    echo '<p class="submit"><input type="submit" name="Submit" class="'.apply_filters('admin_page_class_submit_class', 'btn-info').' btn" value="'.esc_attr(__('Save Changes','apc')).'" /></p>'."\n";
+    echo '<p class="submit"><input type="submit" id="submit" name="Submit" class="'.apply_filters('admin_page_class_submit_class', 'btn-info').' btn" value="'.esc_attr(__('Save Changes','apc')).'" />'."\n";
+    echo '<input type="reset" name="reset" value="reset" />'."\n";
     echo '<input type="hidden" name="action" value="save" />'."\n";
+    echo '</p>'."\n";
     echo '</form>'."\n".'</div>'."\n".'</div>'."\n";
     do_action('admin_page_class_after_page');
     }
@@ -743,6 +740,62 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       $args['id'] = 'TABS';
       $args['std'] = '';
       $this->SetField($args);
+    }
+
+    public function object_to_array($obj) {
+      if(is_object($obj)) $obj = (array) $obj;
+      if(is_array($obj)) {
+          $new = array();
+          foreach($obj as $key => $val) {
+              $new[$key] = $this->object_to_array($val);
+          }
+      }
+      else $new = $obj;
+      return $new;       
+  }
+
+    /**
+     * AJAX save options
+     * 
+     * @access public
+     * @author Dorian Tudorache
+     */
+    function sticky_ajax_option_save() {
+      // check_ajax_referer( 'sticky_nonce', 'sticky_wpnonce' );
+      $request = 'sticky_new_options';
+      $request = ( isset( $_REQUEST[ $request ] ) ) ? $_REQUEST[ $request ] : false ;
+
+      if ( ! $request )
+        return;
+
+      // Reset Options
+      if ( $request == 'reset' ) {
+        StickyAdmin::reset();
+        $msg = array( 'success' => 'options_reset', 'message' => __( 'Options are now back to defaults', '_sticky_' ) );
+      } 
+      // Update options
+      else {
+        $data = json_decode( stripcslashes( $request ) );
+        $data = $this->object_to_array( $data ); // this is for recursive, adding (array) in front of data would have caused incorrect statements for nested array
+
+        $msg = array( 'success' => false, 'message' => __( 'Error: Options not saved, please try again', '_sticky_' ) );
+
+        if( get_option( 'sticky_options' ) != $data ) {
+          
+          if( update_option( 'sticky_options', $data ) )
+            $msg = array( 'success' => 'options_saved', 'message' => __( 'Options Saved', '_sticky_' ) );
+            
+        } else {
+          $msg = array( 'success' => true, 'message' => __( 'Options Saved', '_sticky_' ) );
+        }
+      }
+      
+      $echo = json_encode( $msg );
+
+      @header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ) );
+
+      echo $echo;
+      exit;
     }
     /**
      * Close open Div
@@ -874,10 +927,12 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
           'id' => ''
         );
         $args = array_merge($default, $args);
+
         $saved = get_option($this->option_group);
+
       if (isset($saved[$args['id']])){
         if($saved[$args['id']] === false) {
-            $saved[$args['id']] = $args['std'];
+            $saved[$args['id']] = stripcslashes( $args['std'] );
             update_option($this->args['option_group'],$saved);
           }
       }
@@ -1319,7 +1374,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
   public function show() {
     
     global $post;
-    wp_nonce_field( basename(__FILE__), 'BF_Admin_Page_Class_nonce' );
+    wp_nonce_field( basename(__FILE__), 'sticky_nonce' );
     echo '<table class="form-table">'."\n";
     foreach ( $this->_fields as $field ) {
       $meta = get_post_meta( $post->ID, $field['id'], !$field['multiple'] );
@@ -2185,7 +2240,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     If ($post_data == NULL) return;
     $skip = array('title','paragraph','subtitle','TABS','CloseDiv','TABS_Listing','OpenTab','h1','import_export', 'AccordionArea', 'AccordionAEnd');
     //check nonce
-    if ( ! check_admin_referer( basename( __FILE__ ), 'BF_Admin_Page_Class_nonce') )
+    if ( ! check_admin_referer( basename( __FILE__ ), 'sticky_nonce') )
       return;
     
     foreach ( $this->_fields as $field ) {

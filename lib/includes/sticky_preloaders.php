@@ -3,8 +3,8 @@
     if ( !function_exists( 'add_action' ) )
         exit;
     // Icons by Jiri Shilha - https://dribbble.com/shots/1631956-Settings-Icons-PSD
-    if ( !function_exists( 'numina_cogs') ) :
-    function numina_cogs( $cogsvg = NULL ) {
+    if ( !function_exists( 'sticky_cogs') ) :
+    function sticky_cogs( $cogsvg = NULL ) {
         if ( ! $cogsvg ) return;
         switch ( $cogsvg ) {
         case 1:

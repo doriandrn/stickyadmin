@@ -95,6 +95,24 @@ Coming soon.
 
 == Changelog ==
 
+= 1.0.6 =
+Dec 25th, 2015
+Merry Christmas everyone!
+
+Improvements:
+
+* AJAXified the control panel;
+* Added a 'Reset options' button in the panel;
+* Further optimised PHP code;
+* Improved color matches algorithms;
+
+BugFixes:
+
+* The logo no longer overfloats the adminmenu;
+* Fixed a bug where clicking the header would have brough up empty screen options panel;
+* Icon for WP Logo Menu (in adminbar) can no longer be changed. There is an option to disable it in the panel;
+* Fixed alignment for Bulk Actions buttons;
+
 = 1.0.5 =
 Dec 21st, 2015
 

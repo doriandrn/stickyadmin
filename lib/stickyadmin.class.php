@@ -9,7 +9,7 @@
  * @author Dorian Tudorache
  * @link www.stickyadmin.net
  *
- * @license See Licensing folder
+ * @license GPL 2.0+
  *
  * @package Sticky Admin
  *
@@ -30,12 +30,21 @@ class StickyAdmin {
     public static $original_admin_menu;
 
     /**
-     * Background colors.
+     * StickyAdmin config
      *
      * @since 1.0.0
      */
     public static $config;
     
+
+    /**
+     * Vars to keep the user id and current blog id stored for use
+     *
+     * @since 1.0.5
+     */
+    public static $current_blog_id;
+    public static $current_user_id;
+
     /**
      * The menu ID for the currently being edited cd_admin_menu nav menu.
      *
@@ -70,6 +79,7 @@ class StickyAdmin {
         self::sticky_objects_constants();
         self::sticky_functions();
         self::sticky_vars();
+        self::sticky_generate_css( self::$config, self::$current_blog_id );
         self::sticky_on_init();
         self::sticky_login_page();
         
@@ -173,8 +183,6 @@ class StickyAdmin {
         // Sticky required functions
         require_once( STICKY_INCLUDES_URI . 'sticky_functions.php' );
 
-        self::sticky_generate_css( self::$config, get_current_blog_id() );
-
         // Sticky styles and scripts definitions
         require_once( STICKY_INCLUDES_URI . 'sticky_do_styles.php' );
         require_once( STICKY_INCLUDES_URI . 'sticky_do_scripts.php' );
@@ -184,6 +192,7 @@ class StickyAdmin {
     } 
     
     /**
+     *
      * Sticky variables object init.
      *
      * @since 1.0.0
@@ -194,6 +203,8 @@ class StickyAdmin {
     public static function sticky_vars() {
         self::sticky_setup_options( get_option('sticky_options') );
     }
+
+
     /**
      *
      * Actions that run once the plugin is initalized.
@@ -203,14 +214,15 @@ class StickyAdmin {
      *
      */
     public static function sticky_on_init() {
-        add_action( 'admin_init',           array( 'StickyAdmin', 'numina_remove_admin_styles' ) );
-        add_action( 'bp_init',              array( 'StickyAdmin', 'numina_remove_bp_adminbar_css' ) );
-        add_action( 'get_header',           array( 'StickyAdmin', 'numina_wpadminbar_remove_inline_css' ) );
-        add_action( 'admin_init',           array( 'StickyAdmin', 'numina_sticky_adminbar' ) );
-        add_action( 'admin_init',           array( 'StickyAdmin', 'numina_extensions' ) );
-        add_action( 'admin_init',           array( 'StickyAdmin', 'numina_wpab_state_controller' ) );
-        add_action( 'admin_init',           array( 'StickyAdmin', 'numina_wpab_check' ) );
-        add_action( 'init' ,                array( 'StickyAdmin', 'numina_sticky_adminbar' ) );
+        add_action( 'admin_init',           array( 'StickyAdmin', 'sticky_remove_wp_admin_styles' ) );
+        add_action( 'bp_init',              array( 'StickyAdmin', 'sticky_remove_bp_adminbar_css' ) );
+        add_action( 'get_header',           array( 'StickyAdmin', 'sticky_wpab_remove_inline_css' ) );
+        add_action( 'admin_init',           array( 'StickyAdmin', 'sticky_wpab' ) );
+        add_action( 'admin_init',           array( 'StickyAdmin', 'sticky_wpab_state_controller' ) );
+        add_action( 'admin_init',           array( 'StickyAdmin', 'sticky_wpab_check' ) );
+        add_action( 'admin_init',           array( 'StickyAdmin', 'sticky_extensions' ) );
+        add_action( 'init' ,                array( 'StickyAdmin', 'sticky_wpab' ) );
+        add_action( 'init' ,                array( 'StickyAdmin', 'sticky_grab_ids' ) );
     }
     
     /**
@@ -220,21 +232,21 @@ class StickyAdmin {
      * @since 1.0
      * @author Dorian Tudorache
      *
-    */
+     */
     public static function sticky_admin_ss() {
         // Plugin styles & scripts.
         add_action( 'admin_enqueue_scripts',        array( 'StickyAdmin', 'sticky_styles' ) );
         add_action( 'admin_enqueue_scripts',        array( 'StickyAdmin', 'sticky_scripts' ) );  
         // Admin Bar only.
-        add_action( 'admin_enqueue_scripts',        array( 'StickyAdmin', 'numina_sticky_adminbar_css' ) );
-        add_action( 'admin_enqueue_scripts',        array( 'StickyAdmin', 'numina_sticky_adminbar_js' ) );
-        add_action( 'wp_enqueue_scripts',           array( 'StickyAdmin', 'numina_sticky_adminbar_css' ) );
-        add_action( 'wp_enqueue_scripts',           array( 'StickyAdmin', 'numina_sticky_adminbar_js' ) );
+        add_action( 'admin_enqueue_scripts',        array( 'StickyAdmin', 'sticky_wpab_css' ) );
+        add_action( 'admin_enqueue_scripts',        array( 'StickyAdmin', 'sticky_wpab_js' ) );
+        add_action( 'wp_enqueue_scripts',           array( 'StickyAdmin', 'sticky_wpab_css' ) );
+        add_action( 'wp_enqueue_scripts',           array( 'StickyAdmin', 'sticky_wpab_js' ) );
     
         // BuddyPress
-        add_action( 'bp_admin_enqueue_scripts',     array( 'StickyAdmin', 'numina_buddypress_enqueue' ) );
+        add_action( 'bp_admin_enqueue_scripts',     array( 'StickyAdmin', 'sticky_buddypress_enqueue' ) );
         // Preserve Modified Admin Bar actions.
-        add_action( 'wp_before_admin_bar_render',   array( 'StickyAdmin', 'numina_wpadminbar_remove' ) );
+        add_action( 'wp_before_admin_bar_render',   array( 'StickyAdmin', 'sticky_wpadminbar_remove' ) );
         
     }   
     
@@ -247,76 +259,83 @@ class StickyAdmin {
      *
      */
     public static function sticky_custom_ss() {
-        add_action( 'admin_head',                   array( 'StickyAdmin', 'numina_sticky_head' ) );
+        add_action( 'admin_head',                   array( 'StickyAdmin', 'sticky_head' ) );
         // Grab the original Admin Menu for diferrent roles.
-        if ( is_network_admin() ) {
-            add_action( 'network_admin_menu',       array( 'StickyAdmin', 'numina_get_orig_admin_menu' ), 999998 );
-        } elseif ( is_user_admin() ) {
-            add_action( 'user_admin_menu',          array( 'StickyAdmin', 'numina_get_orig_admin_menu' ), 999998 );
-        } else {
-            add_action( 'admin_menu',               array( 'StickyAdmin', 'numina_get_orig_admin_menu' ), 999998 );
-        }
+        $nav_hook = ( is_network_admin() ? 'network_admin_menu' : ( is_user_admin() ? 'user_admin_menu' : 'admin_menu' ) );
+        add_action( $nav_hook,                      array( 'StickyAdmin', 'sticky_get_orig_admin_menu' ), 999998 );
         // Remove the original Admin Menu.
-        add_action( 'admin_head',                   array( 'StickyAdmin', 'numina_remove_orig_menu' ), 99999 );
+        add_action( 'admin_head',                   array( 'StickyAdmin', 'sticky_remove_orig_menu' ), 99999 );
         // Dashboard Enhacements.
-        add_action( 'wp_dashboard_setup',           array( 'StickyAdmin', 'numina_sticky_dashboard' ) );
+        add_action( 'wp_dashboard_setup',           array( 'StickyAdmin', 'sticky_dashboard' ) );
         // Filter the <body> classes.
-        add_filter( 'admin_body_class',             array( 'StickyAdmin', 'numina_bodyclass_controller' ) );
-        // add_filter( 'admin_body_class',             array( 'StickyAdmin', 'numina_body_class_ajax' ) );
-        add_filter( 'body_class',                   array( 'StickyAdmin', 'numina_uses_sticky' ) );
+        add_filter( 'admin_body_class',             array( 'StickyAdmin', 'sticky_bodyclass_controller' ) );
+        // add_filter( 'admin_body_class',             array( 'StickyAdmin', 'sticky_body_class_ajax' ) );
+        add_filter( 'body_class',                   array( 'StickyAdmin', 'sticky_uses_sticky' ) );
         // FormatDiv Meta Box style refresh.
-        add_action( 'do_meta_boxes',                array( 'StickyAdmin', 'numina_change_format_meta_box' ), 0 );
-        
+        add_action( 'do_meta_boxes',                array( 'StickyAdmin', 'sticky_change_format_meta_box' ), 0 );
         // Content Preloader - all_admin_notices hook used so it goes in #wpbody.
-        add_action( 'all_admin_notices',            array( 'StickyAdmin', 'numina_content_preload' ) );
+        add_action( 'all_admin_notices',            array( 'StickyAdmin', 'sticky_content_preload' ) );
         // Footer Text Replacement
-        add_filter( 'admin_footer_text' ,           array( 'StickyAdmin', 'numina_wp_admin_footer' ), 999999 );
+        add_filter( 'admin_footer_text' ,           array( 'StickyAdmin', 'sticky_wp_admin_footer' ), 999999 );
         // Howdy message replace
-        add_filter( 'admin_bar_menu',               array( 'StickyAdmin', 'numina_wpab_my_account' ), 10, 3);
-        
+        add_filter( 'admin_bar_menu',               array( 'StickyAdmin', 'sticky_wpab_my_account' ), 10, 3);
         // Customizer styles
-        add_action( 'customize_controls_print_styles', array( 'StickyAdmin', 'numina_customizer_enqeueue' ) );
+        add_action( 'customize_controls_print_styles', array( 'StickyAdmin', 'sticky_customizer_enqeueue' ) );
         // Sticky Editor
-        add_filter( 'tiny_mce_before_init',         array( 'StickyAdmin', 'numina_sticky_editor' ) );
+        add_filter( 'tiny_mce_before_init',         array( 'StickyAdmin', 'sticky_editor' ) );
         // Replace default avatars
-        // add_filter( 'avatar_defaults',              array( 'StickyAdmin', 'numina_sticky_avatar' ) );
-        // Inject the logo
-        // - action fires before the menu.
-        add_action( 'sticky_before_nav',            array( 'StickyAdmin', 'numina_adminmenu_logo' ), 0 );
+        // add_filter( 'avatar_defaults',              array( 'StickyAdmin', 'sticky_avatar' ) );
+        // Inject the logo - action fires before the menu.
+        add_action( 'sticky_before_nav',            array( 'StickyAdmin', 'sticky_adminmenu_logo' ), 0 );
         add_action( 'sticky_before_nav',            array( 'StickyAdmin', 'sticky_logout_button' ) );
         
         // Sticky Admin Menu
-        add_action( 'adminmenu',                    array( 'StickyAdmin', 'numina_sticky_admin_menu' ), 999999 );
+        add_action( 'adminmenu',                    array( 'StickyAdmin', 'sticky_admin_menu' ), 999999 );
         // MENU - Order, Sort and AJAX
-        add_filter( 'custom_menu_order',            array( 'StickyAdmin', 'numina_custom_menu_order') );
-        add_filter( 'menu_order',                   array( 'StickyAdmin', 'numina_custom_menu_order') );
+        add_filter( 'custom_menu_order',            array( 'StickyAdmin', 'sticky_custom_menu_order') );
+        add_filter( 'menu_order',                   array( 'StickyAdmin', 'sticky_custom_menu_order') );
         
         add_action( 'wp_ajax_sticky_update',         array( 'StickyAdmin', 'sticky_setup_options') );
-        add_action( 'wp_ajax_update_menu_positions', array('StickyAdmin', 'numina_update_menu_positions') );
-        add_action( 'wp_ajax_dynamic_css',          array( 'StickyAdmin', 'numina_ajax_css' ) );
-        add_action( 'wp_ajax_nopriv_dynamic_css',   array( 'StickyAdmin', 'numina_ajax_css' ) );
+        add_action( 'wp_ajax_update_menu_positions', array( 'StickyAdmin', 'sticky_update_menu_positions') );
+        add_action( 'wp_ajax_dynamic_css',          array( 'StickyAdmin', 'sticky_ajax_css' ) );
+        add_action( 'wp_ajax_nopriv_dynamic_css',   array( 'StickyAdmin', 'sticky_ajax_css' ) );
         // Copyright on Options Panel
-        add_action( 'admin_page_class_after_page',  array( 'StickyAdmin', 'numina_copyright' ) );
+        add_action( 'admin_page_class_after_page',  array( 'StickyAdmin', 'sticky_copyright' ) );
         // After panel save, trigger the flag
         add_action( 'WP_EX_after_save',				array( 'StickyAdmin', 'sticky_theme_changed' ) );
     }
 
     /**
+     *
      * Function to enqueue CSS on the customizer page.
      *
-     * @since 1.0
+     * @since 1.0.0
      * @author Dorian Tudorache
      *
      */
-    public static function numina_customizer_enqeueue() {
+    public static function sticky_customizer_enqeueue() {
         if ( $GLOBALS['pagenow'] != 'customize.php' ) return;
         wp_enqueue_style( STICKY_CUSTOMIZER, STICKY_CSS . STICKY_CUSTOMIZER . '.css' );
     }
 
     /**
+     *
+     * A simple function to capture IDs of the current user & blog
+     *
+     * @since 1.0.5
+     * @author Dorian Tudorache
+     *
+     */
+    public static function sticky_grab_ids() {
+        self::$current_blog_id = get_current_blog_id();
+        self::$current_user_id = get_current_user_id();
+    }
+
+    /**
+     *
      * Actions & filters just for the login page.
      *
-     * @since 1.0
+     * @since 1.0.0
      * @author Dorian Tudorache
      *
      */
@@ -325,19 +344,19 @@ class StickyAdmin {
         if ( ! in_array( $GLOBALS['pagenow'],       array( 'wp-login.php', 'wp-register.php' ) ) ) return;
         /* Login Page
         -------------------------- */
-        add_action( 'login_init',                   array( 'StickyAdmin', 'numina_replace_login_style' ) );
-        add_action( 'login_head',                   array( 'StickyAdmin', 'numina_login_page_css' ) );
-        add_action( 'login_head',                   array( 'StickyAdmin', 'numina_login_page_js' ) );
-        add_filter( 'login_body_class',             array( 'StickyAdmin', 'numina_login_classes' ) );
-        add_filter( 'login_headertitle',            array( 'StickyAdmin', 'numina_login_page_headertitle' ) );
-        add_filter( 'login_headerurl',              array( 'StickyAdmin', 'numina_login_page_headerurl' ) );
+        add_action( 'login_init',                   array( 'StickyAdmin', 'sticky_replace_login_style' ) );
+        add_action( 'login_head',                   array( 'StickyAdmin', 'sticky_login_page_css' ) );
+        add_action( 'login_head',                   array( 'StickyAdmin', 'sticky_login_page_js' ) );
+        add_filter( 'login_body_class',             array( 'StickyAdmin', 'sticky_login_classes' ) );
+        add_filter( 'login_headertitle',            array( 'StickyAdmin', 'sticky_login_page_headertitle' ) );
+        add_filter( 'login_headerurl',              array( 'StickyAdmin', 'sticky_login_page_headerurl' ) );
     }
 
     /**
      *
      * Sticky Extensions
      *
-     * @since 1.0
+     * @since 1.0.0
      * @author Dorian Tudorache
      *
      */
@@ -348,11 +367,15 @@ class StickyAdmin {
         add_action( 'admin_print_styles-plugin-editor.php',     array( 'StickyAdmin', 'code_editor_styles' ) );
     }
 
-    public static function sticky_setup_options( $s_ui ) {
-        global $wpdb;
-        
-        $color_step = 5; // on HSV scale (360deg), colors increase/decrease by this ammount (deg).
-        
+    /**
+     *
+     * Sets up the options, self::$config object
+     *
+     * @since 1.0.0
+     * @author Dorian Tudorache
+     *
+     */
+    public static function sticky_setup_options( $s_ui ) {        
         // Syicky Random Cogs
         include ( 'includes/sticky_preloaders.php' );
         
@@ -424,7 +447,7 @@ class StickyAdmin {
                 'dash_heading'      =>  ( isset ( $s_ui[ 'dash_heading' ] ) ? esc_attr ( $s_ui[ 'dash_heading' ] ) : '' ),
                 'dash_stats'        =>  ( isset ( $s_ui[ 's_no_welcome' ] ) ? $s_ui['s_no_welcome'] : true ),
                 'preload'           =>  ( isset ( $s_ui[ 'content_preload' ] ) ? $s_ui['content_preload'] : true ),
-                'preloader'         =>  ( isset ( $s_ui[ 'content_preloader' ] ) && ( $s_ui [ 'content_preloader' ] != '' ) ? $s_ui['content_preloader'] : numina_cogs( rand(1,24) ) )
+                'preloader'         =>  ( isset ( $s_ui[ 'content_preloader' ] ) && ( $s_ui [ 'content_preloader' ] != '' ) ? $s_ui['content_preloader'] : sticky_cogs( rand(1,24) ) )
             ),
             'adminbar'  => array(
                 'preserve'          =>  ( isset ( $s_ui[ 'wpadminbar_preserve' ] ) ? $s_ui[ 'wpadminbar_preserve' ] : true ),
@@ -454,17 +477,17 @@ class StickyAdmin {
             ),
             'login'     => array(
                 'bg_color'          =>  ( isset( $s_ui[ 'login_background_color' ] ) ? $s_ui['login_background_color']: '#1a1f2b' ),
-                'bg_image'          =>  ( isset( $s_ui[ 'login_background_image' ][ 'src' ] ) ? $s_ui['login_background_image']['src'] : ( empty( $sticky_themes_images[ $s_ui[ 'sticky_theme' ] ] ) ? STICKY_ASSETS . 'sticky-default-login-bg.jpg' : ( file_exists( STICKY_ASSETS_URI . $s_ui[ 'sticky_theme' ] . '.jpg' ) ? self::sticky_theme_image( $s_ui[ 'sticky_theme' ] ) : '' ) ) ),
+                'bg_image'          =>  ( isset( $s_ui[ 'login_background_image' ][ 'src' ] ) ? $s_ui['login_background_image']['src'] : STICKY_ASSETS . 'sticky-default-login-bg.jpg' ),
                 'display_logo'      =>  ( isset( $s_ui[ 'logo_enable' ] ) ? $s_ui['logo_enable'] : true ),
                 'form'              =>  ( isset( $s_ui[ 'login_form_background' ] ) ? $s_ui[ 'login_form_background' ] : true ),
                 'form_bg'           =>  ( isset( $s_ui[ 'login_form_background_color' ] ) ? $s_ui[ 'login_form_background_color' ] : true ),
             ),
             'icons'     => array(
-                'favicon'           =>  ( isset( $s_ui[ 's_favicon' ][ 'src' ] ) && $s_ui[ 's_favicon' ][ 'src' ] != '' ) ? $s_ui[ 's_favicon' ][ 'src '] : STICKY_ASSETS . 'favico.png',
-                'phone_57'          =>  ( isset( $s_ui[ 's_phone_57' ][ 'src' ] ) && $s_ui[ 's_phone_57' ][ 'src '] != '' ) ? $s_ui[ 's_phone_57' ][ 'src' ] : STICKY_ASSETS . 'sticky_logo_57.png',
-                'phone_114'         =>  ( isset( $s_ui[ 's_phone_114' ][ 'src' ] ) && $s_ui[ 's_phone_114' ][ 'src '] != '' ) ? $s_ui[ 's_phone_114' ][ 'src' ] : STICKY_ASSETS . 'sticky_logo_114.png',
-                'tablet_72'         =>  ( isset( $s_ui[ 's_tablet_72' ][ 'src' ] ) && $s_ui[ 's_tablet_72' ][ 'src '] != '' ) ? $s_ui[ 's_tablet_72' ][ 'src' ] : STICKY_ASSETS . 'sticky_logo_72.png',
-                'tablet_144'        =>  ( isset( $s_ui[ 's_tablet_144' ][ 'src' ] ) && $s_ui[ 's_tablet_144' ][ 'src '] != '' ) ? $s_ui[ 's_tablet_144' ][ 'src' ] : STICKY_ASSETS . 'sticky_logo_144.png'
+                'favicon'           =>  ( isset( $s_ui[ 's_favicon' ][ 'src' ] ) && ! empty( $s_ui[ 's_favicon' ][ 'src' ] ) ) ? $s_ui[ 's_favicon' ][ 'src '] : STICKY_ASSETS . 'favico.png',
+                'phone_57'          =>  ( isset( $s_ui[ 's_phone_57' ][ 'src' ] ) ) ? $s_ui[ 's_phone_57' ][ 'src' ] : STICKY_ASSETS . 'sticky_logo_57.png',
+                'phone_114'         =>  ( isset( $s_ui[ 's_phone_114' ][ 'src' ] ) ) ? $s_ui[ 's_phone_114' ][ 'src' ] : STICKY_ASSETS . 'sticky_logo_114.png',
+                'tablet_72'         =>  ( isset( $s_ui[ 's_tablet_72' ][ 'src' ] ) ) ? $s_ui[ 's_tablet_72' ][ 'src' ] : STICKY_ASSETS . 'sticky_logo_72.png',
+                'tablet_144'        =>  ( isset( $s_ui[ 's_tablet_144' ][ 'src' ] ) ) ? $s_ui[ 's_tablet_144' ][ 'src' ] : STICKY_ASSETS . 'sticky_logo_144.png'
             ),
             'footer'    => array(
                 'show'              =>  ( isset ( $s_ui[ 'show_footer' ] ) ? $s_ui['show_footer'] : true ),
@@ -485,24 +508,24 @@ class StickyAdmin {
             'theme'     => ( isset( $s_ui[ 'sticky_theme' ] ) ? $s_ui[ 'sticky_theme' ] : 'default' ),
             'default_icons' => array(
                 'menu' => array(
-                    'menu-dashboard'   => '\\e7e1',
-                    'menu-posts'       => '\\e8a5',
-                    'menu-media'       => '\\e8e7',
-                    'menu-links'       => '\\e994',
-                    'menu-pages'       => '\\e6f1',
-                    'menu-comments'    => '\\e79e',
-                    'menu-feedback'    => '\\eb10',
-                    'menu-appearance'  => '\\eb6e',
-                    'menu-logout'      => '\\e763',
-                    'menu-users'       => '\\e605',
-                    'menu-plugins'     => '\\ebd4',
-                    'menu-tools'       => '\\ed7d',
-                    'menu-settings'    => '\\e7c9',
-                    'menu-generic'     => '\\e75d',
+                    'menu-dashboard'              => '\\e7e1',
+                    'menu-posts'                  => '\\e8a5',
+                    'menu-media'                  => '\\e8e7',
+                    'menu-links'                  => '\\e994',
+                    'menu-pages'                  => '\\e6f1',
+                    'menu-comments'               => '\\e79e',
+                    'menu-feedback'               => '\\eb10',
+                    'menu-appearance'             => '\\eb6e',
+                    'menu-logout'                 => '\\e763',
+                    'menu-users'                  => '\\e605',
+                    'menu-plugins'                => '\\ebd4',
+                    'menu-tools'                  => '\\ed7d',
+                    'menu-settings'               => '\\e7c9',
+                    'menu-generic'                => '\\e75d',
                     'toplevel_page_bp-activity'   => '\\e91a',
-                    'menu-posts-forum' => '\\e841',
-                    'menu-posts-topic' => '\\e78c',
-                    'menu-posts-reply' => '\\e79d'
+                    'menu-posts-forum'            => '\\e841',
+                    'menu-posts-topic'            => '\\e78c',
+                    'menu-posts-reply'            => '\\e79d'
                 ),
                 'header'    => array(
                     'index-php'                         => '\\e7e1',
@@ -582,56 +605,28 @@ class StickyAdmin {
             'svg_support'           => true // TODO - Check if browser supports SVG
         );
         
-        // Generate highlight colors
-        $get_hl_color = ( isset ( $s_ui[ 'highlight_color' ] ) ? $s_ui[ 'highlight_color' ] : '#FFFFFF' );
-        $get_hl_color2 = ( isset ( $s_ui[ 'content_bg' ] ) ? sticky_adjust_hl_color( $s_ui[ 'content_bg' ], - $color_step, 0, 0, true ) : '#FFFFFF' );
-        // print_r('HL1: ' . $get_hl_color . ', HL2: ' . $get_hl_color2 );
-        $get_hl_color2 = sticky_compare_correct( $get_hl_color, $get_hl_color2, $color_step * 2 );
+        // Based on the above settings, this function is run here to manipulate the data;
+        self::adjust_sticky_config();
+    }
 
-        if ( strpos( self::$config['footer']['copyright'], 'Donate!' ) !== false ) {
-            self::$config['footer']['copyright'] = str_replace( 'Donate!', '<a href="'. self::$config['donate_link'].'">Donate!</a>', self::$config['footer']['copyright'] );
-        }
+    /**
+     *
+     * Adds / Modifies options
+     * -----------------------
+     *
+     * @since 1.0.5
+     * @author Dorian Tudorache
+     *
+     */
+    public static function adjust_sticky_config() {
+        self::generate_highlight_colors();
+        self::adjust_additional_options();
+        self::statistics_config();
+        self::body_classes();
+        self::logo_config();
+    }
 
-        self::$config['hl_colors'] = array(
-            sticky_make_hl_color( $get_hl_color, 0 ),
-            sticky_make_hl_color( $get_hl_color, - $color_step ),
-            sticky_make_hl_color( $get_hl_color, $color_step ),
-            sticky_make_hl_color( $get_hl_color, - ( $color_step * 2) ),
-            sticky_make_hl_color( $get_hl_color, $color_step * 2 )
-        );
-        self::$config['hl_colors2'] = array(
-            sticky_make_hl_color( $get_hl_color2, 0 ),
-            sticky_make_hl_color( $get_hl_color2, - $color_step ),
-            sticky_make_hl_color( $get_hl_color2, $color_step ),
-        );
-
-        // Update the adminbar state
-        self::$config['adminbar']['state'] = ( isset ( self::$config['adminbar']['cookie'] ) ? self::$config['adminbar']['cookie'] : ( self::$config['adminbar']['hide'] ? 'closed' : 'maximized' ) );
-
-        // Dashboard Maps
-        self::$config['colors']['dash_maps'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 0, 15 );
-        self::$config['colors']['dash_maps_bg'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 5, -5 );
-
-        // Highlighter Colors Adjustments
-
-        // AdminMenu
-        self::$config['colors']['adminmenu_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'nav_hl' ] ) ? $s_ui[ 'nav_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminmenu' );
-        self::$config['colors']['adminmenu_hltwo'] = sticky_adjust_hl_color( self::$config['hl_colors'][0], 0, 0, 0, 1, 'adminmenu' );
-        
-        // Adminbar
-        self::$config['colors']['adminbar_submenu_top'] = sticky_adjust_hl_color( self::$config['colors']['adminbar_submenu'], 0, 0, -15 );
-        self::$config['colors']['adminbar_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'wpadminbar_hl' ] ) ? $s_ui[ 'wpadminbar_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminbar' );
-
-        // Header Gradient Color - Increases HUE by color_step
-        self::$config['colors']['header_grad'] = sticky_adjust_hl_color( self::$config['colors']['header'], 35 );
-
-        // If the footer and header have the same colors, make the footer color the sec gradient header color
-        if ( self::$config['colors']['header'] == self::$config['colors']['footer'] )
-            self::$config['colors']['footer'] = self::$config['colors']['header_grad'];
-
-        // Unused variables
-        unset( $get_hl_color, $color_step );
-
+    public static function logo_config() {
         // Logo Configuration
         if ( StickyAdmin::$config['logo']['how'] == 'svg' && ! self::$config['svg_support'] )
             StickyAdmin::$config['logo']['how'] = 'image';
@@ -649,7 +644,8 @@ class StickyAdmin {
                 break;
 
             case 'text':
-                self::$config['logo']['show']           = ( ( isset( $s_ui[ 'nav_custom_logo_text' ] ) && $s_ui[ 'nav_custom_logo_text' ] != '' ) ? esc_attr( $s_ui[ 'nav_custom_logo_text' ] ) : __( 'StickyAdmin', '_sticky_' ) ); 
+                self::$config['logo']['show']           = ( ( isset( $s_ui[ 'nav_custom_logo_text' ] ) && $s_ui[ 'nav_custom_logo_text' ] != '' ) ? esc_attr( $s_ui[ 'nav_custom_logo_text' ] ) : __( 'Sticky', '_sticky_' ) ); 
+                self::$config['logo']['show_folded']    = ( ( isset( $s_ui[ 'nav_custom_logo_letter' ] ) && $s_ui[ 'nav_custom_logo_letter' ] != '' ) ? substr( esc_attr( $s_ui[ 'nav_custom_logo_letter' ] ), 0, 2 ) : __( 'st', '_sticky_' ) ); 
                 break;
         }
 
@@ -661,17 +657,160 @@ class StickyAdmin {
         //         : 'PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJTdGlja3lMb2dvIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQwMy43MTFweCIgaGVpZ2h0PSIxMzMuNDEycHgiIHZpZXdCb3g9Ii05LjkxMiAyODYuMzM2IDQwMy43MTEgMTMzLjQxMiINCgkgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAtOS45MTIgMjg2LjMzNiA0MDMuNzExIDEzMy40MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGZpbGw9IndoaXRlIj4NCjxwYXRoIGlkPSJTdGlja3lHZWFyIiBkPSJNMTE1LjU3NSwzNTMuMDQyYzAtMy41NDgtMC4zMTYtNy4wMi0wLjg5My0xMC40MDJsMy4xODEtOC44ODZjLTMuMDEyLTkuOTg1LTguMzAzLTE4Ljk3Ni0xNS4yNjYtMjYuMzgyDQoJbC05LjI0LTEuNjc5Yy01LjMzMi00LjQzOC0xMS40MjMtNy45OTItMTguMDUzLTEwLjQzN2wtNi4wNjQtNy4xNTFjLTQuODk3LTEuMTQ1LTkuOTk0LTEuNzctMTUuMjQtMS43N3MtMTAuMzQzLDAuNjI1LTE1LjI0LDEuNzcNCglsLTYuMDY0LDcuMTUxYy02LjYzLDIuNDQ0LTEyLjcyMSw1Ljk5OS0xOC4wNTMsMTAuNDM3bC05LjI0LDEuNjc5Yy02Ljk2Myw3LjQwNi0xMi4yNTQsMTYuMzk2LTE1LjI2NiwyNi4zODJsMy4xODEsOC44ODYNCgljLTAuNTc2LDMuMzgzLTAuODkzLDYuODU0LTAuODkzLDEwLjQwMmMwLDMuNTY3LDAuMzA5LDcuMDU4LDAuODczLDEwLjQ1OWwtMy4yMTEsOC45N2MyLjkyMSw5Ljg5MSw4LjA0LDE4LjgwMSwxNC44NDQsMjYuMTU1DQoJbDkuMTg2LDEuNjdjNS40NjgsNC42MDYsMTEuNzg5LDguMjY2LDE4Ljc0OSwxMC43MzFsNS45NzcsNy4wNDdjNC44NDYsMS4wODMsOS45MSwxLjY3NCwxNS4xNTgsMS42NzQNCgljNS4yNDYsMCwxMC4zNDMtMC42MjUsMTUuMjQtMS43N2w2LjA2NS03LjE1MWM2LjYyOS0yLjQ0NSwxMi43MTktNS45OTksMTguMDUxLTEwLjQzNmw5LjI0MS0xLjY4DQoJYzYuOTYzLTcuNDA2LDEyLjI1NC0xNi4zOTYsMTUuMjY2LTI2LjM4MmwtMy4xODEtOC44ODZDMTE1LjI1OSwzNjAuMDYyLDExNS41NzUsMzU2LjU5LDExNS41NzUsMzUzLjA0MnogTTIuNTk2LDM1My4wNDINCgljMC0yOC4zOTEsMjMuMDE2LTUxLjQwNSw1MS40MDUtNTEuNDA1YzMuNDc5LDAsNi44NzYsMC4zNSwxMC4xNjEsMS4wMDljLTUuNzEyLDQuNzA0LTcuODI0LDYuMTc0LTEwLjE2MSw3LjM0OA0KCWMtMi4yNTgsMS4xMzUtNS4wNDMsMS45MjgtNy45NzksMi43NTRjLTE4Ljg2NCwzLjcxNS0zMy4wOTMsMjAuMzQyLTMzLjA5Myw0MC4yOTVjMCwxOC4wNSwxMS4yMTcsMzMuMzc5LDI3LjU2NiwzOC44OQ0KCWMtMi45NDIsMi4yMzktNS40MDksNC43NDgtNy44NjUsNy44MDdjLTAuMDQ0LDAuMDU2LTAuMDcsMC4xMTUtMC4wODcsMC4xNzhDMTQuNTg1LDM5MS44NjIsMi41OTYsMzczLjkxMiwyLjU5NiwzNTMuMDQyeg0KCSBNMzYuMjQ4LDMzMy45ODNjLTAuMjIxLTcuNTY4LDYuMjQzLTkuMzE3LDEyLjk5NC0xMS4xMDVjMS41NTEtMC4yNDQsMy4xNC0wLjM3Miw0Ljc1OS0wLjM3MmMxNi44NjQsMCwzMC41MzUsMTMuNjcyLDMwLjUzNSwzMC41MzYNCgljMCw0LjcxNC0xLjA2OSw5LjE3OC0yLjk3NywxMy4xNjNDNzQuOTAxLDM0Ni4yODYsMzYuNjk4LDM0OS41MDcsMzYuMjQ4LDMzMy45ODN6IE03MS44NDMsMzcyLjU5M2MwLDcuOTItNy4zNzQsOS4yNzItMTMuMzcsMTAuNjU2DQoJYy0xLjQ2LDAuMjE0LTIuOTUyLDAuMzI5LTQuNDcyLDAuMzI5Yy0xNy4zNjQsMC0zMC41MzUtMTMuNjcyLTMwLjUzNS0zMC41MzZjMC00LjY2MiwxLjA0OS05LjA3OCwyLjkxNy0xMy4wMzENCglDMzIuNjQ2LDM2MC4wNDIsNzEuODQzLDM1NS4zMSw3MS44NDMsMzcyLjU5M3ogTTU0LjAwMSw0MDQuNDQ3Yy0zLjYzOSwwLTcuMTY4LTAuMzU3LTEwLjU2LTEuMDM3bDAsMA0KCWMzLjgwNC0zLjc1MSw5LjAyNy03LjI3OCwxNi4wMTEtOS42NTZjMy4wMjUtMC40LDUuOTQ3LTEuMTMsOC43MjgtMi4xNTJjMC4yMzEtMC4wMzgsNC44ODEtMi4wMzksNi4wNjMtMi44MTUNCgljMTIuNDM4LTcuMDYsMjAuODMtMjAuNDIxLDIwLjgzLTM1Ljc0NGMwLTE4LjE3Mi0xMS44MDEtMzMuNTg0LTI4LjE1Ni0zOC45OThjMi43OTYtMi4wNzQsNS4zNy00LjQzMyw4LjA2My03LjkzDQoJYzE3LjkyOSw4LjAyNywzMC40MjcsMjYuMDEzLDMwLjQyNyw0Ni45MjhDMTA1LjQwNiwzODEuNDMzLDgyLjM5Myw0MDQuNDQ3LDU0LjAwMSw0MDQuNDQ3eiIvPg0KPGcgaWQ9IlN1YnRpdGxlIiBvcGFjaXR5PSIwLjciPg0KCTxwYXRoIGQ9Ik0xNDQuODE1LDQwOC40NDdsLTAuODgzLTIuMzcyaC02LjAwNGwtMC44ODMsMi4zNzJoLTMuMzhsNS4zOTYtMTQuMDA1aDMuNzM4bDUuMzk2LDE0LjAwNUgxNDQuODE1eiBNMTQwLjkzMSwzOTcuNDI1DQoJCWwtMi4xODQsNi4wMjVoNC4zNjdMMTQwLjkzMSwzOTcuNDI1eiIvPg0KCTxwYXRoIGQ9Ik0xNTUuMzgsNDA4LjQ0N3YtMTQuMDA1aDUuNTIxYzQuMzg5LDAsNy40MzQsMi43OTMsNy40MzQsNi45OTJjMCw0LjI0MS0zLjA0NSw3LjAxMy03LjQxMiw3LjAxM0gxNTUuMzh6IE0xNjUuMjksNDAxLjQzNQ0KCQljMC0yLjQ1Ny0xLjUxMi00LjM2Ny00LjM2Ny00LjM2N2gtMi41NjJ2OC43NTZoMi41NEMxNjMuNjczLDQwNS44MjMsMTY1LjI5LDQwMy44MjgsMTY1LjI5LDQwMS40MzV6Ii8+DQoJPHBhdGggZD0iTTE4OC41MTUsNDA4LjQ0N3YtMTAuMDk5bC0zLjk0NywxMC4wOTloLTEuMzAybC0zLjk0Ny0xMC4wOTl2MTAuMDk5aC0yLjk4MXYtMTQuMDA1aDQuMTc4bDMuNDAyLDguNzU2bDMuNC04Ljc1Nmg0LjE5OQ0KCQl2MTQuMDA1SDE4OC41MTV6Ii8+DQoJPHBhdGggZD0iTTIwMC4xNzIsNDA4LjQ0N3YtMTQuMDA1aDIuOTgxdjE0LjAwNUgyMDAuMTcyeiIvPg0KCTxwYXRoIGQ9Ik0yMjEuNDY0LDQwOC40NDdsLTYuNjc3LTkuMTM0djkuMTM0aC0yLjk4MXYtMTQuMDA1aDMuMDY1bDYuNDg3LDguNzk4di04Ljc5OGgyLjk4MnYxNC4wMDVIMjIxLjQ2NHoiLz4NCgk8cGF0aCBkPSJNMjQ0LjI3MSw0MDguNDQ3di0xNC4wMDVoNi41NTFjMy4wNDQsMCw0LjcwMywyLjA1OSw0LjcwMyw0LjUxNWMwLDIuNDM2LTEuNjgsNC40OTMtNC43MDMsNC40OTNoLTMuNTY5djQuOTk3SDI0NC4yNzF6DQoJCSBNMjUyLjQ4MSwzOTguOTU3YzAtMS4xNzYtMC45MDMtMS44OS0yLjA3OS0xLjg5aC0zLjE0OXYzLjc1OGgzLjE0OUMyNTEuNTc4LDQwMC44MjUsMjUyLjQ4MSw0MDAuMTEyLDI1Mi40ODEsMzk4Ljk1N3oiLz4NCgk8cGF0aCBkPSJNMjcyLjk1Niw0MDguNDQ3bC0wLjg4My0yLjM3MmgtNi4wMDRsLTAuODgzLDIuMzcyaC0zLjM4bDUuMzk2LTE0LjAwNWgzLjczOGw1LjM5NiwxNC4wMDVIMjcyLjk1NnogTTI2OS4wNzEsMzk3LjQyNQ0KCQlsLTIuMTg0LDYuMDI1aDQuMzY3TDI2OS4wNzEsMzk3LjQyNXoiLz4NCgk8cGF0aCBkPSJNMjkzLjE3OSw0MDguNDQ3bC02LjY3Ny05LjEzNHY5LjEzNGgtMi45ODF2LTE0LjAwNWgzLjA2NWw2LjQ4Nyw4Ljc5OHYtOC43OThoMi45ODJ2MTQuMDA1SDI5My4xNzl6Ii8+DQoJPHBhdGggZD0iTTMwNC43MDksNDA4LjQ0N3YtMTQuMDA1aDkuOTF2Mi42MjVoLTYuOTI5djIuOTM5aDYuNzgxdjIuNjI1aC02Ljc4MXYzLjE5MWg2LjkyOXYyLjYyNEgzMDQuNzA5eiIvPg0KCTxwYXRoIGQ9Ik0zMjIuNzA2LDQwOC40NDd2LTE0LjAwNWgzLjAwMnYxMS4zODFoNS45MjJ2Mi42MjRIMzIyLjcwNnoiLz4NCjwvZz4NCjxnIGlkPSJUaXRsZSI+DQoJPHBhdGggaWQ9InkiIGQ9Ik0zNTAuMTk2LDM5OC40NDFsNC44OTktNy42YzMuNTAxLDQuMzk5LDkuMTAxLDYuMiwxNC42MDIsNi4yYzguNSwwLDEzLjYwMS00LjgwMSwxMy42MDEtMTMuNDAxdi01LjYNCgkJYy0zLjQsMy44LTkuNCw3LjYtMTcuMDAxLDcuNmMtMTAuNCwwLTE1LjYwMS01LjUtMTUuNjAxLTE1LjMwMXYtMzIuNjAyaDEwLjV2MjguNzAxYzAsNy41MDEsMy44MDEsOS45MDEsOS44MDEsOS45MDENCgkJYzUuMzAxLDAsOS45LTMuMTAxLDEyLjMwMS02LjMwMXYtMzIuMzAyaDEwLjUwMXY0NS45MDJjMCwxNC41MDEtMTAuMjAxLDIyLjAwMi0yNC4xMDIsMjIuMDAyDQoJCUMzNjEuNTk3LDQwNS42NDMsMzU1LjQ5Niw0MDMuMzQyLDM1MC4xOTYsMzk4LjQ0MXoiLz4NCgk8cGF0aCBpZD0iayIgZD0iTTMzMC4yNDksMzg2LjA0MWwtMTQuNzAxLTIwLjAwMWwtNi44LDd2MTMuMDAxaC0xMC41MDJ2LTY2LjcwNGgxMC41MDJ2NDEuNzAybDIxLjMwMS0yMy4zMDFoMTMuMDAxbC0yMC4wMDIsMjEuOTAxDQoJCWwyMC40MDEsMjYuNDAxSDMzMC4yNDl6Ii8+DQoJPHBhdGggaWQ9ImMiIGQ9Ik0yNDcuMDQ4LDM2MS44NGMwLTE0LjYwMiwxMC4zLTI1LjMwMiwyNC45MDEtMjUuMzAyYzkuNSwwLDE1LjEwMiw0LDE4LjUwMSw4LjYwMWwtNi45LDYuMw0KCQljLTIuNy0zLjgtNi40LTUuNi0xMS4xMDEtNS42Yy04LjcwMSwwLTE0LjYwMiw2LjYwMS0xNC42MDIsMTYuMDAxczUuOSwxNi4xMDEsMTQuNjAyLDE2LjEwMWM0LjcsMCw4LjQtMiwxMS4xMDEtNS44bDYuOSw2LjUNCgkJYy0zLjM5OSw0LjUtOS4wMDEsOC42MDEtMTguNTAxLDguNjAxQzI1Ny4zNDgsMzg3LjI0MSwyNDcuMDQ4LDM3Ni40NCwyNDcuMDQ4LDM2MS44NHoiLz4NCgk8cGF0aCBpZD0iaSIgZD0iTTIyOC4xNDgsMzI1LjMzN2MwLTMuNiwyLjktNi41LDYuNS02LjVjMy42MDEsMCw2LjUsMi45LDYuNSw2LjVjMCwzLjYwMS0yLjg5OSw2LjUwMS02LjUsNi41MDENCgkJQzIzMS4wNDksMzMxLjgzOCwyMjguMTQ4LDMyOC45MzgsMjI4LjE0OCwzMjUuMzM3eiBNMjI5LjM0OCwzODYuMDQxdi00OC4zMDNoMTAuNTAydjQ4LjMwM0gyMjkuMzQ4eiIvPg0KCTxwYXRoIGlkPSJ0IiBkPSJNMjAxLjA0OCwzNzQuNzR2LTI3LjkwMWgtOC4wMDF2LTkuMTAxaDguMDAxdi0xMy4yMDFoMTAuNTAxdjEzLjIwMWg5LjgwMXY5LjEwMWgtOS44MDF2MjUuMzAyDQoJCWMwLDMuMywxLjYsNS44LDQuNiw1LjhjMiwwLDMuODAxLTAuOSw0LjYwMS0xLjhsMi41MDEsOGMtMS45LDEuNy01LjAwMSwzLjEwMS05LjgwMSwzLjEwMQ0KCQlDMjA1LjI0OCwzODcuMjQxLDIwMS4wNDgsMzgyLjg0MSwyMDEuMDQ4LDM3NC43NHoiLz4NCgk8cGF0aCBpZD0icyIgZD0iTTEzMy41NSwzNzYuNjQxbDYuNi05LjEwMWM0LjUsNC45LDExLjgwMSw5LjMwMSwyMS4xMDIsOS4zMDFjOS42MDEsMCwxMy4zMDEtNC43LDEzLjMwMS05LjIwMQ0KCQljMC0xNC4wMDEtMzguODAyLTUuMy0zOC44MDItMjkuODAyYzAtMTEuMTAxLDkuNjAxLTE5LjYwMSwyNC4zMDEtMTkuNjAxYzEwLjMwMSwwLDE4LjgwMiwzLjM5OSwyNC45MDEsOS40bC02LjYsOC43DQoJCWMtNS4zMDEtNS4zLTEyLjQwMS03LjctMTkuNDAyLTcuN2MtNi44LDAtMTEuMjAxLDMuNC0xMS4yMDEsOC4zMDFjMCwxMi41LDM4LjgwMiw0LjgsMzguODAyLDI5LjYwMg0KCQljMCwxMS4xMDEtNy45LDIwLjcwMS0yNS44MDEsMjAuNzAxQzE0OC40NTEsMzg3LjI0MSwxMzkuNTUxLDM4Mi44NDEsMTMzLjU1LDM3Ni42NDF6Ii8+DQo8L2c+DQo8L3N2Zz4='
         //     ) 
 
-        // If user changed the theme, generate the widefat colors.
-        // if ( sticky_has_changed( get_current_blog_id() ) ) {
-        // 	self::$config['widefat']['plugin_active'] = self::$config['hl_colors'][0];
-        // 	self::$config['widefat']['plugin_inactive'] = self::$config['hl_colors2'][0];
-        // 	numina_options_updater( 'widefat_plugin_active', self::$config['hl_colors'][0] );
-        // 	numina_options_updater( 'widefat_plugin_inactive', self::$config['hl_colors2'][0] );
-        // }
+    }
 
-        // Navigation width
-        if ( intval( self::$config['adminmenu']['width'] ) < 60 ) self::$config['adminmenu']['width'] = '220';
+    /**
+     *
+     * Statistics Config
+     * -----------------------
+     *
+     * @since 1.0.5
+     * @author Dorian Tudorache
+     *
+     */
+    public static function statistics_config() {
+        global $wpdb;
 
+        if ( ! self::$config['statistics'] ) 
+            return;
+        
+        self::$config['statistics'] = array(
+            // Overall stats config
+            'ignore_spam'       => ( isset( $s_ui[ 's_s_ignore_spam' ] ) && $s_ui[ 's_s_ignore_spam' ] ) ? 1 : 0,
+            'tracker_active'    => ( isset( $s_ui[ 's_s_tracker' ] ) && $s_ui[ 's_s_tracker' ] ) ? 1 : 0,
+            'ignore_admin'      => ( isset( $s_ui[ 's_s_ignore_admin' ] ) && $s_ui[ 's_s_ignore_admin' ] ) ? 1 : 0,
+            'track_users'       => ( isset( $s_ui[ 's_s_track_users' ] ) && $s_ui[ 's_s_track_users' ] ) ? 1 : 0,
+            'purge_interval'    => ( isset( $s_ui[ 's_s_purge_time' ] ) ? $s_ui[ 's_s_purge_time' ] : 150 ),
+            'ignore_ips'        => ( isset( $s_ui[ 's_s_exclude_ips' ] ) ? $s_ui[ 's_s_exclude_ips' ] : '' ),
+            'ignore_countries'  => ( isset( $s_ui[ 's_s_exclude_country' ] ) ? $s_ui[ 's_s_exclude_country' ] : '' ),
+            'ignore_uas'        => ( isset( $s_ui[ 's_s_exclude_ua' ] ) ? $s_ui [ 's_s_exclude_ua' ] : '' ),
+            'ignore_users'      => ( isset( $s_ui[ 's_s_exclude_user' ] ) ? $s_ui [ 's_s_exclude_user' ] : '' ),
+            'ignore_pages'      => ( isset( $s_ui[ 's_s_exclude_page' ] ) ? $s_ui[ 's_s_exclude_page' ] : '' ),
+            'extend_session'    => ( isset( $s_ui[ 's_s_extend_visit'] ) ? $s_ui[ 's_s_extend_visit' ] : false )
+        );
+
+        // Configuration from down here it's only for the dashboard
+        if ( $GLOBALS['pagenow'] != 'index.php' ) 
+            return;
+
+        $week_start = get_option('start_of_week'); // Get Wordpress option
+        $now        = current_time('mysql');
+        $week_mode  = ( $week_start == 1 ) ? 1 : 0;
+
+        self::$config['statistics'] += array(
+            // Visits
+            // ------------------------
+            'visits'            => $wpdb->get_results("SELECT `v`.`date`, COUNT(`v`.`id`) AS `hits`, `p`.`hits` AS `pageviews` FROM `{$wpdb->prefix}sticky_stats_visits` AS `v` JOIN `{$wpdb->prefix}sticky_stats_pageviews` AS `p` ON (`v`.`date` = `p`.`date`) GROUP BY `date` ORDER BY `v`.`date` DESC LIMIT 11", ARRAY_A),
+            'total_visits'      => $wpdb->get_row("SELECT COUNT(`id`) FROM `{$wpdb->prefix}sticky_stats_visits`", ARRAY_N),
+
+            // Daily
+            'today_visits'      => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE DATE(`date`) = DATE('". $now ."')", ARRAY_N),
+            'yesterday_visits'  => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE DATE(`date`) = DATE(DATE_SUB('". $now ."', INTERVAL 1 DAY))", ARRAY_N),
+            
+            // Weekly
+            'this_week_visits'  => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE WEEK(`date`, $week_mode) = WEEK('". $now ."', $week_mode)", ARRAY_N),
+            'last_week_visits'  => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE WEEK(`date`, $week_mode) = WEEK(DATE_SUB('". $now ."', INTERVAL 1 WEEK), $week_mode)", ARRAY_N),
+
+            // Monthly
+            'this_month_visits' => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE MONTH(`date`) = MONTH('". $now ."')", ARRAY_N),
+            'last_month_visits' => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE MONTH(`date`) = MONTH(DATE_SUB('". $now ."', INTERVAL 1 MONTH))", ARRAY_N),
+            'country_data'      => $wpdb->get_results("SELECT `country` AS `name`, COUNT(`id`) AS `count` FROM `{$wpdb->prefix}sticky_stats_visits` GROUP BY `country` ORDER BY `count` DESC", ARRAY_A),
+
+            // Daily
+            'today_pv'          => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE DATE(`date`) = DATE('". $now ."')", ARRAY_N),
+            'yesterday_pv'      => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE DATE(`date`) = DATE(DATE_SUB('". $now ."', INTERVAL 1 DAY))", ARRAY_N),
+
+            // Weekly
+            'this_week_pv'      => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE WEEK(`date`, $week_mode) = WEEK('". $now ."', $week_mode)", ARRAY_N),
+            'last_week_pv'      => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE MONTH(`date`) = MONTH(DATE_SUB('". $now ."', INTERVAL 1 MONTH))", ARRAY_N),
+
+            // Monthly
+            'this_month_pv'     => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE MONTH(`date`) = MONTH('". $now ."')", ARRAY_N),
+            'last_month_pv'     => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE MONTH(`date`) = MONTH(DATE_SUB('". $now ."', INTERVAL 1 MONTH))", ARRAY_N),
+
+            // Hits
+            // ------------------------
+            'desktop_hits'      => $wpdb->get_row("SELECT COUNT(`id`) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `device`='desktop'", ARRAY_N ),
+            'tablet_hits'       => $wpdb->get_row("SELECT COUNT(`id`) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `device`='tablet'", ARRAY_N ),
+            'mobile_hits'       => $wpdb->get_row("SELECT COUNT(`id`) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `device`='mobile'", ARRAY_N ),
+            
+            // Referers
+            // ------------------------
+            'search_engine_referers' => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `is_search_engine` = '1'", ARRAY_N ),
+            'non_empty_referers'     => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `referer` != '' AND `is_search_engine` != '1'", ARRAY_N ),
+
+            // Browsers
+            // ------------------------
+            'browser_data'       => $wpdb->get_results("SELECT `browser` AS `name`, `count` AS `hits` FROM `{$wpdb->prefix}sticky_stats_browsers` ORDER BY `count` DESC LIMIT 3", ARRAY_A),
+            'browser_total_hits' => $wpdb->get_row("SELECT SUM(`count`) AS `total_hits` FROM `{$wpdb->prefix}sticky_stats_browsers`", ARRAY_N),
+
+            // Operating Systems
+            // ------------------------
+            'os_data'            => $wpdb->get_results("SELECT `os` AS `name`, `count` AS `hits` FROM `{$wpdb->prefix}sticky_stats_os` ORDER BY `count` DESC LIMIT 3", ARRAY_A),
+            'os_total_hits'      => $wpdb->get_row("SELECT SUM(`count`) AS `total_hits` FROM `{$wpdb->prefix}sticky_stats_os`", ARRAY_N),
+
+            // Tops
+            // ------------------------
+            'top_posts'          => $wpdb->get_results("SELECT `s`.`post_id`, `wp`.`post_title` AS `title`, SUM(`s`.`hits`) AS `hits` FROM `{$wpdb->prefix}sticky_stats_posts` AS `s` LEFT JOIN `{$wpdb->posts}` AS `wp` ON (`s`.`post_id` = `wp`.`id`) GROUP BY `s`.`post_id` ORDER BY `hits` DESC LIMIT 10", ARRAY_A),
+            'top_links'          => $wpdb->get_results("SELECT `referer`, `count` FROM `{$wpdb->prefix}sticky_stats_referers` ORDER BY `count` DESC LIMIT 10", ARRAY_A),
+            'top_searches'       => $wpdb->get_results("SELECT `terms`, `count` FROM `{$wpdb->prefix}sticky_stats_searches` ORDER BY `count` DESC LIMIT 10", ARRAY_A),
+            'visits'             => $wpdb->get_results("SELECT `v`.`date`, COUNT(`v`.`id`) AS `hits`, `p`.`hits` AS `pageviews` FROM `{$wpdb->prefix}sticky_stats_visits` AS `v` JOIN `{$wpdb->prefix}sticky_stats_pageviews` AS `p` ON (`v`.`date` = `p`.`date`) GROUP BY `date` ORDER BY `v`.`date` DESC LIMIT 11", ARRAY_A),
+            'country_data'       => $wpdb->get_results("SELECT `country` AS `name`, COUNT(`id`) AS `count` FROM `{$wpdb->prefix}sticky_stats_visits` GROUP BY `country` ORDER BY `count` DESC", ARRAY_A)
+
+        );
+
+        // self::$config['statistics']['visits']               = array_reverse( self::$config['statistics']['visits'] );
+    
+        // Visits Deltas
+        self::$config['statistics']['day_visits_delta']     = ( self::$config['statistics']['yesterday_visits'][0] == 0 ) ? 0 : round( self::$config['statistics']['today_visits'][0] / self::$config['statistics']['yesterday_visits'][0], 2) * 100;
+        self::$config['statistics']['week_visits_delta']    = ( self::$config['statistics']['last_week_visits'][0] == 0 ) ? 0 : round( self::$config['statistics']['this_week_visits'][0] / self::$config['statistics']['last_week_visits'][0], 2 ) * 100;
+        @self::$config['statistics']['month_visits_delta']   = ( self::$config['statistics']['this_month_visits'][0] == 0) ? 0 : round( self::$config['statistics']['this_month_visits'][0] / self::$config['statistics']['last_month_visits'][0], 2 ) * 100;
+        
+        // Pageviews Deltas
+        self::$config['statistics']['day_pvs_delta']        = ( self::$config['statistics']['yesterday_pv'][0] == 0 ) ? 0 : round( self::$config['statistics']['today_pv'][0] / self::$config['statistics']['yesterday_pv'][0], 2) * 100;
+        self::$config['statistics']['week_pvs_delta']       = ( self::$config['statistics']['last_week_pv'][0] == 0 ) ? 0 : round( self::$config['statistics']['this_week_pv'][0] / self::$config['statistics']['last_week_pv'][0], 2 ) * 100;
+        self::$config['statistics']['month_pvs_delta']      = ( self::$config['statistics']['last_month_pv'][0] == 0 ) ? 0 : round( self::$config['statistics']['this_month_pv'][0] / self::$config['statistics']['last_month_pv'][0], 2) * 100;
+    
+        // Devices
+        self::$config['statistics']['desktop']              = ( ! empty( self::$config['statistics']['total_visits'][0] ) ) ? round( self::$config['statistics']['desktop_hits'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
+        self::$config['statistics']['tablet']               = ( ! empty( self::$config['statistics']['total_visits'][0] ) ) ? round( self::$config['statistics']['tablet_hits'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
+        self::$config['statistics']['mobile']               = ( ! empty( self::$config['statistics']['total_visits'][0] ) ) ? round( self::$config['statistics']['mobile_hits'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
+    
+        // Browsers
+        self::$config['statistics']['search_engines']       = ( ! empty( self::$config['statistics']['total_visits'][0] )) ? round( self::$config['statistics']['search_engine_referers'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
+        self::$config['statistics']['links']                = ( ! empty( self::$config['statistics']['total_visits'][0] )) ? round( self::$config['statistics']['non_empty_referers'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
+        self::$config['statistics']['direct']               = 100 - self::$config['statistics']['search_engines'] - self::$config['statistics']['links'];
+    }
+
+    /**
+     *
+     * Adjusts any other option
+     * -----------------------
+     *
+     * @since 1.0.5
+     * @author Dorian Tudorache
+     *
+     */
+    public static function adjust_additional_options() {
+        // Update the adminbar state
+        self::$config['adminbar']['state'] = ( isset ( self::$config['adminbar']['cookie'] ) ? self::$config['adminbar']['cookie'] : ( self::$config['adminbar']['hide'] ? 'closed' : 'maximized' ) );
+   
+        // If the value read from the cookie is illegal
+        $wid = intval( self::$config['adminmenu']['width'] );
+        if ( $wid < 60 || $wid > 440 ) 
+            self::$config['adminmenu']['width'] = '220';
+    }
+
+    /**
+     *
+     * Body classes
+     * -----------------------
+     *
+     * @since 1.0.5
+     * @author Dorian Tudorache
+     *
+     */
+    public static function body_classes() {
         self::$config['adminbar']['classes_string'] = 
              ' hl-' . ( sticky_luminance( self::$config['hl_colors'][0] ) ? 'b' : 'w' )
            . ' wpab-' . ( sticky_luminance( self::$config['colors']['adminbar'] ) ? 'b' : 'w' )
@@ -699,119 +838,67 @@ class StickyAdmin {
         // Statistics widget enabled?
         if ( $GLOBALS['pagenow'] === 'dashboard.php' && self::$config['content']['dash_stats'] )
             self::$config['classes_string'] .= ' s-stats';
+    }
 
-        // Statistics configurations
-        if ( self::$config['statistics'] ) {
-            self::$config['statistics'] = array(
-                // Config
-                // ------------------------
-                'ignore_spam'       => ( isset( $s_ui[ 's_s_ignore_spam' ] ) && $s_ui[ 's_s_ignore_spam' ] ) ? 1 : 0,
-                'tracker_active'    => ( isset( $s_ui[ 's_s_tracker' ] ) && $s_ui[ 's_s_tracker' ] ) ? 1 : 0,
-                'ignore_admin'      => ( isset( $s_ui[ 's_s_ignore_admin' ] ) && $s_ui[ 's_s_ignore_admin' ] ) ? 1 : 0,
-                'track_users'       => ( isset( $s_ui[ 's_s_track_users' ] ) && $s_ui[ 's_s_track_users' ] ) ? 1 : 0,
-                'purge_interval'    => ( isset( $s_ui[ 's_s_purge_time' ] ) ? $s_ui[ 's_s_purge_time' ] : 150 ),
-                'ignore_ips'        => ( isset( $s_ui[ 's_s_exclude_ips' ] ) ? $s_ui[ 's_s_exclude_ips' ] : '' ),
-                'ignore_countries'  => ( isset( $s_ui[ 's_s_exclude_country' ] ) ? $s_ui[ 's_s_exclude_country' ] : '' ),
-                'ignore_uas'        => ( isset( $s_ui[ 's_s_exclude_ua' ] ) ? $s_ui [ 's_s_exclude_ua' ] : '' ),
-                'ignore_users'      => ( isset( $s_ui[ 's_s_exclude_user' ] ) ? $s_ui [ 's_s_exclude_user' ] : '' ),
-                'ignore_pages'      => ( isset( $s_ui[ 's_s_exclude_page' ] ) ? $s_ui[ 's_s_exclude_page' ] : '' ),
-                'extend_session'    => ( isset( $s_ui[ 's_s_extend_visit'] ) ? $s_ui[ 's_s_extend_visit' ] : false )
-            );
+    /**
+     *
+     * Generates the HIGHLIGHT colors 
+     * -----------------------
+     * based on background colors choices.
+     *
+     * @since 1.0.5
+     * @author Dorian Tudorache
+     *
+     */
+    public static function generate_highlight_colors() {
+        $color_step = 5; // on HSV scale (360deg), colors increase/decrease by this ammount (deg).
+        // Generate highlight colors
+        $get_hl_color = ( isset ( $s_ui[ 'highlight_color' ] ) ? $s_ui[ 'highlight_color' ] : '#FFFFFF' );
+        $get_hl_color2 = ( isset ( $s_ui[ 'content_bg' ] ) ? sticky_adjust_hl_color( $s_ui[ 'content_bg' ], - $color_step, 0, 0, true ) : '#FFFFFF' );
+        // print_r('HL1: ' . $get_hl_color . ', HL2: ' . $get_hl_color2 );
+        $get_hl_color2 = sticky_compare_correct( $get_hl_color, $get_hl_color2, $color_step * 2 );
 
-            if ( $GLOBALS['pagenow'] === 'index.php' ) {
-
-                $week_start = get_option('start_of_week'); // Get Wordpress option
-                $now        = current_time('mysql');
-                $week_mode  = ( $week_start == 1 ) ? 1 : 0;
-
-                self::$config['statistics'] += array(
-                    // Visits
-                    // ------------------------
-                    'visits'            => $wpdb->get_results("SELECT `v`.`date`, COUNT(`v`.`id`) AS `hits`, `p`.`hits` AS `pageviews` FROM `{$wpdb->prefix}sticky_stats_visits` AS `v` JOIN `{$wpdb->prefix}sticky_stats_pageviews` AS `p` ON (`v`.`date` = `p`.`date`) GROUP BY `date` ORDER BY `v`.`date` DESC LIMIT 11", ARRAY_A),
-                    'total_visits'      => $wpdb->get_row("SELECT COUNT(`id`) FROM `{$wpdb->prefix}sticky_stats_visits`", ARRAY_N),
-
-                    // Daily
-                    'today_visits'      => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE DATE(`date`) = DATE('". $now ."')", ARRAY_N),
-                    'yesterday_visits'  => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE DATE(`date`) = DATE(DATE_SUB('". $now ."', INTERVAL 1 DAY))", ARRAY_N),
-                    
-                    // Weekly
-                    'this_week_visits'  => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE WEEK(`date`, $week_mode) = WEEK('". $now ."', $week_mode)", ARRAY_N),
-                    'last_week_visits'  => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE WEEK(`date`, $week_mode) = WEEK(DATE_SUB('". $now ."', INTERVAL 1 WEEK), $week_mode)", ARRAY_N),
-
-                    // Monthly
-                    'this_month_visits' => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE MONTH(`date`) = MONTH('". $now ."')", ARRAY_N),
-                    'last_month_visits' => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE MONTH(`date`) = MONTH(DATE_SUB('". $now ."', INTERVAL 1 MONTH))", ARRAY_N),
-                    'country_data'      => $wpdb->get_results("SELECT `country` AS `name`, COUNT(`id`) AS `count` FROM `{$wpdb->prefix}sticky_stats_visits` GROUP BY `country` ORDER BY `count` DESC", ARRAY_A),
-
-                    // Daily
-                    'today_pv'          => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE DATE(`date`) = DATE('". $now ."')", ARRAY_N),
-                    'yesterday_pv'      => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE DATE(`date`) = DATE(DATE_SUB('". $now ."', INTERVAL 1 DAY))", ARRAY_N),
-
-                    // Weekly
-                    'this_week_pv'      => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE WEEK(`date`, $week_mode) = WEEK('". $now ."', $week_mode)", ARRAY_N),
-                    'last_week_pv'      => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE MONTH(`date`) = MONTH(DATE_SUB('". $now ."', INTERVAL 1 MONTH))", ARRAY_N),
-
-                    // Monthly
-                    'this_month_pv'     => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE MONTH(`date`) = MONTH('". $now ."')", ARRAY_N),
-                    'last_month_pv'     => $wpdb->get_row("SELECT SUM(`hits`) FROM `{$wpdb->prefix}sticky_stats_pageviews` WHERE MONTH(`date`) = MONTH(DATE_SUB('". $now ."', INTERVAL 1 MONTH))", ARRAY_N),
-
-                    // Hits
-                    // ------------------------
-                    'desktop_hits'      => $wpdb->get_row("SELECT COUNT(`id`) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `device`='desktop'", ARRAY_N ),
-                    'tablet_hits'       => $wpdb->get_row("SELECT COUNT(`id`) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `device`='tablet'", ARRAY_N ),
-                    'mobile_hits'       => $wpdb->get_row("SELECT COUNT(`id`) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `device`='mobile'", ARRAY_N ),
-                    
-                    // Referers
-                    // ------------------------
-                    'search_engine_referers' => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `is_search_engine` = '1'", ARRAY_N ),
-                    'non_empty_referers'     => $wpdb->get_row("SELECT COUNT(id) FROM `{$wpdb->prefix}sticky_stats_visits` WHERE `referer` != '' AND `is_search_engine` != '1'", ARRAY_N ),
-
-                    // Browsers
-                    // ------------------------
-                    'browser_data'       => $wpdb->get_results("SELECT `browser` AS `name`, `count` AS `hits` FROM `{$wpdb->prefix}sticky_stats_browsers` ORDER BY `count` DESC LIMIT 3", ARRAY_A),
-                    'browser_total_hits' => $wpdb->get_row("SELECT SUM(`count`) AS `total_hits` FROM `{$wpdb->prefix}sticky_stats_browsers`", ARRAY_N),
-
-                    // Operating Systems
-                    // ------------------------
-                    'os_data'            => $wpdb->get_results("SELECT `os` AS `name`, `count` AS `hits` FROM `{$wpdb->prefix}sticky_stats_os` ORDER BY `count` DESC LIMIT 3", ARRAY_A),
-                    'os_total_hits'      => $wpdb->get_row("SELECT SUM(`count`) AS `total_hits` FROM `{$wpdb->prefix}sticky_stats_os`", ARRAY_N),
-
-                    // Tops
-                    // ------------------------
-                    'top_posts'          => $wpdb->get_results("SELECT `s`.`post_id`, `wp`.`post_title` AS `title`, SUM(`s`.`hits`) AS `hits` FROM `{$wpdb->prefix}sticky_stats_posts` AS `s` LEFT JOIN `{$wpdb->posts}` AS `wp` ON (`s`.`post_id` = `wp`.`id`) GROUP BY `s`.`post_id` ORDER BY `hits` DESC LIMIT 10", ARRAY_A),
-                    'top_links'          => $wpdb->get_results("SELECT `referer`, `count` FROM `{$wpdb->prefix}sticky_stats_referers` ORDER BY `count` DESC LIMIT 10", ARRAY_A),
-                    'top_searches'       => $wpdb->get_results("SELECT `terms`, `count` FROM `{$wpdb->prefix}sticky_stats_searches` ORDER BY `count` DESC LIMIT 10", ARRAY_A),
-                    'visits'             => $wpdb->get_results("SELECT `v`.`date`, COUNT(`v`.`id`) AS `hits`, `p`.`hits` AS `pageviews` FROM `{$wpdb->prefix}sticky_stats_visits` AS `v` JOIN `{$wpdb->prefix}sticky_stats_pageviews` AS `p` ON (`v`.`date` = `p`.`date`) GROUP BY `date` ORDER BY `v`.`date` DESC LIMIT 11", ARRAY_A),
-                    'country_data'       => $wpdb->get_results("SELECT `country` AS `name`, COUNT(`id`) AS `count` FROM `{$wpdb->prefix}sticky_stats_visits` GROUP BY `country` ORDER BY `count` DESC", ARRAY_A)
-
-                );
-
-                // self::$config['statistics']['visits']               = array_reverse( self::$config['statistics']['visits'] );
-            
-                // Visits Deltas
-                self::$config['statistics']['day_visits_delta']     = ( self::$config['statistics']['yesterday_visits'][0] == 0 ) ? 0 : round( self::$config['statistics']['today_visits'][0] / self::$config['statistics']['yesterday_visits'][0], 2) * 100;
-                self::$config['statistics']['week_visits_delta']    = ( self::$config['statistics']['last_week_visits'][0] == 0 ) ? 0 : round( self::$config['statistics']['this_week_visits'][0] / self::$config['statistics']['last_week_visits'][0], 2 ) * 100;
-                @self::$config['statistics']['month_visits_delta']   = ( self::$config['statistics']['this_month_visits'][0] == 0) ? 0 : round( self::$config['statistics']['this_month_visits'][0] / self::$config['statistics']['last_month_visits'][0], 2 ) * 100;
-                
-                // Pageviews Deltas
-                self::$config['statistics']['day_pvs_delta']        = ( self::$config['statistics']['yesterday_pv'][0] == 0 ) ? 0 : round( self::$config['statistics']['today_pv'][0] / self::$config['statistics']['yesterday_pv'][0], 2) * 100;
-                self::$config['statistics']['week_pvs_delta']       = ( self::$config['statistics']['last_week_pv'][0] == 0 ) ? 0 : round( self::$config['statistics']['this_week_pv'][0] / self::$config['statistics']['last_week_pv'][0], 2 ) * 100;
-                self::$config['statistics']['month_pvs_delta']      = ( self::$config['statistics']['last_month_pv'][0] == 0 ) ? 0 : round( self::$config['statistics']['this_month_pv'][0] / self::$config['statistics']['last_month_pv'][0], 2) * 100;
-            
-                // Devices
-                self::$config['statistics']['desktop']              = ( ! empty( self::$config['statistics']['total_visits'][0] ) ) ? round( self::$config['statistics']['desktop_hits'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
-                self::$config['statistics']['tablet']               = ( ! empty( self::$config['statistics']['total_visits'][0] ) ) ? round( self::$config['statistics']['tablet_hits'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
-                self::$config['statistics']['mobile']               = ( ! empty( self::$config['statistics']['total_visits'][0] ) ) ? round( self::$config['statistics']['mobile_hits'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
-            
-                // Browsers
-                self::$config['statistics']['search_engines']       = ( ! empty( self::$config['statistics']['total_visits'][0] )) ? round( self::$config['statistics']['search_engine_referers'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
-                self::$config['statistics']['links']                = ( ! empty( self::$config['statistics']['total_visits'][0] )) ? round( self::$config['statistics']['non_empty_referers'][0] / self::$config['statistics']['total_visits'][0] * 100) : 0;
-                self::$config['statistics']['direct']               = 100 - self::$config['statistics']['search_engines'] - self::$config['statistics']['links'];
-        
-            }
+        if ( strpos( self::$config['footer']['copyright'], 'Donate!' ) !== false ) {
+            self::$config['footer']['copyright'] = str_replace( 'Donate!', '<a href="'. self::$config['donate_link'].'">Donate!</a>', self::$config['footer']['copyright'] );
         }
 
-        // print_r(self::$config);
+        self::$config['hl_colors'] = array(
+            sticky_make_hl_color( $get_hl_color, 0 ),
+            sticky_make_hl_color( $get_hl_color, - $color_step ),
+            sticky_make_hl_color( $get_hl_color, $color_step ),
+            sticky_make_hl_color( $get_hl_color, - ( $color_step * 2) ),
+            sticky_make_hl_color( $get_hl_color, $color_step * 2 )
+        );
+        self::$config['hl_colors2'] = array(
+            sticky_make_hl_color( $get_hl_color2, 0 ),
+            sticky_make_hl_color( $get_hl_color2, - $color_step ),
+            sticky_make_hl_color( $get_hl_color2, $color_step ),
+        );
+
+
+        // Dashboard Maps
+        self::$config['colors']['dash_maps'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 0, 15 );
+        self::$config['colors']['dash_maps_bg'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 5, -5 );
+
+        // Highlighter Colors Adjustments
+
+        // AdminMenu
+        self::$config['colors']['adminmenu_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'nav_hl' ] ) ? $s_ui[ 'nav_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminmenu' );
+        self::$config['colors']['adminmenu_hltwo'] = sticky_adjust_hl_color( self::$config['hl_colors'][0], 0, 0, 0, 1, 'adminmenu' );
+        
+        // Adminbar
+        self::$config['colors']['adminbar_submenu_top'] = sticky_adjust_hl_color( self::$config['colors']['adminbar_submenu'], 0, 0, -15 );
+        self::$config['colors']['adminbar_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'wpadminbar_hl' ] ) ? $s_ui[ 'wpadminbar_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminbar' );
+
+        // Header Gradient Color - Increases HUE by color_step
+        self::$config['colors']['header_grad'] = sticky_adjust_hl_color( self::$config['colors']['header'], 35 );
+
+        // If the footer and header have the same colors, make the footer color the sec gradient header color
+        if ( self::$config['colors']['header'] == self::$config['colors']['footer'] )
+            self::$config['colors']['footer'] = self::$config['colors']['header_grad'];
+
+        // Unused variables
+        unset( $get_hl_color, $color_step );
     }
 
     /**
@@ -820,7 +907,7 @@ class StickyAdmin {
      * -----------------------
      * Creates tables, initializes options and schedules cron
      *
-     * @since 1.0
+     * @since 1.0.0
      * @author Dorian Tudorache
      *
      */
@@ -878,6 +965,20 @@ class StickyAdmin {
 
     /**
      *
+     * Plugin reset
+     * -----------------------
+     * Deletes the options, cookies, basically everything
+     *
+     * @since 1.0
+     * @author Dorian Tudorache
+     *
+     */
+    public static function reset() {
+        delete_option( 'sticky_options' );
+    }
+
+    /**
+     *
      * My account tab on the adminbar.
      * -----------------------
      * Replaces the howdy text and the avatar with a HiDpi one.
@@ -886,7 +987,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_wpab_my_account( $wp_admin_bar ) {
+    public static function sticky_wpab_my_account( $wp_admin_bar ) {
         if ( ! is_user_logged_in() ) return;
 
         $wp_admin_bar->remove_node('my-account');
@@ -1047,7 +1148,7 @@ class StickyAdmin {
      *
      */
     public static function sticky_theme_changed() {
-        set_transient( get_current_blog_id() . '_sticky-changes', '1' );
+        set_transient( self::$current_blog_id . '_sticky-changes', '1' );
     }
 
     /**
@@ -1062,7 +1163,7 @@ class StickyAdmin {
         // This function is not needed on login / register page.
         if ( in_array( $GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php') ) ) return;
         
-        $cache_file = 'sticky-' . get_current_blog_id() . '.css';
+        $cache_file = 'sticky-' . self::$current_blog_id . '.css';
 
         if ( file_exists( STICKY_CACHE . $cache_file ) && ! sticky_has_changed( $blogid ) ) return;
 
@@ -1114,11 +1215,11 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_change_format_meta_box() {
+    public static function sticky_change_format_meta_box() {
         $screens = array( 'post', 'custom_post_type' );
         remove_meta_box( 'formatdiv', null, 'side', 'core' );
         foreach ( $screens as $screen ) {
-            add_meta_box( 'formatdiv', _x( 'Format', 'post format' ), array( 'StickyAdmin', 'numina_post_format_meta_box' ), $screen, 'side', 'default' );
+            add_meta_box( 'formatdiv', _x( 'Format', 'post format' ), array( 'StickyAdmin', 'sticky_post_format_meta_box' ), $screen, 'side', 'default' );
         }
     }
     /**
@@ -1129,11 +1230,25 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_remove_admin_styles() {
+    public static function sticky_remove_wp_admin_styles() {
         apply_filters( 'mce_css', STICKY_CSS . 'sticky-editor-style.css' );
         // Add The Custom Editor Style
         remove_editor_styles();
         add_editor_style( STICKY_CSS . 'sticky-editor-style-' . ( sticky_luminance( self::$config['colors']['content'] ) ? 'black' : 'white' )  . '.css' );
+    }
+
+    /**
+     *
+     * Checks for AJAX request
+     *
+     * @since 1.0
+     * @author Dorian Tudorache
+     *
+     */
+    public static function sticky_ajax_request() {
+        if ( ( !empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) ) && ( strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) )
+            return true;
+        return false;
     }
     /**
      *
@@ -1144,7 +1259,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_replace_login_style() {
+    public static function sticky_replace_login_style() {
         wp_deregister_style( 'login', 'wp-admin' );
         wp_dequeue_style( 'login' );
         wp_enqueue_script( 'jquery' );
@@ -1157,7 +1272,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_remove_bp_adminbar_css() {
+    public static function sticky_remove_bp_adminbar_css() {
         wp_dequeue_style ( 'bp-admin-bar' );
         wp_dequeue_style ( 'bp-admin-bar-rtl' );
     }
@@ -1170,7 +1285,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_wpadminbar_remove_inline_css() {
+    public static function sticky_wpab_remove_inline_css() {
         remove_action( 'wp_head', '_admin_bar_bump_cb' );
     }
     /** 
@@ -1181,7 +1296,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_wpadminbar_remove() {
+    public static function sticky_wpadminbar_remove() {
         if ( ! is_admin() && ! self::$config['adminbar']['preserve'] ) return;
         global $wp_admin_bar;
 
@@ -1262,7 +1377,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_sticky_adminbar() {
+    public static function sticky_wpab() {
         if ( ! is_admin() && ! self::$config['adminbar']['preserve'] ) return;        
         // Hook for scripts and styles enqueue-ing for the AdminBar. 
         do_action( 'sticky_adminbar_enqueue' );    
@@ -1276,7 +1391,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_sticky_adminbar_css() {
+    public static function sticky_wpab_css() {
         if ( ! is_admin() && ! self::$config['adminbar']['preserve'] ) return;
         do_action( 'sticky_adminbar_enqueue' );
         echo '<style type="text/css">' .  apply_filters( 'sticky_adminbar_css', '' ) . '</style>';
@@ -1289,7 +1404,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_sticky_adminbar_js() {
+    public static function sticky_wpab_js() {
         if ( ! self::$config['adminbar']['preserve'] && ! is_admin() ) return;
         do_action( 'sticky_add_adminbar_scripts' );
     }
@@ -1310,7 +1425,7 @@ class StickyAdmin {
         $request = ( isset( $_REQUEST[ $request ] ) ) ? $_REQUEST[ $request ] : false ;
         // print_r($request);
         $get_icons = array();
-        $transient_name = get_current_blog_id() . '_sticky_'. $which .'_icons';
+        $transient_name = self::$current_blog_id . '_sticky_'. $which .'_icons';
         $previous_icons = ( get_transient( $transient_name ) ) ? (array) get_transient( $transient_name ) : self::$config['default_icons'][$which];
 
         if ( $request ) {
@@ -1330,12 +1445,12 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_ajax_css() {
+    public static function sticky_ajax_css() {
         foreach ( self::$config['iconpickers'] as $item => $value ) {
             self::sticky_update_ui_icons( $item );
 
             if ( isset( $_REQUEST[ 'sticky_reset_' . $item ] ) && $_REQUEST['sticky_reset_' . $item ] == 'reset' ) {
-                delete_transient( get_current_blog_id() . '_sticky_'. $item .'_icons' );
+                delete_transient( self::$current_blog_id . '_sticky_'. $item .'_icons' );
             }
         }
         
@@ -1368,7 +1483,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    private function numina_debug() {
+    private function sticky_debug() {
         // Debugging functions were removed from final distribution package.
     }
     /**
@@ -1381,7 +1496,7 @@ class StickyAdmin {
      * @author Popa Florin
      *
      */  
-    public static function numina_post_format_meta_box( $post, $box ) {
+    public static function sticky_post_format_meta_box( $post, $box ) {
         if ( current_theme_supports( 'post-formats' ) && post_type_supports( $post->post_type, 'post-formats' ) ) :
             $post_formats = get_theme_support( 'post-formats' );
             if ( is_array( $post_formats[0] ) ) :
@@ -1412,7 +1527,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_buddypress_enqueue() {
+    public static function sticky_buddypress_enqueue() {
         do_action( 'sticky_buddypress_enqueues' );
     }
     /**
@@ -1507,7 +1622,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_sticky_head() {
+    public static function sticky_head() {
         do_action( 'sticky_head' );
     }
     /** 
@@ -1518,7 +1633,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-     public static function numina_adminmenu_logo() {    
+     public static function sticky_adminmenu_logo() {    
         echo "\n" . '<li id="adminmenu_logo">';
         // FOLDED 
         echo "\n" . '   <div class="folded_logo">';
@@ -1565,7 +1680,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_content_preload() {                
+    public static function sticky_content_preload() {                
         if ( ! self::$config['content']['preload'] ) return;
 
         echo 
@@ -1581,7 +1696,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_wp_admin_footer() {
+    public static function sticky_wp_admin_footer() {
         return self::$config['footer']['copyright'];
     }
     /**
@@ -1592,7 +1707,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_wpab_state_controller() {
+    public static function sticky_wpab_state_controller() {
         // self::$config['adminbar']['state'] = isset( self::$config['adminbar']['cookie'] ) ? self::$config['adminbar']['cookie'] : ( self::$config['adminbar']['hide'] ? 'closed' : 'maximized' );
         if ( self::$config['adminbar']['cookie'] !== 'closed' && self::$config['adminbar']['hide'] ) {
             self::$config['adminbar']['cookie'] = self::$config['adminbar']['state'] = 'closed';
@@ -1609,10 +1724,10 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_wpab_check() {
+    public static function sticky_wpab_check() {
         if ( false === self::$config['adminbar']['hide'] && self::$config['adminbar']['cookie'] === 'closed' ) {
             self::$config['adminbar']['cookie'] = self::$config['adminbar']['state'] = 'closed';
-            numina_options_updater( 'wpadminbar_hide', true );
+            sticky_options_updater( 'wpadminbar_hide', true );
         }
     }
     /**
@@ -1623,7 +1738,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public function numina_wpab_toggle() {
+    public function sticky_wpab_toggle() {
         echo '<div class="sticky_toggle"><button class="sticky_resize"></button><button class="sticky_close"></button></div>';
     }
     /**
@@ -1634,7 +1749,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_uses_sticky( $classes ) {
+    public static function sticky_uses_sticky( $classes ) {
         if ( self::$config['adminbar']['preserve'] ) {
             $classes[] = 'uses_sticky';
             foreach( explode(' ', self::$config['adminbar']['classes_string'] ) as $class )
@@ -1651,7 +1766,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_bodyclass_controller( $admin_body_class ) {
+    public static function sticky_bodyclass_controller( $admin_body_class ) {
         /* Dynamic Classes
         ------------------------------------ */
         $admin_body_class .= self::$config['classes_string'];
@@ -1661,32 +1776,16 @@ class StickyAdmin {
 
     /**
      *
-     * Custom CSS classes needed for the body.
-     *
-     * @since 1.0
-     * @author Dorian Tudorache
-     *
-     */
-    // public static function numina_body_classes( $admin_body_class ) {
-    
-    //     return $admin_body_class;
-    // }
-
-    
-
-    /**
-     *
      * Replaces the default avatar with Sticky one.
      *
      * @since 1.0
      * @author Dorian Tudorache
      *
      */
-    public static function numina_sticky_avatar() {
+    public static function sticky_avatar() {
         $s_avatar = STICKY_ASSETS . 'sticky-avatar.png';
         $avatar_defaults[ $s_avatar ] = 'Sticky Avatar';
         
-        // print_r($avatar_defaults);
         return $avatar_defaults;
     }
 
@@ -1698,7 +1797,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_sticky_dashboard() {
+    public static function sticky_dashboard() {
         global $grab_data, $wp_meta_boxes, $wp_registered_widgets;
         if ( ( isset( $grab_data[ 's_stats' ] ) ? $grab_data[ 's_stats' ] : true ) && current_user_can( 'wp_sticky_stats_view' )  )
             wp_add_dashboard_widget( 'sticky_stats', __( 'Site Statistics', '_sticky_' ), 'sticky_stats_display' );
@@ -1712,7 +1811,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_login_classes( $classes ) {
+    public static function sticky_login_classes( $classes ) {
         $classes[] = 'is_loading';
         $classes[] = 'no-js';
         $classes[] = ( sticky_luminance( self::$config['login']['form_bg'] ) ? 'login-w' : 'login-b' );
@@ -1725,7 +1824,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_login_page_headertitle() {
+    public static function sticky_login_page_headertitle() {
         global $grab_data;
         if ( $logo_description = esc_attr ( $grab_data['login_logo_alt'] ) )
             return esc_attr( $logo_description );
@@ -1738,7 +1837,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_login_page_headerurl() {
+    public static function sticky_login_page_headerurl() {
         global $grab_data;
         if ( $logo_url = esc_url ( $grab_data[ 'login_logo_link' ] ) )
             return $logo_url;
@@ -1751,20 +1850,20 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_login_page_css() {
+    public static function sticky_login_page_css() {
         do_action( 'sticky_login_css_enqueues' );
         echo '<style type="text/css">' . "\n";
         apply_filters( 'sticky_filter_login_styles', '' );
         echo '</style>' . "\n";
     }
-    private function numina_me() {
+    private function sticky_me() {
         $p = 'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0ODAgNDgwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA0ODAgNDgwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48ZyBpZD0iTGF5ZXJfMV94QTBfSW1hZ2VfMV8iIGRpc3BsYXk9Im5vbmUiPjxpbWFnZSBkaXNwbGF5PSJpbmxpbmUiIG92ZXJmbG93PSJ2aXNpYmxlIiB3aWR0aD0iMjAwMCIgaGVpZ2h0PSIyMDAwIiBpZD0iTGF5ZXJfMV94QTBfSW1hZ2UiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFCOUFBQUFmUUNBSUFBQUFWV2xNdUFBQUFDWEJJV1hNQUFDNGpBQUF1SXdGNHBUOTJBQUFBR1hSRldIUlRiMlowZDJGeVpRQkJaRzlpWlNCSmJXRm5aVkpsWVdSNWNjbGxQQUFBUHlCSlJFRlVlTnJzMkRFQkFDQU13RERBditjaFlqMFRDVDE3WitZQUFBQUFBQUE3VHdJQUFBQUFBTmd6M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBQUFBQWdZTGdEQUFBQUFFREFjQWNBQUFBQWdJRGhEZ0FBQUFBQUFjTWRBQUFBQUFBQ2hqc0FBQUFBQUFRTWR3QUFBQUFBQ0JqdUFBQUFBQUFRTU53QkFBQUFBQ0JndUFNQUFBQUFRTUJ3QndBQUFBQ0FnT0VPQUFBQUFBQUJ3eDBBQUFBQUFBS0dPd0FBQUFBQUJBeDNBQUFBQUFBSUdPNEFBQUFBQUJBdzNBRUFBQUFBSUdDNEF3QUFBQUJBd0hBSEFBQUFBSUNBNFE0QUFBQUFBQUhESFFBQUFBQUFBb1k3QUFBQUFBQUVESGNBQUFBQUFBZ1k3Z0FBQUFBQUVERGNBUUFBQUFBZ1lMZ0RBQUFBQUVEQWNBY0FBQUFBZ0lEaERnQUFBQUFBQWNNZEFBQUFBQUFDaGpzQUFBQUFBQVFNZHdBQUFBQUFDQmp1QUFBQUFBQVFNTndCQUFBQUFDQmd1QU1BQUFBQVFNQndCd0FBQUFDQWdPRU9BQUFBQUFBQnd4MEFBQUFBQUFLR093QUFBQUFBQkF4M0FBQUFBQUFJR080QUFBQUFBQkF3M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBQUFBQWdZTGdEQUFBQUFFREFjQWNBQUFBQWdJRGhEZ0FBQUFBQUFjTWRBQUFBQUFBQ2hqc0FBQUFBQUFRTWR3QUFBQUFBQ0JqdUFBQUFBQUFRTU53QkFBQUFBQ0JndUFNQUFBQUFRTUJ3QndBQUFBQ0FnT0VPQUFBQUFBQUJ3eDBBQUFBQUFBS0dPd0FBQUFBQUJBeDNBQUFBQUFBSUdPNEFBQUFBQUJBdzNBRUFBQUFBSUdDNEF3QUFBQUJBd0hBSEFBQUFBSUNBNFE0QUFBQUFBQUhESFFBQUFBQUFBb1k3QUFBQUFBQUVESGNBQUFBQUFBZ1k3Z0FBQUFBQUVERGNBUUFBQUFBZ1lMZ0RBQUFBQUVEQWNBY0FBQUFBZ0lEaERnQUFBQUFBQWNNZEFBQUFBQUFDaGpzQUFBQUFBQVFNZHdBQUFBQUFDQmp1QUFBQUFBQVFNTndCQUFBQUFDQmd1QU1BQUFBQVFNQndCd0FBQUFDQWdPRU9BQUFBQUFBQnd4MEFBQUFBQUFLR093QUFBQUFBQkF4M0FBQUFBQUFJR080QUFBQUFBQkF3M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBQUFBQWdZTGdEQUFBQUFFREFjQWNBQUFBQWdJRGhEZ0FBQUFBQUFjTWRBQUFBQUFBQ2hqc0FBQUFBQUFRTWR3QUFBQUFBQ0JqdUFBQUFBQUFRTU53QkFBQUFBQ0JndUFNQUFBQUFRTUJ3QndBQUFBQ0FnT0VPQUFBQUFBQUJ3eDBBQUFBQUFBS0dPd0FBQUFBQUJBeDNBQUFBQUFBSUdPNEFBQUFBQUJBdzNBRUFBQUFBSUdDNEF3QUFBQUJBd0hBSEFBQUFBSUNBNFE0QUFBQUFBQUhESFFBQUFBQUFBb1k3QUFBQUFBQUVESGNBQUFBQUFBZ1k3Z0FBQUFBQUVERGNBUUFBQUFBZ1lMZ0RBQUFBQUVEQWNBY0FBQUFBZ0lEaERnQUFBQUFBQWNNZEFBQUFBQUFDaGpzQUFBQUFBQVFNZHdBQUFBQUFDQmp1QUFBQUFBQVFNTndCQUFBQUFDQmd1QU1BQUFBQVFNQndCd0FBQUFDQWdPRU9BQUFBQUFBQnd4MEFBQUFBQUFLR093QUFBQUFBQkF4M0FBQUFBQUFJR080QUFBQUFBQkF3M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBQUFBQWdZTGdEQUFBQUFFREFjQWNBQUFBQWdJRGhEZ0FBQUFBQUFjTWRBQUFBQUFBQ2hqc0FBQUFBQUFRTWR3QUFBQUFBQ0JqdUFBQUFBQUFRTU53QkFBQUFBQ0JndUFNQUFBQUFRTUJ3QndBQUFBQ0FnT0VPQUFBQUFBQUJ3eDBBQUFBQUFBS0dPd0FBQUFBQUJBeDNBQUFBQUFBSUdPNEFBQUFBQUJBdzNBRUFBQUFBSUdDNEF3QUFBQUJBd0hBSEFBQUFBSUNBNFE0QUFBQUFBQUhESFFBQUFBQUFBb1k3QUFBQUFBQUVESGNBQUFBQUFBZ1k3Z0FBQUFBQUVERGNBUUFBQUFBZ1lMZ0RBQUFBQUVEQWNBY0FBQUFBZ0lEaERnQUFBQUFBQWNNZEFBQUFBQUFDaGpzQUFBQUFBQVFNZHdBQUFBQUFDQmp1QUFBQUFBQVFNTndCQUFBQUFDQmd1QU1BQUFBQVFNQndCd0FBQUFDQWdPRU9BQUFBQUFBQnd4MEFBQUFBQUFLR093QUFBQUFBQkF4M0FBQUFBQUFJR080QUFBQUFBQkF3M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBQUFBQWdZTGdEQUFBQUFFREFjQWNBQUFBQWdJRGhEZ0FBQUFBQUFjTWRBQUFBQUFBQ2hqc0FBQUFBQUFRTWR3QUFBQUFBQ0JqdUFBQUFBQUFRTU53QkFBQUFBQ0JndUFNQUFBQUFRTUJ3QndBQUFBQ0FnT0VPQUFBQUFBQUJ3eDBBQUFBQUFBS0dPd0FBQUFBQUJBeDNBQUFBQUFBSUdPNEFBQUFBQUJBdzNBRUFBQUFBSUdDNEF3QUFBQUJBd0hBSEFBQUFBSUNBNFE0QUFBQUFBQUhESFFBQUFBQUFBb1k3QUFBQUFBQUVESGNBQUFBQUFBZ1k3Z0FBQUFBQUVERGNBUUFBQUFBZ1lMZ0RBQUFBQUVEQWNBY0FBQUFBZ0lEaERnQUFBQUFBQWNNZEFBQUFBQUFDaGpzQUFBQUFBQVFNZHdBQUFBQUFDQmp1QUFBQUFBQVFNTndCQUFBQUFDQmd1QU1BQUFBQVFNQndCd0FBQUFDQWdPRU9BQUFBQUFBQnd4MEFBQUFBQUFLR093QUFBQUFBQkF4M0FBQUFBQUFJR080QUFBQUFBQkF3M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBQUFBQWdZTGdEQUFBQUFFREFjQWNBQUFBQWdJRGhEZ0FBQUFBQUFjTWRBQUFBQUFBQ2hqc0FBQUFBQUFRTWR3QUFBQUFBQ0JqdUFBQUFBQUFRTU53QkFBQUFBQ0JndUFNQUFBQUFRTUJ3QndBQUFBQ0FnT0VPQUFBQUFBQUJ3eDBBQUFBQUFBS0dPd0FBQUFBQUJBeDNBQUFBQUFBSUdPNEFBQUFBQUJBdzNBRUFBQUFBSUdDNEF3QUFBQUJBd0hBSEFBQUFBSUNBNFE0QUFBQUFBQUhESFFBQUFBQUFBb1k3QUFBQUFBQUVESGNBQUFBQUFBZ1k3Z0FBQUFBQUVERGNBUUFBQUFBZ1lMZ0RBQUFBQUVEQWNBY0FBQUFBZ0lEaERnQUFBQUFBQWNNZEFBQUFBQUFDaGpzQUFBQUFBQVFNZHdBQUFBQUFDQmp1QUFBQUFBQVFNTndCQUFBQUFDQmd1QU1BQUFBQVFNQndCd0FBQUFDQWdPRU9BQUFBQUFBQnd4MEFBQUFBQUFLR093QUFBQUFBQkF4M0FBQUFBQUFJR080QUFBQUFBQkF3M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBQUFBQWdZTGdEQUFBQUFFREFjQWNBQUFBQWdJRGhEZ0FBQUFBQUFjTWRBQUFBQUFBQ2hqc0FBQUFBQUFRTWR3QUFBQUFBQ0JqdUFBQUFBQUFRTU53QkFBQUFBQ0JndUFNQUFBQUFRTUJ3QndBQUFBQ0FnT0VPQUFBQUFBQUJ3eDBBQUFBQUFBS0dPd0FBQUFBQUJBeDNBQUFBQUFBSUdPNEFBQUFBQUJBdzNBRUFBQUFBSUdDNEF3QUFBQUJBd0hBSEFBQUFBSUNBNFE0QUFBQUFBQUhESFFBQUFBQUFBb1k3QUFBQUFBQUVESGNBQUFBQUFBZ1k3Z0FBQUFBQUVERGNBUUFBQUFBZ1lMZ0RBQUFBQUVEQWNBY0FBQUFBZ0lEaERnQUFBQUFBQWNNZEFBQUFBQUFDaGpzQUFBQUFBQVFNZHdBQUFBQUFDQmp1QUFBQUFBQVFNTndCQUFBQUFDQmd1QU1BQUFBQVFNQndCd0FBQUFDQWdPRU9BQUFBQUFBQnd4MEFBQUFBQUFLR093QUFBQUFBQkF4M0FBQUFBQUFJR080QUFBQUFBQkF3M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBQUFBQWdZTGdEQUFBQUFFREFjQWNBQUFBQWdJRGhEZ0FBQUFBQUFjTWRBQUFBQUFBQ2hqc0FBQUFBQUFRTWR3QUFBQUFBQ0JqdUFBQUFBQUFRTU53QkFBQUFBQ0JndUFNQUFBQUFRTUJ3QndBQUFBQ0FnT0VPQUFBQUFBQUJ3eDBBQUFBQUFBS0dPd0FBQUFBQUJBeDNBQUFBQUFBSUdPNEFBQUFBQUJBdzNBRUFBQUFBSUdDNEF3QUFBQUJBd0hBSEFBQUFBSUNBNFE0QUFBQUFBQUhESFFBQUFBQUFBb1k3QUFBQUFBQUVESGNBQUFBQUFBZ1k3Z0FBQUFBQUVERGNBUUFBQUFBZ1lMZ0RBQUFBQUVEQWNBY0FBQUFBZ0lEaERnQUFBQUFBQWNNZEFBQUFBQUFDaGpzQUFBQUFBQVFNZHdBQUFBQUFDQmp1QUFBQUFBQVFNTndCQUFBQUFDQmd1QU1BQUFBQVFNQndCd0FBQUFDQWdPRU9BQUFBQUFBQnd4MEFBQUFBQUFLR093QUFBQUFBQkF4M0FBQUFBQUFJR080QUFBQUFBQkF3M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBQUFBQWdZTGdEQUFBQUFFREFjQWNBQUFBQWdJRGhEZ0FBQUFBQUFjTWRBQUFBQUFBQ2hqc0FBQUFBQUFRTWR3QUFBQUFBQ0JqdUFBQUFBQUFRTU53QkFBQUFBQ0JndUFNQUFBQUFRTUJ3QndBQUFBQ0FnT0VPQUFBQUFBQUJ3eDBBQUFBQUFBS0dPd0FBQUFBQUJBeDNBQUFBQUFBSUdPNEFBQUFBQUJBdzNBRUFBQUFBSUdDNEF3QUFBQUJBd0hBSEFBQUFBSUNBNFE0QUFBQUFBQUhESFFBQUFBQUFBb1k3QUFBQUFBQUVESGNBQUFBQUFBZ1k3Z0FBQUFBQUVERGNBUUFBQUFBZ1lMZ0RBQUFBQUVEQWNBY0FBQUFBZ0lEaERnQUFBQUFBQWNNZEFBQUFBQUFDaGpzQUFBQUFBQVFNZHdBQUFBQUFDQmp1QUFBQUFBQVFNTndCQUFBQUFDQmd1QU1BQUFBQVFNQndCd0FBQUFDQWdPRU9BQUFBQUFBQnd4MEFBQUFBQUFLR093QUFBQUFBQkF4M0FBQUFBQUFJR080QUFBQUFBQkF3M0FFQUFBQUFJR0M0QXdBQUFBQkF3SEFIQUFBQUFJQ0E0UTRBQUFBQUFBSERIUUFBQUFBQUFvWTdBQUFBQUFBRURIY0FBQUFBQUFnWTdnQUFBQUFBRUREY0FRQUFBQUFnWUxnREFBQUFBRURBY0FjQUFBQUFnSURoRGdBQUFBQUFBY01kQUFBQUFBQUNoanNBQUFBQUFBUU1kd0FBQUFBQUNCanVBQUFBQUFBUU1Od0JBQUFBQUNCZ3VBTUFBQUFBUU1Cd0J3QUFBQUNBZ09FT0FBQUFBQUFCd3gwQUFBQUFBQUtHT3dBQUFBQUFCQXgzQUFBQUFBQUlHTzRBQUFBQUFCQXczQUVBQUFBQUlHQzRBd0FBQUFCQXdIQUhBQUFBQUlDQTRRNEFBQUFBQUFIREhRQUFBQUFBQW9ZN0FBQUFBQUFFREhjQUFBQUFBQWdZN2dBQUFBQUFFRERjQVFBK08zWXNBQUFBQURESTMzb1NPd3NqQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVl4STRkQ3dBQUFBQU04cmVleE03Q1NMZ0RBQUFBQU1CQXVBTUFBQUFBd0VDNEF3QUFBQURBUUxnREFBQUFBTUJBdUFNQUFBQUF3RUM0QXdBQUFBREFRTGdEQUFBQUFNQkF1QU1BQUFBQXdFQzRBd0FBQUFEQVFMZ0RBQUFBQU1CQXVBTUFBQUFBd0VDNEF3QUFBQURBUUxnREFBQUFBTUJBdUFNQUFBQUF3RUM0QXdBQUFBREFRTGdEQUFBQUFNQkF1QU1BQUFBQXdFQzRBd0FBQUFEQVFMZ0RBQUFBQU1CQXVBTUFBQUFBd0VDNEF3QUFBQURBUUxnREFBQUFBTUJBdUFNQUFBQUF3RUM0QXdBQUFBREFRTGdEQUFBQUFNQkF1QU1BQUFBQXdFQzRBd0FBQUFEQVFMZ0RBQUFBQU1CQXVBTUFBQUFBd0VDNEF3QUFBQURBUUxnREFBQUFBTUJBdUFNQUFBQUF3Q0FCMnJGakFRQUFBSUJCL3RhVDJGa1lDWGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlDSGNBQUFBQUFCZ0lkd0FBQUFBQUdBaDNBQUFBQUFBWUNIY0FBQUFBQUJnSWR3QUFBQUFBR0FoM0FBQUFBQUFZQ0hjQUFBQUFBQmdJZHdBQUFBQUFHQWgzQUFBQUFBQVlCQlVZRXAxZE1XR3VBQUFBQUVsRlRrU3VRbUNDIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjI0IDAgMCAwLjI0IDAgMCkiPjwvaW1hZ2U+PC9nPjxnIGlkPSJWZXJzaW9uMV8xXyI+PGcgaWQ9IlNoYXBlXzE3Ij48Zz48cGF0aCBmaWxsPSIjMDUwNTA1IiBkPSJNMzAxLDE4NC4zYy0yLjUtMS43LTI1LTE0LjEtNDAuNiwxLjJjMCwwLDktNS44LDE2LjEtNmM3LjEtMC4yLDE2LjUsMS4zLDIyLjgsNS4zYzYuMyw0LDguMiw0LjUsOC4yLDMuOEMzMDcuNCwxODgsMzAzLjUsMTg2LDMwMSwxODQuM3oiLz48L2c+PC9nPjxnIGlkPSJTaGFwZV8xMyI+PGc+PHBhdGggZmlsbD0iIzA1MDUwNSIgZD0iTTM0MiwyMTVjLTIuNC0zLjQtMy44LTcuNS00LjMtMy42cy0xLjgsOC45LTEuNywxMS4zcy0wLjQsNy41LDAuNSw3LjJzNi40LTAuNCw3LjQtNC42UzM0NC40LDIxOC40LDM0MiwyMTV6Ii8+PC9nPjwvZz48ZyBpZD0iU2hhcGVfMSI+PGc+PHBhdGggZmlsbD0iIzA1MDUwNSIgZD0iTTMxMy45LDczLjljMCwwLTMuOS03LjMtMTMuNy0xMi4ycy0xMC4zLTIuNi0xOC43LTkuNGMtOC40LTYuNy0yMC41LTIwLjgtNTQuNS0yMS4xYy0zNC0wLjQtNDIuNiw3LjEtNTMuMywxM2MtMTAuNiw1LjktMTAuNiwxMS41LTIxLjQsMjUuOWMtMTAuNywxNC40LTE0LjgsMzcuOS0xMC4zLDU4LjZjNC41LDIwLjYsNy43LDQwLjgsMTAuOCw1My4zczYuOCwxOS43LDcuMiwzMC41YzAsMC45LDAuMSwxLjcsMC4xLDIuMmMwLTAuNiwwLTEuMSwwLjEtMS4zYzAuMS0wLjEsMC4xLTAuMSwwLjEtMC4xYy0wLjItNC4yLTAuOS0xMi4yLTMtMjAuNWMtNC0xNS42LTkuMy01NC4xLTEuMi02NC44czIyLTI0LjQsMzQuNi0zMS45czI5LjItOS41LDM2LjctMTAuMWM3LjYtMC42LDItNCwxNC4yLTMuNnM1Mi40LDAuMiw2Ni4yLDE2LjhjMTMuOSwxNi42LDExLjgsMjQuOSwxMC44LDMxLjljLTEsNy4xLDEuOSwyMC45LDcuMiwzMC43YzUuMyw5LjksNC45LDE3LjMsNS44LDI1czguNyw2NC44LTkuMSw5N2MwLDAtMTIuOCwxNy40LTE4LjcsMTQuMmMtNS45LTMuMy01LjYtMy40LTYuNy0xMy40Yy0wLjktOCwxLjgtMTcuMi0zLjEtMjRjLTYuNC04LjktMTcuNC0xMi41LTI1LjItMTEuOGMtNi41LDAuOC05LjgtMC40LTEyLjUsMGMtMTAuMywxLjQtMTMuOCw1LjktMjAuNiw2LjJjLTcuNSwwLjQtMTIuOS01LjctMTguMi0zLjRjLTMsMS4zLTExLjksMy42LTE3LjksOC4zYy00LjQsMy41LTguMyw4LjEtOSwxMS4xYy0yLjQsMTAuOCwxMC4xLDEwLjksMTIuNiw2LjVjMS42LTIuOCwzLjctNC44LDguNC01LjVzOS4yLTAuMiwxMy43LTEuMnM0LjgtMy4xLDguOS0yLjljNCwwLjIsOS4yLTAuNiwxNC40LTEuNGM1LjItMC44LDUuNi0yLjEsMTAuMy0yLjljNC43LTAuOCwxOC0xLjUsMjIuMywxczkuNiw3LjIsOS42LDExLjVjMCw0LjMtNS4xLDI3LjUtOS4xLDM2LjdjLTYuNiwxNS4zLTIxLjYsMTQuMy0zMS40LDE2LjNjLTkuOCwyLTIwLjUsNS40LTI1LjIsMXMtMjAuMy0yNy4xLTIwLjktMzYuN2MtMC42LTkuNi0xLjgtMTIuMS0zLjQtMTIuMmMtNi4zLTAuNi04LjYsMTUuNi0xNS42LDVjLTQtNi0xMy43LTI4LjMtMTguNS00Mi43Yy00LjUtMTMuOC01LjEtMzAuNC02LjEtMzAuMWMwLjEsMy0wLjEsMy45LTAuMywxLjRjMC4yLDUuOCw1LjIsMjguMiw2LjQsMzUuNWMxLjMsOCwxMCwyOS44LDEyLjcsMzguNGMzLjYsMTEuNSwxMi45LDI2LjMsMTkuNywzMy4xYzcuOSw4LDE5LjcsMjcuNCwyNy40LDI5LjhjOS4zLDIuOCwzMC45LDMuOSw0My40LTQuNmMxMi41LTguNSwzMC40LTIzLjksMzYuNy0zMWM2LjQtNywyMy42LTMwLjMsMjcuOC02MC43YzQuMS0yOS43LDIuNS00Ni44LDEuOS01Ni42YzAsMCwyLjMtMTEuNyw4LjItMTMuNEMzNDQuNCwxODUsMzQ2LjIsOTMuMiwzMTMuOSw3My45eiIvPjwvZz48L2c+PGcgaWQ9IlNoYXBlXzE1Ij48Zz48cGF0aCBmaWxsPSIjMDUwNTA1IiBkPSJNMzYwLjUsMzE5LjdjLTYuNC01LjMtMjIuNy0yMC0yNC41LTMyLjJjLTEuOC0xMi4xLTEuOS0zMS41LTMuNi0zMGMtMS43LDEuNSwwLDUuNC0wLjIsNi4yYzAsMCwxLjcsMjIuMiwzLjYsMjYuOWMzLjksOS41LDE4LDMxLDQwLjYsMzkuOEMzNzYuMywzMzAuNSwzNjYuOSwzMjUsMzYwLjUsMzE5Ljd6Ii8+PC9nPjwvZz48ZyBpZD0iU2hhcGVfMTYiPjxnPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBmaWxsPSIjMDUwNTA1IiBkPSJNNDgwLDM5NS41Yy0zLjctMTIuNy05LjMtMjMtMTcuOC0yNy44Yy0zOC40LTIxLjktNjEuNi0zMS43LTY2LjUtMzMuMWMtOC45LTIuNy0xOS40LTUtMTkuNC01cy03LjIsNS4xLTE3LDE3Yy05LjksMTEuOS0yOSwyNi4zLTM4LjksMzEuOWMtOS45LDUuNi00NS41LDIxLjgtNTcuOCwyNS40cy0zNS45LDcuOS0yNC41LTI1LjljMCwwLTYuNi0xNy4zLTguNC0yMS40YzAsMC0xNi4zLDE2LjItMjYuNiwzNS44Yy04LjksMTYuOS0xOC41LDY3LjctMTguNiw4Ny42SDQ4MFYzOTUuNXoiLz48L2c+PC9nPjxnIGlkPSJTaGFwZV8yIj48Zz48cGF0aCBmaWxsPSIjMDUwNTA1IiBkPSJNMjAzLjMsMjcxLjlsLTExLjgtMS43YzAsMC0zLjQsMC42LTAuMiwxMS44YzEuOSw2LjctMC40LDguOS0wLjcsOS42Yy0wLjcsMS42LDEwLjYsMi40LDEwLjYsMi40czItNS45LDEuNC0xMS44QzIwMiwyNzYuNywyMDMuMywyNzEuOSwyMDMuMywyNzEuOXoiLz48L2c+PC9nPjxnIGlkPSJTaGFwZV8zIj48Zz48cGF0aCBmaWxsPSIjMDUwNTA1IiBkPSJNMTU3LjQsMjEzLjZjMC44LDMuMSwzLjIsNiw0LDguNGMtMC4yLTMuNi0wLjUtMTAuNS0xLjQtMTQuMkMxNjAuMSwyMDcuOCwxNTYuNCwyMDkuNywxNTcuNCwyMTMuNnogTTE2MS41LDIyMmMwLjEsMS45LDAuMiwyLjgsMC4zLDEuOUMxNjEuOCwyMjMuMywxNjEuNywyMjIuNywxNjEuNSwyMjJ6Ii8+PC9nPjwvZz48ZyBpZD0iU2hhcGVfNCI+PGc+PHBhdGggZmlsbD0iIzA1MDUwNSIgZD0iTTM1MS4xLDIxMi40Yy0xLjYtMTEuMSwwLjYtMTguMS0xLjQtMjEuNGMtMi0zLjItMy43LTYuMy00LjgtNmMtMC43LDAuMi0zLjksMS02LDQuMWMtMS41LDIuMi0xLjcsNi41LTMuMSw4LjJjMCwwLTAuMyw3LjMsMSw3LjJzOC42LTEzLjMsOS4xLTEwLjZjMC42LDIuOCwxLDYuNywxLDEwLjhzNS4xLDE0LjksMCwyNC4yYy01LjEsOS40LTQuNCwxMi42LTYuNywxNS40Yy0yLjMsMi43LTUuOSwyLjItNiwxYy0wLjEtMS4zLTEuOSw4LjUtMS43LDguOWMxLjcsMi45LDcuOCwyLjEsOS42LTEuN2MxLjgtMy44LDMuMy02LjMsNS41LTEzLjRDMzQ5LjcsMjMxLjksMzUyLjcsMjIzLjUsMzUxLjEsMjEyLjR6Ii8+PC9nPjwvZz48ZyBpZD0iU2hhcGVfNSI+PGc+PHBhdGggZmlsbD0iIzA1MDUwNSIgZD0iTTMxMS44LDE2Mi41Yy03LjYtNS41LTE5LjYtMTQuOC00NS40LTdsLTMuNiwxLjJjLTAuOSwwLjUtNS41LDMuNi01LjUsMy42bC0wLjUtMi42bC0yLjYsMi45bC0xLjItMS40YzAsMC0yLjcsNS4zLTMuNiw1LjVjLTEsMC4yLTMuOCwxMS43LDEsMTIuMmM0LjgsMC42LDguNS0yLjYsMTQuNC0zLjZjNS45LTEsMzUuNC0xMS43LDQ2LjYtNi4yQzMxMS4zLDE2NywzMTkuMywxNjgsMzExLjgsMTYyLjV6Ii8+PC9nPjwvZz48ZyBpZD0iU2hhcGVfNiI+PGc+PHBhdGggZmlsbD0iIzA1MDUwNSIgZD0iTTIxMy44LDE3MC45Yy0zLjItNi45LTEuNCwxLTEuNCwxbC0zLjEtNC4xYy0yLjctMS4xLTYuMi00LjgtNi4yLTQuOGMtMS4yLDEuNS0xMC43LDAuMy0xNy41LDEuMmMtNi44LDAuOS0zMy41LDQuNi0yNS43LDI0YzAsMCwyLjQtOS43LDEzLTkuMWMxNiwwLjksMzMuOSw0LjUsNDAuOCwyLjRDMjEzLjYsMTgxLjQsMjE3LjEsMTc3LjgsMjEzLjgsMTcwLjl6Ii8+PC9nPjwvZz48ZyBpZD0iU2hhcGVfNyI+PGc+PHBhdGggZmlsbD0iIzA1MDUwNSIgZD0iTTI5Ny4xLDE4OC40Yy0yLjctMS44LTE1LjQtMTEuOC0zMS0yLjljMCwwLTUuOCw0LjYtNy4yLDUuNWMwLDAsOC41LTMuNywxMS44LTQuNmMwLDAtMS4xLDYuNiw2LjIsNy43YzAsMCwxMS4zLDAuNCwxMC4xLTguNmMwLDAsNS40LDQuNCw4LjIsNC44QzI5OCwxOTAuNywyOTkuOCwxOTAuMiwyOTcuMSwxODguNHoiLz48L2c+PC9nPjxnIGlkPSJTaGFwZV84Ij48Zz48cGF0aCBmaWxsPSIjMDUwNTA1IiBkPSJNMjExLjQsMTk1LjRjMCwwLTkuMi03LjMtMTguNS0zLjZjLTkuMywzLjctMTAuOCw4LjgtMTQuMiwxMWMtMy40LDIuMiwwLjYsMS43LDMuNC0wLjJjMi44LTIsNi4zLTYuNSw3LjItNi41YzAsMC0wLjUsNS44LDMuNCw2LjdzOS40LTEuNSwxMC44LTMuMWMxLjQtMS42LDAuMy02LTAuNS02LjdMMjExLjQsMTk1LjR6Ii8+PC9nPjwvZz48ZyBpZD0iU2hhcGVfOSI+PGc+PHBhdGggZmlsbD0iIzA1MDUwNSIgZD0iTTI2NS45LDIzNS43YzEuOSwyLjktMi4zLDcuMy03LjIsNy40cy0xMi4zLDMuMy0xNy41LDcuN2MtNi4xLDUuMS0xMS44LDEuOC0xNy41LTAuNWMtNS44LTIuMy05LjItMi43LTEyLjctNmMtMy42LTMuMywyLjQtNy4yLDIuNC03LjJjLTkuMiwzLjctMy40LDExLDEuNywxMmM1LjEsMSw4LDMuMywxMi4yLDQuOHM4LjUsMS44LDE0LjYtMWM2LjUtMi45LDExLjQtNS45LDE1LjgtNmM0LjUtMC4xLDYuNi0yLjQsOC42LTYuMkMyNjguOCwyMzYuMiwyNjUuOSwyMzUuNywyNjUuOSwyMzUuN3oiLz48L2c+PC9nPjxnIGlkPSJTaGFwZV8xMCI+PGc+PHBhdGggZmlsbD0iIzA1MDUwNSIgZD0iTTIxOC40LDI0NC4xYy0xLjMtNC45LDAuNC05LjMtMC41LTExLjNjLTAuMy0wLjctMS42LDguNC0wLjcsMTEuM2MwLjksMi44LDEuNCwzLjYsMy44LDQuM0MyMjMuNCwyNDkuMSwyMTkuNSwyNDguMywyMTguNCwyNDQuMXoiLz48L2c+PC9nPjxnIGlkPSJTaGFwZV8xMSI+PGc+PHBhdGggZmlsbD0iIzA1MDUwNSIgZD0iTTI4My4yLDI2OC4zYy0zLjksMC0xMi42LTIuNS0xNS42LTIuMmMtMywwLjMtMTUuMywzLjUtMjAuNiw1Yy01LjMsMS41LTE1LjYsMS42LTIyLjYsMi40Yy03LDAuOC0xMC40LDEuNy0xMy40LDIuNGMtMy4xLDAuNy02LjYsMS40LTMuMSw1LjVjMCwwLDcuMiw4LjgsMTEuNSwxMy43YzQuMyw0LjksMTAuMywxMS45LDI2LjksOC45czIyLjctNy40LDI3LjQtMTQuNGM0LjctNyw3LjQtMTIsMTAuMy0xNS42QzI4Ni44LDI3MC40LDI4Ny4xLDI2OC4zLDI4My4yLDI2OC4zeiIvPjwvZz48L2c+PGcgaWQ9IlNoYXBlXzE4Ij48Zz48cGF0aCBmaWxsPSIjMDUwNTA1IiBkPSJNMTk5LjIsMTg3LjJjLTItMC4yLTE0LjYsNS4zLTE3LjgsNi4yYy0zLjEsMC45LTgsOC4xLTcuOSw4LjljMCwwLjgtMC42LDEuNiwzLjQtMy4xYzMuOS00LjcsMTAuOS03LjEsMTktMTAuM2M4LjgtMy42LDE1LjQsMy4xLDE1LjQsMy4xQzIwOC4xLDE4Ny40LDIwMS4yLDE4Ny40LDE5OS4yLDE4Ny4yeiIvPjwvZz48L2c+PGcgaWQ9IlNoYXBlXzE0Ij48Zz48cGF0aCBmaWxsPSIjMDUwNTA1IiBkPSJNMjI3LjMsMzQ5LjdjLTEuOC0wLjYsNC41LDEzLjIsMTAuMSwyNy42YzUsMTMsOS4zLDI2LjYsOS44LDI4LjhjMS4yLDQuNiwxLjksMS45LDEuOSwxLjlDMjUwLjQsNDAxLDIyOC4yLDM1MCwyMjcuMywzNDkuN3oiLz48L2c+PC9nPjxnIGlkPSJTaGFwZV8xMiI+PGc+PHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTI3NiwyNzEuN2MtNiwxLjUtMjQsNy4xLTMzLjYsNy45Yy05LjYsMC44LTIwLjIsMC40LTI0LjIsMC41Yy00LDAuMS02LjMsMS45LTMuNiwzLjhjMCwwLDYuNSw1LjMsMTYuMSw3LjJjOS42LDEuOSwxNi44LDEuNiwyMi4xLTFjNS4zLTIuNSwxNy44LTkuNywyMS42LTEyLjJDMjc3LjEsMjc2LjEsMjgyLDI3MC4yLDI3NiwyNzEuN3oiLz48L2c+PC9nPjwvZz48L3N2Zz4=)';
         $a = '';
     }
-    public static function numina_copyright() {
+    public static function sticky_copyright() {
         echo '<p class="hidden_copyright">&copy; 2015 - Sticky Admin, a WordPress plugin by Dorian Tudorache. All Rights Reserved.</p>';
     }
-    public static function numina_extensions() {
+    public static function sticky_extensions() {
         // Whatever else is need for Sticky Admin UI
     }
     /**
@@ -1775,8 +1874,8 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_update_menu_positions() {
-        update_user_meta( get_current_user_id(), get_current_blog_id() . '_sticky_menu_order', str_replace('admin.php?page=', '', $_REQUEST['menu_item_positions'])); // str_replace (support for custom added menu items)
+    public static function sticky_update_menu_positions() {
+        update_user_meta( get_current_user_id(), self::$current_blog_id . '_sticky_menu_order', str_replace('admin.php?page=', '', $_REQUEST['menu_item_positions'])); // str_replace (support for custom added menu items)
     }
     /**
      *
@@ -1786,8 +1885,8 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_update_menu_hidden_items() {
-        update_user_meta( get_current_user_id(), get_current_blog_id() . '_sticky_menu_hidden_items', str_replace('admin.php?page=', '', $_REQUEST['menu_items_to_hide']));
+    public static function sticky_update_menu_hidden_items() {
+        update_user_meta( get_current_user_id(), self::$current_blog_id . '_sticky_menu_hidden_items', str_replace('admin.php?page=', '', $_REQUEST['menu_items_to_hide']));
     }
     /**
      *
@@ -1797,11 +1896,11 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_custom_menu_order( $menu_order ) {
+    public static function sticky_custom_menu_order( $menu_order ) {
         global $menu;
         if ( ! $menu_order)
             return true;
-        $new_menu_order = get_user_meta(get_current_user_id(), get_current_blog_id() . '_sticky_menu_order', true);
+        $new_menu_order = get_user_meta(get_current_user_id(), self::$current_blog_id . '_sticky_menu_order', true);
         if ( $new_menu_order ) {
             $new_menu_order = explode(',', $new_menu_order);
             return $new_menu_order;
@@ -1817,7 +1916,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_remove_orig_menu() {
+    public static function sticky_remove_orig_menu() {
         global $orig_menu, $menu, $orig_submenu, $submenu;
         $orig_menu = $menu; // This is where we'll keep a copy of the admin $menu as it gets emptied later on. 
         $orig_submenu = $submenu;
@@ -1842,7 +1941,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_sticky_admin_menu() {
+    public static function sticky_admin_menu() {
         global $orig_menu, $orig_submenu, $parent_file, $admin_page_hooks, $orig_menu;
         // Get current role
         // $current_role = $this->get_user_role();
@@ -1860,7 +1959,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_sticky_editor( $in ) {
+    public static function sticky_editor( $in ) {
         // $in['plugins']='inlinepopups,spellchecker,tabfocus,paste,media,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs';
         // $in['wpautop']=true;
         // $in['apply_source_formatting']=false;
@@ -1893,7 +1992,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_original_admin_menu() {
+    public static function sticky_original_admin_menu() {
         global $menu, $submenu, $orig_menu, $orig_submenu;
         $orig_menu = $menu;
         $orig_submenu = $submenu;
@@ -1903,7 +2002,7 @@ class StickyAdmin {
      *
      * @since 1.0
      */
-    public static function numina_get_orig_admin_menu() {
+    public static function sticky_get_orig_admin_menu() {
         global $menu, $submenu, $wp_filter;
         // $menu
         // 0 => Menu Title, 1 => Capability, 2 => Slug, 3 => Page Title, 4 => Classes, 5 => Hookname, 6 => Icon
@@ -1967,7 +2066,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public static function numina_login_page_js() {
+    public static function sticky_login_page_js() {
         do_action( 'sticky_login_enqueues' );
         echo '<script type="text/javascript">';
         echo apply_filters( 'sticky_login_dynamic_js', '' );
