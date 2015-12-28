@@ -1,6 +1,6 @@
 # Sticky Admin
 
-[![License](https://poser.pugx.org/automattic/jetpack/license.svg)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![License](https://poser.pugx.org/automattic/jetpack/license.svg)](http://www.gnu.org/licenses/gpl-2.0.html) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 [StickyAdmin WordPress Plugin](https://wordpress.org/plugins/stickyadmin/)
 
