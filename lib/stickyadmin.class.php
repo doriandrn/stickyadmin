@@ -4,7 +4,7 @@
  * Class StickyAdmin - Main file for plugin execution
  * ==================================================
  *
- * @version 1.0.5
+ * @version 1.0.6
  * @copyright 2016
  * @author Dorian Tudorache
  * @link www.stickyadmin.net
@@ -20,7 +20,7 @@ class StickyAdmin {
     protected static $instance = null;
     const PLUGIN_NAME   = 'Sticky Admin';
     const PLUGIN_SLUG   = 'stickyadmin';
-    const VERSION       = '1.0.5';
+    const VERSION       = '1.0.6';
     
     /**
      * The pre-modified admin menu.
@@ -97,7 +97,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    private function __construct() { /* Do nothing here */ }
+    public function __construct() { /* Do nothing here */ }
     
     /**
      * A dummy magic method to prevent StickyAdmin from being cloned.
@@ -380,52 +380,97 @@ class StickyAdmin {
         include ( 'includes/sticky_preloaders.php' );
         
         self::$config = array(
-            // Background Colors
+            // Elements colors
             'colors'    => array(
-                // Header
-                'header'            =>  ( isset ( $s_ui[ 'header_bg' ] ) ? $s_ui[ 'header_bg' ] : '#4A6491' ),
+                'highlight' => array(
+                    'bg'    => ( isset ( $s_ui[ 'highlight_color' ] ) ? $s_ui[ 'highlight_color' ] : '#FFFFFF' ),
+                    'color' => '',
+                    'hl'    => '',
+                ),
 
-                // Navigation
-                'adminmenu'         =>  ( isset ( $s_ui[ 'nav_bg' ] ) ? $s_ui[ 'nav_bg' ] : '#1A1F2B' ),
-                
-                'adminmenu_submenu' =>  ( isset ( $s_ui[ 'nav_sub_bg' ] ) ? $s_ui[ 'nav_sub_bg' ] : '#FFFFFF' ),
-                'adminmenu_handle'  =>  ( isset ( $s_ui[ 'nav_resize_handle_bg' ] ) ? $s_ui[ 'nav_resize_handle_bg' ] : '#FFFFFF' ),
+                // Header
+                'header'    => array(
+                    'bg'    => ( isset ( $s_ui[ 'header_bg' ] ) ? $s_ui[ 'header_bg' ] : '#4A6491' ),
+                    'color' => '',
+                    'hl'    => ''
+                ),
+
+                // AdminMenu
+                'adminmenu' => array(
+                    'bg'    => ( isset ( $s_ui[ 'nav_bg' ] ) ? $s_ui[ 'nav_bg' ] : '#1A1F2B' ),
+                    'color' => '',
+                    'hl'    => '',
+                    // Submenus
+                    'submenu'   => array( //adminmenu_submenu
+                        'bg'    => ( isset ( $s_ui[ 'nav_sub_bg' ] ) ? $s_ui[ 'nav_sub_bg' ] : '#FFFFFF' ),
+                        'color' => ''
+                    ),
+                    // The resize handle
+                    'handle'    => array(
+                        'bg'    => ( isset ( $s_ui[ 'nav_resize_handle_bg' ] ) ? $s_ui[ 'nav_resize_handle_bg' ] : '#FFFFFF' ),
+                        'color' => ''
+                    ),
+                ),
 
                 // AdminBar
-                'adminbar'          =>  ( isset ( $s_ui[ 'wpadminbar_bg' ] ) ? $s_ui['wpadminbar_bg'] : '#FFFFFF' ),
-    
-                'adminbar_submenu'  =>  ( isset ( $s_ui[ 'wpadminbar_sub_bg' ] ) ? $s_ui[ 'wpadminbar_sub_bg' ] : '#FFFFFF' ),
-                'adminbar_profile'  =>  ( isset ( $s_ui[ 'wpadminbar_profile_bg' ] ) ? $s_ui[ 'wpadminbar_profile_bg' ] : '#1A1F2B' ),
-                'adminbar_tooltip'  =>  ( isset ( $s_ui[ 'wpab_tooltips_bg' ] ) ? $s_ui[ 'wpab_tooltips_bg' ] : '#FFFFFF' ),
+                'adminbar'  => array(
+                    'bg'    => ( isset ( $s_ui[ 'wpadminbar_bg' ] ) ? $s_ui['wpadminbar_bg'] : '#FFFFFF' ),
+                    'color' => '',
+                    'hl'    => '',
+                    // SubMenus
+                    'submenu'   => array(
+                        'bg'    => ( isset ( $s_ui[ 'wpadminbar_sub_bg' ] ) ? $s_ui[ 'wpadminbar_sub_bg' ] : '#FFFFFF' ),
+                        'color' => ''
+                    ),
+                    // Profile menu
+                    'profile'   => array(
+                        'bg'    => ( isset ( $s_ui[ 'wpadminbar_profile_bg' ] ) ? $s_ui[ 'wpadminbar_profile_bg' ] : '#1A1F2B' ),
+                        'color' => ''
+                    ),
+                    // Tooltips
+                    'tooltips'  => array(
+                        'bg'    => ( isset ( $s_ui[ 'wpab_tooltips_bg' ] ) ? $s_ui[ 'wpab_tooltips_bg' ] : '#FFFFFF' ),
+                        'color' => ''
+                    )
+                ),
 
                 // Content
-                'content'           =>  ( isset ( $s_ui[ 'content_bg' ] ) ? $s_ui[ 'content_bg' ] : '#ECF2F6' ),
+                'content'   => array(
+                    'bg'    => ( isset ( $s_ui[ 'content_bg' ] ) ? $s_ui[ 'content_bg' ] : '#ECF2F6' ),
+                    'color' => '',
+                    'hl'    => '',
+                     // Widgets
+                    'widgets'   => array(
+                        'bg'    => ( isset ( $s_ui[ 'color_widget' ] ) ? $s_ui[ 'color_widget' ] : '#FFFFFF' ),
+                        'color' => '',
+                        'hl'    => ''
+                    ),
+                    // Content ScrollBar
+                    'scroll'    => array(
+                        'bg'    => ( isset ( $s_ui[ 'scrollbar' ] ) ? $s_ui[ 'scrollbar' ] : '#30395c' ),
+                        'rail'  => ( isset ( $s_ui[ 'scrollbar_rail' ] ) ? $s_ui[ 'scrollbar_rail' ] : '#ffffff' ),
+                    ), 
+                    // Tooltips
+                    'tooltips'  => array(
+                        'bg'    => ( isset ( $s_ui[ 'tooltips_bg' ] ) ? $s_ui[ 'tooltips_bg' ] : '#FFFFFF' ),
+                        'color' => '',
+                        'hl'    => ''
+                    ),  
+                ),
 
                 // Customizer
-                'customizer'        =>  ( isset ( $s_ui[ 'customizer_bg' ] ) ? $s_ui[ 'customizer_bg' ] : '#1A1F2B' ),
-
-                // Forms
-                'form'              =>  ( isset ( $s_ui[ 'forms_bg'] ) ? $s_ui[ 'forms_bg' ]: '#4A6491' ),
-                'form_head'         =>  ( isset ( $s_ui[ 'forms_top_bg' ] ) ? $s_ui[ 'forms_top_bg' ] : '#1A1F2B' ),
+                'customizer'=> array(
+                    'bg'    => ( isset ( $s_ui[ 'customizer_bg' ] ) ? $s_ui[ 'customizer_bg' ] : '#1A1F2B' ),
+                    'color' => '',
+                    'hl'    => ''
+                ),
 
                 // Footer
-                'footer'            =>  ( isset ( $s_ui[ 'footer_bg' ] ) ? $s_ui[ 'footer_bg' ] : '#4A6491' ),
-
-                // Widgets
-                'widgets'           =>  ( isset ( $s_ui[ 'color_widget' ] ) ? $s_ui[ 'color_widget' ] : '#FFFFFF' ),
-
-                // Widefat 
-                'widefat_draft'     =>  sticky_make_hl_color( isset ( $s_ui[ 'widefat_draft' ] ) ? $s_ui [ 'widefat_draft' ] : '#fff3a2' ),
-                'widefat_pass'      =>  sticky_make_hl_color( isset ( $s_ui[ 'widefat_pass' ] ) ? $s_ui [ 'widefat_pass' ] : '#ffc7f4' ),
-                'widefat_trash'     =>  sticky_make_hl_color( isset ( $s_ui[ 'widefat_trash' ] ) ? $s_ui [ 'widefat_trash' ] : '#ffa7a7' ),
-                'widefat_sticky'    =>  sticky_make_hl_color( isset ( $s_ui[ 'widefat_sticky' ] ) ? $s_ui [ 'widefat_sticky' ] : '#6af9ff' ),
-
-                // Content ScrollBar
-                'scrollbar'         =>  ( isset ( $s_ui[ 'scrollbar' ] ) ? $s_ui[ 'scrollbar' ] : '#30395c' ),
-                'scrollbar_rail'    =>  ( isset ( $s_ui[ 'scrollbar_rail' ] ) ? $s_ui[ 'scrollbar_rail' ] : '#ffffff' ),
-
-                // Tooltips
-                'tooltip'           =>  ( isset ( $s_ui[ 'tooltips_bg' ] ) ? $s_ui[ 'tooltips_bg' ] : '#FFFFFF' )
+                'footer'    => array(
+                    'bg'    => ( isset ( $s_ui[ 'footer_bg' ] ) ? $s_ui[ 'footer_bg' ] : '#4A6491' ),
+                    'color' => '',
+                    'hl'    => '',
+                ),
             ),
             'adminmenu' => array(
                 'position'          =>  ( isset ( $s_ui[ 'nav_pos' ] ) ? $s_ui['nav_pos'] : 'left' ),
@@ -619,13 +664,23 @@ class StickyAdmin {
      *
      */
     public static function adjust_sticky_config() {
-        self::generate_highlight_colors();
+        self::generate_colors( self::$config['colors'] );
         self::adjust_additional_options();
         self::statistics_config();
         self::body_classes();
         self::logo_config();
+        // print_r(self::$config);
     }
 
+    /**
+     *
+     * Logo Config
+     * -----------------------
+     *
+     * @since 1.0.5
+     * @author Dorian Tudorache
+     *
+     */
     public static function logo_config() {
         // Logo Configuration
         if ( StickyAdmin::$config['logo']['how'] == 'svg' && ! self::$config['svg_support'] )
@@ -633,12 +688,12 @@ class StickyAdmin {
 
         switch ( StickyAdmin::$config['logo']['how'] ) {
             case 'svg':
-                self::$config['logo']['show']           = ( isset( $s_ui[ 'logo_svg_code' ] ) ? stripslashes( $s_ui['logo_svg_code'] ) : '<svg width="100%" height="100%" viewBox="0 0 66 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><path d="M32.8426,12.5458c0.770276,0.214047 1.4408,0.188865 2.04308,0l0,-7.98126c-0.661744,-0.138054 -1.33804,-0.171962 -2.04308,0l0,7.98126ZM22.7154,6.40182c-1.55804,-0.352763 -2.29296,-0.66143 -2.29296,-1.39635c0,-0.646732 0.587938,-1.11708 1.64623,-1.11708c0.970098,0 2.24886,0.308668 3.16017,0.690827c0.419431,-0.40633 0.721636,-0.944577 0.85251,-1.67562c-1.01419,-0.440954 -2.39585,-0.837812 -3.96858,-0.837812c-2.36645,0 -3.8216,1.29346 -3.8216,3.11607c0,2.04308 1.71972,2.64572 3.85099,3.13077c1.51394,0.352763 2.20477,0.66143 2.20477,1.36696c0,0.76432 -0.676129,1.17588 -1.80791,1.17588c-1.29346,0 -2.24886,-0.132286 -3.61582,-0.793716c-0.429827,0.430943 -0.757265,0.927922 -0.76432,1.63153c1.64623,0.823113 2.54283,0.984796 4.30665,0.984796c2.41055,0 4.01268,-1.17588 4.01268,-3.17487c0,-1.8961 -1.52864,-2.60163 -3.7628,-3.10137ZM32.0636,6.25483c0.0890945,-0.567859 0.0890945,-1.1313 0,-1.69032l-2.23416,0l0,-3.10137c-0.659598,-0.0642262 -1.34202,-0.0727897 -2.05778,0l0,3.10137l-1.13178,0c-0.108901,0.45576 -0.108901,1.0192 0,1.69032l1.13178,0l0,3.89509c0,1.67562 1.07299,2.51344 2.41055,2.51344c1.14648,0 1.76381,-0.264572 1.85201,-0.293969c0.0849201,-0.520595 0.0849201,-1.03014 0,-1.52864c-0.279271,0.0293969 -0.587938,0.0734923 -0.940701,0.0734923c-1.02889,0 -1.26407,-0.411557 -1.26407,-1.83731l0,-2.8221l2.23416,0ZM41.9703,9.84126c-0.396858,0.602637 -1.05829,0.984796 -1.79321,0.984796c-1.29346,0 -2.35175,-1.02889 -2.35175,-2.27826c0,-1.26407 1.05829,-2.29296 2.35175,-2.29296c0.734923,0 1.39635,0.38216 1.79321,0.970098c0.47924,-0.336012 0.929597,-0.725318 1.32286,-1.21997c-0.720224,-0.970098 -1.83731,-1.58743 -3.11607,-1.58743c-2.41055,0 -4.36544,1.83731 -4.36544,4.13027c0,2.27826 1.95489,4.11557 4.36544,4.11557c1.23467,0 2.36645,-0.617335 3.08668,-1.60213c-0.34561,-0.486577 -0.786829,-0.883832 -1.29346,-1.21997ZM51.5945,4.54807c0.736249,-0.100887 1.41348,-0.0954069 2.03169,0.0164378l2.10188,5.42373l0.146985,0l2.05778,-5.42373c0.657944,-0.0792415 1.35857,-0.0792415 2.10188,0l-3.29245,8.40751c-0.705526,1.80791 -2.58693,2.33705 -4.26255,2.33705c-0.264572,0 -0.499747,0 -0.720224,-0.0146985c-0.17937,-0.832003 -0.0651775,-1.30909 0.249874,-1.54334l0.220477,0c1.10238,0 2.08718,-0.279271 2.54283,-1.20527l-0.176381,0l-2.98175,-7.63721l-2.58897,2.77202l2.95439,4.86519c-0.72946,0.107894 -1.48064,0.12228 -2.26356,0l-2.04308,-3.26306l-1.54334,1.48454l0,1.77851c-0.648138,0.102344 -1.31551,0.144827 -2.04308,0l0,-11.0826c0.647703,-0.0952009 1.32429,-0.107894 2.04308,0l0,6.52611l3.41004,-3.42474c0.701166,-0.0504605 1.38206,-0.0451206 2.05448,-0.0164378ZM33.8568,3.6973c0.646732,0 1.16118,-0.529144 1.16118,-1.19057c0,-0.66143 -0.514446,-1.20527 -1.16118,-1.20527c-0.646732,0 -1.17588,0.543843 -1.17588,1.20527c0,0.66143 0.529144,1.19057 1.17588,1.19057Z" style="fill:'.( sticky_luminance( self::$config['colors']['adminmenu'] ) ? '#000' : '#fff' ).';"/><g id="symbol"><path id="shape" d="M14.9043,0.879207c0,7.75964 -6.24752,14.8521 -14.8812,14.8521c0,0 5.45056,-1.99884 5.29521,-6.56935c-0.0913755,-2.68834 -1.92424,-4.00687 -3.42363,-5.07256c-1.7672,-1.25605 -1.46038,-3.21021 1.25117,-3.21021l11.7585,0ZM8.66296,11.6622c3.25674,-2.61475 4.65136,-6.22415 5.04952,-8.63801l-7.3755,0l-0.777586,1.45421c0.264753,0.29761 0.531504,0.64284 0.777586,1.03748l1.66922,-0.288376c0.426586,0.837222 0.718737,1.73637 0.865728,2.66444l-1.47349,0.724993c0.0424477,0.192526 0.0640729,1.10667 0.0179983,1.36043l1.45549,0.716137c-0.0517875,0.326973 -0.121593,0.650357 -0.208975,0.968704Z" style="fill:url(#tag1);"/><path id="shadows" d="M7.98974,13.431c-0.947079,0.617907 -2.1981,1.17465 -2.97048,1.433c0,0 2.14709,-1.7577 2.39306,-4.88889l0.49701,0.251258c-0.317153,1.94835 -1.0592,3.08425 -1.0592,3.08425l1.14372,0.111844c0.295876,-0.615408 0.525434,-1.23207 0.669207,-1.76064l0.427596,-0.355322c-0.104407,0.595011 -0.312351,1.22726 -0.604996,1.80274c-0.17876,0.127792 -0.499563,0.329323 -0.499563,0.329323l0.00364059,-0.00755594ZM6.33724,5.51288c0.561589,0.873405 0.905559,1.91803 1.06922,3.10452l0.455932,-0.224572c-0.136957,-1.03451 -0.449229,-2.03527 -1.00447,-2.97184l-0.520681,0.0918931ZM13.7162,3.01897l1.0331,0c-0.209664,1.2021 -0.399158,1.91335 -0.735155,2.88975c0.192212,-2.11072 -0.134651,-2.60024 -0.297945,-2.88975ZM5.55527,4.47823c-0.898756,-1.03097 -1.73411,-1.45416 -1.73411,-1.45416l2.51589,0l-0.781787,1.45416Z" style="fill:#000;fill-opacity:0.25098;"/></g><defs><linearGradient id="tag1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.0187592,14.773,-14.773,0.0187592,0.708301,0.97579)"><stop offset="0%" style="stop-color:'.StickyAdmin::$config['colors']['adminmenu_hltwo'].';stop-opacity:1"/><stop offset="100%" style="stop-color:'. self::$config['colors']['adminmenu_hl'].';stop-opacity:1"/></linearGradient></defs></svg>' );
-                self::$config['logo']['show_folded']    = ( isset( $s_ui[ 'folded_logo_svg_code' ] ) ? stripslashes( $s_ui['folded_logo_svg_code'] ) : '<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><g id="symbol"><path id="shape" d="M15.9696,0.0236995c0,8.32649 -6.7039,15.9371 -15.9683,15.9371c0,0 5.84872,-2.14486 5.68203,-7.04925c-0.0980505,-2.88473 -2.06481,-4.29957 -3.67372,-5.44312c-1.8963,-1.3478 -1.56706,-3.44471 1.34257,-3.44471l12.6174,0ZM9.27225,11.5944c3.49465,-2.80576 4.99114,-6.67883 5.41839,-9.26902l-7.91428,0l-0.834389,1.56044c0.284093,0.31935 0.570331,0.6898 0.834389,1.11327l1.79116,-0.309442c0.457748,0.898381 0.771241,1.86321 0.92897,2.85907l-1.58113,0.777954c0.0455485,0.20659 0.0687535,1.18751 0.0193131,1.4598l1.56182,0.768451c-0.0555705,0.350859 -0.130475,0.697865 -0.22424,1.03947Z" style="fill:url(#tag2);"/><path id="shadows" d="M8.54986,13.4924c-1.01626,0.663045 -2.35867,1.26045 -3.18747,1.53768c0,0 2.30394,-1.8861 2.56787,-5.24603l0.533316,0.269613c-0.340321,2.09068 -1.13657,3.30955 -1.13657,3.30955l1.22727,0.120014c0.317489,-0.660363 0.563817,-1.32208 0.718093,-1.88926l0.458832,-0.381279c-0.112034,0.638477 -0.335168,1.31691 -0.649191,1.93443c-0.191818,0.137128 -0.536056,0.35338 -0.536056,0.35338l0.00390654,-0.0081079ZM6.77664,4.99587c0.602614,0.937207 0.971711,2.05814 1.14732,3.3313l0.489239,-0.240977c-0.146962,-1.11008 -0.482045,-2.18394 -1.07784,-3.18893l-0.558717,0.0986059ZM14.6946,2.31977l1.10857,0c-0.224981,1.28992 -0.428317,2.05312 -0.788858,3.10085c0.206253,-2.26491 -0.144487,-2.79019 -0.31971,-3.10085ZM5.93754,3.88564c-0.96441,-1.10628 -1.86078,-1.56039 -1.86078,-1.56039l2.69968,0l-0.838897,1.56039Z" style="fill:#000;fill-opacity:0.25098;"/></g><defs><linearGradient id="tag2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.0201296,15.8522,-15.8522,0.0201296,0.736504,0.127337)"><stop offset="0%" style="stop-color:'.StickyAdmin::$config['colors']['adminmenu_hltwo'].';stop-opacity:1"/><stop offset="100%" style="stop-color:'.StickyAdmin::$config['colors']['adminmenu_hl'].';stop-opacity:1"/></linearGradient></defs></svg>' );
+                self::$config['logo']['show']           = ( isset( $s_ui[ 'logo_svg_code' ] ) ? stripslashes( $s_ui['logo_svg_code'] ) : '<svg width="100%" height="100%" viewBox="0 0 66 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><path d="M32.8426,12.5458c0.770276,0.214047 1.4408,0.188865 2.04308,0l0,-7.98126c-0.661744,-0.138054 -1.33804,-0.171962 -2.04308,0l0,7.98126ZM22.7154,6.40182c-1.55804,-0.352763 -2.29296,-0.66143 -2.29296,-1.39635c0,-0.646732 0.587938,-1.11708 1.64623,-1.11708c0.970098,0 2.24886,0.308668 3.16017,0.690827c0.419431,-0.40633 0.721636,-0.944577 0.85251,-1.67562c-1.01419,-0.440954 -2.39585,-0.837812 -3.96858,-0.837812c-2.36645,0 -3.8216,1.29346 -3.8216,3.11607c0,2.04308 1.71972,2.64572 3.85099,3.13077c1.51394,0.352763 2.20477,0.66143 2.20477,1.36696c0,0.76432 -0.676129,1.17588 -1.80791,1.17588c-1.29346,0 -2.24886,-0.132286 -3.61582,-0.793716c-0.429827,0.430943 -0.757265,0.927922 -0.76432,1.63153c1.64623,0.823113 2.54283,0.984796 4.30665,0.984796c2.41055,0 4.01268,-1.17588 4.01268,-3.17487c0,-1.8961 -1.52864,-2.60163 -3.7628,-3.10137ZM32.0636,6.25483c0.0890945,-0.567859 0.0890945,-1.1313 0,-1.69032l-2.23416,0l0,-3.10137c-0.659598,-0.0642262 -1.34202,-0.0727897 -2.05778,0l0,3.10137l-1.13178,0c-0.108901,0.45576 -0.108901,1.0192 0,1.69032l1.13178,0l0,3.89509c0,1.67562 1.07299,2.51344 2.41055,2.51344c1.14648,0 1.76381,-0.264572 1.85201,-0.293969c0.0849201,-0.520595 0.0849201,-1.03014 0,-1.52864c-0.279271,0.0293969 -0.587938,0.0734923 -0.940701,0.0734923c-1.02889,0 -1.26407,-0.411557 -1.26407,-1.83731l0,-2.8221l2.23416,0ZM41.9703,9.84126c-0.396858,0.602637 -1.05829,0.984796 -1.79321,0.984796c-1.29346,0 -2.35175,-1.02889 -2.35175,-2.27826c0,-1.26407 1.05829,-2.29296 2.35175,-2.29296c0.734923,0 1.39635,0.38216 1.79321,0.970098c0.47924,-0.336012 0.929597,-0.725318 1.32286,-1.21997c-0.720224,-0.970098 -1.83731,-1.58743 -3.11607,-1.58743c-2.41055,0 -4.36544,1.83731 -4.36544,4.13027c0,2.27826 1.95489,4.11557 4.36544,4.11557c1.23467,0 2.36645,-0.617335 3.08668,-1.60213c-0.34561,-0.486577 -0.786829,-0.883832 -1.29346,-1.21997ZM51.5945,4.54807c0.736249,-0.100887 1.41348,-0.0954069 2.03169,0.0164378l2.10188,5.42373l0.146985,0l2.05778,-5.42373c0.657944,-0.0792415 1.35857,-0.0792415 2.10188,0l-3.29245,8.40751c-0.705526,1.80791 -2.58693,2.33705 -4.26255,2.33705c-0.264572,0 -0.499747,0 -0.720224,-0.0146985c-0.17937,-0.832003 -0.0651775,-1.30909 0.249874,-1.54334l0.220477,0c1.10238,0 2.08718,-0.279271 2.54283,-1.20527l-0.176381,0l-2.98175,-7.63721l-2.58897,2.77202l2.95439,4.86519c-0.72946,0.107894 -1.48064,0.12228 -2.26356,0l-2.04308,-3.26306l-1.54334,1.48454l0,1.77851c-0.648138,0.102344 -1.31551,0.144827 -2.04308,0l0,-11.0826c0.647703,-0.0952009 1.32429,-0.107894 2.04308,0l0,6.52611l3.41004,-3.42474c0.701166,-0.0504605 1.38206,-0.0451206 2.05448,-0.0164378ZM33.8568,3.6973c0.646732,0 1.16118,-0.529144 1.16118,-1.19057c0,-0.66143 -0.514446,-1.20527 -1.16118,-1.20527c-0.646732,0 -1.17588,0.543843 -1.17588,1.20527c0,0.66143 0.529144,1.19057 1.17588,1.19057Z" style="fill:'.( ( self::$config['colors']['adminmenu']['color'] == 'w' ) ? '#fff' : '#000' ).';"/><g id="symbol"><path id="shape" d="M14.9043,0.879207c0,7.75964 -6.24752,14.8521 -14.8812,14.8521c0,0 5.45056,-1.99884 5.29521,-6.56935c-0.0913755,-2.68834 -1.92424,-4.00687 -3.42363,-5.07256c-1.7672,-1.25605 -1.46038,-3.21021 1.25117,-3.21021l11.7585,0ZM8.66296,11.6622c3.25674,-2.61475 4.65136,-6.22415 5.04952,-8.63801l-7.3755,0l-0.777586,1.45421c0.264753,0.29761 0.531504,0.64284 0.777586,1.03748l1.66922,-0.288376c0.426586,0.837222 0.718737,1.73637 0.865728,2.66444l-1.47349,0.724993c0.0424477,0.192526 0.0640729,1.10667 0.0179983,1.36043l1.45549,0.716137c-0.0517875,0.326973 -0.121593,0.650357 -0.208975,0.968704Z" style="fill:url(#tag1);"/><path id="shadows" d="M7.98974,13.431c-0.947079,0.617907 -2.1981,1.17465 -2.97048,1.433c0,0 2.14709,-1.7577 2.39306,-4.88889l0.49701,0.251258c-0.317153,1.94835 -1.0592,3.08425 -1.0592,3.08425l1.14372,0.111844c0.295876,-0.615408 0.525434,-1.23207 0.669207,-1.76064l0.427596,-0.355322c-0.104407,0.595011 -0.312351,1.22726 -0.604996,1.80274c-0.17876,0.127792 -0.499563,0.329323 -0.499563,0.329323l0.00364059,-0.00755594ZM6.33724,5.51288c0.561589,0.873405 0.905559,1.91803 1.06922,3.10452l0.455932,-0.224572c-0.136957,-1.03451 -0.449229,-2.03527 -1.00447,-2.97184l-0.520681,0.0918931ZM13.7162,3.01897l1.0331,0c-0.209664,1.2021 -0.399158,1.91335 -0.735155,2.88975c0.192212,-2.11072 -0.134651,-2.60024 -0.297945,-2.88975ZM5.55527,4.47823c-0.898756,-1.03097 -1.73411,-1.45416 -1.73411,-1.45416l2.51589,0l-0.781787,1.45416Z" style="fill:#000;fill-opacity:0.25098;"/></g><defs><linearGradient id="tag1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.0187592,14.773,-14.773,0.0187592,0.708301,0.97579)"><stop offset="0%" style="stop-color:'.StickyAdmin::$config['colors']['adminmenu']['hl'][1].';stop-opacity:1"/><stop offset="100%" style="stop-color:'. self::$config['colors']['adminmenu']['hl'][0].';stop-opacity:1"/></linearGradient></defs></svg>' );
+                self::$config['logo']['show_folded']    = ( isset( $s_ui[ 'folded_logo_svg_code' ] ) ? stripslashes( $s_ui['folded_logo_svg_code'] ) : '<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><g id="symbol"><path id="shape" d="M15.9696,0.0236995c0,8.32649 -6.7039,15.9371 -15.9683,15.9371c0,0 5.84872,-2.14486 5.68203,-7.04925c-0.0980505,-2.88473 -2.06481,-4.29957 -3.67372,-5.44312c-1.8963,-1.3478 -1.56706,-3.44471 1.34257,-3.44471l12.6174,0ZM9.27225,11.5944c3.49465,-2.80576 4.99114,-6.67883 5.41839,-9.26902l-7.91428,0l-0.834389,1.56044c0.284093,0.31935 0.570331,0.6898 0.834389,1.11327l1.79116,-0.309442c0.457748,0.898381 0.771241,1.86321 0.92897,2.85907l-1.58113,0.777954c0.0455485,0.20659 0.0687535,1.18751 0.0193131,1.4598l1.56182,0.768451c-0.0555705,0.350859 -0.130475,0.697865 -0.22424,1.03947Z" style="fill:url(#tag2);"/><path id="shadows" d="M8.54986,13.4924c-1.01626,0.663045 -2.35867,1.26045 -3.18747,1.53768c0,0 2.30394,-1.8861 2.56787,-5.24603l0.533316,0.269613c-0.340321,2.09068 -1.13657,3.30955 -1.13657,3.30955l1.22727,0.120014c0.317489,-0.660363 0.563817,-1.32208 0.718093,-1.88926l0.458832,-0.381279c-0.112034,0.638477 -0.335168,1.31691 -0.649191,1.93443c-0.191818,0.137128 -0.536056,0.35338 -0.536056,0.35338l0.00390654,-0.0081079ZM6.77664,4.99587c0.602614,0.937207 0.971711,2.05814 1.14732,3.3313l0.489239,-0.240977c-0.146962,-1.11008 -0.482045,-2.18394 -1.07784,-3.18893l-0.558717,0.0986059ZM14.6946,2.31977l1.10857,0c-0.224981,1.28992 -0.428317,2.05312 -0.788858,3.10085c0.206253,-2.26491 -0.144487,-2.79019 -0.31971,-3.10085ZM5.93754,3.88564c-0.96441,-1.10628 -1.86078,-1.56039 -1.86078,-1.56039l2.69968,0l-0.838897,1.56039Z" style="fill:#000;fill-opacity:0.25098;"/></g><defs><linearGradient id="tag2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.0201296,15.8522,-15.8522,0.0201296,0.736504,0.127337)"><stop offset="0%" style="stop-color:'.StickyAdmin::$config['colors']['adminmenu']['hl'][1].';stop-opacity:1"/><stop offset="100%" style="stop-color:'.StickyAdmin::$config['colors']['adminmenu']['hl'][0].';stop-opacity:1"/></linearGradient></defs></svg>' );
                 break;
 
             case 'image':
-                self::$config['logo']['image_path']     = ( ( isset( $s_ui[ 'nav_custom_logo_image' ][ 'src' ] ) && $s_ui[ 'nav_custom_logo_image']['src'] != '' ) ? $s_ui[ 'nav_custom_logo_image' ][ 'src' ] : STICKY_ASSETS . 'sticky-logo-' . ( sticky_luminance( self::$config['colors']['adminmenu'] ) ? 'black' : 'white' ) . '.png' );
+                self::$config['logo']['image_path']     = ( ( isset( $s_ui[ 'nav_custom_logo_image' ][ 'src' ] ) && $s_ui[ 'nav_custom_logo_image']['src'] != '' ) ? $s_ui[ 'nav_custom_logo_image' ][ 'src' ] : STICKY_ASSETS . 'sticky-logo-' . self::$config['colors']['adminmenu']['color'] . '.png' );
                 self::$config['logo']['show']           = '<img src="' . self::$config['logo']['image_path'] . '" alt="'. __( 'Logo', '_sticky_' ). '" />';
                 self::$config['logo']['show_folded']    = ( ( isset( $s_ui[ 'folded_logo_image' ][ 'src' ] ) && $s_ui[ 'folded_logo_image' ][ 'src' ] != '' ) ? '<img src="' . $s_ui[ 'folded_logo_image' ][ 'src' ] . '" alt="'. __( 'Logo', '_sticky_' ). '" />' : self::$config['logo']['show_folded'] );
                 break;
@@ -650,8 +705,8 @@ class StickyAdmin {
         }
 
         // Login Page
-        self::$config['login']['logo_color'] = ( sticky_luminance( self::$config['login']['form_bg'] ) ? 1 : 0 );
-        self::$config['login']['logo_image'] = ( isset( $s_ui[ 'logo_image' ][ 'src' ] ) ? $s_ui['logo_image']['src'] : STICKY_ASSETS . STICKY_LOGO . '-' . ( ( self::$config['login']['logo_color'] ) ? 'black' : 'white' ) . '.png' );
+        // self::$config['login']['logo_color'] = ( sticky_luminance( self::$config['login']['form_bg'] ) ? 1 : 0 );
+        // self::$config['login']['logo_image'] = ( isset( $s_ui[ 'logo_image' ][ 'src' ] ) ? $s_ui['logo_image']['src'] : STICKY_ASSETS . STICKY_LOGO . '-' . ( ( self::$config['login']['logo_color'] ) ? 'black' : 'white' ) . '.png' );
         // self::$config['login']['logo_svg']   = ( isset( $s_ui[ 'login_logo_svg_code' ] ) && $s_ui[ 'login_logo_svg_code' ] != '' ) ? base64_encode( stripslashes( $s_ui[ 'login_logo_svg_code' ] ) ) : ( ( $logo_color )
         //         ? 'PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJTdGlja3lMb2dvIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQwMy43MTFweCIgaGVpZ2h0PSIxMzMuNDEycHgiIHZpZXdCb3g9Ii05LjkxMiAyODYuMzM2IDQwMy43MTEgMTMzLjQxMiINCgkgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAtOS45MTIgMjg2LjMzNiA0MDMuNzExIDEzMy40MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGZpbGw9ImJsYWNrIj4NCjxwYXRoIGlkPSJTdGlja3lHZWFyIiBkPSJNMTE1LjU3NSwzNTMuMDQyYzAtMy41NDgtMC4zMTYtNy4wMi0wLjg5My0xMC40MDJsMy4xODEtOC44ODZjLTMuMDEyLTkuOTg1LTguMzAzLTE4Ljk3Ni0xNS4yNjYtMjYuMzgyDQoJbC05LjI0LTEuNjc5Yy01LjMzMi00LjQzOC0xMS40MjMtNy45OTItMTguMDUzLTEwLjQzN2wtNi4wNjQtNy4xNTFjLTQuODk3LTEuMTQ1LTkuOTk0LTEuNzctMTUuMjQtMS43N3MtMTAuMzQzLDAuNjI1LTE1LjI0LDEuNzcNCglsLTYuMDY0LDcuMTUxYy02LjYzLDIuNDQ0LTEyLjcyMSw1Ljk5OS0xOC4wNTMsMTAuNDM3bC05LjI0LDEuNjc5Yy02Ljk2Myw3LjQwNi0xMi4yNTQsMTYuMzk2LTE1LjI2NiwyNi4zODJsMy4xODEsOC44ODYNCgljLTAuNTc2LDMuMzgzLTAuODkzLDYuODU0LTAuODkzLDEwLjQwMmMwLDMuNTY3LDAuMzA5LDcuMDU4LDAuODczLDEwLjQ1OWwtMy4yMTEsOC45N2MyLjkyMSw5Ljg5MSw4LjA0LDE4LjgwMSwxNC44NDQsMjYuMTU1DQoJbDkuMTg2LDEuNjdjNS40NjgsNC42MDYsMTEuNzg5LDguMjY2LDE4Ljc0OSwxMC43MzFsNS45NzcsNy4wNDdjNC44NDYsMS4wODMsOS45MSwxLjY3NCwxNS4xNTgsMS42NzQNCgljNS4yNDYsMCwxMC4zNDMtMC42MjUsMTUuMjQtMS43N2w2LjA2NS03LjE1MWM2LjYyOS0yLjQ0NSwxMi43MTktNS45OTksMTguMDUxLTEwLjQzNmw5LjI0MS0xLjY4DQoJYzYuOTYzLTcuNDA2LDEyLjI1NC0xNi4zOTYsMTUuMjY2LTI2LjM4MmwtMy4xODEtOC44ODZDMTE1LjI1OSwzNjAuMDYyLDExNS41NzUsMzU2LjU5LDExNS41NzUsMzUzLjA0MnogTTIuNTk2LDM1My4wNDINCgljMC0yOC4zOTEsMjMuMDE2LTUxLjQwNSw1MS40MDUtNTEuNDA1YzMuNDc5LDAsNi44NzYsMC4zNSwxMC4xNjEsMS4wMDljLTUuNzEyLDQuNzA0LTcuODI0LDYuMTc0LTEwLjE2MSw3LjM0OA0KCWMtMi4yNTgsMS4xMzUtNS4wNDMsMS45MjgtNy45NzksMi43NTRjLTE4Ljg2NCwzLjcxNS0zMy4wOTMsMjAuMzQyLTMzLjA5Myw0MC4yOTVjMCwxOC4wNSwxMS4yMTcsMzMuMzc5LDI3LjU2NiwzOC44OQ0KCWMtMi45NDIsMi4yMzktNS40MDksNC43NDgtNy44NjUsNy44MDdjLTAuMDQ0LDAuMDU2LTAuMDcsMC4xMTUtMC4wODcsMC4xNzhDMTQuNTg1LDM5MS44NjIsMi41OTYsMzczLjkxMiwyLjU5NiwzNTMuMDQyeg0KCSBNMzYuMjQ4LDMzMy45ODNjLTAuMjIxLTcuNTY4LDYuMjQzLTkuMzE3LDEyLjk5NC0xMS4xMDVjMS41NTEtMC4yNDQsMy4xNC0wLjM3Miw0Ljc1OS0wLjM3MmMxNi44NjQsMCwzMC41MzUsMTMuNjcyLDMwLjUzNSwzMC41MzYNCgljMCw0LjcxNC0xLjA2OSw5LjE3OC0yLjk3NywxMy4xNjNDNzQuOTAxLDM0Ni4yODYsMzYuNjk4LDM0OS41MDcsMzYuMjQ4LDMzMy45ODN6IE03MS44NDMsMzcyLjU5M2MwLDcuOTItNy4zNzQsOS4yNzItMTMuMzcsMTAuNjU2DQoJYy0xLjQ2LDAuMjE0LTIuOTUyLDAuMzI5LTQuNDcyLDAuMzI5Yy0xNy4zNjQsMC0zMC41MzUtMTMuNjcyLTMwLjUzNS0zMC41MzZjMC00LjY2MiwxLjA0OS05LjA3OCwyLjkxNy0xMy4wMzENCglDMzIuNjQ2LDM2MC4wNDIsNzEuODQzLDM1NS4zMSw3MS44NDMsMzcyLjU5M3ogTTU0LjAwMSw0MDQuNDQ3Yy0zLjYzOSwwLTcuMTY4LTAuMzU3LTEwLjU2LTEuMDM3bDAsMA0KCWMzLjgwNC0zLjc1MSw5LjAyNy03LjI3OCwxNi4wMTEtOS42NTZjMy4wMjUtMC40LDUuOTQ3LTEuMTMsOC43MjgtMi4xNTJjMC4yMzEtMC4wMzgsNC44ODEtMi4wMzksNi4wNjMtMi44MTUNCgljMTIuNDM4LTcuMDYsMjAuODMtMjAuNDIxLDIwLjgzLTM1Ljc0NGMwLTE4LjE3Mi0xMS44MDEtMzMuNTg0LTI4LjE1Ni0zOC45OThjMi43OTYtMi4wNzQsNS4zNy00LjQzMyw4LjA2My03LjkzDQoJYzE3LjkyOSw4LjAyNywzMC40MjcsMjYuMDEzLDMwLjQyNyw0Ni45MjhDMTA1LjQwNiwzODEuNDMzLDgyLjM5Myw0MDQuNDQ3LDU0LjAwMSw0MDQuNDQ3eiIvPg0KPGcgaWQ9IlN1YnRpdGxlIiBvcGFjaXR5PSIwLjciPg0KCTxwYXRoIGQ9Ik0xNDQuODE1LDQwOC40NDdsLTAuODgzLTIuMzcyaC02LjAwNGwtMC44ODMsMi4zNzJoLTMuMzhsNS4zOTYtMTQuMDA1aDMuNzM4bDUuMzk2LDE0LjAwNUgxNDQuODE1eiBNMTQwLjkzMSwzOTcuNDI1DQoJCWwtMi4xODQsNi4wMjVoNC4zNjdMMTQwLjkzMSwzOTcuNDI1eiIvPg0KCTxwYXRoIGQ9Ik0xNTUuMzgsNDA4LjQ0N3YtMTQuMDA1aDUuNTIxYzQuMzg5LDAsNy40MzQsMi43OTMsNy40MzQsNi45OTJjMCw0LjI0MS0zLjA0NSw3LjAxMy03LjQxMiw3LjAxM0gxNTUuMzh6IE0xNjUuMjksNDAxLjQzNQ0KCQljMC0yLjQ1Ny0xLjUxMi00LjM2Ny00LjM2Ny00LjM2N2gtMi41NjJ2OC43NTZoMi41NEMxNjMuNjczLDQwNS44MjMsMTY1LjI5LDQwMy44MjgsMTY1LjI5LDQwMS40MzV6Ii8+DQoJPHBhdGggZD0iTTE4OC41MTUsNDA4LjQ0N3YtMTAuMDk5bC0zLjk0NywxMC4wOTloLTEuMzAybC0zLjk0Ny0xMC4wOTl2MTAuMDk5aC0yLjk4MXYtMTQuMDA1aDQuMTc4bDMuNDAyLDguNzU2bDMuNC04Ljc1Nmg0LjE5OQ0KCQl2MTQuMDA1SDE4OC41MTV6Ii8+DQoJPHBhdGggZD0iTTIwMC4xNzIsNDA4LjQ0N3YtMTQuMDA1aDIuOTgxdjE0LjAwNUgyMDAuMTcyeiIvPg0KCTxwYXRoIGQ9Ik0yMjEuNDY0LDQwOC40NDdsLTYuNjc3LTkuMTM0djkuMTM0aC0yLjk4MXYtMTQuMDA1aDMuMDY1bDYuNDg3LDguNzk4di04Ljc5OGgyLjk4MnYxNC4wMDVIMjIxLjQ2NHoiLz4NCgk8cGF0aCBkPSJNMjQ0LjI3MSw0MDguNDQ3di0xNC4wMDVoNi41NTFjMy4wNDQsMCw0LjcwMywyLjA1OSw0LjcwMyw0LjUxNWMwLDIuNDM2LTEuNjgsNC40OTMtNC43MDMsNC40OTNoLTMuNTY5djQuOTk3SDI0NC4yNzF6DQoJCSBNMjUyLjQ4MSwzOTguOTU3YzAtMS4xNzYtMC45MDMtMS44OS0yLjA3OS0xLjg5aC0zLjE0OXYzLjc1OGgzLjE0OUMyNTEuNTc4LDQwMC44MjUsMjUyLjQ4MSw0MDAuMTEyLDI1Mi40ODEsMzk4Ljk1N3oiLz4NCgk8cGF0aCBkPSJNMjcyLjk1Niw0MDguNDQ3bC0wLjg4My0yLjM3MmgtNi4wMDRsLTAuODgzLDIuMzcyaC0zLjM4bDUuMzk2LTE0LjAwNWgzLjczOGw1LjM5NiwxNC4wMDVIMjcyLjk1NnogTTI2OS4wNzEsMzk3LjQyNQ0KCQlsLTIuMTg0LDYuMDI1aDQuMzY3TDI2OS4wNzEsMzk3LjQyNXoiLz4NCgk8cGF0aCBkPSJNMjkzLjE3OSw0MDguNDQ3bC02LjY3Ny05LjEzNHY5LjEzNGgtMi45ODF2LTE0LjAwNWgzLjA2NWw2LjQ4Nyw4Ljc5OHYtOC43OThoMi45ODJ2MTQuMDA1SDI5My4xNzl6Ii8+DQoJPHBhdGggZD0iTTMwNC43MDksNDA4LjQ0N3YtMTQuMDA1aDkuOTF2Mi42MjVoLTYuOTI5djIuOTM5aDYuNzgxdjIuNjI1aC02Ljc4MXYzLjE5MWg2LjkyOXYyLjYyNEgzMDQuNzA5eiIvPg0KCTxwYXRoIGQ9Ik0zMjIuNzA2LDQwOC40NDd2LTE0LjAwNWgzLjAwMnYxMS4zODFoNS45MjJ2Mi42MjRIMzIyLjcwNnoiLz4NCjwvZz4NCjxnIGlkPSJUaXRsZSI+DQoJPHBhdGggaWQ9InkiIGQ9Ik0zNTAuMTk2LDM5OC40NDFsNC44OTktNy42YzMuNTAxLDQuMzk5LDkuMTAxLDYuMiwxNC42MDIsNi4yYzguNSwwLDEzLjYwMS00LjgwMSwxMy42MDEtMTMuNDAxdi01LjYNCgkJYy0zLjQsMy44LTkuNCw3LjYtMTcuMDAxLDcuNmMtMTAuNCwwLTE1LjYwMS01LjUtMTUuNjAxLTE1LjMwMXYtMzIuNjAyaDEwLjV2MjguNzAxYzAsNy41MDEsMy44MDEsOS45MDEsOS44MDEsOS45MDENCgkJYzUuMzAxLDAsOS45LTMuMTAxLDEyLjMwMS02LjMwMXYtMzIuMzAyaDEwLjUwMXY0NS45MDJjMCwxNC41MDEtMTAuMjAxLDIyLjAwMi0yNC4xMDIsMjIuMDAyDQoJCUMzNjEuNTk3LDQwNS42NDMsMzU1LjQ5Niw0MDMuMzQyLDM1MC4xOTYsMzk4LjQ0MXoiLz4NCgk8cGF0aCBpZD0iayIgZD0iTTMzMC4yNDksMzg2LjA0MWwtMTQuNzAxLTIwLjAwMWwtNi44LDd2MTMuMDAxaC0xMC41MDJ2LTY2LjcwNGgxMC41MDJ2NDEuNzAybDIxLjMwMS0yMy4zMDFoMTMuMDAxbC0yMC4wMDIsMjEuOTAxDQoJCWwyMC40MDEsMjYuNDAxSDMzMC4yNDl6Ii8+DQoJPHBhdGggaWQ9ImMiIGQ9Ik0yNDcuMDQ4LDM2MS44NGMwLTE0LjYwMiwxMC4zLTI1LjMwMiwyNC45MDEtMjUuMzAyYzkuNSwwLDE1LjEwMiw0LDE4LjUwMSw4LjYwMWwtNi45LDYuMw0KCQljLTIuNy0zLjgtNi40LTUuNi0xMS4xMDEtNS42Yy04LjcwMSwwLTE0LjYwMiw2LjYwMS0xNC42MDIsMTYuMDAxczUuOSwxNi4xMDEsMTQuNjAyLDE2LjEwMWM0LjcsMCw4LjQtMiwxMS4xMDEtNS44bDYuOSw2LjUNCgkJYy0zLjM5OSw0LjUtOS4wMDEsOC42MDEtMTguNTAxLDguNjAxQzI1Ny4zNDgsMzg3LjI0MSwyNDcuMDQ4LDM3Ni40NCwyNDcuMDQ4LDM2MS44NHoiLz4NCgk8cGF0aCBpZD0iaSIgZD0iTTIyOC4xNDgsMzI1LjMzN2MwLTMuNiwyLjktNi41LDYuNS02LjVjMy42MDEsMCw2LjUsMi45LDYuNSw2LjVjMCwzLjYwMS0yLjg5OSw2LjUwMS02LjUsNi41MDENCgkJQzIzMS4wNDksMzMxLjgzOCwyMjguMTQ4LDMyOC45MzgsMjI4LjE0OCwzMjUuMzM3eiBNMjI5LjM0OCwzODYuMDQxdi00OC4zMDNoMTAuNTAydjQ4LjMwM0gyMjkuMzQ4eiIvPg0KCTxwYXRoIGlkPSJ0IiBkPSJNMjAxLjA0OCwzNzQuNzR2LTI3LjkwMWgtOC4wMDF2LTkuMTAxaDguMDAxdi0xMy4yMDFoMTAuNTAxdjEzLjIwMWg5LjgwMXY5LjEwMWgtOS44MDF2MjUuMzAyDQoJCWMwLDMuMywxLjYsNS44LDQuNiw1LjhjMiwwLDMuODAxLTAuOSw0LjYwMS0xLjhsMi41MDEsOGMtMS45LDEuNy01LjAwMSwzLjEwMS05LjgwMSwzLjEwMQ0KCQlDMjA1LjI0OCwzODcuMjQxLDIwMS4wNDgsMzgyLjg0MSwyMDEuMDQ4LDM3NC43NHoiLz4NCgk8cGF0aCBpZD0icyIgZD0iTTEzMy41NSwzNzYuNjQxbDYuNi05LjEwMWM0LjUsNC45LDExLjgwMSw5LjMwMSwyMS4xMDIsOS4zMDFjOS42MDEsMCwxMy4zMDEtNC43LDEzLjMwMS05LjIwMQ0KCQljMC0xNC4wMDEtMzguODAyLTUuMy0zOC44MDItMjkuODAyYzAtMTEuMTAxLDkuNjAxLTE5LjYwMSwyNC4zMDEtMTkuNjAxYzEwLjMwMSwwLDE4LjgwMiwzLjM5OSwyNC45MDEsOS40bC02LjYsOC43DQoJCWMtNS4zMDEtNS4zLTEyLjQwMS03LjctMTkuNDAyLTcuN2MtNi44LDAtMTEuMjAxLDMuNC0xMS4yMDEsOC4zMDFjMCwxMi41LDM4LjgwMiw0LjgsMzguODAyLDI5LjYwMg0KCQljMCwxMS4xMDEtNy45LDIwLjcwMS0yNS44MDEsMjAuNzAxQzE0OC40NTEsMzg3LjI0MSwxMzkuNTUxLDM4Mi44NDEsMTMzLjU1LDM3Ni42NDF6Ii8+DQo8L2c+DQo8L3N2Zz4='
         //         : 'PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJTdGlja3lMb2dvIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQwMy43MTFweCIgaGVpZ2h0PSIxMzMuNDEycHgiIHZpZXdCb3g9Ii05LjkxMiAyODYuMzM2IDQwMy43MTEgMTMzLjQxMiINCgkgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAtOS45MTIgMjg2LjMzNiA0MDMuNzExIDEzMy40MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGZpbGw9IndoaXRlIj4NCjxwYXRoIGlkPSJTdGlja3lHZWFyIiBkPSJNMTE1LjU3NSwzNTMuMDQyYzAtMy41NDgtMC4zMTYtNy4wMi0wLjg5My0xMC40MDJsMy4xODEtOC44ODZjLTMuMDEyLTkuOTg1LTguMzAzLTE4Ljk3Ni0xNS4yNjYtMjYuMzgyDQoJbC05LjI0LTEuNjc5Yy01LjMzMi00LjQzOC0xMS40MjMtNy45OTItMTguMDUzLTEwLjQzN2wtNi4wNjQtNy4xNTFjLTQuODk3LTEuMTQ1LTkuOTk0LTEuNzctMTUuMjQtMS43N3MtMTAuMzQzLDAuNjI1LTE1LjI0LDEuNzcNCglsLTYuMDY0LDcuMTUxYy02LjYzLDIuNDQ0LTEyLjcyMSw1Ljk5OS0xOC4wNTMsMTAuNDM3bC05LjI0LDEuNjc5Yy02Ljk2Myw3LjQwNi0xMi4yNTQsMTYuMzk2LTE1LjI2NiwyNi4zODJsMy4xODEsOC44ODYNCgljLTAuNTc2LDMuMzgzLTAuODkzLDYuODU0LTAuODkzLDEwLjQwMmMwLDMuNTY3LDAuMzA5LDcuMDU4LDAuODczLDEwLjQ1OWwtMy4yMTEsOC45N2MyLjkyMSw5Ljg5MSw4LjA0LDE4LjgwMSwxNC44NDQsMjYuMTU1DQoJbDkuMTg2LDEuNjdjNS40NjgsNC42MDYsMTEuNzg5LDguMjY2LDE4Ljc0OSwxMC43MzFsNS45NzcsNy4wNDdjNC44NDYsMS4wODMsOS45MSwxLjY3NCwxNS4xNTgsMS42NzQNCgljNS4yNDYsMCwxMC4zNDMtMC42MjUsMTUuMjQtMS43N2w2LjA2NS03LjE1MWM2LjYyOS0yLjQ0NSwxMi43MTktNS45OTksMTguMDUxLTEwLjQzNmw5LjI0MS0xLjY4DQoJYzYuOTYzLTcuNDA2LDEyLjI1NC0xNi4zOTYsMTUuMjY2LTI2LjM4MmwtMy4xODEtOC44ODZDMTE1LjI1OSwzNjAuMDYyLDExNS41NzUsMzU2LjU5LDExNS41NzUsMzUzLjA0MnogTTIuNTk2LDM1My4wNDINCgljMC0yOC4zOTEsMjMuMDE2LTUxLjQwNSw1MS40MDUtNTEuNDA1YzMuNDc5LDAsNi44NzYsMC4zNSwxMC4xNjEsMS4wMDljLTUuNzEyLDQuNzA0LTcuODI0LDYuMTc0LTEwLjE2MSw3LjM0OA0KCWMtMi4yNTgsMS4xMzUtNS4wNDMsMS45MjgtNy45NzksMi43NTRjLTE4Ljg2NCwzLjcxNS0zMy4wOTMsMjAuMzQyLTMzLjA5Myw0MC4yOTVjMCwxOC4wNSwxMS4yMTcsMzMuMzc5LDI3LjU2NiwzOC44OQ0KCWMtMi45NDIsMi4yMzktNS40MDksNC43NDgtNy44NjUsNy44MDdjLTAuMDQ0LDAuMDU2LTAuMDcsMC4xMTUtMC4wODcsMC4xNzhDMTQuNTg1LDM5MS44NjIsMi41OTYsMzczLjkxMiwyLjU5NiwzNTMuMDQyeg0KCSBNMzYuMjQ4LDMzMy45ODNjLTAuMjIxLTcuNTY4LDYuMjQzLTkuMzE3LDEyLjk5NC0xMS4xMDVjMS41NTEtMC4yNDQsMy4xNC0wLjM3Miw0Ljc1OS0wLjM3MmMxNi44NjQsMCwzMC41MzUsMTMuNjcyLDMwLjUzNSwzMC41MzYNCgljMCw0LjcxNC0xLjA2OSw5LjE3OC0yLjk3NywxMy4xNjNDNzQuOTAxLDM0Ni4yODYsMzYuNjk4LDM0OS41MDcsMzYuMjQ4LDMzMy45ODN6IE03MS44NDMsMzcyLjU5M2MwLDcuOTItNy4zNzQsOS4yNzItMTMuMzcsMTAuNjU2DQoJYy0xLjQ2LDAuMjE0LTIuOTUyLDAuMzI5LTQuNDcyLDAuMzI5Yy0xNy4zNjQsMC0zMC41MzUtMTMuNjcyLTMwLjUzNS0zMC41MzZjMC00LjY2MiwxLjA0OS05LjA3OCwyLjkxNy0xMy4wMzENCglDMzIuNjQ2LDM2MC4wNDIsNzEuODQzLDM1NS4zMSw3MS44NDMsMzcyLjU5M3ogTTU0LjAwMSw0MDQuNDQ3Yy0zLjYzOSwwLTcuMTY4LTAuMzU3LTEwLjU2LTEuMDM3bDAsMA0KCWMzLjgwNC0zLjc1MSw5LjAyNy03LjI3OCwxNi4wMTEtOS42NTZjMy4wMjUtMC40LDUuOTQ3LTEuMTMsOC43MjgtMi4xNTJjMC4yMzEtMC4wMzgsNC44ODEtMi4wMzksNi4wNjMtMi44MTUNCgljMTIuNDM4LTcuMDYsMjAuODMtMjAuNDIxLDIwLjgzLTM1Ljc0NGMwLTE4LjE3Mi0xMS44MDEtMzMuNTg0LTI4LjE1Ni0zOC45OThjMi43OTYtMi4wNzQsNS4zNy00LjQzMyw4LjA2My03LjkzDQoJYzE3LjkyOSw4LjAyNywzMC40MjcsMjYuMDEzLDMwLjQyNyw0Ni45MjhDMTA1LjQwNiwzODEuNDMzLDgyLjM5Myw0MDQuNDQ3LDU0LjAwMSw0MDQuNDQ3eiIvPg0KPGcgaWQ9IlN1YnRpdGxlIiBvcGFjaXR5PSIwLjciPg0KCTxwYXRoIGQ9Ik0xNDQuODE1LDQwOC40NDdsLTAuODgzLTIuMzcyaC02LjAwNGwtMC44ODMsMi4zNzJoLTMuMzhsNS4zOTYtMTQuMDA1aDMuNzM4bDUuMzk2LDE0LjAwNUgxNDQuODE1eiBNMTQwLjkzMSwzOTcuNDI1DQoJCWwtMi4xODQsNi4wMjVoNC4zNjdMMTQwLjkzMSwzOTcuNDI1eiIvPg0KCTxwYXRoIGQ9Ik0xNTUuMzgsNDA4LjQ0N3YtMTQuMDA1aDUuNTIxYzQuMzg5LDAsNy40MzQsMi43OTMsNy40MzQsNi45OTJjMCw0LjI0MS0zLjA0NSw3LjAxMy03LjQxMiw3LjAxM0gxNTUuMzh6IE0xNjUuMjksNDAxLjQzNQ0KCQljMC0yLjQ1Ny0xLjUxMi00LjM2Ny00LjM2Ny00LjM2N2gtMi41NjJ2OC43NTZoMi41NEMxNjMuNjczLDQwNS44MjMsMTY1LjI5LDQwMy44MjgsMTY1LjI5LDQwMS40MzV6Ii8+DQoJPHBhdGggZD0iTTE4OC41MTUsNDA4LjQ0N3YtMTAuMDk5bC0zLjk0NywxMC4wOTloLTEuMzAybC0zLjk0Ny0xMC4wOTl2MTAuMDk5aC0yLjk4MXYtMTQuMDA1aDQuMTc4bDMuNDAyLDguNzU2bDMuNC04Ljc1Nmg0LjE5OQ0KCQl2MTQuMDA1SDE4OC41MTV6Ii8+DQoJPHBhdGggZD0iTTIwMC4xNzIsNDA4LjQ0N3YtMTQuMDA1aDIuOTgxdjE0LjAwNUgyMDAuMTcyeiIvPg0KCTxwYXRoIGQ9Ik0yMjEuNDY0LDQwOC40NDdsLTYuNjc3LTkuMTM0djkuMTM0aC0yLjk4MXYtMTQuMDA1aDMuMDY1bDYuNDg3LDguNzk4di04Ljc5OGgyLjk4MnYxNC4wMDVIMjIxLjQ2NHoiLz4NCgk8cGF0aCBkPSJNMjQ0LjI3MSw0MDguNDQ3di0xNC4wMDVoNi41NTFjMy4wNDQsMCw0LjcwMywyLjA1OSw0LjcwMyw0LjUxNWMwLDIuNDM2LTEuNjgsNC40OTMtNC43MDMsNC40OTNoLTMuNTY5djQuOTk3SDI0NC4yNzF6DQoJCSBNMjUyLjQ4MSwzOTguOTU3YzAtMS4xNzYtMC45MDMtMS44OS0yLjA3OS0xLjg5aC0zLjE0OXYzLjc1OGgzLjE0OUMyNTEuNTc4LDQwMC44MjUsMjUyLjQ4MSw0MDAuMTEyLDI1Mi40ODEsMzk4Ljk1N3oiLz4NCgk8cGF0aCBkPSJNMjcyLjk1Niw0MDguNDQ3bC0wLjg4My0yLjM3MmgtNi4wMDRsLTAuODgzLDIuMzcyaC0zLjM4bDUuMzk2LTE0LjAwNWgzLjczOGw1LjM5NiwxNC4wMDVIMjcyLjk1NnogTTI2OS4wNzEsMzk3LjQyNQ0KCQlsLTIuMTg0LDYuMDI1aDQuMzY3TDI2OS4wNzEsMzk3LjQyNXoiLz4NCgk8cGF0aCBkPSJNMjkzLjE3OSw0MDguNDQ3bC02LjY3Ny05LjEzNHY5LjEzNGgtMi45ODF2LTE0LjAwNWgzLjA2NWw2LjQ4Nyw4Ljc5OHYtOC43OThoMi45ODJ2MTQuMDA1SDI5My4xNzl6Ii8+DQoJPHBhdGggZD0iTTMwNC43MDksNDA4LjQ0N3YtMTQuMDA1aDkuOTF2Mi42MjVoLTYuOTI5djIuOTM5aDYuNzgxdjIuNjI1aC02Ljc4MXYzLjE5MWg2LjkyOXYyLjYyNEgzMDQuNzA5eiIvPg0KCTxwYXRoIGQ9Ik0zMjIuNzA2LDQwOC40NDd2LTE0LjAwNWgzLjAwMnYxMS4zODFoNS45MjJ2Mi42MjRIMzIyLjcwNnoiLz4NCjwvZz4NCjxnIGlkPSJUaXRsZSI+DQoJPHBhdGggaWQ9InkiIGQ9Ik0zNTAuMTk2LDM5OC40NDFsNC44OTktNy42YzMuNTAxLDQuMzk5LDkuMTAxLDYuMiwxNC42MDIsNi4yYzguNSwwLDEzLjYwMS00LjgwMSwxMy42MDEtMTMuNDAxdi01LjYNCgkJYy0zLjQsMy44LTkuNCw3LjYtMTcuMDAxLDcuNmMtMTAuNCwwLTE1LjYwMS01LjUtMTUuNjAxLTE1LjMwMXYtMzIuNjAyaDEwLjV2MjguNzAxYzAsNy41MDEsMy44MDEsOS45MDEsOS44MDEsOS45MDENCgkJYzUuMzAxLDAsOS45LTMuMTAxLDEyLjMwMS02LjMwMXYtMzIuMzAyaDEwLjUwMXY0NS45MDJjMCwxNC41MDEtMTAuMjAxLDIyLjAwMi0yNC4xMDIsMjIuMDAyDQoJCUMzNjEuNTk3LDQwNS42NDMsMzU1LjQ5Niw0MDMuMzQyLDM1MC4xOTYsMzk4LjQ0MXoiLz4NCgk8cGF0aCBpZD0iayIgZD0iTTMzMC4yNDksMzg2LjA0MWwtMTQuNzAxLTIwLjAwMWwtNi44LDd2MTMuMDAxaC0xMC41MDJ2LTY2LjcwNGgxMC41MDJ2NDEuNzAybDIxLjMwMS0yMy4zMDFoMTMuMDAxbC0yMC4wMDIsMjEuOTAxDQoJCWwyMC40MDEsMjYuNDAxSDMzMC4yNDl6Ii8+DQoJPHBhdGggaWQ9ImMiIGQ9Ik0yNDcuMDQ4LDM2MS44NGMwLTE0LjYwMiwxMC4zLTI1LjMwMiwyNC45MDEtMjUuMzAyYzkuNSwwLDE1LjEwMiw0LDE4LjUwMSw4LjYwMWwtNi45LDYuMw0KCQljLTIuNy0zLjgtNi40LTUuNi0xMS4xMDEtNS42Yy04LjcwMSwwLTE0LjYwMiw2LjYwMS0xNC42MDIsMTYuMDAxczUuOSwxNi4xMDEsMTQuNjAyLDE2LjEwMWM0LjcsMCw4LjQtMiwxMS4xMDEtNS44bDYuOSw2LjUNCgkJYy0zLjM5OSw0LjUtOS4wMDEsOC42MDEtMTguNTAxLDguNjAxQzI1Ny4zNDgsMzg3LjI0MSwyNDcuMDQ4LDM3Ni40NCwyNDcuMDQ4LDM2MS44NHoiLz4NCgk8cGF0aCBpZD0iaSIgZD0iTTIyOC4xNDgsMzI1LjMzN2MwLTMuNiwyLjktNi41LDYuNS02LjVjMy42MDEsMCw2LjUsMi45LDYuNSw2LjVjMCwzLjYwMS0yLjg5OSw2LjUwMS02LjUsNi41MDENCgkJQzIzMS4wNDksMzMxLjgzOCwyMjguMTQ4LDMyOC45MzgsMjI4LjE0OCwzMjUuMzM3eiBNMjI5LjM0OCwzODYuMDQxdi00OC4zMDNoMTAuNTAydjQ4LjMwM0gyMjkuMzQ4eiIvPg0KCTxwYXRoIGlkPSJ0IiBkPSJNMjAxLjA0OCwzNzQuNzR2LTI3LjkwMWgtOC4wMDF2LTkuMTAxaDguMDAxdi0xMy4yMDFoMTAuNTAxdjEzLjIwMWg5LjgwMXY5LjEwMWgtOS44MDF2MjUuMzAyDQoJCWMwLDMuMywxLjYsNS44LDQuNiw1LjhjMiwwLDMuODAxLTAuOSw0LjYwMS0xLjhsMi41MDEsOGMtMS45LDEuNy01LjAwMSwzLjEwMS05LjgwMSwzLjEwMQ0KCQlDMjA1LjI0OCwzODcuMjQxLDIwMS4wNDgsMzgyLjg0MSwyMDEuMDQ4LDM3NC43NHoiLz4NCgk8cGF0aCBpZD0icyIgZD0iTTEzMy41NSwzNzYuNjQxbDYuNi05LjEwMWM0LjUsNC45LDExLjgwMSw5LjMwMSwyMS4xMDIsOS4zMDFjOS42MDEsMCwxMy4zMDEtNC43LDEzLjMwMS05LjIwMQ0KCQljMC0xNC4wMDEtMzguODAyLTUuMy0zOC44MDItMjkuODAyYzAtMTEuMTAxLDkuNjAxLTE5LjYwMSwyNC4zMDEtMTkuNjAxYzEwLjMwMSwwLDE4LjgwMiwzLjM5OSwyNC45MDEsOS40bC02LjYsOC43DQoJCWMtNS4zMDEtNS4zLTEyLjQwMS03LjctMTkuNDAyLTcuN2MtNi44LDAtMTEuMjAxLDMuNC0xMS4yMDEsOC4zMDFjMCwxMi41LDM4LjgwMiw0LjgsMzguODAyLDI5LjYwMg0KCQljMCwxMS4xMDEtNy45LDIwLjcwMS0yNS44MDEsMjAuNzAxQzE0OC40NTEsMzg3LjI0MSwxMzkuNTUxLDM4Mi44NDEsMTMzLjU1LDM3Ni42NDF6Ii8+DQo8L2c+DQo8L3N2Zz4='
@@ -812,26 +867,27 @@ class StickyAdmin {
      */
     public static function body_classes() {
         self::$config['adminbar']['classes_string'] = 
-             ' hl-' . ( sticky_luminance( self::$config['hl_colors'][0] ) ? 'b' : 'w' )
-           . ' wpab-' . ( sticky_luminance( self::$config['colors']['adminbar'] ) ? 'b' : 'w' )
-           . ' wpab-t-' . ( sticky_luminance( self::$config['colors']['adminbar_tooltip'] ) ? 'b' : 'w' )
-           . ' wpab-' . self::$config['adminbar']['state']
-           . ' wpab-sub-' . ( sticky_luminance( self::$config['colors']['adminbar_submenu'] ) ? 'b' : 'w' )
-           . ' wpab-badges-' . ( sticky_luminance( self::$config['colors']['adminbar_hl'] ) ? 'b' : 'w' );
+             ' wpab-'       . self::$config['adminbar']['state']
+           . ' wpab-'       . self::$config['colors']['adminbar']['color']
+           . ' wpab-t-'     . self::$config['colors']['adminbar']['tooltips']['color']
+           . ' wpab-sub-'   . self::$config['colors']['adminbar']['submenu']['color']
+           . ' wpab-hl-'    . self::$config['colors']['adminbar']['hl_color'];
 
         // Admin Body Classes
         self::$config['classes_string'] = ' sticky-admin is_loading'
            . self::$config['adminbar']['classes_string']
-           . ' content-' . ( sticky_luminance( self::$config['colors']['content'] ) ? 'b' : 'w' )
-           . ' tip-' . ( sticky_luminance( self::$config['colors']['tooltip'] ) ? 'b' : 'w' )
-           . ' header-' . ( sticky_luminance( self::$config['colors']['header'] ) ? 'b' : 'w' )
-           . ' menu-' . ( sticky_luminance( self::$config['colors']['adminmenu'] ) ? 'b' : 'w' )
-           . ' menu-' . self::$config['adminmenu']['position']
-           . ' menu-h-' . ( sticky_luminance( self::$config['colors']['adminmenu_handle'] ) ? 'b' : 'w' )
-           . ' menu-sub-' . ( sticky_luminance( self::$config['colors']['adminmenu_submenu'] ) ? 'b' : 'w' )
-           . ' menu-badges-' . ( sticky_luminance( self::$config['colors']['adminmenu_hl'] ) ? 'b' : 'w' )
+           . ' content-'    . self::$config['colors']['content']['color']
+           . ' content-hl-' . self::$config['colors']['content']['hl_color'] 
+           . ' tip-'        . self::$config['colors']['content']['tooltips']['color']
+           . ' header-'     . self::$config['colors']['header']['color']
+           . ' header-hl-'  . self::$config['colors']['header']['hl_color']
+           . ' menu-'       . self::$config['colors']['adminmenu']['color']
+           . ' menu-hl-'    . self::$config['colors']['adminmenu']['hl_color']
+           . ' menu-'       . self::$config['adminmenu']['position']
+           . ' menu-h-'     . self::$config['colors']['adminmenu']['handle']['bg']
+           . ' menu-sub-'   . self::$config['colors']['adminmenu']['submenu']['color']
            . ( ! empty( self::$config['adminmenu']['grid_on'] ) ? ' ' . self::$config['adminmenu']['grid_on'] : '' )
-           . ' footer-' . ( sticky_luminance( self::$config['colors']['footer'] ) ? 'b' : 'w' )
+           . ' footer-'     . self::$config['colors']['footer']['color']
            . ( self::$config['header']['sticky'] ? ' header-sticky' : '' )
            . ( self::$config['header']['type'] == 'minimized' ? ' header-small' : '' );
             
@@ -842,63 +898,104 @@ class StickyAdmin {
 
     /**
      *
-     * Generates the HIGHLIGHT colors 
+     * Generates the colors 
      * -----------------------
-     * based on background colors choices.
+     * (recursive)
      *
      * @since 1.0.5
      * @author Dorian Tudorache
      *
      */
-    public static function generate_highlight_colors() {
-        $color_step = 5; // on HSV scale (360deg), colors increase/decrease by this ammount (deg).
-        // Generate highlight colors
-        $get_hl_color = ( isset ( $s_ui[ 'highlight_color' ] ) ? $s_ui[ 'highlight_color' ] : '#FFFFFF' );
-        $get_hl_color2 = ( isset ( $s_ui[ 'content_bg' ] ) ? sticky_adjust_hl_color( $s_ui[ 'content_bg' ], - $color_step, 0, 0, true ) : '#FFFFFF' );
-        // print_r('HL1: ' . $get_hl_color . ', HL2: ' . $get_hl_color2 );
-        $get_hl_color2 = sticky_compare_correct( $get_hl_color, $get_hl_color2, $color_step * 2 );
+    public static function generate_colors( &$node ) {
+        // error_reporting(0);
+        $color_step = 15; // on HSV scale (360deg), colors increase/decrease by this ammount (deg).
+        foreach ( $node as $key => &$elem ) {
+            if ( is_array( $elem ) && ! empty( $elem ) && array_key_exists( 'bg', $elem ) ) {
+                if ( array_key_exists( 'hl', $elem ) && empty( $elem['hl'] ) ) {
+                    $test = sticky_compare_correct( self::$config['colors']['highlight']['bg'], $elem['bg'], $color_step );
 
-        if ( strpos( self::$config['footer']['copyright'], 'Donate!' ) !== false ) {
-            self::$config['footer']['copyright'] = str_replace( 'Donate!', '<a href="'. self::$config['donate_link'].'">Donate!</a>', self::$config['footer']['copyright'] );
+                    switch ( $key ) {
+                        // Highlight colors for the header
+                        case 'header':
+                            $elem['hl'] = array(
+                                sticky_make_hl_color( $test, 0 ),
+                                sticky_make_hl_color( $test, - $color_step ),
+                                sticky_make_hl_color( $test, $color_step ),
+                                sticky_make_hl_color( $test, - $color_step * 2 ),
+                                sticky_make_hl_color( $test, $color_step * 2 ),
+                                sticky_make_hl_color( $test, - $color_step * 3 )
+                            );
+                            $elem['bg'] = array(
+                                $elem['bg'],
+                                sticky_adjust_hl_color( $elem['bg'], $color_step )
+                            );
+                            break;
+
+                        // Highlight colors for the nav
+                        case 'adminmenu':
+                            $elem['hl'] = array(
+                                sticky_make_hl_color( $test, 0 ),
+                                sticky_make_hl_color( $test, $color_step ),
+                            );
+                            break;
+
+                        // Highlight colors for all other elements
+                        default: 
+                            $elem['hl'] = sticky_make_hl_color( $test, 0 );
+                            break;
+                    }
+                    // One interpretation is enough here
+                    $elem['hl_color'] = ( !is_array( $elem['hl'] ) ? ( sticky_luminance( $elem['hl'] ) ? 'b' : 'w' ) : ( sticky_luminance( $elem['hl'][0] ) ? 'b' : 'w' ) );
+                }   
+
+                if ( array_key_exists( 'color', $elem ) ) {
+                    $elem['color'] = ( !is_array( $elem['bg'] ) ? ( sticky_luminance( $elem['bg'] ) ? 'b' : 'w' ) : ( sticky_luminance( $elem['bg'][0] ) ? 'b' : 'w' ) );
+                }
+
+
+                self::generate_colors( $node[$key] );
+            }
         }
+    }
 
-        self::$config['hl_colors'] = array(
-            sticky_make_hl_color( $get_hl_color, 0 ),
-            sticky_make_hl_color( $get_hl_color, - $color_step ),
-            sticky_make_hl_color( $get_hl_color, $color_step ),
-            sticky_make_hl_color( $get_hl_color, - ( $color_step * 2) ),
-            sticky_make_hl_color( $get_hl_color, $color_step * 2 )
-        );
-        self::$config['hl_colors2'] = array(
-            sticky_make_hl_color( $get_hl_color2, 0 ),
-            sticky_make_hl_color( $get_hl_color2, - $color_step ),
-            sticky_make_hl_color( $get_hl_color2, $color_step ),
-        );
+        // // Dashboard Maps
+        // self::$config['colors']['dash_maps'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 0, 15 );
+        // self::$config['colors']['dash_maps_bg'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 5, -5 );
 
+        // // Highlighter Colors Adjustments
 
-        // Dashboard Maps
-        self::$config['colors']['dash_maps'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 0, 15 );
-        self::$config['colors']['dash_maps_bg'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 5, -5 );
-
-        // Highlighter Colors Adjustments
-
-        // AdminMenu
-        self::$config['colors']['adminmenu_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'nav_hl' ] ) ? $s_ui[ 'nav_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminmenu' );
-        self::$config['colors']['adminmenu_hltwo'] = sticky_adjust_hl_color( self::$config['hl_colors'][0], 0, 0, 0, 1, 'adminmenu' );
+        // // AdminMenu
+        // self::$config['colors']['adminmenu_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'nav_hl' ] ) ? $s_ui[ 'nav_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminmenu' );
+        // self::$config['colors']['adminmenu_hltwo'] = sticky_adjust_hl_color( self::$config['hl_colors'][0], 0, 0, 0, 1, 'adminmenu' );
         
-        // Adminbar
-        self::$config['colors']['adminbar_submenu_top'] = sticky_adjust_hl_color( self::$config['colors']['adminbar_submenu'], 0, 0, -15 );
-        self::$config['colors']['adminbar_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'wpadminbar_hl' ] ) ? $s_ui[ 'wpadminbar_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminbar' );
+        // // Adminbar
+        // self::$config['colors']['adminbar_submenu_top'] = sticky_adjust_hl_color( self::$config['colors']['adminbar_submenu'], 0, 0, -15 );
+        // self::$config['colors']['adminbar_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'wpadminbar_hl' ] ) ? $s_ui[ 'wpadminbar_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminbar' );
 
-        // Header Gradient Color - Increases HUE by color_step
-        self::$config['colors']['header_grad'] = sticky_adjust_hl_color( self::$config['colors']['header'], 35 );
+        // // Header Gradient Color - Increases HUE by color_step
+        // self::$config['colors']['header_grad'] = s
 
-        // If the footer and header have the same colors, make the footer color the sec gradient header color
-        if ( self::$config['colors']['header'] == self::$config['colors']['footer'] )
-            self::$config['colors']['footer'] = self::$config['colors']['header_grad'];
+        // // If the footer and header have the same colors, make the footer color the sec gradient header color
+        // if ( self::$config['colors']['header'] == self::$config['colors']['footer'] )
+        //     self::$config['colors']['footer'] = self::$config['colors']['header_grad'];
 
-        // Unused variables
-        unset( $get_hl_color, $color_step );
+        // // Unused variables
+        // unset( $get_hl_color, $color_step );
+    
+
+    /**
+     *
+     * Checks for the 'donate' in the footer.
+     * -----------------------
+     *
+     * @since 1.0.5
+     * @author Dorian Tudorache
+     *
+     */
+    public static function sticky_has_footer_donate() {
+        if ( strpos( self::$config['footer']['copyright'], 'Donate!' ) !== false ) 
+            return true;
+        return false;
     }
 
     /**
@@ -923,6 +1020,7 @@ class StickyAdmin {
             wp_schedule_event( '1111111111', 'daily', 'sticky_stats_purge' );
         }
         self::sticky_create_capabilities();
+        chmod( STICKY_CACHE_URI, 0755 );
         return true;
     }
     
@@ -1162,6 +1260,9 @@ class StickyAdmin {
     public static function sticky_generate_css( $data, $blogid = 1 ) {
         // This function is not needed on login / register page.
         if ( in_array( $GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php') ) ) return;
+
+        if ( ! is_writeable(STICKY_CACHE_URI) )
+            return;
         
         $cache_file = 'sticky-' . self::$current_blog_id . '.css';
 
@@ -1196,7 +1297,7 @@ class StickyAdmin {
      *
      * Enqueue Scripts
      *
-     * @since 1.0
+     * @since 1.0.0
      * @author Dorian Tudorache
      *
      */
@@ -1211,7 +1312,7 @@ class StickyAdmin {
      * 
      * Change the HTML structure of the Format DIV
      *
-     * @since 1.0
+     * @since 1.0.0
      * @author Dorian Tudorache
      *
      */
@@ -1222,11 +1323,12 @@ class StickyAdmin {
             add_meta_box( 'formatdiv', _x( 'Format', 'post format' ), array( 'StickyAdmin', 'sticky_post_format_meta_box' ), $screen, 'side', 'default' );
         }
     }
+
     /**
      *
      * Deregister all (default) styles used by WordPress.
      *
-     * @since 1.0
+     * @since 1.0.0
      * @author Dorian Tudorache
      *
      */
@@ -1234,14 +1336,14 @@ class StickyAdmin {
         apply_filters( 'mce_css', STICKY_CSS . 'sticky-editor-style.css' );
         // Add The Custom Editor Style
         remove_editor_styles();
-        add_editor_style( STICKY_CSS . 'sticky-editor-style-' . ( sticky_luminance( self::$config['colors']['content'] ) ? 'black' : 'white' )  . '.css' );
+        add_editor_style( STICKY_CSS . 'sticky-editor-style-' . self::$config['colors']['content']['color'] . '.css' );
     }
 
     /**
      *
      * Checks for AJAX request
      *
-     * @since 1.0
+     * @since 1.0.5
      * @author Dorian Tudorache
      *
      */
@@ -1250,12 +1352,13 @@ class StickyAdmin {
             return true;
         return false;
     }
+
     /**
      *
      * Deregister the styles the login pages uses,
      * enqueue jQuery as this is the right place to do it.
      *
-     * @since 1.0
+     * @since 1.0.0
      * @author Dorian Tudorache
      *
      */
@@ -1264,6 +1367,7 @@ class StickyAdmin {
         wp_dequeue_style( 'login' );
         wp_enqueue_script( 'jquery' );
     }
+
     /** 
      * BuddyPress also adds it's own stylesheets,
      * these also should not be loaded at all!
@@ -1276,6 +1380,7 @@ class StickyAdmin {
         wp_dequeue_style ( 'bp-admin-bar' );
         wp_dequeue_style ( 'bp-admin-bar-rtl' );
     }
+
     /** 
      *
      * WordPress adds some inline CSS for the adminbar,
@@ -1288,6 +1393,7 @@ class StickyAdmin {
     public static function sticky_wpab_remove_inline_css() {
         remove_action( 'wp_head', '_admin_bar_bump_cb' );
     }
+
     /** 
      *
      * Removes items in the admin bar.
@@ -1419,20 +1525,14 @@ class StickyAdmin {
      *
      */
     public static function sticky_update_ui_icons( $which ) {
-        // if ( $new_icons == '' || $which == '' ) return;
         $request = 's_'. $which .'_icons';
-        // print_r('gg:'.$request);
         $request = ( isset( $_REQUEST[ $request ] ) ) ? $_REQUEST[ $request ] : false ;
-        // print_r($request);
         $get_icons = array();
         $transient_name = self::$current_blog_id . '_sticky_'. $which .'_icons';
         $previous_icons = ( get_transient( $transient_name ) ) ? (array) get_transient( $transient_name ) : self::$config['default_icons'][$which];
 
-        if ( $request ) {
-            // print_r($request);
+        if ( $request ) 
             $get_icons = (array) json_decode( stripslashes( preg_replace('/\x{FEFF}/u', '', $request ) ) );
-            // print_r($get_icons);
-        }
     
         set_transient( $transient_name,  array_merge( $previous_icons, $get_icons ) );
     }
@@ -1454,7 +1554,6 @@ class StickyAdmin {
             }
         }
         
-
         // Dyanimc CSS and other stuff
         if ( isset( $_REQUEST['sticky_new_values'] ) && ! empty( $_REQUEST['sticky_new_values'] ) ) {
             $new_values = json_decode( stripslashes( preg_replace('/\x{FEFF}/u', '', $_REQUEST['sticky_new_values'] ) ) );
@@ -1463,8 +1562,6 @@ class StickyAdmin {
 
         if ( isset( $_REQUEST['sticky_update_options'] ) && ! empty( $_REQUEST['sticky_update_options'] ) )
             self::sticky_setup_options( get_option('sticky_options') );
-
-        // print_r( get_option('sticky_options') );
 
         require( STICKY_INCLUDES_URI . '/sticky_ajax_css.php' );
         exit;
@@ -1588,7 +1685,6 @@ class StickyAdmin {
      */
     public static function sticky_theme_image( $theme_name ) {
         global $grab_data, $sticky_themes_images;
-        // print_r($sticky_themes_images);
     
         if ( ! isset( $grab_data[ 'dash_image' ] ) && ! isset ( $grab_data[ 'dash_image' ][ 'src' ] ) ) {
             if ( ! empty( $sticky_themes_images[ $theme_name ] ) )
@@ -1697,8 +1793,9 @@ class StickyAdmin {
      *
      */
     public static function sticky_wp_admin_footer() {
-        return self::$config['footer']['copyright'];
+        return ( self::sticky_has_footer_donate() ? str_replace( 'Donate!', '<a href="'. self::$config['donate_link'].'">Donate!</a>', self::$config['footer']['copyright'] ) : self::$config['footer']['copyright'] );
     }
+
     /**
      *
      * Set the WP Admin Bar State based on cookie value.
@@ -1814,7 +1911,7 @@ class StickyAdmin {
     public static function sticky_login_classes( $classes ) {
         $classes[] = 'is_loading';
         $classes[] = 'no-js';
-        $classes[] = ( sticky_luminance( self::$config['login']['form_bg'] ) ? 'login-w' : 'login-b' );
+        $classes[] = ( sticky_luminance( self::$config['login']['form']['bg'] ) ? 'login-w' : 'login-b' );
         return $classes;
     }
 
@@ -1842,6 +1939,7 @@ class StickyAdmin {
         if ( $logo_url = esc_url ( $grab_data[ 'login_logo_link' ] ) )
             return $logo_url;
     }
+
     /** 
      *
      * CSS for the Login Page

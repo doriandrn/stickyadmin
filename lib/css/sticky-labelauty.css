@@ -59,10 +59,8 @@ input.labelauty + label > span.labelauty-checked {
 input.labelauty + label > span.labelauty-unchecked-image,
 input.labelauty + label > span.labelauty-checked-image {
     display: inline-block;
-    text-align:center;
+    text-align: center;
     vertical-align: top;
-    background-repeat: no-repeat;
-    background-position: left center;
 }
 /* When there's a label, add a little margin to the left */
 

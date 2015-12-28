@@ -61,7 +61,7 @@ class StickyStats extends StickyAdmin
         require_once STICKY_CLASSES_URI . '/vendor/geolite/Db/Reader/Metadata.php';
         require_once STICKY_CLASSES_URI . '/vendor/geolite/Db/Reader/Util.php'; 
         
-        self::$vendors['browser'] = new Browser($_SERVER['HTTP_USER_AGENT']);
+        self::$vendors['browser'] = new BrowserTest($_SERVER['HTTP_USER_AGENT']);
         self::$vendors['device'] = new Mobile_Detect();
 
         // Add the server and client-side tracker

@@ -74,7 +74,7 @@ if ( !function_exists( 'add_action' ) )
 
         unset ( $to_deregister, $to_dequeue );
 
-        if ( StickyAdmin::$config['dev']['cache_css'] ) {
+        if ( StickyAdmin::$config['dev']['cache_css'] && is_writeable( STICKY_CSS_URI ) ) {
             // Clone the existing object as other styles may be also enqueued by themes and plugins, direct manipulation of $wp_styles is not a viable solution.
             $sticky_styles = wp_clone( $wp_styles );
             
@@ -128,6 +128,7 @@ if ( !function_exists( 'add_action' ) )
 
             // Generate the minified admin.css file on Sticky first run
             $blogid = get_current_blog_id();
+
             if ( ! file_exists( STICKY_CSS_URI . 'sticky-minified.css' ) || sticky_has_changed( $blogid ) ) {
                 $content = '';
 
@@ -340,40 +341,40 @@ if ( !function_exists( 'add_action' ) )
         return minify_css('
             #wpadminbar,
             #wpadminbar #sticky_toggle button {
-                background:'. StickyAdmin::$config['colors']['adminbar'] .'!important;
+                background:'. StickyAdmin::$config['colors']['adminbar']['bg'] .'!important;
             }
             #wpadminbar .menupop .ab-sub-wrapper {
-                background:'. StickyAdmin::$config['colors']['adminbar_submenu'] .';
+                background:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'] .';
             }
             #wpadminbar #wp-admin-bar-user-actions,
             #wpadminbar .menupop .ab-sub-wrapper .menupop .ab-sub-wrapper,
             #wpadminbar .quicklinks > ul > li .ab-sub-wrapper ul li.sticky-menu-head {
-                background:'. StickyAdmin::$config['colors']['adminbar_submenu_top'] .';
+                background:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'] .';
             }
             #wp-admin-bar-bp-notifications .count, #wp-admin-bar-comments .ab-label, #wp-admin-bar-updates .ab-label {
-                border: 2px solid '. StickyAdmin::$config['colors']['adminbar'] .';
+                border: 2px solid '. StickyAdmin::$config['colors']['adminbar']['bg'] .';
             }
             #wpadminbar ul.ab-top-secondary ul.ab-submenu .menupop .ab-sub-wrapper:after {
-                border-left-color:'. StickyAdmin::$config['colors']['adminbar_submenu_top'] .';
+                border-left-color:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'][1] .';
             }
             #wpadminbar .menupop .ab-sub-wrapper:before {
-                border-bottom-color:'. StickyAdmin::$config['colors']['adminbar_submenu_top'] .'!important;
+                border-bottom-color:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'][1] .'!important;
             }
             #wpadminbar .quicklinks > ul > li .ab-sub-wrapper ul li.sticky-menu-head:after {
-                border-top-color:'. StickyAdmin::$config['colors']['adminbar_submenu_top'] .'!important;
+                border-top-color:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'][1] .'!important;
             }
             .sticky_wpab.qtip,
             .sticky_wpab.qtip-default {
-                background: rgba(' . hex2rgb( StickyAdmin::$config['colors']['adminbar_tooltip'] ) . ', .95)!important;
+                background:'. StickyAdmin::$config['colors']['adminbar']['tooltips']['bg'] . '!important;
             }
             .sticky_wpab.qtip:after,
             .sticky_wpab.qtip-default:after {
-                border-bottom-color: rgba(' . hex2rgb( StickyAdmin::$config['colors']['adminbar_tooltip'] ) . ', .95)!important;
+                border-bottom-color:'. StickyAdmin::$config['colors']['adminbar']['tooltips']['bg'] .'!important;
             }
             #wp-admin-bar-bp-notifications .count,
             #wp-admin-bar-comments .ab-label,
             #wp-admin-bar-updates .ab-label {
-                background:'. StickyAdmin::$config['colors']['adminbar_hl'] .';
+                background:'. StickyAdmin::$config['colors']['adminbar']['hl'] .';
             }
         ');
     }
@@ -436,13 +437,13 @@ if ( !function_exists( 'add_action' ) )
             #postdivrich .switch-tmce:before,
             #postdivrich .switch-tmce:after
             {
-                background: ' . StickyAdmin::$config['colors']['content'] . ' ;
+                background: ' . StickyAdmin::$config['colors']['content']['bg'] . ' ;
             }
             ::-webkit-scrollbar-track {
-                background:' . StickyAdmin::$config['colors']['scrollbar_rail'] . ';
+                background:' . StickyAdmin::$config['colors']['content']['scroll']['rail'] . ';
             }
             ::-webkit-scrollbar-thumb {
-                background-color: '. StickyAdmin::$config['colors']['scrollbar'] . ';
+                background-color: '. StickyAdmin::$config['colors']['content']['scroll']['bg'] . ';
             }
             #adminmenumain,
             #sidemenu,
@@ -450,59 +451,59 @@ if ( !function_exists( 'add_action' ) )
             #adminmenuwrap .menu_settings,
             .panel_menu,
             body:not(.grid_menu) #adminmenu .wp-submenu {
-                background:'. StickyAdmin::$config['colors']['adminmenu'] . '!important;
+                background:'. StickyAdmin::$config['colors']['adminmenu']['bg'] . '!important;
             }
             #adminmenu .awaiting-mod, #adminmenu span.update-plugins, 
             #sidemenu li a span.update-plugins {
-                border:2px solid ' . StickyAdmin::$config['colors']['adminmenu'] . ';
+                border:2px solid ' . StickyAdmin::$config['colors']['adminmenu']['bg'] . ';
             }
             #adminmenu .awaiting-mod, 
             #adminmenu span.update-plugins, 
             #sidemenu li a span.update-plugins {
-                background-color:' . StickyAdmin::$config['colors']['adminmenu_hl'] . '!important;
+                background-color:' . StickyAdmin::$config['colors']['adminmenu']['hl'][0] . '!important;
             }
             #adminmenu li.menu-top-open > a .wp-menu-image:before,
             #adminmenu li.opensub > a .wp-menu-image:before,
             #adminmenu li.current > a .wp-menu-image:before,
             #adminmenu li.wp-has-current-submenu > a .wp-menu-image:before {
-                color:' . StickyAdmin::$config['colors']['adminmenu_hl']. '!important;
+                color:' . StickyAdmin::$config['colors']['adminmenu']['hl'][0] . '!important;
             }
             #sticky_icon_picker {
-                background:'. StickyAdmin::$config['colors']['adminbar_submenu_top'] .';
+                background:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'][1] .';
             }
             #sticky_icon_picker:before {
-                border-bottom-color: ' . StickyAdmin::$config['colors']['adminbar_submenu_top'] . '!important; 
+                border-bottom-color: ' . StickyAdmin::$config['colors']['adminbar']['submenu']['bg'][1] . '!important; 
             }
             #sticky_icon_picker.reposition:before {
                 border-bottom-color: transparent!important;
-                border-top-color: ' . StickyAdmin::$config['colors']['adminbar_submenu_top'] . '!important;
+                border-top-color: ' . StickyAdmin::$config['colors']['adminbar']['submenu']['bg'][1] . '!important;
             }
             body:not(.mobile) #adminmenu .wp-not-current-submenu .wp-submenu,
             body.folded:not(.mobile) #adminmenu .wp-has-current-submenu .wp-submenu {
-                background:'. StickyAdmin::$config['colors']['adminmenu_submenu'] . '!important;
+                background:'. StickyAdmin::$config['colors']['adminmenu']['submenu']['bg'] . '!important;
             }
             #fx stop:nth-child(1) { 
-                stop-color:'. StickyAdmin::$config['hl_colors'][1] . '; 
+                stop-color:'. StickyAdmin::$config['colors']['header']['hl'][4] . '; 
             }               
             #fx stop:nth-child(2) { 
-                stop-color:' . StickyAdmin::$config['hl_colors'][0] . ';
+                stop-color:' . StickyAdmin::$config['colors']['header']['hl'][0] . ';
             }
             #fx stop:nth-child(3) { 
-                stop-color:' . StickyAdmin::$config['hl_colors'][2] . '; 
+                stop-color:' . StickyAdmin::$config['colors']['header']['hl'][2] . '; 
             }
 
             #fxtwo stop:nth-child(1) { 
-                stop-color:'. StickyAdmin::$config['hl_colors2'][1] . '; 
+                stop-color:'. StickyAdmin::$config['colors']['header']['hl'][5] . '; 
             }               
             #fxtwo stop:nth-child(2) { 
-                stop-color:' . StickyAdmin::$config['hl_colors2'][0] . ';
+                stop-color:' . StickyAdmin::$config['colors']['header']['hl'][1] . ';
             }
             #fxtwo stop:nth-child(3) { 
-                stop-color:' . StickyAdmin::$config['hl_colors2'][2] . '; 
+                stop-color:' . StickyAdmin::$config['colors']['header']['hl'][3] . '; 
             }
             
             #overlay svg path {
-                fill:' . StickyAdmin::$config['hl_colors'][0] . ';
+                fill:' . StickyAdmin::$config['colors']['header']['hl'][0] . ';
             }
 
             body.wp-admin input + label > span.labelauty-checked-image,
@@ -519,7 +520,7 @@ if ( !function_exists( 'add_action' ) )
             .welcome-panel .slick-dots li.slick-active span.icon:before,
             body.wp-admin #activity-widget ul.slick-dots > li.slick-active > button,
             .panel_menu li.active_tab a.nav_tab_link:before { 
-                color:' . StickyAdmin::$config['hl_colors'][0] . '; 
+                color:' . StickyAdmin::$config['colors']['content']['hl'] . '; 
             }
 
             #sticky_bulk_actions button.selected,
@@ -537,22 +538,22 @@ if ( !function_exists( 'add_action' ) )
             body.wp-admin input[type="url"]:focus, 
             body.wp-admin select:focus,
             body.wp-admin .sod_select.focus {
-                border-color: ' . StickyAdmin::$config['hl_colors'][0] . '; 
+                border-color: ' . StickyAdmin::$config['colors']['content']['hl'] . '; 
             }
 
             .current-panel .accordion-sub-container.control-panel-content,
             #customize-controls { 
-                background:' . StickyAdmin::$config['colors']['customizer'] . '; 
+                background:' . StickyAdmin::$config['colors']['customizer']['bg'] . '; 
             }
 
             .qtip,
             .qtip-default,
             div.google-visualization-tooltip { 
-                background: ' . StickyAdmin::$config['colors']['tooltip'] . '; 
+                background: ' . StickyAdmin::$config['colors']['content']['tooltips']['bg'] . '; 
             }
             .qtip:after,
             .qtip-default:after { 
-                border-top-color: ' . StickyAdmin::$config['colors']['tooltip'] . ' !important;
+                border-top-color: ' . StickyAdmin::$config['colors']['content']['tooltips']['bg'] . ' !important;
             }
             
             .wrap > h1:first-child,
@@ -560,21 +561,21 @@ if ( !function_exists( 'add_action' ) )
             .wp-filter .search-form input[type=search],
             p.search-box input[name=s]
             {
-                background:'. StickyAdmin::$config['colors']['header'] .';
+                background:'. StickyAdmin::$config['colors']['header']['bg'][0] .';
             }
             .wrap > h1 > .page-title-action, 
             .wrap .add-new-h2,
             .wp-media-buttons .button,
             #screen-meta input[type="submit"],
             #sticky_bulk_actions input[type=submit] {
-                background:'. StickyAdmin::$config['hl_colors'][0] .';   
+                background:'. StickyAdmin::$config['colors']['header']['hl'][0] .';   
             }
             .wrap > h1:first-child #filters-expand ul li.active:before,
             .view-switch > .current { 
-                color:' . StickyAdmin::$config['hl_colors'][0] . '!important;
+                color:' . StickyAdmin::$config['colors']['header']['hl'][0] . '!important;
             }
             .post-state-format {
-                color:' . StickyAdmin::$config['hl_colors'][0] . ' !important;
+                color:' . StickyAdmin::$config['colors']['header']['hl'][0] . ' !important;
             }
             #overlay:before,
             .filter-links, 
@@ -589,19 +590,19 @@ if ( !function_exists( 'add_action' ) )
             #activity-widget ul.subsubsub,
             .wrap > form > .tablenav.bottom > .tablenav-pages,
             .press-this-actions {
-                background: ' . StickyAdmin::$config['colors']['header'] . ' ;
-                background: -webkit-linear-gradient(180deg, '. StickyAdmin::$config['colors']['header'] .', '. StickyAdmin::$config['colors']['header_grad'] .' 100%);
-                background: -moz-linear-gradient(180deg, '. StickyAdmin::$config['colors']['header'] .', '. StickyAdmin::$config['colors']['header_grad'] .' 100%);
-                background: -o-linear-gradient(180deg, '. StickyAdmin::$config['colors']['header'] .', '. StickyAdmin::$config['colors']['header_grad'] .' 100%);
-                background: linear-gradient(180deg, '. StickyAdmin::$config['colors']['header'] .', '. StickyAdmin::$config['colors']['header_grad'] .' 100%);
+                background: ' . StickyAdmin::$config['colors']['header']['bg'][0] . ' ;
+                background: -webkit-linear-gradient(180deg, '. StickyAdmin::$config['colors']['header']['bg'][0] .', '. StickyAdmin::$config['colors']['header']['bg'][1] .' 100%);
+                background: -moz-linear-gradient(180deg, '. StickyAdmin::$config['colors']['header']['bg'][0] .', '. StickyAdmin::$config['colors']['header']['bg'][1] .' 100%);
+                background: -o-linear-gradient(180deg, '. StickyAdmin::$config['colors']['header']['bg'][0] .', '. StickyAdmin::$config['colors']['header']['bg'][1] .' 100%);
+                background: linear-gradient(180deg, '. StickyAdmin::$config['colors']['header']['bg'][0] .', '. StickyAdmin::$config['colors']['header']['bg'][1] .' 100%);
             }
 
             #wpbody-content:after {
-                background: ' . StickyAdmin::$config['colors']['header'] . ' ;
+                background: ' . StickyAdmin::$config['colors']['header']['bg'][0] . ' ;
             }
             
             #wpfooter { 
-                background-color:' . StickyAdmin::$config['colors']['footer'] . ' ;
+                background-color:' . StickyAdmin::$config['colors']['footer']['bg'] . ' ;
             }
 
             #adminmenu li#collapse-menu { 
@@ -613,11 +614,11 @@ if ( !function_exists( 'add_action' ) )
             }
             #adminmenuwrap .resize_handle,
             .welcome-panel .welcome-panel-close { 
-                background:' . StickyAdmin::$config['colors']['adminmenu_handle'] . '; 
+                background:' . StickyAdmin::$config['colors']['adminmenu']['handle']['bg'] . '; 
             }
             @media screen and (min-width: 1025px) {
                 body.grid_menu:not(.mobile):not(.folded) #adminmenu .wp-submenu {
-                    background:' . StickyAdmin::$config['colors']['adminmenu_submenu'] . '!important;
+                    background:' . StickyAdmin::$config['colors']['adminmenu']['submenu']['bg'] . '!important;
                 }
                 #adminmenuwrap .menu_settings,
                 body:not(.mobile):not(.folded) #adminmenumain { 
@@ -654,7 +655,7 @@ if ( !function_exists( 'add_action' ) )
             }
             @media screen and (min-width: 783px) and (max-width: 1024px) {
                 body.auto-fold:not(.mobile) #adminmenu .wp-has-current-submenu:hover > a + .wp-submenu {
-                    background:'.StickyAdmin::$config['colors']['adminmenu_submenu'] . '!important;
+                    background:'.StickyAdmin::$config['colors']['adminmenu']['submenu']['bg'] . '!important;
                 }
                 body:not(.auto-fold) #adminmenumain {
                     min-width: '. StickyAdmin::$config['adminmenu']['width'] . 'px;
@@ -675,39 +676,14 @@ if ( !function_exists( 'add_action' ) )
 
             }
             #adminmenu .wp-submenu:before {
-                border-right-color:'.StickyAdmin::$config['colors']['adminmenu_submenu'] . '!important;
+                border-right-color:'.StickyAdmin::$config['colors']['adminmenu']['submenu']['bg'] . '!important;
             }
             body.s_nav_right #adminmenu .wp-submenu:before {
-                border-left-color:'.StickyAdmin::$config['colors']['adminmenu_submenu'] . '!important;
+                border-left-color:'.StickyAdmin::$config['colors']['adminmenu']['submenu']['bg'] . '!important;
                 border-right-color:transparent!important;
             }
 
-            .status-draft .sticky_altered.post-state:after { color: '. StickyAdmin::$config['colors']['widefat_draft'] .'; }
-            .status-draft .sticky_altered.post-state:after { color: '. StickyAdmin::$config['colors']['widefat_draft'] .'; }
-
-            .widefat.plugins > tbody > tr.inactive > td.plugin-title > strong { color: '. StickyAdmin::$config['widefat']['plugin-inactive'] .'; }
-            .widefat.plugins > tbody > tr.active > td.plugin-title > strong { color: '. StickyAdmin::$config['widefat']['plugin-active'] .'; }
-
-            .widefat > tbody input.labelauty:checked + label {
-                color: '. StickyAdmin::$config['hl_colors'][0] .'!important;
-            }
-            #sticky_stats .instats #s-circle-falls stop:nth-child(1) {
-                stop-color:' . StickyAdmin::$config['hl_colors2'][0] . ';
-            }
-            #sticky_stats .instats #s-circle-falls stop:nth-child(2) {
-                stop-color:' . StickyAdmin::$config['hl_colors2'][1] . ';
-            }
-
-            #sticky_stats .instats #s-circle-rises stop:nth-child(1) {
-                stop-color:' . StickyAdmin::$config['hl_colors'][0] . ';
-            }
-            #sticky_stats .instats #s-circle-rises stop:nth-child(2) {
-                stop-color:' . StickyAdmin::$config['hl_colors'][1] . ';
-            }
-            #map_canvas svg path {
-                stroke: ' . StickyAdmin::$config['colors']['dash_maps'] . ';
-                fill: ' . StickyAdmin::$config['colors']['dash_maps_bg'] . ';
-            }
+           
             ' . ( ( ! StickyAdmin::$config['footer']['show'] ) ? '#wpfooter{display:none!important}' : '' ) . '
         ');
     }

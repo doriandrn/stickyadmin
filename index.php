@@ -4,12 +4,15 @@ Plugin Name: StickyAdmin
 Plugin URI: https://wordpress.org/plugins/stickyadmin/
 Description: StickyAdmin will revamp your WordPress' Admin User Interface. You can customize it by navigating to Settings -> StickyAdmin Settings.
 Author: Dorian Tuorache
-Version: 1.0.5
+Version: 1.0.6
 Author URI: https://profiles.wordpress.org/doriantudorache/
 */
 if ( function_exists( 'add_action' ) ) {
 	// Plugin Options panel
 	require_once( "lib/sticky_options.php" );
+
+	// PHP Unit for debugging
+    // require_once 'PHPUnit/Autoload.php';
 
 	// Load StickyAdmin
 	require_once( "lib/stickyadmin.class.php" );
@@ -32,7 +35,6 @@ if ( function_exists( 'add_action' ) ) {
 		
 		// Ajax listener for statistics
 		if ( !empty( $_POST[ 'action' ] ) && $_POST[ 'action' ] == 'sticky_stats_track' ) {
-			// echo 'Excuse this. Just for dev purposes, testing stuff and it works!';
 			add_action( 'wp_ajax_sticky_stats_track', array( 'StickyStats', 'sticky_stats_track' ) ); // user logged in
 			add_action( 'wp_ajax_nopriv_sticky_stats_track', array( 'StickyStats', 'sticky_stats_track' ) ); // user not logged in
 		}

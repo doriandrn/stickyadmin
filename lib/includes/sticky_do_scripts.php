@@ -49,14 +49,13 @@
      *
      */
     function sticky_global_js() {
-        if ( ! is_admin() ) return;
+        if ( ! is_admin() ) 
+            return;
         wp_enqueue_script('jquery-ui-sortable');
-        // Register scripts
-        // wp_register_script( 'mCustomScrollbar' , STICKY_JS . 'jquery.mCustomScrollbar.concat.min.js', NULL, StickyAdmin::VERSION );
-        // wp_register_script( 'toastr' , STICKY_JS . 'toastr.min.js', NULL, StickyAdmin::VERSION );
-        // wp_register_script( 'pace' , STICKY_JS . 'pace.min.js', NULL, StickyAdmin::VERSION );
-        // wp_register_script( 'qtip' , STICKY_JS . 'jquery.qtip.min.js', NULL, StickyAdmin::VERSION );
-        // wp_register_script( 'sticky-adminmenu', STICKY_JS . 'sticky-adminmenu.js', NULL, StickyAdmin::VERSION );
+        
+        // Dependencies
+        wp_enqueue_script( 'sticky-admin-deps', STICKY_JS . 'sticky-admin-deps.js' );
+
         // Main JS file for Sticky Admin.
         wp_register_script( 'sticky-admin', STICKY_JS . 'sticky-admin.js' );
         // Define the cookies path so JS also knows about it when setting cookies.
@@ -102,12 +101,11 @@
             's_theme'            => StickyAdmin::$config['theme'],
             // 's_dash_image'       => StickyAdmin::sticky_theme_image( $sticky_theme ),
             's_dash_welcome'     => StickyAdmin::$config['content']['dash_heading'],
-            's_dash_maps'        => StickyAdmin::$config['colors']['dash_maps'],
+            // 's_dash_maps'        => StickyAdmin::$config['colors']['dash_maps'],
             's_stats'            => StickyAdmin::$config['statistics'],
             's_big_stats'        => StickyAdmin::$config['content']['dash_stats'],
-            's_colors'           => StickyAdmin::$config['hl_colors'],
-            's_colors2'          => StickyAdmin::$config['hl_colors2'],
-            's_required_color'   => ( sticky_luminance( StickyAdmin::$config['colors']['content'] ) ? 'black' : 'white' )
+            // 's_colors'           => StickyAdmin::$config['hl_colors'],
+            // 's_colors2'          => StickyAdmin::$config['hl_colors2'],
         );
         // Enqueue them scripts.
         // wp_enqueue_script( 'mCustomScrollbar' );

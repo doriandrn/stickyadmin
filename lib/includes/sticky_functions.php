@@ -18,7 +18,6 @@ if ( !function_exists( 'sticky_addStyle' ) ) :
      *
      */
     function sticky_addStyle( $hooks, $filename_no_ext, $has_rtl = NULL, $order = 1 ) {
-        
         $style = trim ( $filename_no_ext ) ;
         $enqueue_string = '';
         if ( is_array ( $hooks ) )
@@ -140,9 +139,6 @@ if ( !function_exists( 'hex2rgb' ) ) :
      *
      */
     function hex2rgb( $hex ) {
-
-       // if ( is_array( $hex ) || $hex == '' ) return;
-
        $hex = str_replace( "#", "", $hex);
        if ( strlen( $hex ) == 3 ) {
           $r = hexdec(substr($hex,0,1).substr($hex,0,1));
@@ -384,7 +380,7 @@ if ( !function_exists( 'sticky_adjust_hl_color' ) ) :
      */
     function sticky_adjust_hl_color( $hex, $h = 0, $s = 0, $v = 0, $auto = false, $setting = 'content' ) {
         $get_color = hex2hsv( $hex );
-        // print_r("\n\n\n" . '<!== START: ' . 'getHEX: ' . $hex . '['. $get_color[0] .'] +H[' . $h . ']=' . $get_color[0] + $h );
+    
         $get_color[0] = $get_color[0] + $h;
         $get_color[1] = $get_color[1] + $s;
         $get_color[2] = $get_color[2] + $v;
@@ -398,51 +394,29 @@ if ( !function_exists( 'sticky_adjust_hl_color' ) ) :
         $get_color[1] = ( $get_color[1] <= 0 ) ? 0 : $get_color[1];
         $get_color[2] = ( $get_color[2] <= 0 ) ? 0 : $get_color[2];
 
-        // print_r($get_color);
-
         if ( $auto ) {
-
-            // print_r("\n" . '----------' . "\n") ;
-            $selector = StickyAdmin::$config['colors'][$setting];
-
+            $selector = StickyAdmin::$config['colors'][$setting]['bg'];
             if ( ! $selector ) 
                 return rgb2hex( implode( ',', hsv2rgb( $get_color ) ) );
 
-            // print_r('setting=' . $setting . ' selector: ' . $selector);
             $hl_color_hsv = hex2hsv( $selector );
-            
             $hue_diff = abs( $get_color[0] - $hl_color_hsv[0] );
-            // if ( $setting == 'content' ) 
-                // print_r( 'Dif: [' . $get_color[0] . '-' . $hl_color_hsv[0] . ']=' . $hue_diff );
-
-            // print_r('Indifierenta! ' . $hue_diff . "\n");
-
-            // print_r( "\n" . 'HEX: ' . $hex . ' -> HUE: ' . $get_color[0] . "\n" );            
+       
             if ( $hue_diff < 45 ) {
-
-                // print_r('prea apropiate: ' . $get_color[0] . '(+125) cu ' . $hl_color_hsv[0] . "\n");
                 $get_color[0] = ( abs( $get_color[0] ) > 180 ) ? abs( $get_color[0] - 45 ) : abs( $get_color[0] + 45 );
-                // if ( $setting == 'content' ) 
-                // print_r( ', mai mic ca 45 deci vine ' . $get_color[0] . ' =>' );
             }
 
             // Color might look wrong if it's too far away from the bg color hue
             if ( $hue_diff > 100 && $hue_diff < 180 ) {
-                // print_r( ', > 100 < 180 deci vine ' );
-                // print_r( 'PESTE 100! HEX:' . $hex . ', $get_color0=' . $get_color[0] . ', hl_color_hsv=' . $hl_color_hsv[0] . "\n" );
                 $get_color[0] = ( abs( $get_color[0] ) <= 180 ) ? abs( $get_color[0] + 90 ) : abs( $get_color[0] - 90 ); // Adjust by decreasing it by 80
             }
 
             if ( $hue_diff >= 180 ) {
-                // if ( $setting == 'content' ) 
-                // print_r( ' >= 180 deci vine ');
                 $get_color[0] = ( abs( $get_color[0] ) <= 180 ) ? abs( $get_color[0] + 90 ) : abs( $get_color[0] - 90 ); // Adjust by decreasing it by 80
             }
 
-            // print_r( 'new get color:' . $get_color[0] . "\n" );
             if ( $get_color[0] <= 0 || $get_color[0] >= 360 ) 
                 $get_color[0] = abs( 360 - abs( $get_color[0] ) );
-            // print_r( 'Adjusted (Hue): ' . $get_color[0] . "\n" );
 
             if ( ! sticky_luminance( $selector ) ) {
                 $get_color[1] = 95; 
@@ -452,19 +426,10 @@ if ( !function_exists( 'sticky_adjust_hl_color' ) ) :
                 $get_color[1] = 75;
                 $get_color[2] = 80; 
             } 
-
-            // if ( $setting == 'content' ) 
-            // print_r( $get_color );
         }
-        // print_r('RETURNEAZA: ' . rgb2hex( implode( ',', hsv2rgb( $get_color ) ) ) . "\n" . '===========');
         return rgb2hex( implode( ',', hsv2rgb( $get_color ) ) );
     }
 endif;
-
-
-    function sticky_adjust_color_by_diff( $color_hue, $diff, $content_diff ) {
-
-    }
 
 if ( !function_exists( 'hex2hsv' ) ) :
     function hex2hsv( $hex ) {
@@ -484,7 +449,8 @@ if ( !function_exists( 'sticky_luminance' ) ) :
      */
     function sticky_luminance( $hexcolor ) {
         $rgb = explode( ',', hex2rgb( str_replace( '#', '', $hexcolor ) ) );
-        if ( ( ( $rgb[0] * 299 ) + ( $rgb[1] * 587 ) + ( $rgb[2] * 114 ) ) / 255000 >= .5 ) return true;
+        if ( ( ( $rgb[0] * 299 ) + ( $rgb[1] * 587 ) + ( $rgb[2] * 114 ) ) / 255000 >= 0.5 ) 
+            return true;
         return false;
     }
 endif;

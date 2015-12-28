@@ -705,7 +705,9 @@ body.rtl #wpadminbar ul:not(.ab-top-secondary) .ab-submenu .menupop .ab-sub-wrap
     min-width: 54px;
     text-align: center;
 }
-
+#wpadminbar #wp-admin-bar-menu-toggle {
+    display: none;
+}
 #wpadminbar .quicklinks > ul > li > a,
 #wpadminbar .quicklinks > ul > li > .ab-empty-item {
     border: 0;
@@ -1764,13 +1766,13 @@ body.wpab-sub-b #wpadminbar .quicklinks > ul > .menupop:not(#wp-admin-bar-my-acc
 
 body.wpab-sub-b #wpadminbar .quicklinks > ul:not(#wp-admin-bar-top-secondary) ul:not(:last-child):after { background:rgba(0,0,0,.1); }
 
-body.wpab-badges-w #wp-admin-bar-bp-notifications .count,
-body.wpab-badges-w #wp-admin-bar-comments .ab-label,
-body.wpab-badges-w #wp-admin-bar-updates .ab-label { color:#FFF!important; }
+body.wpab-hl-w #wp-admin-bar-bp-notifications .count,
+body.wpab-hl-w #wp-admin-bar-comments .ab-label,
+body.wpab-hl-w #wp-admin-bar-updates .ab-label { color:#FFF!important; }
 
-body.wpab-badges-b #wp-admin-bar-bp-notifications .count,
-body.wpab-badges-b #wp-admin-bar-comments .ab-label,
-body.wpab-badges-b #wp-admin-bar-updates .ab-label { color:#000!important; }
+body.wpab-hl-b #wp-admin-bar-bp-notifications .count,
+body.wpab-hl-b #wp-admin-bar-comments .ab-label,
+body.wpab-hl-b #wp-admin-bar-updates .ab-label { color:#000!important; }
 
 
 /* Generated with Bounce.js. Edit at http://goo.gl/3A0PgF */

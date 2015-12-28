@@ -35,7 +35,7 @@
  *
  */
 
-class Browser
+class BrowserTest
 {
     private $_agent = '';
     private $_browser_name = '';

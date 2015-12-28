@@ -96,7 +96,7 @@ Coming soon.
 == Changelog ==
 
 = 1.0.6 =
-Dec 25th, 2015
+Dec 28th, 2015
 Merry Christmas everyone!
 
 Improvements:
@@ -105,6 +105,9 @@ Improvements:
 * Added a 'Reset options' button in the panel;
 * Further optimised PHP code;
 * Improved color matches algorithms;
+* Better caching of files; 
+* 100% compatibility with PHP 7.0+
+* Added GruntJS for minifications and compilations;
 
 BugFixes:
 
@@ -112,6 +115,9 @@ BugFixes:
 * Fixed a bug where clicking the header would have brough up empty screen options panel;
 * Icon for WP Logo Menu (in adminbar) can no longer be changed. There is an option to disable it in the panel;
 * Fixed alignment for Bulk Actions buttons;
+* Fixed missing styles for filesystem dialogs;
+* Fixed a bug where inactive plugins names were getting colored;
+* Fixed a bug where the title on dashboard was not getting replaced;
 
 = 1.0.5 =
 Dec 21st, 2015

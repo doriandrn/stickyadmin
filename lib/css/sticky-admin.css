@@ -2406,6 +2406,7 @@ body.header-b #welcome-panel * {
 .edit-comments-php #wpbody-content > .wrap,
 .nav-menus-php #wpbody-content > .wrap,
 .plugins-php #wpbody-content > .wrap,
+.plugin-install-php #wpbody-content > .wrap,
 .users-php #wpbody-content > .wrap,
 .theme-install-php #wpbody-content > .wrap,
 .update-core-php #wpbody-content > .wrap,
@@ -9915,4 +9916,32 @@ body.rtl .slick-slide,
 }
 .checkout-header img {
     display: none!important;
+}
+
+#request-filesystem-credentials-dialog {
+    padding: 25px;
+    position: absolute;
+    z-index: 1001;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+body.content-b #request-filesystem-credentials-dialog {
+    background: #fff;
+}
+body.content-w #request-filesystem-credentials-dialog {
+    background: #000;
+}
+#request-filesystem-credentials-form .field-title {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    margin-right: 20px;
+    line-height: 44px;
+}
+#request-filesystem-credentials-form label > input[type="text"], #request-filesystem-credentials-form label > input[type="password"] {
+    width: 200px;
+}
+#request-filesystem-credentials-form label > em {
+    font-size: 9px;
 }
