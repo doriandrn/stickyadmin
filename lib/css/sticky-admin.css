@@ -1058,6 +1058,9 @@ body.header-b .wrap > h1:first-child div#sticky-actions {
 .wrap > h1:first-child div#sticky-actions button#save-post:before {
     content: '\e8d4';
 }
+.wrap > h1:first-child div#sticky-actions button[type="reset"]:before {
+    content: '\ec98';
+}
 
 .wrap > h1:first-child div#sticky-actions:after {
     content: none !important;
@@ -4072,6 +4075,16 @@ body.rtl .media-upload-form tr.image-size label {
        -moz-box-sizing: border-box;
             box-sizing: border-box;
 }
+body.content-w .wrap > .tool-box,
+body.content-w .wrap > .card {
+    background: #000;
+}
+body.content-b .wrap > .tool-box,
+body.content-b .wrap > .card {
+    background: #fff;
+}
+
+
 .wrap > .tool-box > form > p:last-child,
 .wrap > .tool-box > p:last-child,
 .wrap > .card > form > p:last-child,

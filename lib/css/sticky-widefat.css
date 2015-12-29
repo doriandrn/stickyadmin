@@ -474,7 +474,9 @@ body.rtl .widefat td.column-date .sticky.status {
 .plugin-install-php h3 {
     clear: both;
     margin-bottom: 10px;
-    text-align: center;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .widefat thead tr th:after,
@@ -1936,7 +1938,7 @@ body.content-w .widefat.comments > tbody input.labelauty:checked + label {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-    padding: 15px;
+    padding: 20px;
     -webkit-box-shadow: 0px 1px rgba(0, 0, 0, .1);
     -moz-box-shadow: 0px 1px rgba(0, 0, 0, .1);
     box-shadow: 0px 1px rgba(0, 0, 0, .1);
@@ -1945,6 +1947,13 @@ body.content-w .widefat.comments > tbody input.labelauty:checked + label {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+body.content-b .plugin-card { 
+    background: #fff;
+}
+body.content-w .plugin-card { 
+    background: #000;
+}
+
 .plugin-card-top .column-name h4 a {
     font-size: 14px;
     line-height: 18px!important;
@@ -2097,7 +2106,7 @@ body.content-w .widefat.comments > tbody input.labelauty:checked + label {
     display: inline-block;
     float: left;
     width: 128px;
-    margin: 0 15px 25px 0;
+    margin: 0 20px 25px 0;
 }
 .plugin-icon img {
     max-width: 100%;

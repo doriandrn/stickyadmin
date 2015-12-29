@@ -813,14 +813,15 @@ input.wp-picker-clear {
     left: 25%;
     height: 20px;
     width: 75%;
+    display: none;
 }
 
 #sticky_theme_selector ul li span.color_scheme span:nth-child(5) {
     position: absolute;
-    top: 40px;
+    top: 20px;
     left: 25%;
     width: 75%;
-    height: 40px;
+    height: 60px;
 }
 
 

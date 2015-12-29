@@ -107,7 +107,7 @@ Improvements:
 * Better caching of files; 
 * 100% compatibility with PHP 7.0+
 * Added GruntJS for minifications and compilations;
-* All files run now minified, better page loading speeds
+* All files run now minified, better page loading speeds.
 
 BugFixes:
 
@@ -119,6 +119,7 @@ BugFixes:
 * Fixed a bug where inactive plugins names were getting colored;
 * Fixed a bug where the title on dashboard was not getting replaced;
 * Fixed a bug where the view-switch in the header was not working properly on some pages;
+* Fixed plugins background on add new plugins page.
 
 
 = 1.0.5 =

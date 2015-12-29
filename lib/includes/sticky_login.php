@@ -28,9 +28,9 @@
         }
         
         echo minify_css('
-            #login h1 { background: '. StickyAdmin::$config['colors']['adminmenu'] .'}
-            #login #backtoblog a { color: ' . ( sticky_luminance( StickyAdmin::$config['colors']['adminmenu'] ) ? 'rgba(0,0,0,.25)' : 'rgba(255,255,255,.25)' ) . ';}
-            body.login #login p.forgetmenot.on { background: '. StickyAdmin::$config['hl_colors'][0] .'; }
+            #login h1 { background: '. StickyAdmin::$config['colors']['adminmenu']['bg'] .'}
+            #login #backtoblog a { color: ' . ( sticky_luminance( StickyAdmin::$config['colors']['adminmenu']['bg'] ) ? 'rgba(0,0,0,.25)' : 'rgba(255,255,255,.25)' ) . ';}
+            body.login #login p.forgetmenot.on { background: '. StickyAdmin::$config['colors']['content']['hl'] .'; }
         ');
 
         // Logo affichage
@@ -51,7 +51,6 @@
         // Remove shake js
         remove_action( 'login_head', 'wp_shake_js', 12 );
         // Required Scripts for the Login Page
-        sticky_addScript ( 'Login', 'backstretch' );
         sticky_addScript ( 'Login', STICKY_LOGIN );
     }
     add_action( 'sticky_login_enqueues', 'sticky_login_enq' );

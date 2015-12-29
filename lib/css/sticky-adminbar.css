@@ -591,7 +591,7 @@ body:not(.no-js) #wpadminbar #wp-admin-bar-menu-toggle {
     vertical-align: top;
     position: absolute;
     left: 10px;
-    top: 8px;
+    top: 10px;
     -webkit-transition: font-size .1s ease-in-out;
        -moz-transition: font-size .1s ease-in-out;
          -o-transition: font-size .1s ease-in-out;
@@ -620,7 +620,7 @@ body.rtl #wpadminbar .quicklinks .menupop:not(#wp-admin-bar-new-content) ul:not(
     letter-spacing: .4px;
     display: block;
     line-height: 14px;
-    padding: 7px 10px 7px 20px;
+    padding: 10px 10px 10px 20px;
     white-space: normal;
 }
 body.rtl #wpadminbar .quicklinks .menupop ul li .ab-item,
@@ -961,15 +961,15 @@ body.rtl #wpadminbar div#sticky_icon_picker {
     top: 15px;
     right: -10px;
 }
-#wpadminbar .quicklinks > ul ul {
+#wpadminbar .quicklinks > ul ul:last-child {
     padding: 0 0 4px 0;
 }
 #wpadminbar .quicklinks > ul:not(#wp-admin-bar-top-secondary) ul:not(:last-child):after {
     content: '';
     display: block;
-    height: 1px;
-    width: 10px;
-    margin: 10px auto;
+    height: 3px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 #wpadminbar .quicklinks > ul #wp-admin-bar-site-name-default:after {
@@ -1014,11 +1014,11 @@ body.wpab-sub-b #wpadminbar .quicklinks > ul > li .ab-sub-wrapper ul li.sticky-m
 #wpadminbar .quicklinks > ul > li .ab-sub-wrapper ul li.sticky-menu-head:after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -3px;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 5px 10px 0 10px;
+    border-width: 3px 5px 0 5px;
     border-color: transparent;
     left: 50%;
     -webkit-transform: translateX(-50%);
@@ -1759,12 +1759,8 @@ body.wpab-t-w .sticky_wpab .qtip-content {
 body.wpab-sub-w #wpadminbar .quicklinks > ul > .menupop:not(#wp-admin-bar-my-account):hover .ab-sub-wrapper a { color:rgba(255,255,255,.65)!important }
 body.wpab-sub-w #wpadminbar .quicklinks > ul > .menupop:not(#wp-admin-bar-my-account):hover .ab-sub-wrapper a:hover { color:#fff!important }
 
-body.wpab-sub-w #wpadminbar .quicklinks > ul:not(#wp-admin-bar-top-secondary) ul:not(:last-child):after { background:rgba(255,255,255,.1); }
-
 body.wpab-sub-b #wpadminbar .quicklinks > ul > .menupop:not(#wp-admin-bar-my-account):hover .ab-sub-wrapper a { color:rgba(0,0,0,.65)!important }
 body.wpab-sub-b #wpadminbar .quicklinks > ul > .menupop:not(#wp-admin-bar-my-account):hover .ab-sub-wrapper a:hover { color:#000!important }
-
-body.wpab-sub-b #wpadminbar .quicklinks > ul:not(#wp-admin-bar-top-secondary) ul:not(:last-child):after { background:rgba(0,0,0,.1); }
 
 body.wpab-hl-w #wp-admin-bar-bp-notifications .count,
 body.wpab-hl-w #wp-admin-bar-comments .ab-label,

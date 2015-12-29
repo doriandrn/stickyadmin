@@ -358,7 +358,14 @@ body.login-w #login > form p.s {
 #login p#nav {
     text-align: center;
     margin-bottom: 0;
-    display: none;
+    position: absolute;
+    top: 155px;
+    right: 20px;
+    opacity: 0;
+}
+
+#login p#nav.show {
+    opacity: .5;
 }
 
 #login > form p.submit {

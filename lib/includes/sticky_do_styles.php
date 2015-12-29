@@ -347,6 +347,7 @@ if ( !function_exists( 'add_action' ) )
             }
             #wpadminbar #wp-admin-bar-user-actions,
             #wpadminbar .menupop .ab-sub-wrapper .menupop .ab-sub-wrapper,
+            #wpadminbar .quicklinks > ul:not(#wp-admin-bar-top-secondary) ul:not(:last-child):after,
             #wpadminbar .quicklinks > ul > li .ab-sub-wrapper ul li.sticky-menu-head {
                 background:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'][1] .';
             }

@@ -8,6 +8,7 @@
   	"url": "https://github.com/doriandrn/stickyadmin.git"
   },
   "license": "GPL-3.0+",
+  "author": "Dorian Tudorache",
   "main": "Gruntfile.js",
   "devDependencies": {
     "grunt": "^0.4.5",

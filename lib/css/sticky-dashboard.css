@@ -3002,7 +3002,7 @@ body.content-w #dashboard_quick_press .drafts p {
     color: rgba(255,255,255,.5);
 }
 body.content-w #dashboard_primary div.rss-widget:nth-child(3) {
-    border-top: 1px solid rgba(255,255,255,.1)!important;
+    border-top: 1px solid rgba(255,255,255,.5)!important;
 }
 body.content-w #dashboard-widgets #dashboard_primary div.rss-widget a.rsswidget {
     color: rgba(255,255,255,.75);
@@ -3063,7 +3063,7 @@ body.content-b #dashboard_quick_press .drafts p {
     color: rgba(0,0,0,.5);
 }
 body.content-b #dashboard_primary div.rss-widget:nth-child(3) {
-    border-top: 1px solid rgba(0,0,0,.1)!important;
+    border-top: 1px solid rgba(0,0,0,.025)!important;
 }
 body.content-b #dashboard-widgets #dashboard_primary div.rss-widget a.rsswidget {
     color: rgba(0,0,0,.75);
