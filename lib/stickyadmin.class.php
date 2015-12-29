@@ -937,29 +937,45 @@ class StickyAdmin {
                 if ( array_key_exists( 'hl', $elem ) && empty( $elem['hl'] ) ) {
                     $test = sticky_compare_correct( self::$config['colors']['highlight']['bg'], $elem['bg'], $color_step );
 
+                    // Element specific rules
                     switch ( $key ) {
                         // Highlight colors for the header
                         case 'header':
-                            $elem['hl'] = array(
-                                sticky_make_hl_color( $test, 0 ),
-                                sticky_make_hl_color( $test, - $color_step ),
-                                sticky_make_hl_color( $test, $color_step ),
-                                sticky_make_hl_color( $test, - $color_step * 2 ),
-                                sticky_make_hl_color( $test, $color_step * 2 ),
-                                sticky_make_hl_color( $test, - $color_step * 3 )
-                            );
-                            $elem['bg'] = array(
-                                $elem['bg'],
-                                sticky_adjust_hl_color( $elem['bg'], 35 )
-                            );
+                            if ( ! is_array( $elem['hl'] ) && ! is_array( $elem['bg'] ) ) {
+                                $elem['hl'] = array(
+                                    sticky_make_hl_color( $test, 0 ),
+                                    sticky_make_hl_color( $test, - $color_step ),
+                                    sticky_make_hl_color( $test, $color_step ),
+                                    sticky_make_hl_color( $test, - $color_step * 2 ),
+                                    sticky_make_hl_color( $test, $color_step * 2 ),
+                                    sticky_make_hl_color( $test, - $color_step * 3 )
+                                );
+                                $elem['bg'] = array(
+                                    $elem['bg'],
+                                    sticky_adjust_hl_color( $elem['bg'], $color_step * 5 ) // for gradient
+                                );
+                            }
+                            
                             break;
 
                         // Highlight colors for the nav
                         case 'adminmenu':
-                            $elem['hl'] = array(
-                                sticky_make_hl_color( $test, 0 ),
-                                sticky_make_hl_color( $test, $color_step ),
-                            );
+                            if ( ! is_array( $elem['hl'] ) ) {
+                                $elem['hl'] = array(
+                                    sticky_make_hl_color( $test, 0 ),
+                                    sticky_make_hl_color( $test, $color_step ),
+                                );
+                            }
+                            break;
+
+                        case 'adminbar':
+                            if ( ! is_array( $elem['submenu']['bg'] ) ) {
+                                $elem['submenu']['bg'] = array(
+                                    $elem['submenu']['bg'],
+                                    sticky_adjust_hl_color( $elem['submenu']['bg'], 0, 0, ( -$color_step/2 ) )
+                                );
+                            }
+                            $elem['hl'] = sticky_make_hl_color( $test, 0 );
                             break;
 
                         // Highlight colors for all other elements

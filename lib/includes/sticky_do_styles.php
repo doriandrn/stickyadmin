@@ -238,7 +238,6 @@ if ( !function_exists( 'add_action' ) )
      *
      */
     function sticky_global_styles() {
-        // global $grab_data;
         // PACE.js CSS files based on settings.
         // $pace_color = $grab_data['page_load_color'] ? : 'orange';
         // $pace_theme = $grab_data['page_load'] ? : 'minimal';
@@ -344,12 +343,12 @@ if ( !function_exists( 'add_action' ) )
                 background:'. StickyAdmin::$config['colors']['adminbar']['bg'] .'!important;
             }
             #wpadminbar .menupop .ab-sub-wrapper {
-                background:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'] .';
+                background:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'][0] .';
             }
             #wpadminbar #wp-admin-bar-user-actions,
             #wpadminbar .menupop .ab-sub-wrapper .menupop .ab-sub-wrapper,
             #wpadminbar .quicklinks > ul > li .ab-sub-wrapper ul li.sticky-menu-head {
-                background:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'] .';
+                background:'. StickyAdmin::$config['colors']['adminbar']['submenu']['bg'][1] .';
             }
             #wp-admin-bar-bp-notifications .count, #wp-admin-bar-comments .ab-label, #wp-admin-bar-updates .ab-label {
                 border: 2px solid '. StickyAdmin::$config['colors']['adminbar']['bg'] .';
@@ -426,7 +425,8 @@ if ( !function_exists( 'add_action' ) )
      *
      */
     function sticky_dynamic_css() {
-        if ( ! is_admin() && ! StickyAdmin::$config['adminbar']['preserve'] ) return;
+        if ( ! is_admin() && ! StickyAdmin::$config['adminbar']['preserve'] ) 
+        	return;
 
         return minify_css('
             body, 
