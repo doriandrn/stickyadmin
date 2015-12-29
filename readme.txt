@@ -118,6 +118,8 @@ BugFixes:
 * Fixed missing styles for filesystem dialogs;
 * Fixed a bug where inactive plugins names were getting colored;
 * Fixed a bug where the title on dashboard was not getting replaced;
+* Fixed a bug where the view-switch in the header was not working properly on some pages;
+
 
 = 1.0.5 =
 Dec 21st, 2015

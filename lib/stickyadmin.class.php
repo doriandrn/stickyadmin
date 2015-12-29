@@ -473,45 +473,45 @@ class StickyAdmin {
                 ),
             ),
             'adminmenu' => array(
-                'position'          =>  ( isset ( $s_ui[ 'nav_pos' ] ) ? $s_ui['nav_pos'] : 'left' ),
-                'foldable'          =>  ( isset ( $s_ui[ 'nav_fold' ] ) ? $s_ui['nav_fold'] : true ),
-                'sticky'            =>  ( isset ( $s_ui[ 'nav_sticky' ] ) ? $s_ui[ 'nav_sticky' ] : true), 
-                'grid'              =>  ( isset ( $s_ui[ 'nav_grid' ] ) ? $s_ui[ 'nav_grid' ] : true ),
-                'grid_on'           =>  ( isset ( $_COOKIE[ 'sticky-gridmenu' ] ) ? $_COOKIE[ 'sticky-gridmenu' ] : ''),
-                'resizable'         =>  ( isset ( $s_ui[ 'nav_resize' ] ) ? $s_ui['nav_resize'] : true ),
-                'controls'          =>  ( isset ( $s_ui[ 'nav_controls' ] ) ? $s_ui['nav_controls'] : true ),
-                'mobile'            =>  ( isset ( $s_ui[ 'nav_mobile' ] ) ? $s_ui[ 'nav_mobile' ] : true ),
-                'width'             =>  ( isset ( $_COOKIE[ 'sticky_nav_width' ] ) ? $_COOKIE[ 'sticky_nav_width' ] : '220' )
+                'position'          =>  ( isset( $s_ui[ 'nav_pos' ] ) ? $s_ui['nav_pos'] : 'left' ),
+                'foldable'          =>  ( isset( $s_ui[ 'nav_fold' ] ) ? $s_ui['nav_fold'] : true ),
+                'sticky'            =>  ( isset( $s_ui[ 'nav_sticky' ] ) ? $s_ui[ 'nav_sticky' ] : true), 
+                'grid'              =>  ( isset( $s_ui[ 'nav_grid' ] ) ? $s_ui[ 'nav_grid' ] : true ),
+                'grid_on'           =>  ( isset( $_COOKIE[ 'sticky-gridmenu' ] ) ? $_COOKIE[ 'sticky-gridmenu' ] : ''),
+                'resizable'         =>  ( isset( $s_ui[ 'nav_resize' ] ) ? $s_ui['nav_resize'] : true ),
+                'controls'          =>  ( isset( $s_ui[ 'nav_controls' ] ) ? $s_ui['nav_controls'] : true ),
+                'mobile'            =>  ( isset( $s_ui[ 'nav_mobile' ] ) ? $s_ui[ 'nav_mobile' ] : true ),
+                'width'             =>  ( isset( $_COOKIE[ 'sticky_nav_width' ] ) ? $_COOKIE[ 'sticky_nav_width' ] : '220' )
             ),
             'header'    => array(
-                'icons'             =>  ( isset ( $s_ui[ 'header_icons' ] ) ? $s_ui[ 'header_icons' ] : true ),
-                'sticky'            =>  ( isset ( $s_ui[ 'header_sticky' ] ) ? $s_ui[ 'header_sticky' ] : true ),
-                'type'              =>  ( isset ( $s_ui[ 'header_type' ] ) ? $s_ui[ 'header_type' ] : 'minimize' ),
+                'icons'             =>  ( isset( $s_ui[ 'header_icons' ] ) ? $s_ui[ 'header_icons' ] : true ),
+                'sticky'            =>  ( isset( $s_ui[ 'header_sticky' ] ) ? $s_ui[ 'header_sticky' ] : true ),
+                'type'              =>  ( isset( $s_ui[ 'header_type' ] ) ? $s_ui[ 'header_type' ] : 'minimize' ),
             ),
             'content'   => array(
-                'dash_heading'      =>  ( isset ( $s_ui[ 'dash_heading' ] ) ? esc_attr ( $s_ui[ 'dash_heading' ] ) : __( 'Welcome to WordPress with StickyAdmin!', '_sticky_' ) ),
-                'dash_stats'        =>  ( isset ( $s_ui[ 's_no_welcome' ] ) ? $s_ui['s_no_welcome'] : true ),
-                'preload'           =>  ( isset ( $s_ui[ 'content_preload' ] ) ? $s_ui['content_preload'] : true ),
-                'preloader'         =>  ( isset ( $s_ui[ 'content_preloader' ] ) && ( $s_ui [ 'content_preloader' ] != '' ) ? $s_ui['content_preloader'] : sticky_cogs( rand(1,24) ) )
+                'dash_heading'      =>  ( isset( $s_ui[ 'dash_heading' ] ) ? esc_attr ( $s_ui[ 'dash_heading' ] ) : __( 'Welcome to WordPress with StickyAdmin!', '_sticky_' ) ),
+                'dash_stats'        =>  ( isset( $s_ui[ 's_no_welcome' ] ) ? $s_ui['s_no_welcome'] : true ),
+                'preload'           =>  ( isset( $s_ui[ 'content_preload' ] ) ? $s_ui['content_preload'] : true ),
+                'preloader'         =>  ( isset( $s_ui[ 'content_preloader' ] ) && ( $s_ui [ 'content_preloader' ] != '' ) ? $s_ui['content_preloader'] : sticky_cogs( rand(1,24) ) )
             ),
             'adminbar'  => array(
-                'preserve'          =>  ( isset ( $s_ui[ 'wpadminbar_preserve' ] ) ? $s_ui[ 'wpadminbar_preserve' ] : true ),
-                'sticky'            =>  ( isset ( $s_ui[ 'wpadminbar_sticky' ] ) ? $s_ui[ 'wpadminbar_sticky' ] : true ),
-                'hide'              =>  ( isset ( $s_ui[ 'wpadminbar_hide' ] ) ? $s_ui[ 'wpadminbar_hide' ] : false ),
-                'controls'          =>  ( isset ( $s_ui[ 'wpadminbar_controls' ] ) ? $s_ui[ 'wpadminbar_controls' ] : true ),
-                'cookie'            =>  ( isset ( $_COOKIE[ 'sticky_wpab' ] ) ? $_COOKIE[ 'sticky_wpab' ] : 'maximized' ),
+                'preserve'          =>  ( isset( $s_ui[ 'wpadminbar_preserve' ] ) ? $s_ui[ 'wpadminbar_preserve' ] : true ),
+                'sticky'            =>  ( isset( $s_ui[ 'wpadminbar_sticky' ] ) ? $s_ui[ 'wpadminbar_sticky' ] : true ),
+                'hide'              =>  ( isset( $s_ui[ 'wpadminbar_hide' ] ) ? $s_ui[ 'wpadminbar_hide' ] : false ),
+                'controls'          =>  ( isset( $s_ui[ 'wpadminbar_controls' ] ) ? $s_ui[ 'wpadminbar_controls' ] : true ),
+                'cookie'            =>  ( isset( $_COOKIE[ 'sticky_wpab' ] ) ? $_COOKIE[ 'sticky_wpab' ] : 'maximized' ),
                 'state'             =>  '',
-                'tooltips'          =>  ( isset ( $s_ui[ 'wpab_tooltips_disable' ] ) ? $s_ui[ 'wpab_tooltips_disable' ] : false ),
-                'searchbar'         =>  ( isset ( $s_ui[ 'wpab_search' ] ) ? $s_ui[ 'wpab_search' ] : false ),
-                'howdy_text'        =>  ( isset ( $s_ui[ 'wpadminbar_howdy' ] ) ? $s_ui[ 'wpadminbar_howdy' ] : __( 'Howdy', '_sticky_' ) )
+                'tooltips'          =>  ( isset( $s_ui[ 'wpab_tooltips_disable' ] ) ? $s_ui[ 'wpab_tooltips_disable' ] : false ),
+                'searchbar'         =>  ( isset( $s_ui[ 'wpab_search' ] ) ? $s_ui[ 'wpab_search' ] : false ),
+                'howdy_text'        =>  ( isset( $s_ui[ 'wpadminbar_howdy' ] ) ? $s_ui[ 'wpadminbar_howdy' ] : __( 'Howdy', '_sticky_' ) )
             ),
             'widefat'   => array(
-                'post-draft'        =>  ( isset ( $s_ui[ 'widefat_draft' ] ) ? $s_ui [ 'widefat_draft' ] : '#fff3a2' ),
-                'post-protected'    =>  ( isset ( $s_ui[ 'widefat_pass' ] ) ? $s_ui [ 'widefat_pass' ] : '#ffc7f4' ),
-                'post-trash'        =>  ( isset ( $s_ui[ 'widefat_trash' ] ) ? $s_ui [ 'widefat_trash' ] : '#ffa7a7' ),
-                'post-sticky'       =>  ( isset ( $s_ui[ 'widefat_sticky' ] ) ? $s_ui [ 'widefat_sticky' ] : '#6af9ff'),
-                'plugin-active'     =>  ( isset ( $s_ui[ 'widefat_plugin_active' ] ) ? $s_ui [ 'widefat_plugin_active' ] : '#30395c' ),
-                'plugin-inactive'   =>  ( isset ( $s_ui[ 'widefat_plugin_inactive' ] ) ? $s_ui [ 'widefat_plugin_inactive' ] : '#ff5d5d')
+                'post-draft'        =>  ( isset( $s_ui[ 'widefat_draft' ] ) ? $s_ui [ 'widefat_draft' ] : '#fff3a2' ),
+                'post-protected'    =>  ( isset( $s_ui[ 'widefat_pass' ] ) ? $s_ui [ 'widefat_pass' ] : '#ffc7f4' ),
+                'post-trash'        =>  ( isset( $s_ui[ 'widefat_trash' ] ) ? $s_ui [ 'widefat_trash' ] : '#ffa7a7' ),
+                'post-sticky'       =>  ( isset( $s_ui[ 'widefat_sticky' ] ) ? $s_ui [ 'widefat_sticky' ] : '#6af9ff'),
+                'plugin-active'     =>  ( isset( $s_ui[ 'widefat_plugin_active' ] ) ? $s_ui [ 'widefat_plugin_active' ] : '#30395c' ),
+                'plugin-inactive'   =>  ( isset( $s_ui[ 'widefat_plugin_inactive' ] ) ? $s_ui [ 'widefat_plugin_inactive' ] : '#ff5d5d')
             ),
             'logo'      => array(
                 'how'               =>  ( isset( $s_ui[ 'nav_logo_how' ] ) ? $s_ui[ 'nav_logo_how' ] : 'svg' ),
@@ -847,8 +847,18 @@ class StickyAdmin {
      *
      */
     public static function adjust_additional_options() {
+        // echo 'la inceput cookie: ' . self::$config['adminbar']['cookie'] . '<br/>';
+        // echo 'la inceput state: ' . self::$config['adminbar']['state'] . '<br/>';
+        
+        // In case of error
+        if ( self::$config['adminbar']['cookie'] == 'undefined' ) {
+            self::$config['adminbar']['cookie'] = 'maximized';
+            setcookie( 'sticky_wpab', 'maximized' );
+        }
         // Update the adminbar state
         self::$config['adminbar']['state'] = ( isset( self::$config['adminbar']['cookie'] ) ? self::$config['adminbar']['cookie'] : ( self::$config['adminbar']['hide'] ? 'closed' : 'maximized' ) );
+        // echo 'dupa cookie: ' . self::$config['adminbar']['cookie'] . '<br/>';
+        // echo 'dupa mod state: ' . self::$config['adminbar']['state'] . '<br/>';
 
         // Extensions to use for CSS and JS files
         self::$config['dev']['js_ext'] = ( self::$config['dev']['minified_js'] ) ? '.min.js' : '.js';

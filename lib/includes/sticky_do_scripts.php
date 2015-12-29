@@ -27,7 +27,6 @@
         wp_enqueue_script('jquery-ui-sortable');
 
         // Main JS file for Sticky Admin.
-        wp_enqueue_script( 'sticky-adminbar', STICKY_JS . 'sticky-adminbar' . StickyAdmin::$config['dev']['js_ext'] );
         wp_register_script( 'sticky-admin', STICKY_JS . 'sticky-admin' . StickyAdmin::$config['dev']['js_ext'] );
         
         // Define the cookies path so JS also knows about it when setting cookies.
@@ -148,7 +147,7 @@
             }
 
             wp_enqueue_script( 'googleapi' );
-            
+
             $dash_locals = array(
                 'word:year'          => __( 'Year', '_sticky_' ),
                 'word:pageviews'     => __( 'Pageviews', '_sticky_' ),
@@ -173,6 +172,7 @@
         } 
         wp_enqueue_script( 'sticky-admin' );
         wp_localize_script( 'sticky-admin', 'stickyObj', $stickyObj );
+        wp_enqueue_script( 'sticky-adminbar', STICKY_JS . 'sticky-adminbar' . StickyAdmin::$config['dev']['js_ext'] );
     }
     add_action( 'sticky_add_scripts', 'sticky_global_js', 2 );
     /**
