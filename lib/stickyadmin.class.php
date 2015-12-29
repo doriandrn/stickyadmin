@@ -848,8 +848,8 @@ class StickyAdmin {
      */
     public static function adjust_additional_options() {
         // Update the adminbar state
-        self::$config['adminbar']['state'] = ( isset ( self::$config['adminbar']['cookie'] ) ? self::$config['adminbar']['cookie'] : ( self::$config['adminbar']['hide'] ? 'closed' : 'maximized' ) );
-   
+        self::$config['adminbar']['state'] = ( isset( self::$config['adminbar']['cookie'] ) ? self::$config['adminbar']['cookie'] : ( self::$config['adminbar']['hide'] ? 'closed' : 'maximized' ) );
+
         // Extensions to use for CSS and JS files
         self::$config['dev']['js_ext'] = ( self::$config['dev']['minified_js'] ) ? '.min.js' : '.js';
         self::$config['dev']['css_ext'] = ( self::$config['dev']['minified_css'] ) ? '.min.css' : '.css';
@@ -858,6 +858,10 @@ class StickyAdmin {
         $wid = intval( self::$config['adminmenu']['width'] );
         if ( $wid < 60 || $wid > 440 ) 
             self::$config['adminmenu']['width'] = '220';
+
+        // If the footer and header have the same colors, make the footer color the sec gradient header color
+        if ( self::$config['colors']['header'] == self::$config['colors']['footer'] )
+            self::$config['colors']['footer'] = self::$config['colors']['header_grad'];
     }
 
     /**
@@ -888,7 +892,7 @@ class StickyAdmin {
            . ' menu-'       . self::$config['colors']['adminmenu']['color']
            . ' menu-hl-'    . self::$config['colors']['adminmenu']['hl_color']
            . ' menu-'       . self::$config['adminmenu']['position']
-           . ' menu-h-'     . self::$config['colors']['adminmenu']['handle']['bg']
+           . ' menu-h-'     . self::$config['colors']['adminmenu']['handle']['color']
            . ' menu-sub-'   . self::$config['colors']['adminmenu']['submenu']['color']
            . ( ! empty( self::$config['adminmenu']['grid_on'] ) ? ' ' . self::$config['adminmenu']['grid_on'] : '' )
            . ' footer-'     . self::$config['colors']['footer']['color']
@@ -956,7 +960,6 @@ class StickyAdmin {
                     $elem['color'] = ( !is_array( $elem['bg'] ) ? ( sticky_luminance( $elem['bg'] ) ? 'b' : 'w' ) : ( sticky_luminance( $elem['bg'][0] ) ? 'b' : 'w' ) );
                 }
 
-
                 self::generate_colors( $node[$key] );
             }
         }
@@ -979,9 +982,7 @@ class StickyAdmin {
         // // Header Gradient Color - Increases HUE by color_step
         // self::$config['colors']['header_grad'] = s
 
-        // // If the footer and header have the same colors, make the footer color the sec gradient header color
-        // if ( self::$config['colors']['header'] == self::$config['colors']['footer'] )
-        //     self::$config['colors']['footer'] = self::$config['colors']['header_grad'];
+        
 
         // // Unused variables
         // unset( $get_hl_color, $color_step );

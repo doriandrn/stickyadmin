@@ -16,10 +16,13 @@ module.exports = function(grunt) {
         '<%= paths.js %>/jquery-labelauty.js',
         '<%= paths.js %>/selectordie.js',
         '<%= paths.js %>/jquery.mCustomScrollbar.js',
-        '<%= paths.js %>/jquery.qtip.js',
         '<%= paths.js %>/moment-with-locales.js',
         '<%= paths.js %>/odometer.js',
         '<%= paths.js %>/slick.js',
+    ],
+    filesAdminBar: [
+        '<%= paths.js %>/jquery.qtip.js',
+        '<%= paths.js %>/sticky-adminbar.js',
     ],
     filesLogin: [
     	'<%= paths.js %>/toastr.js', 
@@ -49,6 +52,10 @@ module.exports = function(grunt) {
       admin: {
         src: "<%= filesAdmin %>",
         dest: '<%= paths.js %>/sticky-admin.min.js'
+      },
+      adminbar: {
+        src: "<%= filesAdminBar %>",
+      	dest: '<%= paths.js %>/sticky-adminbar.min.js'
       },
       login: {
         src: "<%= filesLogin %>",

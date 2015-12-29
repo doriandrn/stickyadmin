@@ -12,32 +12,6 @@
     if ( !function_exists( 'add_action' ) )
         exit;
     
-    function sticky_do_scripts( $theme ) { 
-        // Libraries
-        // sticky_addScript( 'all', 'labelauty' );
-        // sticky_addScript( 'all', 'selectordie' );
-
-
-        // MUST ADD THIS ON ALL PAGES< EVEN LOGIN use sticky_add_login_styles to enqueue
-        sticky_addScript( 'all', STICKY_ADMINBAR );
-        // Search Box
-        // sticky_addScript( array( 'Posts', 'Tags', 'Media', 'Themes', 'Plugins', 'PluginInstall', 'Users', 'Comments' ), STICKY_SEARCHBOX );
-        // Media 
-        // sticky_addScript( 'Media', 'masonry.pkgd.min' );
-        // sticky_addScript( 'Media', STICKY_MEDIA, FALSE, array( 'wp-backbone', 'media-views' ) );
-        // Load the backstretch.js plugin on dashboard only if there is an image set.
-        // sticky_addScript( 'Dashboard', 'backstretch' );
-        // sticky_addScript( 'Dashboard', 'slick', TRUE );
-        // sticky_addScript( 'Dashboard', 'odometer', TRUE );
-        // sticky_addScript( 'Dashboard', STICKY_DASHBOARD );
-        // Update Core page
-        // sticky_addScript( 'UpdateCore', 'sticky-wp-core-update' );
-        // Forms
-        sticky_addScript( array( 'Settings', 'Tags', 'OptionsWriting' ), STICKY_FORMS );
-        // Widgets 
-        sticky_addScript( 'Widgets', STICKY_WIDGETS );
-    }
-    add_action( 'sticky_page_specific_scripts', 'sticky_do_scripts', 1 );
     /**
      * 
      * Sticky Global Scripts
@@ -53,6 +27,7 @@
         wp_enqueue_script('jquery-ui-sortable');
 
         // Main JS file for Sticky Admin.
+        wp_enqueue_script( 'sticky-adminbar', STICKY_JS . 'sticky-adminbar' . StickyAdmin::$config['dev']['js_ext'] );
         wp_register_script( 'sticky-admin', STICKY_JS . 'sticky-admin' . StickyAdmin::$config['dev']['js_ext'] );
         
         // Define the cookies path so JS also knows about it when setting cookies.
@@ -64,8 +39,6 @@
         $origmenu = Array();
         $origids = Array();
 
-        // print_r(StickyAdmin::$original_admin_menu);
-
         foreach ( StickyAdmin::$original_admin_menu as $menu => $item ) { 
             array_push( $origmenu, $item['menu_slug'] );
 
@@ -75,7 +48,7 @@
                 array_push( $origids, 'separator' );
         }
 
-        $vars_to_send_to_js = array(
+        $stickyObj = array(
             'cookie_path'        => $cookies,
             's_admin'            => ( current_user_can( 'edit_stickyadmin' ) ? true : false ),
             'wpab_close_message' => __( 'To reopen the WP Admin Bar, go to Sticky Options and enable it back!', '_sticky_' ),
@@ -104,12 +77,7 @@
             // 's_colors'           => StickyAdmin::$config['hl_colors'],
             // 's_colors2'          => StickyAdmin::$config['hl_colors2'],
         );
-        // Enqueue them scripts.
-        // wp_enqueue_script( 'mCustomScrollbar' );
-        // wp_enqueue_script( 'toastr' );
-        // wp_enqueue_script( 'pace' );
-        // wp_enqueue_script( 'qtip' );
-        // wp_enqueue_script( 'sticky-adminmenu' );
+
         // Dashboard custom.
         if ( $GLOBALS['pagenow'] == 'index.php' && StickyAdmin::$config['statistics'] != false && current_user_can( 'wp_sticky_stats_view' ) ) {
             wp_register_script( 'googleapi', '//www.google.com/jsapi' );
@@ -150,17 +118,17 @@
             );
             
 
-            $p1_array               = __( 'Desktop', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['desktop'] . ',' . __( 'Tablet', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['tablet'] . ',' . __( 'Mobile', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['mobile'];
-            $p3_array               = __( 'Search Engines', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['search_engines'] . ',' . __( 'Links', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['links'] . ',' . __( 'Direct', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['direct'];
+            $p1_array = __( 'Desktop', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['desktop'] . ',' . __( 'Tablet', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['tablet'] . ',' . __( 'Mobile', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['mobile'];
+            $p3_array = __( 'Search Engines', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['search_engines'] . ',' . __( 'Links', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['links'] . ',' . __( 'Direct', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['direct'];
 
             if ( is_array( StickyAdmin::$config['statistics']['os_data'] ) && ! empty( StickyAdmin::$config['statistics']['os_data'] ) ) {
                 foreach (StickyAdmin::$config['statistics']['os_data'] as $os) {
-                    $p2_array           .= strtr(ucfirst($os['name']), $os_names) . ',' . round($os['hits'] / StickyAdmin::$config['statistics']['os_total_hits'][0] * 100) . ',';
+                    $p2_array .= strtr(ucfirst($os['name']), $os_names) . ',' . round($os['hits'] / StickyAdmin::$config['statistics']['os_total_hits'][0] * 100) . ',';
                 }
             }
             if ( is_array( StickyAdmin::$config['statistics']['browser_data'] ) && ! empty( StickyAdmin::$config['statistics']['browser_data'] ) ) {
                 foreach (StickyAdmin::$config['statistics']['browser_data'] as $browser) {
-                    $p4_array           .= strtr(ucfirst($browser['name']), $browser_names) . ',' . round($browser['hits'] / StickyAdmin::$config['statistics']['browser_total_hits'][0] * 100) . ',' ;
+                    $p4_array .= strtr(ucfirst($browser['name']), $browser_names) . ',' . round($browser['hits'] / StickyAdmin::$config['statistics']['browser_total_hits'][0] * 100) . ',' ;
                 }
             }
             if ( is_array( StickyAdmin::$config['statistics']['visits'] ) && ! empty( StickyAdmin::$config['statistics']['visits'] ) ) {
@@ -168,7 +136,6 @@
                     if ( $day[ 'hits' ] === null ) $day[ 'hits' ] = 0;
                     if ( $day[ 'pageviews' ] === null ) $day[ 'pageviews' ] = 0;
                     $s_date = explode('-', $day['date']);
-                    // echo $day['date'];
                     $required_day = date("l", mktime(0, 0, 0, $s_date[1], $s_date[2], $s_date[0]));
                     $data_array .= substr( $required_day, 0, 1 ) . "," . $day['pageviews'] . "," . $day[ 'hits' ] . "," . $required_day . '+' . $day[ 'date' ] . ",";
                 } 
@@ -181,6 +148,7 @@
             }
 
             wp_enqueue_script( 'googleapi' );
+            
             $dash_locals = array(
                 'word:year'          => __( 'Year', '_sticky_' ),
                 'word:pageviews'     => __( 'Pageviews', '_sticky_' ),
@@ -201,10 +169,10 @@
                 'p3'                 => $p3_array,
                 'p4'                 => $p4_array
             );
-            $vars_to_send_to_js = array_merge( $vars_to_send_to_js, $dash_locals ); 
+            $stickyObj = array_merge( $stickyObj, $dash_locals ); 
         } 
         wp_enqueue_script( 'sticky-admin' );
-        wp_localize_script( 'sticky-admin', 'stickyObj', $vars_to_send_to_js );
+        wp_localize_script( 'sticky-admin', 'stickyObj', $stickyObj );
     }
     add_action( 'sticky_add_scripts', 'sticky_global_js', 2 );
     /**
@@ -250,7 +218,7 @@
 
         if ( ! is_admin() && StickyAdmin::$config['adminbar']['preserve'] ) {
             wp_enqueue_script( 'qtip' , STICKY_JS . 'jquery.qtip.min.js' );
-            $vars_to_send_to_js = array(
+            $stickyObj = array(
                 's_admin'            => ( current_user_can( 'edit_stickyadmin') ? true : false ),
                 'wpab_controls'      => StickyAdmin::$config['adminbar']['controls']
             );
@@ -259,8 +227,8 @@
         // This will ensure the scripts are loaded on back-end only
         wp_register_script( STICKY_ADMINBAR, STICKY_JS . STICKY_ADMINBAR . '.js', 0, StickyAdmin::VERSION );
         
-        if ( ! empty( $vars_to_send_to_js ) )
-            wp_localize_script( STICKY_ADMINBAR, 'sticky_js_vars', $vars_to_send_to_js );
+        if ( ! empty( $stickyObj ) )
+            wp_localize_script( STICKY_ADMINBAR, 'sticky_js_vars', $stickyObj );
 
         wp_enqueue_script( STICKY_ADMINBAR );
     }
