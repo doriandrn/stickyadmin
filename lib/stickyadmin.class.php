@@ -489,7 +489,7 @@ class StickyAdmin {
                 'type'              =>  ( isset ( $s_ui[ 'header_type' ] ) ? $s_ui[ 'header_type' ] : 'minimize' ),
             ),
             'content'   => array(
-                'dash_heading'      =>  ( isset ( $s_ui[ 'dash_heading' ] ) ? esc_attr ( $s_ui[ 'dash_heading' ] ) : '' ),
+                'dash_heading'      =>  ( isset ( $s_ui[ 'dash_heading' ] ) ? esc_attr ( $s_ui[ 'dash_heading' ] ) : __( 'Welcome to WordPress with StickyAdmin!', '_sticky_' ) ),
                 'dash_stats'        =>  ( isset ( $s_ui[ 's_no_welcome' ] ) ? $s_ui['s_no_welcome'] : true ),
                 'preload'           =>  ( isset ( $s_ui[ 'content_preload' ] ) ? $s_ui['content_preload'] : true ),
                 'preloader'         =>  ( isset ( $s_ui[ 'content_preloader' ] ) && ( $s_ui [ 'content_preloader' ] != '' ) ? $s_ui['content_preloader'] : sticky_cogs( rand(1,24) ) )
@@ -732,7 +732,7 @@ class StickyAdmin {
         self::$config['statistics'] = array(
             // Overall stats config
             'ignore_spam'       => ( isset( $s_ui[ 's_s_ignore_spam' ] ) && $s_ui[ 's_s_ignore_spam' ] ) ? 1 : 0,
-            'tracker_active'    => ( isset( $s_ui[ 's_s_tracker' ] ) && $s_ui[ 's_s_tracker' ] ) ? 1 : 0,
+            'tracker_active'    => ( isset( $s_ui[ 's_s_tracker' ] ) && $s_ui[ 's_s_tracker' ] ) ? 1 : 1,
             'ignore_admin'      => ( isset( $s_ui[ 's_s_ignore_admin' ] ) && $s_ui[ 's_s_ignore_admin' ] ) ? 1 : 0,
             'track_users'       => ( isset( $s_ui[ 's_s_track_users' ] ) && $s_ui[ 's_s_track_users' ] ) ? 1 : 0,
             'purge_interval'    => ( isset( $s_ui[ 's_s_purge_time' ] ) ? $s_ui[ 's_s_purge_time' ] : 150 ),
@@ -850,6 +850,10 @@ class StickyAdmin {
         // Update the adminbar state
         self::$config['adminbar']['state'] = ( isset ( self::$config['adminbar']['cookie'] ) ? self::$config['adminbar']['cookie'] : ( self::$config['adminbar']['hide'] ? 'closed' : 'maximized' ) );
    
+        // Extensions to use for CSS and JS files
+        self::$config['dev']['js_ext'] = ( self::$config['dev']['minified_js'] ) ? '.min.js' : '.js';
+        self::$config['dev']['css_ext'] = ( self::$config['dev']['minified_css'] ) ? '.min.css' : '.css';
+
         // If the value read from the cookie is illegal
         $wid = intval( self::$config['adminmenu']['width'] );
         if ( $wid < 60 || $wid > 440 ) 
@@ -1270,9 +1274,8 @@ class StickyAdmin {
 
         ob_start();
 
-        require_once( STICKY_INCLUDES_URI . 'sticky_css.php' );
-
-        $css = ob_get_clean();
+        $css = sticky_dynamic_css();
+        $css .= ob_get_clean();
 
         // Write the CSS cache file
         file_put_contents( STICKY_CACHE_URI . $cache_file , $css, LOCK_EX );

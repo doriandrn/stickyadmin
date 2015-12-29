@@ -169,7 +169,7 @@ $options_panel->OpenTab( 's_dashboard' );
         $options_panel->addText( 'dash_heading', array(
                 'name'  => __( 'Welcome text', '_sticky_' ),
                 'desc'  => __( 'Input a custom heading title to be displayed on the Dashboard - Welcome Screen. Only works if JavaScript is enabled.', '_sticky_' ), 
-                'std'   => __( 'StickyAdmin', '_sticky_') 
+                'std'   => __( 'Welcome to WordPress with StickyAdmin!', '_sticky_') 
         ) );
         $options_panel->addText( 'dash_subheading', array(
                 'name'  => __( 'Welcome subheading / Statistics Widget title', '_sticky_' ),

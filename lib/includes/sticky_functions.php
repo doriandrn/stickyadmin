@@ -33,19 +33,13 @@ if ( !function_exists( 'sticky_addStyle' ) ) :
                 $hook = StickyAdmin::$config['default_pages_list'][$hooks];
                 // if ( $GLOBALS['pagenow'] != $hook ) return;
                 $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_CSS . $style . '.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
-                // if ( function_exists('is_rtl') && is_rtl() && $has_rtl )
-                    // $enqueue_string .= 'wp_enqueue_style ( "' . $style . '", "' . STICKY_CSS . $style . '.rtl.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
                 add_action( 'admin_print_styles-' . $hook, ( create_function( '', $enqueue_string ) ), $order );
             }
             elseif ( $hooks == 'Login' ) {
                 echo "<link rel='stylesheet' href='". STICKY_CSS . $style .".css' type='text/css' ></link>";
-                // if ( function_exists('is_rtl') && is_rtl() && $has_rtl )
-                    // echo "<link rel='stylesheet' href='". STICKY_CSS . $style .".min.css' type='text/css' ></link>";
             }
             elseif ( $hooks == 'all' ) {
                 $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_CSS . $style . '.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
-                // if ( function_exists ( 'is_rtl' ) && is_rtl() && $has_rtl )
-                    // $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_CSS . $style . '.rtl.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
                 add_action( 'admin_print_styles', ( create_function( '', $enqueue_string ) ), $order );
             }
         }   
@@ -70,6 +64,7 @@ if ( !function_exists( 'sticky_addScript' ) ) :
         $script = trim ( $filename_no_ext );
         $deps = array( $deps );
         $deps_string = '';
+        $minified = StickyAdmin::$config['dev']['minified_js'];
         // Only do this if we have dependencies
         if ( ! empty( $deps ) ) {
             $deps_count = count( $deps );
@@ -654,7 +649,7 @@ if ( !function_exists( 'sticky_stats_display' ) ) :
                     </div>
                  </div>';
         } else {
-            echo '<div id="sticky_notice"><p>' . __( 'Please give the statistics screen up to 30 minutes to gather elemental data in order for it to show up. Unfortunately, the statistics panel IS NOT AVAILABLE for localhost installations at this time.', '_sticky_' ) . '</p></div>';
+            echo '<div id="sticky_notice"><p>' . __( 'Please allow the statistics screen up to 30 minutes to gather elemental data in order for it to show up. Unfortunately, the statistics panel IS NOT AVAILABLE for localhost installations at this time.', '_sticky_' ) . '</p></div>';
         }
     }
 endif;

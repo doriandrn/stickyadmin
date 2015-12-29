@@ -9,6 +9,23 @@ module.exports = function(grunt) {
     	fonts: 'lib/fonts',
     	assets: 'lib/assets'
     },
+    filesAdmin: [
+    	'<%= paths.js %>/toastr.js',
+        '<%= paths.js %>/sticky-admin.js',
+        '<%= paths.js %>/anysearch.js',
+        '<%= paths.js %>/jquery-labelauty.js',
+        '<%= paths.js %>/selectordie.js',
+        '<%= paths.js %>/jquery.mCustomScrollbar.js',
+        '<%= paths.js %>/jquery.qtip.js',
+        '<%= paths.js %>/moment-with-locales.js',
+        '<%= paths.js %>/odometer.js',
+        '<%= paths.js %>/slick.js',
+    ],
+    filesLogin: [
+    	'<%= paths.js %>/toastr.js', 
+    	'<%= paths.js %>/backstretch.js', 
+        '<%= paths.js %>/sticky-login.js',
+    ],
     jshint: {   
       options: {
         globals: {
@@ -20,21 +37,23 @@ module.exports = function(grunt) {
       },
       files: [
       	'Gruntfile.js',
-      	'!<%= paths.js %>/*.min.js', 
       	'<%= paths.js %>/sticky-*.js',
-      	'!<%= paths.js %>/sticky-admin-deps.js',
+      	'!<%= paths.js %>/*.min.js', 
+      	'!<%= paths.js %>/sticky-*.min.js', 
       ],
     },
     concat: {
       options: {
         separator: ';'
       },
-      dist: {
-        src: [
-        	'<%= paths.js %>/*.js'
-        ],
-        dest: '<%= paths.js %>/.min.js'
-      }
+      admin: {
+        src: "<%= filesAdmin %>",
+        dest: '<%= paths.js %>/sticky-admin.min.js'
+      },
+      login: {
+        src: "<%= filesLogin %>",
+      	dest: '<%= paths.js %>/sticky-login.min.js'
+      },
     },
     uglify: {
       options: {
@@ -42,7 +61,9 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          '<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          '<%= paths.js %>/sticky-admin.min.js': ['<%= concat.admin.dest %>'],
+          '<%= paths.js %>/sticky-login.min.js': ['<%= concat.login.dest %>'],
+          '<%= paths.js %>/sticky-tracker.min.js': ['<%= paths.js %>/sticky-tracker.js']
         }
       }
     },
@@ -70,6 +91,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Tasks
-  grunt.registerTask('test', ['jshint']);
+  grunt.registerTask('testjs', ['jshint']);
   grunt.registerTask('compile', ['jshint', 'cssmin', 'concat', 'uglify'] );
+  grunt.registerTask('makejs', ['concat', 'uglify']);
 };

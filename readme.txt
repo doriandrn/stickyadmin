@@ -97,7 +97,6 @@ Coming soon.
 
 = 1.0.6 =
 Dec 28th, 2015
-Merry Christmas everyone!
 
 Improvements:
 
@@ -108,6 +107,7 @@ Improvements:
 * Better caching of files; 
 * 100% compatibility with PHP 7.0+
 * Added GruntJS for minifications and compilations;
+* All files run now minified, better page loading speeds
 
 BugFixes:
 

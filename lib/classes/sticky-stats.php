@@ -29,7 +29,6 @@ class StickyStats extends StickyAdmin
      */
     public static function init()
     {
-
         $active_sitewide_plugins = get_site_option('active_sitewide_plugins');
         if ( ! empty( $active_sitewide_plugins['stickyadmin/index.php'] ) ) {
             add_action('wpmu_new_blog', array(__CLASS__, 'new_blog'));
@@ -66,7 +65,7 @@ class StickyStats extends StickyAdmin
 
         // Add the server and client-side tracker
         if ( StickyAdmin::$config['statistics']['tracker_active'] && ( !is_admin() || ( is_admin() && ! StickyAdmin::$config['statistics']['ignore_admin'] ) ) ) {
-	
+
             // Add additional custom exclusion filters
             $track_filter = apply_filters('sticky_stats_filter_pre_tracking', true);
             $action_to_hook = is_admin() ? 'admin_init' : 'wp';
@@ -115,9 +114,10 @@ class StickyStats extends StickyAdmin
      */
     public static function sticky_stats_enqueue_tracking_script()
     {
-        if ( is_admin() && StickyAdmin::$config['statistics']['ignore_admin'] ) return;
+        if ( is_admin() && StickyAdmin::$config['statistics']['ignore_admin'] ) 
+            return;
 
-        wp_register_script( 'sticky_stats', STICKY_JS . 'sticky-tracker.js', array(), null, true);
+        wp_register_script( 'sticky_stats', STICKY_JS . 'sticky-tracker' . self::$config['dev']['js_ext'], array(), null, true);
 
         // Pass some information to Javascript
         $params = array(

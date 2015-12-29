@@ -21,7 +21,7 @@
         // MUST ADD THIS ON ALL PAGES< EVEN LOGIN use sticky_add_login_styles to enqueue
         sticky_addScript( 'all', STICKY_ADMINBAR );
         // Search Box
-        sticky_addScript( array( 'Posts', 'Tags', 'Media', 'Themes', 'Plugins', 'PluginInstall', 'Users', 'Comments' ), STICKY_SEARCHBOX );
+        // sticky_addScript( array( 'Posts', 'Tags', 'Media', 'Themes', 'Plugins', 'PluginInstall', 'Users', 'Comments' ), STICKY_SEARCHBOX );
         // Media 
         // sticky_addScript( 'Media', 'masonry.pkgd.min' );
         // sticky_addScript( 'Media', STICKY_MEDIA, FALSE, array( 'wp-backbone', 'media-views' ) );
@@ -36,8 +36,6 @@
         sticky_addScript( array( 'Settings', 'Tags', 'OptionsWriting' ), STICKY_FORMS );
         // Widgets 
         sticky_addScript( 'Widgets', STICKY_WIDGETS );
-        // Comments Page
-        sticky_addScript( 'Comments', STICKY_COMMENTS );
     }
     add_action( 'sticky_page_specific_scripts', 'sticky_do_scripts', 1 );
     /**
@@ -51,13 +49,12 @@
     function sticky_global_js() {
         if ( ! is_admin() ) 
             return;
+
         wp_enqueue_script('jquery-ui-sortable');
-        
-        // Dependencies
-        wp_enqueue_script( 'sticky-admin-deps', STICKY_JS . 'sticky-admin-deps.js' );
 
         // Main JS file for Sticky Admin.
-        wp_register_script( 'sticky-admin', STICKY_JS . 'sticky-admin.js' );
+        wp_register_script( 'sticky-admin', STICKY_JS . 'sticky-admin' . StickyAdmin::$config['dev']['js_ext'] );
+        
         // Define the cookies path so JS also knows about it when setting cookies.
         $cookies = array( 'path' => COOKIEPATH ); 
 
