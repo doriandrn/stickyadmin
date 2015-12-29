@@ -909,11 +909,7 @@
     }
     #wpfooter { 
         padding-right: 20px;
-        padding-left: 80px;
-    }
-    body.rtl #wpfooter { 
         padding-left: 20px;
-        padding-right: 80px;
     }
     #dash_slick.slick-slider > button {
         left: -20px;

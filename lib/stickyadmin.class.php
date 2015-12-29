@@ -860,8 +860,13 @@ class StickyAdmin {
             self::$config['adminmenu']['width'] = '220';
 
         // If the footer and header have the same colors, make the footer color the sec gradient header color
-        if ( self::$config['colors']['header'] == self::$config['colors']['footer'] )
-            self::$config['colors']['footer'] = self::$config['colors']['header_grad'];
+        if ( is_array( self::$config['colors']['header']['bg'] ) ) 
+            if ( self::$config['colors']['header']['bg'][0] == self::$config['colors']['footer']['bg'] )
+                self::$config['colors']['footer']['bg'] = self::$config['colors']['header']['bg'][0];
+
+        // Dashboard Maps
+        // self::$config['colors']['dash_maps'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 0, 15 );
+        // self::$config['colors']['dash_maps_bg'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 5, -5 );
     }
 
     /**
@@ -935,7 +940,7 @@ class StickyAdmin {
                             );
                             $elem['bg'] = array(
                                 $elem['bg'],
-                                sticky_adjust_hl_color( $elem['bg'], $color_step )
+                                sticky_adjust_hl_color( $elem['bg'], 35 )
                             );
                             break;
 
@@ -965,28 +970,6 @@ class StickyAdmin {
         }
     }
 
-        // // Dashboard Maps
-        // self::$config['colors']['dash_maps'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 0, 15 );
-        // self::$config['colors']['dash_maps_bg'] = sticky_adjust_hl_color( self::$config['colors']['content'], 0, 5, -5 );
-
-        // // Highlighter Colors Adjustments
-
-        // // AdminMenu
-        // self::$config['colors']['adminmenu_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'nav_hl' ] ) ? $s_ui[ 'nav_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminmenu' );
-        // self::$config['colors']['adminmenu_hltwo'] = sticky_adjust_hl_color( self::$config['hl_colors'][0], 0, 0, 0, 1, 'adminmenu' );
-        
-        // // Adminbar
-        // self::$config['colors']['adminbar_submenu_top'] = sticky_adjust_hl_color( self::$config['colors']['adminbar_submenu'], 0, 0, -15 );
-        // self::$config['colors']['adminbar_hl'] = sticky_adjust_hl_color( ( isset ( $s_ui[ 'wpadminbar_hl' ] ) ? $s_ui[ 'wpadminbar_hl' ] : '#d0e4f2' ), 0, 0, 0, 1, 'adminbar' );
-
-        // // Header Gradient Color - Increases HUE by color_step
-        // self::$config['colors']['header_grad'] = s
-
-        
-
-        // // Unused variables
-        // unset( $get_hl_color, $color_step );
-    
 
     /**
      *
