@@ -9958,3 +9958,8 @@ body.content-w #request-filesystem-credentials-dialog {
 #request-filesystem-credentials-form label > em {
     font-size: 9px;
 }
+
+/* VC fix  */
+#wpb_visual_composer .inside {
+    max-width: 100%!important;
+}
