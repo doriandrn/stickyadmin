@@ -430,7 +430,7 @@ if ( !function_exists( 'add_action' ) )
         	return;
 
         return minify_css('
-            body, 
+            body.sticky-admin, 
             body.is_loading #overlay, 
             #wpbody,
             #postdivrich .switch-html:before,
