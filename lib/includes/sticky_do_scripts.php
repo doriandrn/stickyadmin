@@ -224,7 +224,7 @@
         }
         
         // This will ensure the scripts are loaded on back-end only
-        wp_register_script( STICKY_ADMINBAR, STICKY_JS . STICKY_ADMINBAR . '.js', array('jquery'), StickyAdmin::VERSION );
+        wp_register_script( STICKY_ADMINBAR, STICKY_JS . STICKY_ADMINBAR . StickyAdmin::$config['dev']['js_ext'], array('jquery'), StickyAdmin::VERSION );
         
         if ( ! empty( $stickyObj ) )
             wp_localize_script( STICKY_ADMINBAR, 'stickyObj', $stickyObj );
