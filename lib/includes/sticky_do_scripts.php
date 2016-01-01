@@ -217,7 +217,6 @@
         // wp_deregister_script( 'admin-bar' );
 
         if ( ! is_admin() && StickyAdmin::$config['adminbar']['preserve'] ) {
-            wp_enqueue_script( 'qtip' , STICKY_JS . 'jquery.qtip.min.js' );
             $stickyObj = array(
                 's_admin'            => ( current_user_can( 'edit_stickyadmin') ? true : false ),
                 'wpab_controls'      => StickyAdmin::$config['adminbar']['controls']
@@ -225,10 +224,10 @@
         }
         
         // This will ensure the scripts are loaded on back-end only
-        wp_register_script( STICKY_ADMINBAR, STICKY_JS . STICKY_ADMINBAR . '.js', 0, StickyAdmin::VERSION );
+        wp_register_script( STICKY_ADMINBAR, STICKY_JS . STICKY_ADMINBAR . '.js', array('jquery'), StickyAdmin::VERSION );
         
         if ( ! empty( $stickyObj ) )
-            wp_localize_script( STICKY_ADMINBAR, 'sticky_js_vars', $stickyObj );
+            wp_localize_script( STICKY_ADMINBAR, 'stickyObj', $stickyObj );
 
         wp_enqueue_script( STICKY_ADMINBAR );
     }

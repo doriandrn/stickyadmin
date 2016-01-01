@@ -4,201 +4,214 @@ msgid ""
 msgstr ""
 "Project-Id-Version: StickyAdmin 1.0.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/stickyadmin\n"
-"POT-Creation-Date: 2015-12-30 15:34:41+00:00\n"
+"POT-Creation-Date: 2015-12-30 18:49+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2015-12-31 09:18+0200\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+"Language: ro_RO\n"
 
 #: lib/classes/admin-page-class/admin-page-class.php:382
 msgid "Allowed Files"
-msgstr ""
+msgstr "Fișiere permise"
 
 #: lib/classes/admin-page-class/admin-page-class.php:585
 #: lib/classes/admin-page-class/admin-page-class.php:587
 msgid "Insert into Post"
-msgstr ""
+msgstr "Inserați în Postare"
 
 #: lib/classes/admin-page-class/admin-page-class.php:585
 msgid "Use this File"
-msgstr ""
+msgstr "Utilizaţi acest fişier"
 
 #: lib/classes/admin-page-class/admin-page-class.php:587
 msgid "Use this Image"
-msgstr ""
+msgstr "Utilizaţi această imagine"
 
 #: lib/classes/admin-page-class/admin-page-class.php:622
 msgid "Settings saved."
-msgstr ""
+msgstr "Setări salvate."
 
 #: lib/classes/admin-page-class/admin-page-class.php:622
 msgid "Please navigate away this page for changes to take effect."
 msgstr ""
+"Vă rugăm să naviga departe această pagină pentru modificările să aibă efect."
 
 #: lib/classes/admin-page-class/admin-page-class.php:722
 msgid "Save Changes"
-msgstr ""
+msgstr "Salvează modificările"
 
 #: lib/classes/admin-page-class/admin-page-class.php:774
 msgid "Options are now back to defaults"
-msgstr ""
+msgstr "Opţiunile sunt acum înapoi la setările implicite"
 
 #: lib/classes/admin-page-class/admin-page-class.php:781
 msgid "Error: Options not saved, please try again"
-msgstr ""
+msgstr "Eroare: Opţiunile nu s-au salvat, vă rugăm să încercaţi din nou"
 
 #: lib/classes/admin-page-class/admin-page-class.php:786
 #: lib/classes/admin-page-class/admin-page-class.php:789
 msgid "Options Saved"
-msgstr ""
+msgstr "Opțiunile au fost salvate."
 
 #: lib/classes/admin-page-class/admin-page-class.php:1180
 msgid "Delete this image"
-msgstr ""
+msgstr "Şterge imaginea"
 
 #: lib/classes/admin-page-class/admin-page-class.php:1180
 #: lib/classes/admin-page-class/admin-page-class.php:1887
 msgid "Delete"
-msgstr ""
+msgstr "Elimină"
 
 #: lib/classes/admin-page-class/admin-page-class.php:1273
 msgid "Cannot delete file. Something's wrong."
-msgstr ""
+msgstr "Nu se poate șterge fișierul. Ceva e în neregulă."
 
 #: lib/classes/admin-page-class/admin-page-class.php:1467
 #: lib/classes/admin-page-class/admin-page-class.php:1510
 msgid "Remove"
-msgstr ""
+msgstr "Elimină"
 
 #: lib/classes/admin-page-class/admin-page-class.php:1478
 msgid "Add"
-msgstr ""
+msgstr "Adaugă"
 
 #: lib/classes/admin-page-class/admin-page-class.php:1647
 msgid "Select Files"
-msgstr ""
+msgstr "Selectează fișiere"
 
 #: lib/classes/admin-page-class/admin-page-class.php:1883
 msgid "Uploaded files"
-msgstr ""
+msgstr "Fișiere încărcate"
 
 #: lib/classes/admin-page-class/admin-page-class.php:1893
 msgid "Upload new files"
-msgstr ""
+msgstr "Încărcaţi fişier nou"
 
 #: lib/classes/admin-page-class/admin-page-class.php:1899
 msgid "Add more files"
-msgstr ""
+msgstr "Adaugă mai multe fișiere"
 
 #: lib/classes/admin-page-class/admin-page-class.php:1918
 #: lib/classes/admin-page-class/admin-page-class.php:1950
 msgid "Delete Image"
-msgstr ""
+msgstr "Şterge imaginea"
 
 #: lib/classes/admin-page-class/admin-page-class.php:1923
 #: lib/classes/admin-page-class/admin-page-class.php:1955
 msgid "Upload Image"
-msgstr ""
+msgstr "Încărcați imagine"
 
 #: lib/classes/admin-page-class/admin-page-class.php:2026
 #: lib/classes/admin-page-class/admin-page-class.php:2052
 msgid "Select a color"
-msgstr ""
+msgstr "Selectează o culoare"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3261
 msgid "Export Code"
-msgstr ""
+msgstr "Codul de export"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3264
 msgid "Get Export"
-msgstr ""
+msgstr "Obţine Export"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3268
 msgid ""
 "To export saved settings click the Export button bellow and you will get the "
 "export Code in the box bellow, which you can later use to import."
 msgstr ""
+"Pentru a exporta setările salvate, faceţi clic pe butonul de Export mai jos "
+"şi veţi obţine codul de export în caseta de mai jos, care mai târziu îl "
+"puteţi utiliza pentru a-l importa."
 
 #: lib/classes/admin-page-class/admin-page-class.php:3274
 msgid "Import Code"
-msgstr ""
+msgstr "Codul de import"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3277
 msgid "Import"
-msgstr ""
+msgstr "Importă"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3281
 msgid ""
 "To Import saved settings paste the Export output in to the Import Code box "
 "bellow and click Import."
 msgstr ""
+"Pentru a importa setările salvate, lipiți codul de export în caseta unde se "
+"cere codul de import mai jos şi faceţi clic pe Import."
 
 #: lib/classes/admin-page-class/admin-page-class.php:3302
 msgid "error in ajax request! (1)"
-msgstr ""
+msgstr "A aparut o eroare in timpul procesării cererii AJAX (1)"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3311
 msgid "error in ajax request! (2)"
-msgstr ""
+msgstr "A aparut o eroare in timpul procesării cererii AJAX (2)"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3342
 msgid "error in ajax request! (3)"
-msgstr ""
+msgstr "A aparut o eroare in timpul procesării cererii AJAX (3)"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3354
 msgid "Setting imported, make sure you "
-msgstr ""
+msgstr "Setări importate, asiguraţi-vă că aţi"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3354
 msgid "Refresh this page"
-msgstr ""
+msgstr "Reîmprospătați această pagină"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3356
 msgid "Could not import settings! (4)"
-msgstr ""
+msgstr "Nu se pot importa setările! (4)"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3373
 msgid "You do not have sufficient permissions to edit templates for this site."
 msgstr ""
+"Nu aveţi permisiuni suficiente pentru a edita template-uri pentru acest site."
 
 #: lib/classes/admin-page-class/admin-page-class.php:3376
 msgid "Error Downloading file."
-msgstr ""
+msgstr "Eroare la descărcarea fişierului."
 
 #: lib/classes/admin-page-class/admin-page-class.php:3397
 #: lib/classes/admin-page-class/admin-page-class.php:3400
 msgid "Download Export"
-msgstr ""
+msgstr "Descarcă Fişier Export"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3461
 msgid "Not Valid "
-msgstr ""
+msgstr "Invalid"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3478
 msgid "Errors in saving changes"
-msgstr ""
+msgstr "Erori la salvarea modificărilor"
 
 #: lib/classes/admin-page-class/admin-page-class.php:3502
 msgid "Unkown Error"
-msgstr ""
+msgstr "Eroare necunoscută"
 
 #: lib/includes/sticky_do_scripts.php:53
 msgid "To reopen the WP Admin Bar, go to Sticky Options and enable it back!"
 msgstr ""
+"Pentru a redeschide bara de Admin, du-te la opţiunile Sticky şi permite-o "
+"înapoi!"
 
 #: lib/includes/sticky_do_scripts.php:54
 msgid "Filter"
-msgstr ""
+msgstr "Filtrează"
 
 #: lib/includes/sticky_do_scripts.php:55
 msgid "Reset"
-msgstr ""
+msgstr "Resetează"
 
 #: lib/includes/sticky_do_scripts.php:92 lib/includes/sticky_do_scripts.php:97
 msgid "Unknown"
-msgstr ""
+msgstr "Necunoscut"
 
 #: lib/includes/sticky_do_scripts.php:93
 msgid "Safari"
@@ -218,15 +231,15 @@ msgstr ""
 
 #: lib/includes/sticky_do_scripts.php:105
 msgid "Visitors Today"
-msgstr ""
+msgstr "Vizitatori astăzi"
 
 #: lib/includes/sticky_do_scripts.php:106
 msgid "Pageviews Today"
-msgstr ""
+msgstr "Vizualizări de pagină astăzi"
 
 #: lib/includes/sticky_do_scripts.php:110
 msgid "Popular Locations"
-msgstr ""
+msgstr "Locații populare"
 
 #: lib/includes/sticky_do_scripts.php:111
 #: lib/includes/sticky_do_scripts.php:115
@@ -239,19 +252,19 @@ msgstr ""
 
 #: lib/includes/sticky_do_scripts.php:120
 msgid "Tablet"
-msgstr ""
+msgstr "Tabletă"
 
 #: lib/includes/sticky_do_scripts.php:120
 msgid "Mobile"
-msgstr ""
+msgstr "Mobil"
 
 #: lib/includes/sticky_do_scripts.php:121
 msgid "Search Engines"
-msgstr ""
+msgstr "Motoare de căutare"
 
 #: lib/includes/sticky_do_scripts.php:121
 msgid "Links"
-msgstr ""
+msgstr "Legături"
 
 #: lib/includes/sticky_do_scripts.php:121
 msgid "Direct"
@@ -259,112 +272,107 @@ msgstr ""
 
 #: lib/includes/sticky_do_scripts.php:152
 msgid "Year"
-msgstr ""
+msgstr "An"
 
-#: lib/includes/sticky_do_scripts.php:153
-#: lib/includes/sticky_functions.php:567
+#: lib/includes/sticky_do_scripts.php:153 lib/includes/sticky_functions.php:567
 msgid "Pageviews"
-msgstr ""
+msgstr "Vizualizări de pagină"
 
 #: lib/includes/sticky_do_scripts.php:154
 msgid "Visitors"
-msgstr ""
+msgstr "Vizitatori"
 
 #: lib/includes/sticky_do_scripts.php:155
 msgid "Country"
-msgstr ""
+msgstr "Țară"
 
 #: lib/includes/sticky_do_scripts.php:156
 msgid "Popularity"
-msgstr ""
+msgstr "Popularitate"
 
-#: lib/includes/sticky_do_scripts.php:157
-#: lib/includes/sticky_functions.php:599
+#: lib/includes/sticky_do_scripts.php:157 lib/includes/sticky_functions.php:599
 msgid "Devices"
 msgstr ""
 
-#: lib/includes/sticky_do_scripts.php:158
-#: lib/includes/sticky_functions.php:603
+#: lib/includes/sticky_do_scripts.php:158 lib/includes/sticky_functions.php:603
 msgid "Operating Systems"
-msgstr ""
+msgstr "Sisteme de operare"
 
-#: lib/includes/sticky_do_scripts.php:159
-#: lib/includes/sticky_functions.php:607
+#: lib/includes/sticky_do_scripts.php:159 lib/includes/sticky_functions.php:607
 msgid "Traffic Sources"
-msgstr ""
+msgstr "Surse de trafic"
 
-#: lib/includes/sticky_do_scripts.php:160
-#: lib/includes/sticky_functions.php:611
+#: lib/includes/sticky_do_scripts.php:160 lib/includes/sticky_functions.php:611
 msgid "Browsers"
-msgstr ""
+msgstr "Navigatoare"
 
 #: lib/includes/sticky_do_scripts.php:161
 msgid "Percentage"
-msgstr ""
+msgstr "Procentaj"
 
 #: lib/includes/sticky_do_scripts.php:162
 msgid "Keep Reading"
-msgstr ""
+msgstr "Citește tot"
 
 #: lib/includes/sticky_do_scripts.php:163
 msgid "More News"
-msgstr ""
+msgstr "Mai multe știri"
 
 #: lib/includes/sticky_functions.php:553
 msgid "Visits"
-msgstr ""
+msgstr "Vizite"
 
 #: lib/includes/sticky_functions.php:555 lib/includes/sticky_functions.php:569
 msgid "Today"
-msgstr ""
+msgstr "Astăzi"
 
 #: lib/includes/sticky_functions.php:556 lib/includes/sticky_functions.php:570
 msgid "This week"
-msgstr ""
+msgstr "În această săptămână"
 
 #: lib/includes/sticky_functions.php:557 lib/includes/sticky_functions.php:571
 msgid "This month"
-msgstr ""
+msgstr "În această lună"
 
 #: lib/includes/sticky_functions.php:560 lib/includes/sticky_functions.php:574
 msgid "Yesterday"
-msgstr ""
+msgstr "Ieri"
 
 #: lib/includes/sticky_functions.php:561 lib/includes/sticky_functions.php:575
 msgid "Last week"
-msgstr ""
+msgstr "Ultima săptămână"
 
 #: lib/includes/sticky_functions.php:562 lib/includes/sticky_functions.php:576
 msgid "Last month"
-msgstr ""
+msgstr "Ultima lună"
 
 #: lib/includes/sticky_functions.php:583 lib/stickyadmin.class.php:1913
 msgid "Site Statistics"
-msgstr ""
+msgstr "Statistici sit"
 
 #: lib/includes/sticky_functions.php:585
 msgid "Daily"
-msgstr ""
+msgstr "Pe zi"
 
 #: lib/includes/sticky_functions.php:586
 msgid "Weekly"
-msgstr ""
+msgstr "Pe săptămână"
 
 #: lib/includes/sticky_functions.php:587
 msgid "Monthly"
-msgstr ""
+msgstr "Pe lună"
 
 #: lib/includes/sticky_functions.php:588
 msgid "Yearly"
-msgstr ""
+msgstr "Pe an"
 
 #: lib/includes/sticky_functions.php:593
 msgid "Hot Locations"
-msgstr ""
+msgstr "Locații populare"
 
 #: lib/includes/sticky_functions.php:597
 msgid "Traffic Overview"
-msgstr ""
+msgstr "Examinare trafic"
 
 #: lib/includes/sticky_functions.php:616
 msgid "Top hits"
@@ -388,6 +396,10 @@ msgid ""
 "in order for it to show up. Unfortunately, the statistics panel IS NOT "
 "AVAILABLE for localhost installations at this time."
 msgstr ""
+"Vă rugăm să acordați ecranului de statistici până la 30 de minute pentru a "
+"colecta datele elementare și necesare acestuia pentru a se afișa. Din "
+"păcate, panoul de statistici nu este disponibil pentru instalaţiile locale "
+"în acest moment."
 
 #: lib/sticky_options.php:15
 msgid "Sticky Admin"
@@ -395,48 +407,48 @@ msgstr ""
 
 #: lib/sticky_options.php:30 lib/sticky_options.php:47
 msgid "Themes"
-msgstr ""
+msgstr "Teme"
 
 #: lib/sticky_options.php:31 lib/sticky_options.php:94
 msgid "Login Page"
-msgstr ""
+msgstr "Pagina de autentificare"
 
 #: lib/sticky_options.php:32 lib/sticky_options.php:166
 msgid "Dashboard"
-msgstr ""
+msgstr "Tabloul de bord"
 
 #: lib/sticky_options.php:33
 msgid "WPAdminBar"
-msgstr ""
+msgstr "Bara de sus"
 
 #: lib/sticky_options.php:34 lib/sticky_options.php:389
 msgid "Header"
-msgstr ""
+msgstr "Preambul"
 
 #: lib/sticky_options.php:35 lib/sticky_options.php:423
 msgid "Navigation"
-msgstr ""
+msgstr "Navigare meniu"
 
 #: lib/sticky_options.php:36 lib/sticky_options.php:542
 msgid "Content"
-msgstr ""
+msgstr "Conținut"
 
 #: lib/sticky_options.php:37 lib/sticky_options.php:685
 msgid "Footer"
-msgstr ""
+msgstr "Subsol"
 
 #: lib/sticky_options.php:38
 msgid "Extensions"
-msgstr ""
+msgstr "Extensii"
 
 #: lib/sticky_options.php:39 lib/sticky_options.php:820
 msgid "Developers"
-msgstr ""
+msgstr "Dezvoltatori"
 
 #: lib/sticky_options.php:40 lib/sticky_options.php:790
 #: lib/sticky_options.php:792
 msgid "Credits"
-msgstr ""
+msgstr "Credite"
 
 #: lib/sticky_options.php:45
 msgid "Sticky Themes"
@@ -1573,11 +1585,11 @@ msgstr ""
 
 #: lib/sticky_options.php:874
 msgid "Import / Export Settings"
-msgstr ""
+msgstr "Importă / exportă setări"
 
 #: lib/stickyadmin.class.php:109
 msgid "Cheatin&#8217; huh?"
-msgstr ""
+msgstr "Trisezi huh?"
 
 #: lib/stickyadmin.class.php:703
 msgid "st"
@@ -1593,6 +1605,7 @@ msgid "%s comment awaiting moderation"
 msgid_plural "%s comments awaiting moderation"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: lib/stickyadmin.class.php:1464
 msgid "Network Admin: %s"
@@ -1604,7 +1617,7 @@ msgstr ""
 
 #: lib/stickyadmin.class.php:1780
 msgid "Logout"
-msgstr ""
+msgstr "Deconectare"
 
 #. Plugin Name of the plugin/theme
 msgid "StickyAdmin"

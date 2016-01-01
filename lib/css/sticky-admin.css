@@ -1347,9 +1347,7 @@ span.description {
 .description-thin {
     height: auto
 }
-#post-body.columns-2 .postbox-container {
-    width: 100%;
-}
+
 #post-body.columns-2 #postbox-container-2 {
     -webkit-box-shadow: inset 0px 1px 5px rgba(0,0,0,.05);
        -moz-box-shadow: inset 0px 1px 5px rgba(0,0,0,.05);
