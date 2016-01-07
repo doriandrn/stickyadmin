@@ -17,3 +17,19 @@ Support requests in _issues_ on this repository will be immediately removed.
 
 ## Contributing to StickyAdmin
 If you have an idea for the plugin, a patch or stumbled upon an issue with the core, you can contribute this back to the code. Please read our [contributors guidelines](https://github.com/doriandrn/stickyadmin/blob/master/contribute.md) for more information on how to do this.
+
+## Developers Quick Installation & Usage Guide
+* Open up a new Terminal / Command Prompt window.
+* Change your working directory to WP/wp-content/plugins/ :
+`cd pathtoWP/wp-content/plugins`
+Tip: Find your current working directory by typing in: `pwd` (Linux, OSX) or `cwd` (Windows)
+* Install StickyAdmin plugin from within this repository with just 1 line (requires git-cli): 
+`git clone https://github.com/doriandrn/stickyadmin.git stickyadmin`
+* Change current working directory to stickyadmin:
+`cd stickyadmin`
+* If you've made any changes to the CSS or JS type in:
+`grunt compile`
+This will also check your code for errors.
+* Send in the code you've modified by submitting a pull request:
+`git push origin nightly`
+Please notice the [nightly branch](https://github.com/doriandrn/stickyadmin/tree/nightly) where all the development is going on for both WordPress and the nightly builds of WordPress.
