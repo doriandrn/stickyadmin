@@ -3528,6 +3528,15 @@ input::-moz-focus-inner {
          -o-transition: -o-transform .3s ease-in-out, opacity .3s ease-in-out, visibility 0s;
             transition: transform .3s ease-in-out, opacity .3s ease-in-out, visibility 0s;
 }
+
+#post-body.columns-2 #postbox-container-2 .postbox .inside {
+    text-align: left;
+}
+
+body.rtl #post-body.columns-2 #postbox-container-2 .postbox .inside {
+    text-align: left;
+}
+
 .postbox .inside p,
 .stuffbox .inside p {
     
@@ -4746,6 +4755,7 @@ video {
 .postbox-container {
     float: left;
     position: relative;
+    width: 100%;
 }
 body.rtl .postbox-container {
     float: right;

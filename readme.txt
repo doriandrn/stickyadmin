@@ -95,6 +95,21 @@ Coming soon.
 
 == Changelog ==
 
+= 1.0.7 =
+Jan 7th, 2015
+
+Improvements:
+
+* Plugin localisation + Romanian language file
+* Better Media section - final version to come in v1.1
+
+BugFixes:
+
+* Freewall js was not loading on media library page;
+* Fixed broken scripts behaviour in media library;
+* Fixed postboxes container width bug on 'Edit Posts' & 'Edit Pages' pages;
+
+
 = 1.0.6 =
 Dec 29th, 2015
 

@@ -13,6 +13,7 @@ module.exports = function(grunt) {
     	'<%= paths.js %>/toastr.js',
         '<%= paths.js %>/sticky-admin.js',
         '<%= paths.js %>/anysearch.js',
+        '<%= paths.js %>/freewall.js',
         '<%= paths.js %>/jquery-labelauty.js',
         '<%= paths.js %>/selectordie.js',
         '<%= paths.js %>/jquery.mCustomScrollbar.js',

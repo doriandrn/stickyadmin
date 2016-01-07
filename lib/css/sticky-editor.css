@@ -1067,6 +1067,7 @@ body.rtl #postdivrich .wp-switch-editor:after {
 }
 .wp-media-buttons {
     float: left;
+    line-height: 22px;
 }
 body.rtl .wp-media-buttons {
     float: right;

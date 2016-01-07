@@ -131,10 +131,12 @@
         bottom: -25px;
     }
     #post-body.columns-2 #postbox-container-2 {
-        margin: -25px;
+        margin: 0 -25px;
         padding: 25px;
+        width: -webkit-calc( 100% + 50px );
+        width: -moz-calc( 100% + 50px );
+        width: calc( 100% + 50px );
     }
-
     .welcome-panel .welcome-panel-content:after {
         bottom: -25px;
     }
@@ -352,8 +354,11 @@
         bottom: -30px;
     }
     #post-body.columns-2 #postbox-container-2 {
-        margin: -30px;
+        margin: 0 -30px;
         padding: 30px;
+        width: -webkit-calc( 100% + 60px );
+        width: -moz-calc( 100% + 60px );
+        width: calc( 100% + 60px );
     }
     .stuffbox:before, .col-wrap .form-wrap:before,
     .postbox:before {
@@ -583,8 +588,11 @@
         bottom: -35px;
     }
     #post-body.columns-2 #postbox-container-2 {
-        margin: -35px;
+        margin: 0 -35px;
         padding: 35px;
+        width: -webkit-calc( 100% + 70px );
+        width: -moz-calc( 100% + 70px );
+        width: calc( 100% + 70px );
     }
     .stuffbox:before, .col-wrap .form-wrap:before,
     .postbox:before {
@@ -851,8 +859,11 @@
         bottom: -20px;
     }
     #post-body.columns-2 #postbox-container-2 {
-        margin: -20px;
+        margin: 0 -20px;
         padding: 20px;
+        width: -webkit-calc( 100% + 40px );
+        width: -moz-calc( 100% + 40px );
+        width: calc( 100% + 40px );
     }
     .stuffbox:before, .col-wrap .form-wrap:before,
     .postbox:before {
@@ -2367,8 +2378,11 @@
         bottom: -15px;
     }
     #post-body.columns-2 #postbox-container-2 {
-        margin: -15px;
+        margin: 0 -15px;
         padding: 15px;
+        width: -webkit-calc( 100% + 30px );
+        width: -moz-calc( 100% + 30px );
+        width: calc( 100% + 30px );
     }
     .stuffbox:before, .col-wrap .form-wrap:before,
     .postbox:before {
@@ -3881,6 +3895,9 @@
     #post-body.columns-2 #postbox-container-2 {
         margin: -10px;
         padding: 10px;
+        width: -webkit-calc( 100% + 20px );
+        width: -moz-calc( 100% + 20px );
+        width: calc( 100% + 20px );
     }
     .stuffbox:before, .col-wrap .form-wrap:before,
     .postbox:before {
