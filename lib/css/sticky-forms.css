@@ -322,10 +322,10 @@ body.rtl:not(.update-core-php) .wrap > form:not(#template):not(#post):not(#plugi
     text-align: center;
 }
 
-body.content-w:not(.update-core-php) .wrap > form:not(#template):not(#post):not(#plugin-filter):not(#export-filters):not(#form-site-list):not(#form-user-list):not(#bp-admin-component-form):not(.search-form) {
+body.content-w:not(.update-core-php) .wrap > form:not(#template):not(#file-form):not(#post):not(#plugin-filter):not(#export-filters):not(#form-site-list):not(#form-user-list):not(#bp-admin-component-form):not(.search-form) {
     background: #000;
 }
-body.content-b:not(.update-core-php) .wrap > form:not(#template):not(#post):not(#plugin-filter):not(#export-filters):not(#form-site-list):not(#form-user-list):not(#bp-admin-component-form):not(.search-form) {
+body.content-b:not(.update-core-php) .wrap > form:not(#template):not(#file-form):not(#post):not(#plugin-filter):not(#export-filters):not(#form-site-list):not(#form-user-list):not(#bp-admin-component-form):not(.search-form) {
     background: #fff;
 }
 

@@ -406,6 +406,11 @@ body.folded #adminmenu li#collapse-menu {
     overflow: visible;
     word-wrap: break-word;
     min-width: 160px;
+    text-align: left;
+}
+
+body.rtl #adminmenu li:not(.wp-has-current-submenu) .wp-submenu {
+    text-align: right;
 }
 
 #adminmenu li.wp-has-current-submenu > .wp-submenu {

@@ -132,7 +132,7 @@ body.content-w .wrap .sod_select .sod_list_wrapper {
 /* Options list container */
 .sod_select .sod_list {
     display: block;
-    overflow-y: auto;
+    max-height: none!important;
     padding: 0;
 }
 /* All the options. Keep the first three lines for truncating... */

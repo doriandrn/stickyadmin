@@ -6,8 +6,8 @@
 
 Welcome to StickyAdmin repository on GitHub. This is the place to keep track of development, look at open issues and browse through the source code.
 
-## Documentation
-* [StickyAdmin Documentation](http://stickyadmin.net/documentation/)
+<!-- ## Documentation ( hidden till the website gets built )
+* [StickyAdmin Documentation](http://stickyadmin.net/documentation/) -->
 
 ## Support
 GitHub is for _bug reports and contributions only_.
