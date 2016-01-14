@@ -619,7 +619,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
           $this->errors_flag = true;
           $this->displayErrors();
         }else{
-          echo '<div class="alert alert-success"><p><strong>' . __( 'Settings saved.','_sticky_') . '</strong><p>' . __( 'Please navigate away this page for changes to take effect.', '_sticky_' ) . '</p></div>'."\n";
+          echo '<div class="alert alert-success"><p><strong>' . __( 'Settings saved.','stickyadmin') . '</strong><p>' . __( 'Please navigate away this page for changes to take effect.', 'stickyadmin' ) . '</p></div>'."\n";
         }
         echo '</div>'."\n";
       }
@@ -771,22 +771,22 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       // Reset Options
       if ( $request == 'reset' ) {
         StickyAdmin::reset();
-        $msg = array( 'success' => 'options_reset', 'message' => __( 'Options are now back to defaults', '_sticky_' ) );
+        $msg = array( 'success' => 'options_reset', 'message' => __( 'Options are now back to defaults', 'stickyadmin' ) );
       } 
       // Update options
       else {
         $data = json_decode( stripcslashes( $request ) );
         $data = $this->object_to_array( $data ); // this is for recursive, adding (array) in front of data would have caused incorrect statements for nested array
 
-        $msg = array( 'success' => false, 'message' => __( 'Error: Options not saved, please try again', '_sticky_' ) );
+        $msg = array( 'success' => false, 'message' => __( 'Error: Options not saved, please try again', 'stickyadmin' ) );
 
         if( get_option( 'sticky_options' ) != $data ) {
           
           if( update_option( 'sticky_options', $data ) )
-            $msg = array( 'success' => 'options_saved', 'message' => __( 'Options Saved', '_sticky_' ) );
+            $msg = array( 'success' => 'options_saved', 'message' => __( 'Options Saved', 'stickyadmin' ) );
             
         } else {
-          $msg = array( 'success' => true, 'message' => __( 'Options Saved', '_sticky_' ) );
+          $msg = array( 'success' => true, 'message' => __( 'Options Saved', 'stickyadmin' ) );
         }
       }
       

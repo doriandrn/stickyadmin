@@ -50,9 +50,9 @@
         $stickyObj = array(
             'cookie_path'        => $cookies,
             's_admin'            => ( current_user_can( 'edit_stickyadmin' ) ? true : false ),
-            'wpab_close_message' => __( 'To reopen the WP Admin Bar, go to Sticky Options and enable it back!', '_sticky_' ),
-            'word:filter'        => __( 'Filter', '_sticky_' ),
-            's_reset'            => __( 'Reset', '_sticky_' ),
+            'wpab_close_message' => __( 'To reopen the WP Admin Bar, go to Sticky Options and enable it back!', 'stickyadmin' ),
+            'word:filter'        => __( 'Filter', 'stickyadmin' ),
+            's_reset'            => __( 'Reset', 'stickyadmin' ),
             'date_format'        => get_option( 'date_format' ),
             'time_format'        => get_option( 'time_format' ),
             'failSafe'           => StickyAdmin::$config['classes_string'],
@@ -89,36 +89,36 @@
             $browsers               = array();
             $translations           = array( "internet explorer" => "ie");
             $browser_names          = array( 
-                "Unknown" => __( 'Unknown', '_sticky_' ),
-                "IPhone"  => __( 'Safari', '_sticky_' )
+                "Unknown" => __( 'Unknown', 'stickyadmin' ),
+                "IPhone"  => __( 'Safari', 'stickyadmin' )
             );
             $oss                    = array();
             $os_names               = array(
-                "Unknown" => __('Unknown','_sticky_'),
-                "Mac"     => __('OS X', '_sticky_'),
-                "Windows" => __('Windows', '_sticky_'),
-                "Linux"   => __('Linux', '_sticky_')
+                "Unknown" => __('Unknown','stickyadmin'),
+                "Mac"     => __('OS X', 'stickyadmin'),
+                "Windows" => __('Windows', 'stickyadmin'),
+                "Linux"   => __('Linux', 'stickyadmin')
             );
 
             $phrases = array(
                 'b_1'  => array(
-                    '1' => __( 'Visitors Today', '_sticky_' ),
-                    '2' => __( 'Pageviews Today', '_sticky_' )
+                    '1' => __( 'Visitors Today', 'stickyadmin' ),
+                    '2' => __( 'Pageviews Today', 'stickyadmin' )
                 ),
 
                 'b_2'  =>array( 
-                    '1' => __( 'Popular Locations', '_sticky_' ),
-                    '2' => __( 'Hot Traffic From', '_sticky_' ),
+                    '1' => __( 'Popular Locations', 'stickyadmin' ),
+                    '2' => __( 'Hot Traffic From', 'stickyadmin' ),
                 ),
 
                 'b_3'   => array(
-                    '1' => __( 'Hot Traffic From', '_sticky_' ),
+                    '1' => __( 'Hot Traffic From', 'stickyadmin' ),
                 ),
             );
             
 
-            $p1_array = __( 'Desktop', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['desktop'] . ',' . __( 'Tablet', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['tablet'] . ',' . __( 'Mobile', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['mobile'];
-            $p3_array = __( 'Search Engines', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['search_engines'] . ',' . __( 'Links', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['links'] . ',' . __( 'Direct', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['direct'];
+            $p1_array = __( 'Desktop', 'stickyadmin' ) . ',' . StickyAdmin::$config['statistics']['desktop'] . ',' . __( 'Tablet', 'stickyadmin' ) . ',' . StickyAdmin::$config['statistics']['tablet'] . ',' . __( 'Mobile', 'stickyadmin' ) . ',' . StickyAdmin::$config['statistics']['mobile'];
+            $p3_array = __( 'Search Engines', 'stickyadmin' ) . ',' . StickyAdmin::$config['statistics']['search_engines'] . ',' . __( 'Links', 'stickyadmin' ) . ',' . StickyAdmin::$config['statistics']['links'] . ',' . __( 'Direct', 'stickyadmin' ) . ',' . StickyAdmin::$config['statistics']['direct'];
 
             if ( is_array( StickyAdmin::$config['statistics']['os_data'] ) && ! empty( StickyAdmin::$config['statistics']['os_data'] ) ) {
                 foreach (StickyAdmin::$config['statistics']['os_data'] as $os) {
@@ -149,18 +149,18 @@
             wp_enqueue_script( 'googleapi' );
 
             $dash_locals = array(
-                'word:year'          => __( 'Year', '_sticky_' ),
-                'word:pageviews'     => __( 'Pageviews', '_sticky_' ),
-                'word:visitors'      => __( 'Visitors', '_sticky_' ),
-                'word:country'       => __( 'Country', '_sticky_' ),
-                'word:popularity'    => __( 'Popularity', '_sticky_' ),
-                'word:devices'       => __( 'Devices', '_sticky_' ),
-                'word:oss'           => __( 'Operating Systems', '_sticky_' ),
-                'word:sources'       => __( 'Traffic Sources', '_sticky_' ),
-                'word:browsers'      => __( 'Browsers', '_sticky_' ),
-                'word:percent'       => __( 'Percentage', '_sticky_' ),
-                'word:readmore'      => __( 'Keep Reading', '_sticky_' ),
-                'word:morenews'      => __( 'More News', '_sticky_' ),
+                'word:year'          => __( 'Year', 'stickyadmin' ),
+                'word:pageviews'     => __( 'Pageviews', 'stickyadmin' ),
+                'word:visitors'      => __( 'Visitors', 'stickyadmin' ),
+                'word:country'       => __( 'Country', 'stickyadmin' ),
+                'word:popularity'    => __( 'Popularity', 'stickyadmin' ),
+                'word:devices'       => __( 'Devices', 'stickyadmin' ),
+                'word:oss'           => __( 'Operating Systems', 'stickyadmin' ),
+                'word:sources'       => __( 'Traffic Sources', 'stickyadmin' ),
+                'word:browsers'      => __( 'Browsers', 'stickyadmin' ),
+                'word:percent'       => __( 'Percentage', 'stickyadmin' ),
+                'word:readmore'      => __( 'Keep Reading', 'stickyadmin' ),
+                'word:morenews'      => __( 'More News', 'stickyadmin' ),
                 'stats-array'        => $data_array,
                 'country-array'      => $country_data_array,
                 'p1'                 => $p1_array,

@@ -106,7 +106,7 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public function __clone() { _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', '_sticky_' ), '1.0.0' ); }
+    public function __clone() { _doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'stickyadmin' ), '1.0.0' ); }
     
     /**
      *
@@ -223,6 +223,7 @@ class StickyAdmin {
         add_action( 'admin_init',           array( 'StickyAdmin', 'sticky_extensions' ) );
         add_action( 'init' ,                array( 'StickyAdmin', 'sticky_wpab' ) );
         add_action( 'init' ,                array( 'StickyAdmin', 'sticky_grab_ids' ) );
+        add_action( 'plugins_loaded',       array( 'StickyAdmin', 'sticky_plugin_textdomain' ) );
     }
     
     /**
@@ -489,7 +490,7 @@ class StickyAdmin {
                 'type'              =>  ( isset( $s_ui[ 'header_type' ] ) ? $s_ui[ 'header_type' ] : 'minimize' ),
             ),
             'content'   => array(
-                'dash_heading'      =>  ( isset( $s_ui[ 'dash_heading' ] ) ? esc_attr ( $s_ui[ 'dash_heading' ] ) : __( 'Welcome to WordPress with StickyAdmin!', '_sticky_' ) ),
+                'dash_heading'      =>  ( isset( $s_ui[ 'dash_heading' ] ) ? esc_attr ( $s_ui[ 'dash_heading' ] ) : __( 'Welcome to WordPress with StickyAdmin!', 'stickyadmin' ) ),
                 'dash_stats'        =>  ( isset( $s_ui[ 's_no_welcome' ] ) ? $s_ui['s_no_welcome'] : true ),
                 'preload'           =>  ( isset( $s_ui[ 'content_preload' ] ) ? $s_ui['content_preload'] : true ),
                 'preloader'         =>  ( isset( $s_ui[ 'content_preloader' ] ) && ( $s_ui [ 'content_preloader' ] != '' ) ? $s_ui['content_preloader'] : sticky_cogs( rand(1,24) ) )
@@ -503,7 +504,7 @@ class StickyAdmin {
                 'state'             =>  '',
                 'tooltips'          =>  ( isset( $s_ui[ 'wpab_tooltips_disable' ] ) ? $s_ui[ 'wpab_tooltips_disable' ] : false ),
                 'searchbar'         =>  ( isset( $s_ui[ 'wpab_search' ] ) ? $s_ui[ 'wpab_search' ] : false ),
-                'howdy_text'        =>  ( isset( $s_ui[ 'wpadminbar_howdy' ] ) ? $s_ui[ 'wpadminbar_howdy' ] : __( 'Howdy', '_sticky_' ) )
+                'howdy_text'        =>  ( isset( $s_ui[ 'wpadminbar_howdy' ] ) ? $s_ui[ 'wpadminbar_howdy' ] : __( 'Howdy', 'stickyadmin' ) )
             ),
             'widefat'   => array(
                 'post-draft'        =>  ( isset( $s_ui[ 'widefat_draft' ] ) ? $s_ui [ 'widefat_draft' ] : '#fff3a2' ),
@@ -694,13 +695,13 @@ class StickyAdmin {
 
             case 'image':
                 self::$config['logo']['image_path']     = ( ( isset( $s_ui[ 'nav_custom_logo_image' ][ 'src' ] ) && $s_ui[ 'nav_custom_logo_image']['src'] != '' ) ? $s_ui[ 'nav_custom_logo_image' ][ 'src' ] : STICKY_ASSETS . 'sticky-logo-' . self::$config['colors']['adminmenu']['color'] . '.png' );
-                self::$config['logo']['show']           = '<img src="' . self::$config['logo']['image_path'] . '" alt="'. __( 'Logo', '_sticky_' ). '" />';
-                self::$config['logo']['show_folded']    = ( ( isset( $s_ui[ 'folded_logo_image' ][ 'src' ] ) && $s_ui[ 'folded_logo_image' ][ 'src' ] != '' ) ? '<img src="' . $s_ui[ 'folded_logo_image' ][ 'src' ] . '" alt="'. __( 'Logo', '_sticky_' ). '" />' : self::$config['logo']['show_folded'] );
+                self::$config['logo']['show']           = '<img src="' . self::$config['logo']['image_path'] . '" alt="'. __( 'Logo', 'stickyadmin' ). '" />';
+                self::$config['logo']['show_folded']    = ( ( isset( $s_ui[ 'folded_logo_image' ][ 'src' ] ) && $s_ui[ 'folded_logo_image' ][ 'src' ] != '' ) ? '<img src="' . $s_ui[ 'folded_logo_image' ][ 'src' ] . '" alt="'. __( 'Logo', 'stickyadmin' ). '" />' : self::$config['logo']['show_folded'] );
                 break;
 
             case 'text':
-                self::$config['logo']['show']           = ( ( isset( $s_ui[ 'nav_custom_logo_text' ] ) && $s_ui[ 'nav_custom_logo_text' ] != '' ) ? esc_attr( $s_ui[ 'nav_custom_logo_text' ] ) : __( 'Sticky', '_sticky_' ) ); 
-                self::$config['logo']['show_folded']    = ( ( isset( $s_ui[ 'nav_custom_logo_letter' ] ) && $s_ui[ 'nav_custom_logo_letter' ] != '' ) ? substr( esc_attr( $s_ui[ 'nav_custom_logo_letter' ] ), 0, 2 ) : __( 'st', '_sticky_' ) ); 
+                self::$config['logo']['show']           = ( ( isset( $s_ui[ 'nav_custom_logo_text' ] ) && $s_ui[ 'nav_custom_logo_text' ] != '' ) ? esc_attr( $s_ui[ 'nav_custom_logo_text' ] ) : __( 'Sticky', 'stickyadmin' ) ); 
+                self::$config['logo']['show_folded']    = ( ( isset( $s_ui[ 'nav_custom_logo_letter' ] ) && $s_ui[ 'nav_custom_logo_letter' ] != '' ) ? substr( esc_attr( $s_ui[ 'nav_custom_logo_letter' ] ), 0, 2 ) : __( 'st', 'stickyadmin' ) ); 
                 break;
         }
 
@@ -1461,9 +1462,9 @@ class StickyAdmin {
                 $blogname = preg_replace( '#^(https?://)?(www.)?#', '', get_home_url() );
             }
             if ( is_network_admin() ) {
-                $blogname = sprintf( __('Network Admin: %s', '_sticky_' ), esc_html( get_current_site()->site_name ) );
+                $blogname = sprintf( __('Network Admin: %s', 'stickyadmin' ), esc_html( get_current_site()->site_name ) );
             } elseif ( is_user_admin() ) {
-                $blogname = sprintf( __( 'User Dashboard: %s', '_sticky_' ), esc_html( get_current_site()->site_name ) );
+                $blogname = sprintf( __( 'User Dashboard: %s', 'stickyadmin' ), esc_html( get_current_site()->site_name ) );
             }
             $title = wp_html_excerpt( $blogname, 40, '&hellip;' );
 
@@ -1541,7 +1542,7 @@ class StickyAdmin {
         $request = 's_'. $which .'_icons';
         $request = ( isset( $_REQUEST[ $request ] ) ) ? $_REQUEST[ $request ] : false ;
         $get_icons = array();
-        $transient_name = self::$current_blog_id . '_sticky_'. $which .'_icons';
+        $transient_name = self::$current_blog_id . 'stickyadmin'. $which .'_icons';
         $previous_icons = ( get_transient( $transient_name ) ) ? (array) get_transient( $transient_name ) : self::$config['default_icons'][$which];
 
         if ( $request ) 
@@ -1563,7 +1564,7 @@ class StickyAdmin {
             self::sticky_update_ui_icons( $item );
 
             if ( isset( $_REQUEST[ 'sticky_reset_' . $item ] ) && $_REQUEST['sticky_reset_' . $item ] == 'reset' ) {
-                delete_transient( self::$current_blog_id . '_sticky_'. $item .'_icons' );
+                delete_transient( self::$current_blog_id . 'stickyadmin'. $item .'_icons' );
             }
         }
         
@@ -1777,7 +1778,7 @@ class StickyAdmin {
         echo '<li id="sticky_logout" class="wp-not-current-submenu menu-top menu-icon-logout">
                 <a href="' . wp_logout_url() . '" class="menu-top">
                     <div class="wp-menu-image"></div>
-                    <div class="wp-menu-name">' . __( 'Logout', '_sticky_' ) . '</div>
+                    <div class="wp-menu-name">' . __( 'Logout', 'stickyadmin' ) . '</div>
                 </a>
               </li>';
     }
@@ -1910,7 +1911,7 @@ class StickyAdmin {
     public static function sticky_dashboard() {
         global $grab_data, $wp_meta_boxes, $wp_registered_widgets;
         if ( ( isset( $grab_data[ 's_stats' ] ) ? $grab_data[ 's_stats' ] : true ) && current_user_can( 'wp_sticky_stats_view' )  )
-            wp_add_dashboard_widget( 'sticky_stats', __( 'Site Statistics', '_sticky_' ), 'sticky_stats_display' );
+            wp_add_dashboard_widget( 'sticky_stats', __( 'Site Statistics', 'stickyadmin' ), 'sticky_stats_display' );
     }
 
     /**
@@ -2192,10 +2193,11 @@ class StickyAdmin {
      * @author Dorian Tudorache
      *
      */
-    public function load_plugin_textdomain() {
-        $domain = $this->plugin_slug;
+    public function sticky_plugin_textdomain() {
+        $domain = 'stickyadmin';
         $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-        load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+        
+        load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . 'plugins/' . $domain . '-' . $locale . '.mo' );
         load_plugin_textdomain( $domain, FALSE, basename( plugin_dir_path( dirname( __FILE__ ) ) ) . '/i18n/languages/' );
     }
 }

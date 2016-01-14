@@ -550,74 +550,74 @@ if ( !function_exists( 'sticky_stats_display' ) ) :
             
             echo '<div class="instats">
                 <div class="visits">
-                    <strong>' . __( 'Visits', '_sticky_' ) . '</strong>
+                    <strong>' . __( 'Visits', 'stickyadmin' ) . '</strong>
                     <ul>
-                        <li><div>' . __( 'Today', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['today_visits'][0] ) ? StickyAdmin::$config['statistics']['today_visits'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'day_visits_delta' ) . '">' . sticky_get_delta( 'day_visits_delta' ) . '</span></li>
-                        <li><div>' . __( 'This week', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['this_week_visits'][0] ) ? StickyAdmin::$config['statistics']['this_week_visits'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'week_visits_delta' ) . '">' . sticky_get_delta( 'week_visits_delta' ) . '</span></li>
-                        <li><div>' . __( 'This month', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['this_month_visits'][0] ) ? StickyAdmin::$config['statistics']['this_month_visits'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'month_visits_delta' ) . '">' . sticky_get_delta( 'month_visits_delta' ) . '</span></li>
+                        <li><div>' . __( 'Today', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['today_visits'][0] ) ? StickyAdmin::$config['statistics']['today_visits'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'day_visits_delta' ) . '">' . sticky_get_delta( 'day_visits_delta' ) . '</span></li>
+                        <li><div>' . __( 'This week', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['this_week_visits'][0] ) ? StickyAdmin::$config['statistics']['this_week_visits'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'week_visits_delta' ) . '">' . sticky_get_delta( 'week_visits_delta' ) . '</span></li>
+                        <li><div>' . __( 'This month', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['this_month_visits'][0] ) ? StickyAdmin::$config['statistics']['this_month_visits'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'month_visits_delta' ) . '">' . sticky_get_delta( 'month_visits_delta' ) . '</span></li>
                     </ul>
                     <ul class="hide">
-                        <li><div>' . __( 'Yesterday', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['yesterday_visits'][0] ) ? StickyAdmin::$config['statistics']['yesterday_visits'][0] : 0 ) . '</strong></li>
-                        <li><div>' . __( 'Last week', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['last_week_visits'][0] ) ? StickyAdmin::$config['statistics']['last_week_visits'][0] : 0 ) . '</strong></li>
-                        <li><div>' . __( 'Last month', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['last_month_visits'][0] ) ? StickyAdmin::$config['statistics']['last_month_visits'][0] : 0 ) . '</strong></li>
+                        <li><div>' . __( 'Yesterday', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['yesterday_visits'][0] ) ? StickyAdmin::$config['statistics']['yesterday_visits'][0] : 0 ) . '</strong></li>
+                        <li><div>' . __( 'Last week', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['last_week_visits'][0] ) ? StickyAdmin::$config['statistics']['last_week_visits'][0] : 0 ) . '</strong></li>
+                        <li><div>' . __( 'Last month', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['last_month_visits'][0] ) ? StickyAdmin::$config['statistics']['last_month_visits'][0] : 0 ) . '</strong></li>
                     </ul>
                 </div>
 
                 <div class="pageviews">
-                    <strong>' . __( 'Pageviews', '_sticky_' ) . '</strong>
+                    <strong>' . __( 'Pageviews', 'stickyadmin' ) . '</strong>
                     <ul>
-                        <li><div>' . __( 'Today', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['today_pv'][0] ) ? StickyAdmin::$config['statistics']['today_pv'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'day_pvs_delta' ) . '">' . sticky_get_delta( 'day_pvs_delta' ) . '</span></li>
-                        <li><div>' . __( 'This week', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['this_week_pv'][0] ) ? StickyAdmin::$config['statistics']['this_week_pv'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'week_pvs_delta' ) . '">' . sticky_get_delta( 'week_pvs_delta' ) . '</span></li>
-                        <li><div>' . __( 'This month', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['this_month_pv'][0] ) ? StickyAdmin::$config['statistics']['this_month_pv'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'month_pvs_delta' ) . '">' . sticky_get_delta( 'month_pvs_delta' ) . '</span></li>
+                        <li><div>' . __( 'Today', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['today_pv'][0] ) ? StickyAdmin::$config['statistics']['today_pv'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'day_pvs_delta' ) . '">' . sticky_get_delta( 'day_pvs_delta' ) . '</span></li>
+                        <li><div>' . __( 'This week', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['this_week_pv'][0] ) ? StickyAdmin::$config['statistics']['this_week_pv'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'week_pvs_delta' ) . '">' . sticky_get_delta( 'week_pvs_delta' ) . '</span></li>
+                        <li><div>' . __( 'This month', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['this_month_pv'][0] ) ? StickyAdmin::$config['statistics']['this_month_pv'][0] : 0 ) . '</strong><span class="delta ' . sticky_delta_class( 'month_pvs_delta' ) . '">' . sticky_get_delta( 'month_pvs_delta' ) . '</span></li>
                     </ul>
                     <ul class="hide">
-                        <li><div>' . __( 'Yesterday', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['yesterday_pv'][0] ) ? StickyAdmin::$config['statistics']['yesterday_pv'][0] : 0 ) . '</strong></li>
-                        <li><div>' . __( 'Last week', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['last_week_pv'][0] ) ? StickyAdmin::$config['statistics']['last_week_pv'][0] : 0 ) . '</strong></li>
-                        <li><div>' . __( 'Last month', '_sticky_' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['last_month_pv'][0] ) ? StickyAdmin::$config['statistics']['last_month_pv'][0] : 0 ) . '</strong></li>
+                        <li><div>' . __( 'Yesterday', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['yesterday_pv'][0] ) ? StickyAdmin::$config['statistics']['yesterday_pv'][0] : 0 ) . '</strong></li>
+                        <li><div>' . __( 'Last week', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['last_week_pv'][0] ) ? StickyAdmin::$config['statistics']['last_week_pv'][0] : 0 ) . '</strong></li>
+                        <li><div>' . __( 'Last month', 'stickyadmin' ) . '</div><strong>' . ( ! empty( StickyAdmin::$config['statistics']['last_month_pv'][0] ) ? StickyAdmin::$config['statistics']['last_month_pv'][0] : 0 ) . '</strong></li>
                     </ul>
                 </div>
             </div>';
 
             echo '<div id="dash_slick">
                     <div>
-                        <h3>' . __( 'Site Statistics', '_sticky_') . '</h3>
+                        <h3>' . __( 'Site Statistics', 'stickyadmin') . '</h3>
                         <select id="s_chart_type">
-                            <option id="daily">' . __('Daily','_sticky_') . '</option>
-                            <option id="weekly">' . __('Weekly','_sticky_') . '</option>
-                            <option id="monthly">' . __('Monthly','_sticky_') . '</option>
-                            <option id="yearly">' . __('Yearly','_sticky_') . '</option>
+                            <option id="daily">' . __('Daily','stickyadmin') . '</option>
+                            <option id="weekly">' . __('Weekly','stickyadmin') . '</option>
+                            <option id="monthly">' . __('Monthly','stickyadmin') . '</option>
+                            <option id="yearly">' . __('Yearly','stickyadmin') . '</option>
                         </select>
                         <div id="chart_div" style="width: 100%; height: 260px;"></div>
                     </div>
                     <div>
-                        <h3>' . __( 'Hot Locations', '_sticky_') . '</h3>
+                        <h3>' . __( 'Hot Locations', 'stickyadmin') . '</h3>
                         <div id="map_canvas" style=" height: 260px; width: 100%; text-align: center; margin: auto;"></div>
                     </div>
                     <div class="overview">
-                        <h3>' . __( 'Traffic Overview', '_sticky_') . '</h3>
+                        <h3>' . __( 'Traffic Overview', 'stickyadmin') . '</h3>
                         <div>
-                            <h5>'. __( 'Devices', '_sticky_' ) .'</h5>
+                            <h5>'. __( 'Devices', 'stickyadmin' ) .'</h5>
                             <div id="p1_devices"></div>
                         </div>
                         <div>
-                            <h5>'. __( 'Operating Systems', '_sticky_' ) .'</h5>
+                            <h5>'. __( 'Operating Systems', 'stickyadmin' ) .'</h5>
                             <div id="p2_oss"></div>
                         </div>
                         <div>
-                            <h5>'. __( 'Traffic Sources', '_sticky_' ) .'</h5>
+                            <h5>'. __( 'Traffic Sources', 'stickyadmin' ) .'</h5>
                             <div id="p3_sources"></div>
                         </div>
                         <div>
-                            <h5>'. __( 'Browsers', '_sticky_' ) .'</h5>
+                            <h5>'. __( 'Browsers', 'stickyadmin' ) .'</h5>
                             <div id="p4_browsers"></div>
                         </div>
                     </div>
                     <div class="linkslist">
-                        <h3>' . __( 'Top hits', '_sticky_') . '</h3>
+                        <h3>' . __( 'Top hits', 'stickyadmin') . '</h3>
                         <div class="slidethis">
                         <div class="ot">
                             <div class="ot_inside">
-                                <strong>' . __( 'Top Posts', '_sticky_' ) . '</strong>
+                                <strong>' . __( 'Top Posts', 'stickyadmin' ) . '</strong>
                                 <ul class="top_posts">' . "\n";
             foreach ( StickyAdmin::$config['statistics']['top_posts'] as $post ) {
                 echo '                              <li class="link"><a href="' . get_permalink( $post[ 'post_id' ] ) . '" target="_blank">' . $post['title'] . '</a></li>' . "\n";
@@ -627,7 +627,7 @@ if ( !function_exists( 'sticky_stats_display' ) ) :
                         </div>
                         <div class="ot">
                             <div class="ot_inside">
-                                <strong>' . __( 'Top Links', '_sticky_' ) . '</strong>
+                                <strong>' . __( 'Top Links', 'stickyadmin' ) . '</strong>
                                 <ul class="top_links">' . "\n";
             foreach ( StickyAdmin::$config['statistics']['top_links'] as $link ) {
                 echo '                              <li class="link"><a href="' . $link['referer'] . '" target="_blank">' . $link['referer'] . '</a></li>' . "\n";
@@ -637,7 +637,7 @@ if ( !function_exists( 'sticky_stats_display' ) ) :
                         </div>
                         <div class="ot">
                             <div class="ot_inside">
-                                <strong>' . __( 'Top Search Terms', '_sticky_' ) . '</strong>
+                                <strong>' . __( 'Top Search Terms', 'stickyadmin' ) . '</strong>
                                 <ul class="top_searches">' . "\n";
             foreach ( StickyAdmin::$config['statistics']['top_searches'] as $search ) {
                 echo '                              <li class="link">' . $search['term'] . '</a></li>' . "\n";
@@ -649,7 +649,7 @@ if ( !function_exists( 'sticky_stats_display' ) ) :
                     </div>
                  </div>';
         } else {
-            echo '<div id="sticky_notice"><p>' . __( 'Please allow the statistics screen up to 30 minutes to gather elemental data in order for it to show up. Unfortunately, the statistics panel IS NOT AVAILABLE for localhost installations at this time.', '_sticky_' ) . '</p></div>';
+            echo '<div id="sticky_notice"><p>' . __( 'Please allow the statistics screen up to 30 minutes to gather elemental data in order for it to show up. Unfortunately, the statistics panel IS NOT AVAILABLE for localhost installations at this time.', 'stickyadmin' ) . '</p></div>';
         }
     }
 endif;

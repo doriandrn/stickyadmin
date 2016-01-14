@@ -96,7 +96,7 @@ Coming soon.
 == Changelog ==
 
 = 1.0.7 =
-Jan 8th, 2015
+Jan 14th, 2015
 
 Improvements:
 
