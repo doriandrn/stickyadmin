@@ -49,7 +49,7 @@ module.exports = (env) => {
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
-                hmr: process.env.NODE_ENV === 'development',
+                hmr: process.env.NODE_ENV === 'development'
               },
             },
             'css-loader',
@@ -89,6 +89,7 @@ module.exports = (env) => {
         // Options similar to the same options in webpackOptions.output
         // all options are optional
         filename: 'index.css',
+        chunkFilename: '[id].css',
         ignoreOrder: false, // Enable to remove warnings about conflicting order
       }),
 

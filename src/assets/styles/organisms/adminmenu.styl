@@ -1,10 +1,17 @@
 $separatorHeight = 5px
+adminbarHeight = 44px
 
 #adminmenu
   padding-bottom 32px
+  padding-left 0
+  list-style-type none
   margin 0
   height 100%
   transition padding .4s ease-in-out
+
+  ul
+    list-style-type none
+    padding 0
 
   &_logo
     background-size 100% auto
@@ -32,7 +39,7 @@ $separatorHeight = 5px
         opacity 1
 
   &wrap
-    position absolute 0 0 32px
+    position absolute 0 0 32px !important
     visibility visible
     z-index 4
     opacity 1
@@ -119,6 +126,7 @@ $separatorHeight = 5px
     a
       display block
       position relative
+      text-decoration none
 
     &#collapse-menu
       position fixed
@@ -209,6 +217,7 @@ $separatorHeight = 5px
       > .wp-submenu
         transition: all .15s ease-in-out
 
+
   .wp-menu
     &-name
       position relative
@@ -242,3 +251,51 @@ $separatorHeight = 5px
       img
       br
         display none
+
+body
+  &.folded
+    #adminmenu
+      .resize_handle
+      .menu_settings
+      .menu-close
+        display none
+
+      li#collapse-menu
+        left 0
+        width 60px
+
+      .opensub .wp-submenu,
+      .wp-has-current-submenu .wp-submenu.sub-open,
+      .wp-has-current-submenu a.menu-top:focus+.wp-submenu,
+      .wp-has-current-submenu.opensub .wp-submenu,
+      .wp-submenu.sub-open,
+      a.menu-top:focus+.wp-submenu
+        left 60px
+
+  &.menu
+    &-w
+      #adminmenu
+        a.menu-top
+        .wp-submenu li.current
+        .wp-submenu li.current a
+        .wp-has-current-submenu > .wp-submenu ul > li > a
+        .wp-has-current-submenu .wp-submenu a
+          color rgba(white, .55)
+
+        a.menu-top:hover
+        .wp-submenu li.current a
+        .wp-submenu li.current a:hover
+        .wp-submenu li.current a:active
+        .wp-menu-open .wp-submenu a:hover
+        li.current a.menu-top .wp-menu-name
+        .opensub .wp-menu-name
+        .wp-menu-open.menu-top .wp-menu-name
+        &_logo
+        &_logo > a
+          color white
+
+        li.wp-menu-separator .separator
+          background rgba(black, .25)
+
+        &_logo svg *
+          fill white
