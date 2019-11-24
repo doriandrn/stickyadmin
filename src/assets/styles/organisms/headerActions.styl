@@ -1,0 +1,54 @@
+#sticky-actions
+  height: 100%
+  float: right
+  overflow: hidden
+
+  button
+    vertical-align: middle
+    position: relative
+
+    &:before
+      font-family: streamline
+      font-weight: 400
+      font-size: 14px
+      display: block
+      text-align: center
+
+    &.submitdelete
+      &:before
+        content: '\e6d9'
+
+    &#publish
+      &:before
+        content: '\e7a9'
+
+    &#save-post
+      &:before
+        content: '\e8d4'
+
+    &[type="reset"]
+      &:before
+        content: '\ec98'
+
+
+  > button
+    display: inline-block
+    vertical-align: top
+    font-size: 0
+    padding: 0 10px
+    border: none
+    min-width: 50px
+    line-height: inherit
+    min-height: 100%
+    word-break: break-word
+    white-space: normal
+    transition: all .1s ease-in-out, min-height .15s ease-in-out, min-width .15s ease-in-out, max-width .15s ease-in-out
+
+    &:before
+      content: '\e79f'
+
+  > .actions
+    float: none!important
+    display: inline-block
+    vertical-align: top
+    line-height: 22px

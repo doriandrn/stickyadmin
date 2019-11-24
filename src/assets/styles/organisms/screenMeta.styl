@@ -1,0 +1,92 @@
+
+#screen-meta
+  position: fixed
+  text-align: center
+  width: 100%
+  z-index: 0
+  padding: 10% 0
+  height: auto
+  overflow: hidden
+  opacity: 0
+  user-select: none
+  transform: translateY( 50% )
+  transition: transform .25s ease-in-out, opacity .25s ease-out
+
+  input[type="submit"]
+    border: 0
+    font-size: 12px
+    line-height: 20px
+    padding: 5px 15px
+    color: #fff!important
+
+  h5
+    margin: 0 0 10px
+
+  p
+    &.submit
+      margin-bottom: 0
+
+  form
+    > fieldset
+      display: inline-block
+      position: relative
+      vertical-align: top
+      text-align: left
+      min-height: 150px
+
+      &:not(:first-child)
+        margin-left: 35px
+        padding-left: 35px
+
+        &:after
+          content: ''
+          width: 1px
+          height: 50px
+          position: absolute
+          left: 0
+          top: calc( 50% - 35px )
+
+  label[for=edit_post_per_page]
+    margin-bottom: 10px
+    font-weight: 400
+    margin-right: 10px
+
+  &-links
+    margin: 0
+    position: fixed
+    right: 0px
+    z-index: 37
+    top: 125px
+
+    &:hover
+      z-index: 99999!important
+
+    .show-settings
+      text-decoration: none
+      z-index: 5
+      padding: 0 8px
+      border: 0
+      position: relative
+      height: 32px
+      font-size: 0px
+      width: 52px
+      line-height: 32px
+      text-transform: uppercase
+      font-weight: 600
+      letter-spacing: 1px
+      display: block
+      border-radius: 2px
+      vertical-align: middle
+      opacity: .25
+      transition: color .15s ease-in-out, transform .3s ease-in-out, opacity .3s ease-in-out
+
+    .screen-meta-toggle
+      display: block
+      margin-bottom: 5px
+      opacity: 1
+      visibility: visible
+      transition: opacity .1s ease-in-out, visibility .1s
+
+      &.hide
+        opacity: 0
+        visibility: hidden

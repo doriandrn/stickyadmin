@@ -98,13 +98,13 @@ if ( !function_exists( 'add_action' ) )
             //     ob_start();
 
             //     foreach( $sticky_load_styles as $style=>$src ) {
-            //         // $wp_styles->add( 'sticky-'.$style, STICKY_CSS . $src['name'] . $suffix . '.css', $src['deps'], StickyAdmin::VERSION, 'all' );
+            //         // $wp_styles->add( 'sticky-'.$style, STICKY_LIB . $src['name'] . $suffix . '.css', $src['deps'], StickyAdmin::VERSION, 'all' );
             //         // $wp_styles->enqueue( 'sticky-'.$style );
 
             //         $sticky_styles->to_do = array_diff( $sticky_styles->to_do, array( $style ) );
             //         $sticky_styles->done[] = $style;
 
-            //         $content .= minify_css( file_get_contents( STICKY_CSS . $src['name'] . $suffix . '.css' ) ) . "\n";
+            //         $content .= minify_css( file_get_contents( STICKY_LIB . $src['name'] . $suffix . '.css' ) ) . "\n";
             //     }
             //     file_put_contents( STICKY_CACHE_URI . 'sticky-minified-' . $blogid . '.css', $content, LOCK_EX );
             // }
@@ -117,16 +117,16 @@ if ( !function_exists( 'add_action' ) )
 
         } else if ( is_admin() ){
             // NOT CACHING CSS
-            // wp_register_style( 'sticky-fonts', STICKY_CSS . STICKY_FONTS . '.css', false, StickyAdmin::VERSION );
+            // wp_register_style( 'sticky-fonts', STICKY_LIB . STICKY_FONTS . '.css', false, StickyAdmin::VERSION );
             wp_register_style( 'sticky-admin', STICKY_LIB . 'index.css', false, StickyAdmin::VERSION );
-            // wp_register_style( 'sticky-adminbar', STICKY_CSS . STICKY_ADMINBAR . '.css', false, StickyAdmin::VERSION );
-            // wp_register_style( 'sticky-adminmenu', STICKY_CSS . 'sticky-adminmenu.css', false, StickyAdmin::VERSION );
+            // wp_register_style( 'sticky-adminbar', STICKY_LIB . STICKY_ADMINBAR . '.css', false, StickyAdmin::VERSION );
+            // wp_register_style( 'sticky-adminmenu', STICKY_LIB . 'sticky-adminmenu.css', false, StickyAdmin::VERSION );
             wp_register_style( 'sticky-dynamic', admin_url( 'admin-ajax.php') . '?action=dynamic_css&_wpnonce=' . wp_create_nonce( 'sticky-nonce' ), false,  StickyAdmin::VERSION );
-            // wp_register_style( 'sticky-toastr', STICKY_CSS . 'sticky-notifications.css', false, StickyAdmin::VERSION );
+            // wp_register_style( 'sticky-toastr', STICKY_LIB . 'sticky-notifications.css', false, StickyAdmin::VERSION );
 
-            // wp_register_style( 'pace_theme', STICKY_CSS . 'pace.js/' . StickyAdmin::$config['extensions']['pace_color']. '/pace-theme-' . StickyAdmin::$config['extensions']['pace_theme'] . '.css' );
-            // wp_register_style( 'mCustomScrollbar', STICKY_CSS . 'jquery.mCustomScrollbar.css' );
-            // wp_register_style( 'qTip', STICKY_CSS . STICKY_TOOLTIPS . '.css' );
+            // wp_register_style( 'pace_theme', STICKY_LIB . 'pace.js/' . StickyAdmin::$config['extensions']['pace_color']. '/pace-theme-' . StickyAdmin::$config['extensions']['pace_theme'] . '.css' );
+            // wp_register_style( 'mCustomScrollbar', STICKY_LIB . 'jquery.mCustomScrollbar.css' );
+            // wp_register_style( 'qTip', STICKY_LIB . STICKY_TOOLTIPS . '.css' );
             wp_enqueue_style( 'sticky-admin' );
             wp_enqueue_style( 'sticky-dynamic' );
 
@@ -137,7 +137,7 @@ if ( !function_exists( 'add_action' ) )
             // wp_enqueue_style( 'qTip' );
 
             if ( isset( $_GET[ 'page' ] ) && substr( $_GET[ 'page' ], 0, 3 ) === 'bp-' ) {
-                wp_enqueue_style( 'sticky-widefat', STICKY_CSS . STICKY_WIDEFAT . '.css', false, StickyAdmin::VERSION );
+                wp_enqueue_style( 'sticky-widefat', STICKY_LIB . STICKY_WIDEFAT . '.css', false, StickyAdmin::VERSION );
             }
 
             // Searhbox
@@ -202,15 +202,15 @@ if ( !function_exists( 'add_action' ) )
         // $pace_color = $grab_data['page_load_color'] ? : 'orange';
         // $pace_theme = $grab_data['page_load'] ? : 'minimal';
         // Sticky Admin GLOBAL Custom CSS
-        // wp_register_style( 'sticky-fonts', STICKY_CSS . STICKY_FONTS . '.css', false, StickyAdmin::VERSION );
-        // wp_register_style( 'sticky-admin', STICKY_CSS . 'sticky-admin.css', false, StickyAdmin::VERSION );
-        // wp_register_style( 'sticky-adminmenu', STICKY_CSS . 'sticky-adminmenu.css', false, StickyAdmin::VERSION );
+        // wp_register_style( 'sticky-fonts', STICKY_LIB . STICKY_FONTS . '.css', false, StickyAdmin::VERSION );
+        // wp_register_style( 'sticky-admin', STICKY_LIB . 'sticky-admin.css', false, StickyAdmin::VERSION );
+        // wp_register_style( 'sticky-adminmenu', STICKY_LIB . 'sticky-adminmenu.css', false, StickyAdmin::VERSION );
         // wp_register_style( 'sticky-dynamic', admin_url( 'admin-ajax.php') . '?action=dynamic_css&_wpnonce=' . wp_create_nonce( 'sticky-nonce' ), false,  StickyAdmin::VERSION );
-        // wp_register_style( 'sticky-toastr', STICKY_CSS . 'sticky-notifications.css', false, StickyAdmin::VERSION );
-        // wp_register_style( 'sticky-css', STICKY_CSS . 'sticky-' . get_current_blog_id() . '.css', false, StickyAdmin::VERSION );
-        // wp_register_style( 'pace_theme', STICKY_CSS . 'pace.js/' . $pace_color. '/pace-theme-' . $pace_theme . '.css' );
-        // wp_register_style( 'mCustomScrollbar', STICKY_CSS . 'jquery.mCustomScrollbar.css' );
-        // wp_register_style( 'qTip', STICKY_CSS . STICKY_TOOLTIPS . '.css' );
+        // wp_register_style( 'sticky-toastr', STICKY_LIB . 'sticky-notifications.css', false, StickyAdmin::VERSION );
+        // wp_register_style( 'sticky-css', STICKY_LIB . 'sticky-' . get_current_blog_id() . '.css', false, StickyAdmin::VERSION );
+        // wp_register_style( 'pace_theme', STICKY_LIB . 'pace.js/' . $pace_color. '/pace-theme-' . $pace_theme . '.css' );
+        // wp_register_style( 'mCustomScrollbar', STICKY_LIB . 'jquery.mCustomScrollbar.css' );
+        // wp_register_style( 'qTip', STICKY_LIB . STICKY_TOOLTIPS . '.css' );
         // wp_enqueue_style( 'sticky-fonts' );
         // wp_enqueue_style( 'sticky-admin' );
         // wp_enqueue_style( 'sticky-adminmenu' );
@@ -223,7 +223,7 @@ if ( !function_exists( 'add_action' ) )
         // wp_enqueue_style( 'mCustomScrollbar' );
         // wp_enqueue_style( 'qTip' );
         // if ( isset( $_GET[ 'page' ] ) && substr( $_GET[ 'page' ], 0, 3 ) === 'bp-' ) {
-            // wp_enqueue_style( 'sticky-widefat', STICKY_CSS . STICKY_WIDEFAT . '.css', false, StickyAdmin::VERSION );
+            // wp_enqueue_style( 'sticky-widefat', STICKY_LIB . STICKY_WIDEFAT . '.css', false, StickyAdmin::VERSION );
         // }
     }
     add_action( 'sticky_add_styles',  'sticky_global_styles' );
@@ -244,10 +244,10 @@ if ( !function_exists( 'add_action' ) )
         wp_deregister_style( 'admin-bar' );
 
         // Add Sticky's ones
-        wp_register_style( STICKY_FONTS, STICKY_CSS . STICKY_FONTS . '.css', 0, StickyAdmin::VERSION );
-        wp_register_style( STICKY_ADMINBAR, STICKY_CSS . STICKY_ADMINBAR . '.css', 0, StickyAdmin::VERSION );
+        wp_register_style( STICKY_FONTS, STICKY_LIB . STICKY_FONTS . '.css', 0, StickyAdmin::VERSION );
+        wp_register_style( STICKY_ADMINBAR, STICKY_LIB . STICKY_ADMINBAR . '.css', 0, StickyAdmin::VERSION );
         wp_register_style( 'sticky-dynamic', admin_url( 'admin-ajax.php') . '?action=dynamic_css&_wpnonce=' . wp_create_nonce( 'sticky-nonce' ), false,  StickyAdmin::VERSION );
-        wp_register_style( STICKY_TOOLTIPS, STICKY_CSS . STICKY_TOOLTIPS . '.css', 0, StickyAdmin::VERSION );
+        wp_register_style( STICKY_TOOLTIPS, STICKY_LIB . STICKY_TOOLTIPS . '.css', 0, StickyAdmin::VERSION );
 
         wp_enqueue_style ( STICKY_FONTS );
         wp_enqueue_style ( STICKY_ADMINBAR );
@@ -540,7 +540,7 @@ if ( !function_exists( 'add_action' ) )
             }
             #overlay:before,
             .filter-links,
-            .subsubsub,
+            // .subsubsub,
             .media-frame.mode-grid .uploader-inline,
             .wrap > .nav-tab-wrapper,
             body.update-core-php .wrap > #s-update-notice-container,
@@ -548,7 +548,6 @@ if ( !function_exists( 'add_action' ) )
             #category-tabs,
             #side-sortables .taxonomy-tabs,
             #side-sortables .posttype-tabs,
-            #activity-widget ul.subsubsub,
             .wrap > form > .tablenav.bottom > .tablenav-pages,
             .press-this-actions {
                 background: ' . StickyAdmin::$config['colors']['header']['bg'][0] . ' ;

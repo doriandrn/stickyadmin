@@ -3,7 +3,7 @@
      *
      * Enqueue custom scripts loaded on dedicated pages,
      * just where we need them.
-     * 
+     *
      * @author Dorian Tudorache
      * @since 1.0
      *
@@ -11,9 +11,9 @@
     // Avoid direct access to this piece of code
     if ( !function_exists( 'add_action' ) )
         exit;
-    
+
     /**
-     * 
+     *
      * Sticky Global Scripts
      *
      * @since 1.0
@@ -21,24 +21,25 @@
      *
      */
     function sticky_global_js() {
-        if ( ! is_admin() ) 
+        if ( ! is_admin() )
             return;
 
-        wp_enqueue_script('jquery-ui-sortable');
+        // wp_enqueue_script('jquery-ui-sortable');
 
         // Main JS file for Sticky Admin.
-        wp_register_script( 'sticky-admin', STICKY_JS . 'sticky-admin' . StickyAdmin::$config['dev']['js_ext'] );
-        
-        // Define the cookies path so JS also knows about it when setting cookies.
-        $cookies = array( 'path' => COOKIEPATH ); 
+        // wp_register_script( 'sticky-admin', STICKY_LIB . 'index' . StickyAdmin::$config['dev']['js_ext'] );
+        wp_register_script( 'sticky-admin', STICKY_LIB . 'index.js' );
 
-        if ( ! current_user_can( 'wp_sticky_stats_view' ) ) 
+        // Define the cookies path so JS also knows about it when setting cookies.
+        $cookies = array( 'path' => COOKIEPATH );
+
+        if ( ! current_user_can( 'wp_sticky_stats_view' ) )
             StickyAdmin::$config['statistics'];
 
         $origmenu = Array();
         $origids = Array();
 
-        foreach ( StickyAdmin::$original_admin_menu as $menu => $item ) { 
+        foreach ( StickyAdmin::$original_admin_menu as $menu => $item ) {
             array_push( $origmenu, $item['menu_slug'] );
 
             if ( !empty ($item['hookname'] ) )
@@ -80,15 +81,15 @@
         // Dashboard custom.
         if ( $GLOBALS['pagenow'] == 'index.php' && StickyAdmin::$config['statistics'] != false && current_user_can( 'wp_sticky_stats_view' ) ) {
             wp_register_script( 'googleapi', '//www.google.com/jsapi' );
-            
-            $data_array             = 
-            $country_data_array     = 
-            $p4_array               = 
+
+            $data_array             =
+            $country_data_array     =
+            $p4_array               =
             $p2_array               = '';
-            
+
             $browsers               = array();
             $translations           = array( "internet explorer" => "ie");
-            $browser_names          = array( 
+            $browser_names          = array(
                 "Unknown" => __( 'Unknown', '_sticky_' ),
                 "IPhone"  => __( 'Safari', '_sticky_' )
             );
@@ -106,7 +107,7 @@
                     '2' => __( 'Pageviews Today', '_sticky_' )
                 ),
 
-                'b_2'  =>array( 
+                'b_2'  =>array(
                     '1' => __( 'Popular Locations', '_sticky_' ),
                     '2' => __( 'Hot Traffic From', '_sticky_' ),
                 ),
@@ -115,7 +116,7 @@
                     '1' => __( 'Hot Traffic From', '_sticky_' ),
                 ),
             );
-            
+
 
             $p1_array = __( 'Desktop', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['desktop'] . ',' . __( 'Tablet', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['tablet'] . ',' . __( 'Mobile', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['mobile'];
             $p3_array = __( 'Search Engines', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['search_engines'] . ',' . __( 'Links', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['links'] . ',' . __( 'Direct', '_sticky_' ) . ',' . StickyAdmin::$config['statistics']['direct'];
@@ -137,7 +138,7 @@
                     $s_date = explode('-', $day['date']);
                     $required_day = date("l", mktime(0, 0, 0, $s_date[1], $s_date[2], $s_date[0]));
                     $data_array .= substr( $required_day, 0, 1 ) . "," . $day['pageviews'] . "," . $day[ 'hits' ] . "," . $required_day . '+' . $day[ 'date' ] . ",";
-                } 
+                }
             }
             if ( is_array( StickyAdmin::$config['statistics']['country_data'] ) && !empty( StickyAdmin::$config['statistics']['country_data'] ) ) {
                 foreach ( StickyAdmin::$config['statistics']['country_data'] as $country ) {
@@ -168,17 +169,17 @@
                 'p3'                 => $p3_array,
                 'p4'                 => $p4_array
             );
-            $stickyObj = array_merge( $stickyObj, $dash_locals ); 
-        } 
+            $stickyObj = array_merge( $stickyObj, $dash_locals );
+        }
         wp_enqueue_script( 'sticky-admin' );
         wp_localize_script( 'sticky-admin', 'stickyObj', $stickyObj );
-        wp_enqueue_script( 'sticky-adminbar', STICKY_JS . 'sticky-adminbar' . StickyAdmin::$config['dev']['js_ext'] );
+        // wp_enqueue_script( 'sticky-adminbar', STICKY_LIB . 'sticky-adminbar' . StickyAdmin::$config['dev']['js_ext'] );
     }
     add_action( 'sticky_add_scripts', 'sticky_global_js', 2 );
     /**
      *
      * JavaScript for the Login Pages
-     * 
+     *
      * @author Dorian Tudorache
      * @since 1.0
      *
@@ -190,7 +191,7 @@
     /**
      *
      * Inline JavaScript output function
-     * 
+     *
      * @author Dorian Tudorache
      * @since 1.0
      *
@@ -208,12 +209,12 @@
     /**
      *
      * Adminbar Javascript
-     * 
+     *
      * @author Dorian Tudorache
      * @since 1.0
      *
      */
-    function sticky_adminbar_js() {
+    // function sticky_adminbar_js() {
         // wp_deregister_script( 'admin-bar' );
 
         if ( ! is_admin() && StickyAdmin::$config['adminbar']['preserve'] ) {
@@ -222,21 +223,21 @@
                 'wpab_controls'      => StickyAdmin::$config['adminbar']['controls']
             );
         }
-        
-        // This will ensure the scripts are loaded on back-end only
-        wp_register_script( STICKY_ADMINBAR, STICKY_JS . STICKY_ADMINBAR . StickyAdmin::$config['dev']['js_ext'], array('jquery'), StickyAdmin::VERSION );
-        
-        if ( ! empty( $stickyObj ) )
-            wp_localize_script( STICKY_ADMINBAR, 'stickyObj', $stickyObj );
 
-        wp_enqueue_script( STICKY_ADMINBAR );
-    }
-    add_action( 'sticky_add_adminbar_scripts', 'sticky_adminbar_js' );
+        // This will ensure the scripts are loaded on back-end only
+        // wp_register_script( STICKY_ADMINBAR, STICKY_LIB . STICKY_ADMINBAR . StickyAdmin::$config['dev']['js_ext'], array('jquery'), StickyAdmin::VERSION );
+
+        // if ( ! empty( $stickyObj ) )
+            // wp_localize_script( STICKY_ADMINBAR, 'stickyObj', $stickyObj );
+
+        // wp_enqueue_script( STICKY_ADMINBAR );
+    // }
+    // add_action( 'sticky_add_adminbar_scripts', 'sticky_adminbar_js' );
 
     /**
      *
      * Plugin Icons Function
-     * 
+     *
      * @author Dorian Tudorache
      * @since 1.0
      *

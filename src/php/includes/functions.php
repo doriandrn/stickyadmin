@@ -23,26 +23,26 @@ if ( !function_exists( 'sticky_addStyle' ) ) :
         if ( is_array ( $hooks ) )
             foreach ( $hooks as $hook ) {
                 $hook = StickyAdmin::$config['default_pages_list'][$hook];
-                $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_CSS . $style . '.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
+                $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_LIB . $style . '.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
                 // if ( function_exists('is_rtl') && is_rtl() && $has_rtl )
-                    // $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_CSS . $style . '.rtl.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
+                    // $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_LIB . $style . '.rtl.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
                 add_action( 'admin_print_styles-' . $hook, ( create_function( '', $enqueue_string ) ), $order );
             }
         else {
             if ( $hooks != 'Login' && $hooks != 'all' ) {
                 $hook = StickyAdmin::$config['default_pages_list'][$hooks];
                 // if ( $GLOBALS['pagenow'] != $hook ) return;
-                $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_CSS . $style . '.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
+                $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_LIB . $style . '.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
                 add_action( 'admin_print_styles-' . $hook, ( create_function( '', $enqueue_string ) ), $order );
             }
             elseif ( $hooks == 'Login' ) {
-                echo "<link rel='stylesheet' href='". STICKY_CSS . $style .".css' type='text/css' ></link>";
+                echo "<link rel='stylesheet' href='". STICKY_LIB . $style .".css' type='text/css' ></link>";
             }
             elseif ( $hooks == 'all' ) {
-                $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_CSS . $style . '.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
+                $enqueue_string = 'wp_enqueue_style ( "' . $style . '", "' . STICKY_LIB . $style . '.css", "sticky-admin", "' . StickyAdmin::VERSION . '" );';
                 add_action( 'admin_print_styles', ( create_function( '', $enqueue_string ) ), $order );
             }
-        }   
+        }
     }
 endif;
 if ( !function_exists( 'sticky_addScript' ) ) :
@@ -71,14 +71,14 @@ if ( !function_exists( 'sticky_addScript' ) ) :
             $i = $c = 0;
             $deps_string .= 'array(';
             foreach ( $deps as $dep ) {
-                
+
                 if ( ! is_array( $dep ) ) {
-                    $deps_string .= '"' . $dep . '' . ( ( ++$i === $deps_count ) ? '"' : '",' ); 
+                    $deps_string .= '"' . $dep . '' . ( ( ++$i === $deps_count ) ? '"' : '",' );
                 }
                 else {
                     $sdepc = count( $dep );
                     foreach( $dep as $s_dep ) {
-                        $deps_string .= '"' . $s_dep . '' . ( ( ++$c === $sdepc ) ? '"' : '",' ); 
+                        $deps_string .= '"' . $s_dep . '' . ( ( ++$c === $sdepc ) ? '"' : '",' );
                     }
                 }
             }
@@ -88,26 +88,26 @@ if ( !function_exists( 'sticky_addScript' ) ) :
         if ( is_array( $hooks ))
             foreach ( $hooks as $hook ) {
                 $hook = StickyAdmin::$config['default_pages_list'][$hook];
-                $enqueue_string = 'wp_enqueue_script ( "' . $script . '", "' . STICKY_JS . $script . "" . ( ( $minified ) ? ".min" : "" ) . '.js", ' . $deps_string . ', "' . StickyAdmin::VERSION . '" );';
-    
+                $enqueue_string = 'wp_enqueue_script ( "' . $script . '", "' . STICKY_LIB . $script . "" . ( ( $minified ) ? ".min" : "" ) . '.js", ' . $deps_string . ', "' . StickyAdmin::VERSION . '" );';
+
                 add_action( 'admin_print_scripts-' . $hook, create_function( '', $enqueue_string ) );
             }
         else {
             if ( $hooks != 'all' && $hooks != 'Login' ) {
                 $hook = StickyAdmin::$config['default_pages_list'][$hooks];
-                $enqueue_string = 'wp_enqueue_script ( "' . $script . '", "' . STICKY_JS . $script . "" . ( ( $minified ) ? ".min" : "" ) . '.js", ' . $deps_string . ', "' . StickyAdmin::VERSION . '" );';
+                $enqueue_string = 'wp_enqueue_script ( "' . $script . '", "' . STICKY_LIB . $script . "" . ( ( $minified ) ? ".min" : "" ) . '.js", ' . $deps_string . ', "' . StickyAdmin::VERSION . '" );';
                 add_action( 'admin_print_scripts-' . $hook, create_function( '', $enqueue_string ) );
             } elseif ( $hooks == 'Login' ) {
-                echo "<script src='" . STICKY_JS . $script . "". ( ( $minified ) ? ".min" : "" ) . ".js' type='text/javascript'></script>";
+                echo "<script src='" . STICKY_LIB . $script . "". ( ( $minified ) ? ".min" : "" ) . ".js' type='text/javascript'></script>";
             } elseif ( $hooks == 'all' ) {
-                $enqueue_string = 'wp_enqueue_script ( "' . $script . '", "' . STICKY_JS . $script . "" . ( ( $minified ) ? ".min" : "" ) . '.js", ' . $deps_string . ', "' . StickyAdmin::VERSION . '" );';
+                $enqueue_string = 'wp_enqueue_script ( "' . $script . '", "' . STICKY_LIB . $script . "" . ( ( $minified ) ? ".min" : "" ) . '.js", ' . $deps_string . ', "' . StickyAdmin::VERSION . '" );';
                 add_action( 'admin_enqueue_scripts', create_function( '', $enqueue_string ) );
             }
         }
     }
 endif;
- 
-if ( !function_exists( 'minify_css' ) ) :   
+
+if ( !function_exists( 'minify_css' ) ) :
     /**
      * CSS minifier function
      *
@@ -144,7 +144,7 @@ if ( !function_exists( 'hex2rgb' ) ) :
           $g = hexdec(substr($hex,2,2));
           $b = hexdec(substr($hex,4,2));
        }
-       
+
        return $r . ',' . $g . ',' . $b;
     }
 endif;
@@ -248,14 +248,14 @@ if ( ! function_exists('sticky_compare_correct') ) :
         if ( $cdiff <= 45 )
             $check_color[0] += 90;
 
-        $check_color[0] = abs( $check_color[0] ) ; 
+        $check_color[0] = abs( $check_color[0] ) ;
 
         // print_r( 'C1: ' . $color[0] . ' vs. C2: ' . $check_color[0] . ' = ' . $cdiff . "\n");
 
         if ( $cdiff >= ( 360 - $range ) )
             $newrange = $range;
 
-        if ( $cdiff < $range ) 
+        if ( $cdiff < $range )
             $newrange = $range + $cdiff;
 
         $check_color[0] = $check_color[0] + $newrange;
@@ -284,7 +284,7 @@ if ( !function_exists( 'hsv2rgb' ) ) :
         $h /= 360;
         $s /= 100;
         $v /= 100;
- 
+
         $h -= floor($h);
 
         if ($s == 0) {
@@ -298,7 +298,7 @@ if ( !function_exists( 'hsv2rgb' ) ) :
         $x = $chroma * abs(1 - abs($h_mod2 - 1));
         $r = $g = $b = 0.0;
         switch ($k) {
-            case 0: 
+            case 0:
             case 6:
                 $r = $chroma;
                 $g = $x;
@@ -343,9 +343,9 @@ if ( !function_exists( 'sticky_make_hl_color' ) ) :
      */
     function sticky_make_hl_color( $hex, $dif = 0 ) {
         // This is only used once when generating the principal HL color.
-        // if ( $dif == 0 && sticky_luminance(StickyAdmin::$content_background) == sticky_luminance($hex) ) 
+        // if ( $dif == 0 && sticky_luminance(StickyAdmin::$content_background) == sticky_luminance($hex) )
             // sticky_options_updater( 'highlight_color', sticky_adjust_hl_color($hex, 0) );
-        
+
         return sticky_adjust_hl_color( $hex, $dif, 0, 0, 1 );
     }
 endif;
@@ -375,11 +375,11 @@ if ( !function_exists( 'sticky_adjust_hl_color' ) ) :
      */
     function sticky_adjust_hl_color( $hex, $h = 0, $s = 0, $v = 0, $auto = false, $setting = 'content' ) {
         $get_color = hex2hsv( $hex );
-    
+
         $get_color[0] = $get_color[0] + $h;
         $get_color[1] = $get_color[1] + $s;
         $get_color[2] = $get_color[2] + $v;
-        
+
         if ( $get_color[0] >= 360 ) $get_color[0] = abs( $get_color[0] - 360 );
         if ( $get_color[0] < 0 ) $get_color[0] = abs( 360 + $get_color[0] );
 
@@ -391,12 +391,12 @@ if ( !function_exists( 'sticky_adjust_hl_color' ) ) :
 
         if ( $auto ) {
             $selector = StickyAdmin::$config['colors'][$setting]['bg'];
-            if ( ! $selector ) 
+            if ( ! $selector )
                 return rgb2hex( implode( ',', hsv2rgb( $get_color ) ) );
 
             $hl_color_hsv = hex2hsv( $selector );
             $hue_diff = abs( $get_color[0] - $hl_color_hsv[0] );
-       
+
             if ( $hue_diff < 45 ) {
                 $get_color[0] = ( abs( $get_color[0] ) > 180 ) ? abs( $get_color[0] - 45 ) : abs( $get_color[0] + 45 );
             }
@@ -410,17 +410,17 @@ if ( !function_exists( 'sticky_adjust_hl_color' ) ) :
                 $get_color[0] = ( abs( $get_color[0] ) <= 180 ) ? abs( $get_color[0] + 90 ) : abs( $get_color[0] - 90 ); // Adjust by decreasing it by 80
             }
 
-            if ( $get_color[0] <= 0 || $get_color[0] >= 360 ) 
+            if ( $get_color[0] <= 0 || $get_color[0] >= 360 )
                 $get_color[0] = abs( 360 - abs( $get_color[0] ) );
 
             if ( ! sticky_luminance( $selector ) ) {
-                $get_color[1] = 95; 
+                $get_color[1] = 95;
                 $get_color[2] = 85;
             }
             else {
                 $get_color[1] = 75;
-                $get_color[2] = 80; 
-            } 
+                $get_color[2] = 80;
+            }
         }
         return rgb2hex( implode( ',', hsv2rgb( $get_color ) ) );
     }
@@ -434,8 +434,8 @@ endif;
 
 if ( !function_exists( 'sticky_luminance' ) ) :
     /**
-     * Get the Luminance Level of a hexcolor and determine 
-     * what color to use over that as a foregrand, 
+     * Get the Luminance Level of a hexcolor and determine
+     * what color to use over that as a foregrand,
      * for best contrast results.
      *
      * @param $hexcolor {string} - the color
@@ -444,7 +444,7 @@ if ( !function_exists( 'sticky_luminance' ) ) :
      */
     function sticky_luminance( $hexcolor ) {
         $rgb = explode( ',', hex2rgb( str_replace( '#', '', $hexcolor ) ) );
-        if ( ( ( $rgb[0] * 299 ) + ( $rgb[1] * 587 ) + ( $rgb[2] * 114 ) ) / 255000 >= 0.5 ) 
+        if ( ( ( $rgb[0] * 299 ) + ( $rgb[1] * 587 ) + ( $rgb[2] * 114 ) ) / 255000 >= 0.5 )
             return true;
         return false;
     }
@@ -527,7 +527,7 @@ if ( !function_exists( 'sticky_delta_class' ) ) :
         } else {
             $class = 'falls';
         }
-        
+
         return $class;
     }
 endif;
@@ -543,11 +543,11 @@ if ( !function_exists( 'sticky_stats_display' ) ) :
      *
      */
     function sticky_stats_display() {
-        if ( ! current_user_can( 'wp_sticky_stats_view' ) ) 
+        if ( ! current_user_can( 'wp_sticky_stats_view' ) )
             return;
 
         if ( ! empty( StickyAdmin::$config['statistics']['visits'] ) || ! empty( StickyAdmin::$config['statistics']['country_data'] ) ) {
-            
+
             echo '<div class="instats">
                 <div class="visits">
                     <strong>' . __( 'Visits', '_sticky_' ) . '</strong>

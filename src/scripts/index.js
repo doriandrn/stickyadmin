@@ -1,3 +1,6 @@
 require('../assets/styles/index.styl')
 
-console.log('jit loaded')
+document.addEventListener('DOMContentLoaded', () => {
+  const { body } = document
+  body.classList.remove('is_loading')
+})

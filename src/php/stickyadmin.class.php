@@ -120,8 +120,6 @@ class StickyAdmin {
         define( 'STICKY_DIR',           WP_PLUGIN_URL . '/stickyadmin/' );
         define( 'STICKY_URI',           plugin_dir_path(__FILE__) );
         define( 'STICKY_LIB',           STICKY_DIR . 'dist/' );
-        define( 'STICKY_CSS',           STICKY_LIB . 'css/' );
-        define( 'STICKY_JS',            STICKY_LIB . 'js/' );
         define( 'STICKY_ASSETS',        STICKY_LIB . 'assets/' );
         define( 'STICKY_CACHE',         STICKY_LIB . 'cache/' );
         define( 'STICKY_CLASSES',       STICKY_LIB . 'classes/' );
@@ -314,7 +312,7 @@ class StickyAdmin {
      */
     public static function sticky_customizer_enqeueue() {
         if ( $GLOBALS['pagenow'] != 'customize.php' ) return;
-        wp_enqueue_style( STICKY_CUSTOMIZER, STICKY_CSS . STICKY_CUSTOMIZER . '.css' );
+        wp_enqueue_style( STICKY_CUSTOMIZER, STICKY_LIB . STICKY_CUSTOMIZER . '.css' );
     }
 
     /**
@@ -1033,7 +1031,6 @@ class StickyAdmin {
             wp_schedule_event( '1111111111', 'daily', 'sticky_stats_purge' );
         }
         self::sticky_create_capabilities();
-        chmod( STICKY_CACHE_URI, 0755 );
         return true;
     }
 
@@ -1274,8 +1271,8 @@ class StickyAdmin {
         // This function is not needed on login / register page.
         if ( in_array( $GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php') ) ) return;
 
-        if ( ! is_writeable(STICKY_CACHE_URI) )
-            return;
+        if ( ! is_writeable(STICKY_CACHE) )
+            chmod(STICKY_CACHE_URI, 0755 );
 
         $cache_file = 'sticky-' . self::$current_blog_id . '.css';
 
@@ -1345,10 +1342,10 @@ class StickyAdmin {
      *
      */
     public static function sticky_remove_wp_admin_styles() {
-        apply_filters( 'mce_css', STICKY_CSS . 'sticky-editor-style.css' );
+        apply_filters( 'mce_css', STICKY_LIB . 'sticky-editor-style.css' );
         // Add The Custom Editor Style
         remove_editor_styles();
-        add_editor_style( STICKY_CSS . 'sticky-editor-style-' . self::$config['colors']['content']['color'] . '.css' );
+        add_editor_style( STICKY_LIB . 'sticky-editor-style-' . self::$config['colors']['content']['color'] . '.css' );
     }
 
     /**
@@ -1650,8 +1647,8 @@ class StickyAdmin {
     public static function code_editor_styles() {
         global $grab_data;
         $codemirror_theme = $grab_data['code_editor_theme'] ? : 'neat';
-        wp_register_style( 'codemirror' , STICKY_CSS . 'codemirror.css' );
-        wp_register_style( 'codemirror_theme', STICKY_CSS . 'codemirror_themes/'. $codemirror_theme .'.css' );
+        wp_register_style( 'codemirror' , STICKY_LIB . 'codemirror.css' );
+        wp_register_style( 'codemirror_theme', STICKY_LIB . 'codemirror_themes/'. $codemirror_theme .'.css' );
         wp_enqueue_style( 'codemirror_theme' );
         wp_enqueue_style( 'codemirror' );
     }
@@ -1678,9 +1675,9 @@ class StickyAdmin {
                 'mode' => $codemirror_mode,
                 'theme' => $codemirror_theme
             );
-        wp_register_script( 'codemirror', STICKY_JS . 'codemirror.js' );
-        wp_register_script( 'codemirror_mode', STICKY_JS . 'codemirror/'.$ext.'/'.$ext.'.js' );
-        wp_register_script( 'codemirror_sticky', STICKY_JS . 'sticky-codemirror.js', self::VERSION );
+        wp_register_script( 'codemirror', STICKY_LIB . 'codemirror.js' );
+        wp_register_script( 'codemirror_mode', STICKY_LIB . 'codemirror/'.$ext.'/'.$ext.'.js' );
+        wp_register_script( 'codemirror_sticky', STICKY_LIB . 'sticky-codemirror.js', self::VERSION );
         wp_localize_script( 'codemirror_sticky', 'StickyCM', $params );
         wp_enqueue_script( 'codemirror' );
         wp_enqueue_script( 'codemirror_mode' );

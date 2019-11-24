@@ -1,304 +1,18 @@
-.welcome-panel h4 {
-    font-size: 12px
-    font-weight: 400
-    line-height: 16px
-    letter-spacing: .1px
-    display: block
-    margin-bottom: 0
-    text-align: left
-    transition: transform .3s ease-in-out, color .3s ease-in-out
-}
-body.rtl .welcome-panel h4 {
-    text-align: right
-}
-.welcome-panel h5 {
-    letter-spacing: .3px
-    margin-bottom: 0
-    display: block
-    transform: translateY(15px)
-}
-.welcome-panel-content h2 {
-    font-size: 20px
-    font-weight: 400
-}
-.wrap {
-    padding-top: 0!important
-}
+#dashboard
+  &-widgets
+    display flex
+    flex-flow row wrap
+    margin -8px
 
-body.header-w #welcome-panel,
-body.header-w #welcome-panel p {
-    color: rgba(255,255,255,.5)
-}
-body.header-b #welcome-panel,
-body.header-b #welcome-panel p {
-    color: rgba(0,0,0,.5)
-}
-body.header-w #welcome-panel h1,
-body.header-w #welcome-panel h2 {
-    color: #fff
-}
-body.header-w #welcome-panel h3,
-body.header-w #welcome-panel h4,
-body.header-w #welcome-panel h5,
-body.header-w #welcome-panel h6 {
-    color: rgba(255,255,255,.85)
-}
-body.header-b #welcome-panel h1,
-body.header-b #welcome-panel h2 {
-    color: #000
-}
-body.header-b #welcome-panel h3,
-body.header-b #welcome-panel h4,
-body.header-b #welcome-panel h5,
-body.header-b #welcome-panel h6 {
-    color: rgba(0,0,0,.85)
-}
-body.header-w #welcome-panel a,
-body.header-w #welcome-panel .button,
-body.header-w #welcome-panel button,
-body.header-w #welcome-panel input,
-body.header-w #welcome-panel textarea,
-body.header-w #welcome-panel select,
-body.header-w #welcome-panel .sod_select {
-    color: rgba(255,255,255,.65)
-    border-color: rgba(255,255,255,.1)
-}
-body.header-b #welcome-panel a,
-body.header-b #welcome-panel .button,
-body.header-b #welcome-panel button,
-body.header-b #welcome-panel input,
-body.header-b #welcome-panel textarea,
-body.header-b #welcome-panel select,
-body.header-b #welcome-panel .sod_select {
-    color: rgba(0,0,0,.65)
-    border-color: rgba(0,0,0,.1)
-}
+    .postbox-container
+      margin 8px
 
-body.header-w #welcome-panel a:disabled,
-body.header-w #welcome-panel .button:disabled,
-body.header-w #welcome-panel .button-disabled,
-body.header-w #welcome-panel button:disabled,
-body.header-w #welcome-panel input:disabled,
-body.header-w #welcome-panel textarea:disabled,
-body.header-w #welcome-panel select:disabled,
-body.header-w #welcome-panel .sod_select:disabled {
-    color: rgba(255,255,255,.3)
-    border-color: rgba(255,255,255, .05)
-}
-body.header-b #welcome-panel a:disabled,
-body.header-b #welcome-panel .button:disabled,
-body.header-b #welcome-panel .button-disabled,
-body.header-b #welcome-panel button:disabled,
-body.header-b #welcome-panel input:disabled,
-body.header-b #welcome-panel textarea:disabled,
-body.header-b #welcome-panel select:disabled,
-body.header-b #welcome-panel .sod_select:disabled {
-    color: rgba(0,0,0,.3)
-    border-color: rgba(0,0,0,.05)
-}
-body.header-w #welcome-panel a:hover,
-body.header-w #welcome-panel .button:hover,
-body.header-w #welcome-panel button:hover,
-body.header-w #welcome-panel input:hover,
-body.header-w #welcome-panel textarea:hover,
-body.header-w #welcome-panel select:hover,
-body.header-w #welcome-panel .sod_select:hover {
-    color: rgba(255,255,255,.85)
-    border-color: rgba(255,255,255,.25)
-}
-body.header-b #welcome-panel a:hover,
-body.header-b #welcome-panel .button:hover,
-body.header-b #welcome-panel button:hover,
-body.header-b #welcome-panel input:hover,
-body.header-b #welcome-panel textarea:hover,
-body.header-b #welcome-panel select:hover,
-body.header-b #welcome-panel .sod_select:hover {
-    color: rgba(0,0,0,.85)
-    border-color: rgba(0,0,0,.25)
-}
-body.header-w #welcome-panel a:focus,
-body.header-w #welcome-panel .button:focus,
-body.header-w #welcome-panel button:focus,
-body.header-w #welcome-panel input:focus,
-body.header-w #welcome-panel textarea:focus,
-body.header-w #welcome-panel select:focus,
-body.header-w #welcome-panel .sod_select:focus,
-body.header-w #welcome-panel .sod_select.focus {
-    color: rgba(255,255,255,1)
-    border-color: rgba(255,255,255,.45)
-}
-body.header-b #welcome-panel a:focus,
-body.header-b #welcome-panel .button:focus,
-body.header-b #welcome-panel button:focus,
-body.header-b #welcome-panel input:focus,
-body.header-b #welcome-panel textarea:focus,
-body.header-b #welcome-panel select:focus,
-body.header-b #welcome-panel .sod_select:focus,
-body.header-b #welcome-panel .sod_select.focus {
-    color: rgba(0,0,0,1)
-    border-color: rgba(0,0,0,.45)
-}
-body.header-w #welcome-panel select:focus,
-body.header-w #welcome-panel .sod_select:focus,
-body.header-w #welcome-panel .sod_select.focus {
-    color: rgba(255,255,255,.5)
-}
-body.header-b #welcome-panel select:focus,
-body.header-b #welcome-panel .sod_select:focus,
-body.header-b #welcome-panel .sod_select.focus {
-    color: rgba(0,0,0,.5)
-}
-#welcome-panel select,
-#welcome-panel .sod_select {
-    border-width: 2px
-    height: 30px
-    font-size: 12px
-    padding: 0 15px
-}
-#welcome-panel .sod_select .sod_list_wrapper {
-    border-width: 2px
-    left: -2px
-    right: -2px
-    background: transparent !important
-}
-.welcome-panel .welcome-panel-column h4:after {
-    display: block
-    height: 2px
-    content: ''
-    width: 20px
-    margin: 15px 0
-    border-radius: 20px
-}
-.welcome-panel .welcome-panel-column {
-    transition: all .3s ease-out
-    opacity: 1
-}
-.welcome-panel.hidden .welcome-panel-column {
-    opacity: 0
-}
-.welcome-panel .welcome-icon:before,
-.welcome-panel .welcome-panel-column p.hide-if-no-customize a:before,
-.wp-core-ui .welcome-panel .button.button-hero:before {
-    display: inline-block
-    margin-right: 5px
-    font: 400 12px/24px streamline
-    vertical-align: top
-    width: 24px
-    text-align: center
-    text-transform: none
-}
-body.rtl .welcome-panel .welcome-icon:before,
-body.rtl .welcome-panel .welcome-panel-column p.hide-if-no-customize a:before,
-body.rtl .wp-core-ui .welcome-panel .button.button-hero:before {
-    margin-right: 0
-    margin-left: 5px
-}
-.welcome-panel .welcome-panel-column p.hide-if-no-customize a:before {
-    content: 'p'
-}
-.welcome-icon.welcome-edit-page:before {
-    content: "\f044"
-}
-.welcome-icon.welcome-add-page:before {
-    content: "\e1f6"
-}
-.welcome-icon.welcome-write-blog:before {
-    content: "M"
-}
-.welcome-icon.welcome-view-site:before {
-    content: "S"
-}
-.welcome-icon.welcome-comments:before {
-    content: '\e05c'
-}
-.welcome-icon.welcome-learn-more:before {
-    content: '\e141'
-}
-.welcome-icon.welcome-widgets-menus:before {
-    content: '\e2a6'
-}
-.welcome-panel .welcome-panel-close {
-    font-size: 0
-    box-shadow: 0 0 2px rgba(0,0,0,.1)
-    position: absolute
-    padding: 0!important
-    width: 32px
-    height: 32px
-    line-height: 32px
-    text-align: center
-    bottom: -16px
-    right: calc(50% - 16px)
-    border-radius: 50%
-    overflow: hidden
-    z-index: 38
-    opacity: 0
-    transition: all .15s ease-in-out
-}
+      .empty-container
+        height: 240px
+        border: none !important
 
-.welcome-panel:hover .welcome-panel-close {
-    opacity: 1
-}
-.welcome-panel .welcome-panel-close:before {
-    background: none!important
-    content: "\e6b2"
-    font: 400 12px/32px streamline
-    display: block
-    font-style: normal
-    text-decoration: inherit
-    margin: 0!important
-}
-#wpbody-content #dashboard-widgets.metabox-holder {
-    float: left
-    width: 100%
-    margin-bottom: 0!important
-}
-#wpbody-content #dashboard-widgets.columns-1 .postbox-container {
-    width: 100%
-}
-#wpbody-content #dashboard-widgets.columns-2 .postbox-container {
-    width: 49.5%
-}
-#wpbody-content #dashboard-widgets.columns-2 #postbox-container-2,
-#wpbody-content #dashboard-widgets.columns-2 #postbox-container-3,
-#wpbody-content #dashboard-widgets.columns-2 #postbox-container-4 {
-    float: right
-    width: 50.5%
-}
-body.rtl #wpbody-content #dashboard-widgets.columns-2 #postbox-container-2,
-body.rtl #wpbody-content #dashboard-widgets.columns-2 #postbox-container-3,
-body.rtl #wpbody-content #dashboard-widgets.columns-2 #postbox-container-4 {
-    float: left
-}
-#wpbody-content #dashboard-widgets.columns-3 .postbox-container {
-    width: 33.5%
-}
-#wpbody-content #dashboard-widgets.columns-3 #postbox-container-1 {
-    width: 33%
-}
-#wpbody-content #dashboard-widgets.columns-3 #postbox-container-3,
-#wpbody-content #dashboard-widgets.columns-3 #postbox-container-4 {
-    float: right
-}
-body.rtl #wpbody-content #dashboard-widgets.columns-3 #postbox-container-3,
-body.rtl #wpbody-content #dashboard-widgets.columns-3 #postbox-container-4 {
-    float: left
-}
-#wpbody-content #dashboard-widgets.columns-4 .postbox-container {
-    width: 25%
-}
-#dashboard-widgets .postbox-container {
-    width: 25%
-}
-#dashboard_primary .inside {
-    border-bottom-radius: 10px
-}
-#dashboard_primary div.rss-widget {
-    font-size: 13px
-    display: inline-block
-    vertical-align: top
-    position: relative
-    text-align: center
-}
+
+
 #dashboard_primary a.more-news {
     font-size: 10px
     text-transform: uppercase
@@ -417,23 +131,7 @@ a.rsswidget {
 #dashboard_secondary li {
     margin-bottom: 5px
 }
-#dash_slick div.linkslist .ot .ot_inside > strong,
-#dashboard-widgets #dashboard_activity h4,
-#dashboard-widgets #dashboard_activity h3,
-#dashboard-widgets h4,
-#dashboard-widgets h3,
-#dashboard_quick_press .drafts h3,
-#dashboard_quick_press .drafts h4 {
-    font-weight: 400
-    font-size: 13px
-    line-height: 13px
-    letter-spacing: .2px
-    text-align: center
-    margin: 0!important
-    position: relative
-    z-index: 2
-    transition: color .15s ease-in-out
-}
+
 #dashboard_quick_press .drafts > h2::last-word {
     display: none
 }
@@ -507,10 +205,7 @@ body.no-js #dashboard-widgets #latest-comments > *:not(h4),
 body.no-js #dashboard-widgets .drafts > ul {
     max-height: none!important
 }
-#dashboard-widgets .activity-block > h4,
-#dashboard-widgets .activity-block > h3 {
-    padding: 25px 0!important
-}
+
 #dashboard-widgets #dashboard_activity .inside {
     border-bottom-radius 3px
 }
@@ -540,28 +235,13 @@ form.initial-form.quickpress-open label.prompt {
 form.initial-form.quickpress-open input#title {
     height: auto
 }
-.activity-block {
-    display: block
-    padding: 0
-    position: relative
-    /*margin-bottom: 50px*/
-}
+
 #future-posts li,
 #published-posts li,
 .drafts li {
     padding: 10px 0
 }
-#future-posts li a,
-#published-posts li a,
-.drafts li a {
-    display: block
-    font-size: 12px
-    line-height: 22px
-    font-weight: 400
-    letter-spacing: 0
-    text-transform: none
-    text-align: left
-}
+
 body.rtl #future-posts li a,
 body.rtl #published-posts li a,
 body.rtl .drafts li a {
@@ -926,41 +606,14 @@ body.rtl #dashboard_quick_press .inside form p.submit {
 #dashboard_right_now li.comment-mod-count .number:before {
     content: '\e724'
 }
-#welcome-panel {
-    display: block
-    border-radius: 0
-    position: relative
-    user-select: none
-    transition: all .3s ease-in
-}
+
 body.header-w #welcome-panel {
     border-top: 1px solid rgba(255,255,255,.25)
 }
 body.header-b #welcome-panel {
     border-top: 1px solid rgba(0,0,0,.25)
 }
-#welcome-panel.hidden {
-    opacity: 0
-    background: none
-    box-shadow: none
-    padding: 0
-    overflow: hidden
-}
-.welcome-panel .welcome-panel-column {
-    width: 29%
-    margin: 0 2%
-    min-width: 200px
-    display: inline-block
-    vertical-align: top
-    padding: 0
-    text-align: center
-    overflow: hidden
-    transform: translateY(0)
-}
-.welcome-panel .welcome-panel-column:not(.open):hover {
-    transform: translateY(-10px)
-    cursor: pointer
-}
+
 .welcome-panel .welcome-panel-column:nth-child(1) {
     transition: transform .3s linear
 }
@@ -980,45 +633,6 @@ body.is_loading:not(.no-js) .welcome-panel .welcome-panel-column:nth-child(2) {
 body.is_loading:not(.no-js) .welcome-panel .welcome-panel-column:nth-child(3) {
     transform: translateY(260px)
     transition: transform .7s linear
-}
-.welcome-panel .welcome-panel-column ul {
-    transition: opacity .3s linear
-    overflow: hidden
-    margin: 0
-}
-.welcome-panel .welcome-panel-column ul li {
-    transition: transform .3s ease-in-out
-}
-.welcome-panel .welcome-panel-column ul li {
-    display: block
-    text-align: left
-    margin-bottom: 10px
-}
-/*.welcome-panel .welcome-panel-column ul li:last-child,
-.welcome-panel .welcome-panel-column ul li:last-child a {
-    margin-bottom: 0
-}*/
-.welcome-panel .welcome-panel-content {
-    text-align: center
-    position: relative
-    z-index: 2
-    margin-top: 0px
-}
-.welcome-panel .welcome-panel-content .inside {
-    display: block
-    width: 100%
-    position: relative
-}
-
-
-.welcome-panel .welcome-panel-content h2 + .inside:before {
-    content: ''
-    position: absolute
-    left: calc(50% - 25px)
-    top: 0
-    width: 50px
-    height: 1px
-    opacity: .1
 }
 
 body.header-w .welcome-panel .welcome-panel-content h2 + .inside:before {
@@ -1077,23 +691,6 @@ body.sleeping .welcome-panel .welcome-panel-content #dash_slick > .slick-list {
     opacity: 0
 }
 
-#welcome-panel .slick-track > .slick-slide:nth-child(1) > h3 {
-    display: inline-block
-}
-
-#welcome-panel .slick-track > .slick-slide:nth-child(1) > h3:after {
-    content: ''
-    display: inline-block
-    margin: 13px 0 0 15px
-    width: 4px
-    height: 4px
-    line-height: inherit
-    vertical-align: top
-    border-radius: 2px
-}
-body.rtl #welcome-panel .slick-track > .slick-slide:nth-child(1) > h3:after {
-    margin: 13px 15px 0 0
-}
 body.header-w #welcome-panel .slick-track > .slick-slide:nth-child(1) > h3:after {
     background: rgba(255,255,255,.15)
 }
@@ -1376,9 +973,7 @@ body.content-b #activity-widget .slick-dots li.slick-active:after {
 #activity-widget #the-comment-list .mCSB_scrollTools {
     right: -20px
 }
-#activity-widget #latest-comments.activity-block {
-    position: relative
-}
+
 #activity-widget #latest-comments.activity-block #the-comment-list {
     padding-bottom: 20px
     margin-top: 75px
@@ -1660,19 +1255,6 @@ body.no-js #dashboard_quick_press .drafts {
     display: none
 }
 
-#wpbody-content #dashboard-widgets.columns-2 .postbox-container,
-.ie8 #wpbody-content #dashboard-widgets .postbox-container {
-    width: 49.5%
-}
-#wpbody-content #dashboard-widgets.columns-2 #postbox-container-2,
-#wpbody-content #dashboard-widgets.columns-2 #postbox-container-3,
-#wpbody-content #dashboard-widgets.columns-2 #postbox-container-4,
-.ie8 #wpbody-content #dashboard-widgets #postbox-container-2,
-.ie8 #wpbody-content #dashboard-widgets #postbox-container-3,
-.ie8 #wpbody-content #dashboard-widgets #postbox-container-4 {
-    float: right
-    width: 50.5%
-}
 p#wp-version-message {
 }
 #wp-version-message + p > a,
@@ -3225,9 +2807,4 @@ body.header-b .instats svg {
     left:0
     right:0
     width:100%
-}
-
-#welcome-panel .slick-slide .sod_select,
-#welcome-panel .slick-slide select {
-    min-width: 120px
 }

@@ -3,7 +3,7 @@
  *
  * Sticky Stats based on WP Power Stats plugin by
  * Igor Buyanov. Plugin URI: http://www.websivu.com/wp-power-stats/
- * 
+ *
  * Plugin modified by Dorian Tudorache to adapt to
  * StickyAdmin plugin's requirements.
  *
@@ -11,7 +11,6 @@
  * License: GPL2
  *
  */
-
 
 class StickyStats extends StickyAdmin
 {
@@ -58,8 +57,8 @@ class StickyStats extends StickyAdmin
         require_once STICKY_CLASSES_URI . '/vendor/geolite/Db/Reader/Decoder.php';
         require_once STICKY_CLASSES_URI . '/vendor/geolite/Db/Reader/InvalidDatabaseException.php';
         require_once STICKY_CLASSES_URI . '/vendor/geolite/Db/Reader/Metadata.php';
-        require_once STICKY_CLASSES_URI . '/vendor/geolite/Db/Reader/Util.php'; 
-        
+        require_once STICKY_CLASSES_URI . '/vendor/geolite/Db/Reader/Util.php';
+
         self::$vendors['browser'] = new BrowserTest($_SERVER['HTTP_USER_AGENT']);
         self::$vendors['device'] = new Mobile_Detect();
 
@@ -73,7 +72,7 @@ class StickyStats extends StickyAdmin
             // Hook the tracker script
             if ($track_filter) {
                 add_action($action_to_hook, array(__CLASS__, 'sticky_stats_enqueue_tracking_script'), 15);
-                if ( StickyAdmin::$config['statistics']['track_users'] ) 
+                if ( StickyAdmin::$config['statistics']['track_users'] )
 					add_action('login_enqueue_scripts', array(__CLASS__, 'sticky_stats_enqueue_tracking_script'), 10);
             }
         }
@@ -114,10 +113,10 @@ class StickyStats extends StickyAdmin
      */
     public static function sticky_stats_enqueue_tracking_script()
     {
-        if ( is_admin() && StickyAdmin::$config['statistics']['ignore_admin'] ) 
+        if ( is_admin() && StickyAdmin::$config['statistics']['ignore_admin'] )
             return;
 
-        wp_register_script( 'sticky_stats', STICKY_JS . 'sticky-tracker' . self::$config['dev']['js_ext'], array(), null, true);
+        wp_register_script( 'sticky_stats', STICKY_LIB . 'sticky-tracker' . self::$config['dev']['js_ext'], array(), null, true);
 
         // Pass some information to Javascript
         $params = array(
@@ -160,7 +159,7 @@ class StickyStats extends StickyAdmin
     public static function sticky_stats_track()
     {
         if ( StickyAdmin::$config['statistics']['tracker_active'] ) {
-		
+
             // Get JavaScript data
             self::$data_js['referer'] = urldecode($_POST['ref']);
 
@@ -183,7 +182,7 @@ class StickyStats extends StickyAdmin
      */
     public static function get_visitor_data()
     {
-	
+
         // Get date and time
         self::$data['date'] = self::get_date();
         self::$data['time'] = self::get_time();
@@ -310,7 +309,7 @@ class StickyStats extends StickyAdmin
 
         // Check if this is a new visitor
         $cookie_filter = apply_filters('sticky_stats_set_visit_cookie', true);
-        
+
         if ($cookie_filter) {
             if (self::$data['id'] > 0 || StickyAdmin::$config['statistics']['extend_session'] ) {
                 @setcookie('sticky_stats_tracking_code', self::$data['id'].'.'.md5(self::$data['id'].self::$options['secret']), time() + self::$options['session_duration'], COOKIEPATH);

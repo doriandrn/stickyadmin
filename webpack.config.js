@@ -5,6 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ZipPlugin = require('zip-webpack-plugin')
+const MakeDirWebpackPlugin = require('make-dir-webpack-plugin')
 
 const stylusPlugins = [
   require('rupture')(),
@@ -73,6 +74,11 @@ module.exports = (env) => {
     },
     plugins: [
       new CleanWebpackPlugin(),
+      new MakeDirWebpackPlugin({
+        dirs: [
+          { path: './dist/cache' }
+        ]
+      }),
 
       // new webpack.DefinePlugin({
       //   'VARIANT': JSON.stringify(env.variant)

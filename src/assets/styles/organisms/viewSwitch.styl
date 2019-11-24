@@ -1,0 +1,42 @@
+.view-switch
+  display: inline-block
+  vertical-align: top
+
+  > .view-list
+    &:before
+      content: '\ed35'
+
+  > .view-grid
+    &:before
+      content: '\ed36'
+
+  > .view-excerpt
+    &:before
+      content: '\ed34'
+
+  > .switch-tmce
+    &:before
+      content: '\ed32'
+
+  > .switch-html
+    &:before
+      content: '\ecbf'
+
+  > button
+  > a
+    display: inline-block
+    font-size: 0
+    height: 22px
+    line-height: 22px
+    margin-right: 5px
+    border: none
+    padding: 0
+
+    &:last-child
+      margin-right 0
+
+    &:before
+      display: block
+      text-align: center
+      font: 400 18px/22px streamline
+      -moz-osx-font-smoothing: grayscale

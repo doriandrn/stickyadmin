@@ -1,1532 +1,3 @@
-
-body
-  &.rtl
-    ol
-      margin-left: auto
-      margin-right: 20px
-    blockquote
-      padding: 20px 50px 20px 25px
-      &:before
-        left: auto
-        right: 15px
-      cite
-        margin-left: auto
-        margin-right: 0
-    select
-      padding-right: 0
-      padding-left: 35px
-    input[type=radio]
-      margin-right: auto
-      margin-left: 5px
-    input[type=radio]:checked
-      &:before
-        float: right
-    .spinner
-      left: auto
-      right: 50%
-    .form-field
-      .infobox
-        left: 0
-        right: auto
-        &:after
-          right: auto
-          left: 0
-    .wrap
-      & > h1
-        &:first-child
-          div#sticky-actions
-            float: left
-          #sticky_filters
-            & > div
-              &:first-child
-                &:before
-                  margin-right: 0
-                  margin-left: 5px
-                &:after
-                  margin-right: 5px
-                  margin-left: 0
-            #filters-expand
-              left: auto
-              right: -15px
-              &:before
-                left: auto
-                right: 13px
-              ul
-                li
-                  &.active
-                    &:before
-                      right: -20px
-                      left: auto
-                      transform: rotateY(180deg)
-      & > .tool-box
-        &:nth-child(3n)
-          margin-left: 0
-          margin-right: auto
-    &.header-w
-      .wrap
-        & > h1
-          &:first-child
-            div#sticky-actions
-              & > button
-                border-left: 0
-                border-right: 1px solid rgba(255,255,255,.1)
-    &.header-b
-      .wrap
-        & > h1
-          &:first-child
-            div#sticky-actions
-              & > button
-                border-left: 0
-                border-right: 1px solid rgba(0,0,0,.1)
-    #filter-click
-      margin-left: auto
-      margin-right: 5px
-      &:after
-        left: auto
-        right: 7px
-    .input-text-wrap
-      input
-        margin-right: auto !important
-        margin-left: 0 !important
-    #wpfooter
-      left: auto
-      right: 0
-    .inner-sidebar
-      float: left
-    .columns-2
-      .inner-sidebar
-        margin-right: 0
-        margin-left: auto
-    .has-right-sidebar
-      #post-body
-        float: right
-        clear: right
-        margin-left: -2000px
-        margin-right: auto
-      #post-body-content
-        margin-left: 300px
-        margin-right: auto
-    #col-right
-      float: left
-      clear: left
-      .col-wrap
-        padding-right: initial
-        padding-left: 0
-      & > .col-wrap
-        & > #posts-filter
-          & + .form-wrap
-            &:before
-              left: auto
-              right: 30px
-            p
-              padding-right: 30px
-              padding-left: initial
-    #poststuff
-      #post-body
-        &.columns-2
-          float: right
-    #post-body-content
-      float: right
-    #post-body
-      &.columns-2
-        #postbox-container-1
-          float: left
-        #postbox-container-2
-          .postbox
-            .inside
-              text-align: left
-    #delete-action
-      text-align: right
-      float: right
-      a
-        &:before
-          margin-left: 5px
-          margin-right: auto
-    #publishing-action
-      text-align: left
-      float: left
-    .side-info
-      ul
-        padding-left: initial
-        padding-right: 18px
-    .title-count
-      margin-right: 5px
-      margin-left: auto
-    .filtered-by
-      a
-        margin-right: 10px
-        margin-left: auto
-    .screen-reader-shortcut
-      &:focus
-        right: 6px
-        left: auto
-    .wp-picker-open
-      & + .wp-picker-input-wrap
-        right: auto
-        left: 0
-    &.content-w
-      .postbox
-        .handlediv
-          border-right: 1px solid rgba(255,255,255,.05)
-          border-left: none!important
-    &.content-b
-      .postbox
-        .handlediv
-          border-right: 1px solid rgba(0,0,0,.05)
-          border-left: none!important
-    .postbox
-      .handlediv
-        right: auto
-        left: 0
-    #submitdiv
-      #misc-publishing-actions
-        text-align: right
-    .tagchecklist
-      text-align: right
-      span
-        a
-          margin-right: 0
-          margin-left: auto
-          &:before
-            left: auto
-            right: 0
-    #dashboard-widgets
-      h3
-        .postbox-title-action
-          a
-            right: auto
-            left: 50px
-    #sticky_bulk_actions
-      text-align: right
-      left: auto
-      right: 0
-    .tablenav
-      .actions
-        margin-left: 15px
-        margin-right: auto
-        .sod_select
-          margin-left: 5px
-          margin-right: auto
-    #minor-publishing-actions
-      text-align: left
-      #save-action
-        float: right
-    .misc-pub-section
-      & > a
-        float: left
-        right: auto
-        left: 20px
-        &:before
-          right: auto
-          left: 0
-      a
-        &.button-cancel
-          left: 20px
-          right: auto
-      label
-        &.selectit
-          padding-left: initial!important
-          padding-right: 0
-      #post-visibility-select
-        #sticky-span
-          float: right
-    .tabs-panel
-      li
-        &.popular-category
-          &:after
-            left: 0px
-            right: auto
-      .mCSB_scrollTools
-        .mCSB_draggerContainer
-          left: -30px
-          right: auto
-    ul
-      &.post-revisions
-        li
-          img
-            margin-left: 5px
-            margin-right: auto
-    #post-formats-select
-      input
-        &:nth-child(9n)
-          margin-left: 0
-          margin-right: auto
-      span
-        margin-right: auto
-        margin-left: 3%
-        &:nth-child(3n)
-          margin-right: auto
-          margin-left: 0
-      input[type=radio]:checked
-        &:after
-          right: auto
-          left: -6px
-    #titlediv
-      #titlewrap
-        &:after
-          right: auto
-          left: 0
-      label#title-prompt-text
-        &.screen-reader-text
-          left: auto!important
-          right: 0
-      #edit-slug-box
-        &.s_modified
-          & > a
-            &.button
-              float: right
-              margin-left: 0
-    .timestamp-wrap
-      & > .sod_select
-        margin-right: auto
-        margin-left: 10px
-        padding-right: initial
-        padding-left: 0px
-      & > input[type=text]
-        margin-right: auto
-        margin-left: 0
-    a#category-add-toggle
-      &:before
-        margin-left: 5px
-        margin-right: auto
-    #set-post-thumbnail
-      &:before
-        right: calc( 50% - 12px)
-        left: auto
-    #categorychecklist
-      ul
-        &.children
-          padding-left: initial
-          padding-right: 0px
-    .row-actions
-      & > span
-        padding-right: initial
-        padding-left: 5px
-      a
-        &:before
-          margin-right: auto
-          margin-left: 1px
-    &.row-actions
-      & > span
-        padding-left: initial
-        margin-right: auto
-        padding-right: 5px
-        margin-left: 5px
-    &.mobile
-      .row-actions
-        a
-          &:before
-            margin-right: auto
-            margin-left: 0
-            text-align: right
-    .media-item
-      .describe
-        th
-          text-align: right
-        p
-          &.help
-            padding: 0 5px 0 0
-      .pinkynail
-        margin: 0px 0px 0 15px
-      .progress
-        float: left
-      .error-div
-        a
-          &.dismiss
-            float: left
-            margin: 0 15px 0 10px
-    .media-upload-form
-      td
-        label
-          margin-right: 2px
-          margin-left: 6px
-      .align
-        .field
-          label
-            padding: 0 23px 0 0
-            margin: 0 3px 0 1em
-      tr
-        &.image-size
-          label
-            margin: 0 5px 0 0
-      .media-item
-        .error
-          padding: 10px 14px 10px 0
-    .find-box
-      margin-left: auto
-      margin-right: -300px
-      left: auto
-      right: 50%
-    .find-box-head
-      padding: 0 16px 0 36px
-    .find-box-search
-      .spinner
-        right: 110px
-        left: auto
-    #find-posts-input
-      margin: 0 0 0 4px
-    .widefat
-      .found-radio
-        padding-right: initial
-        padding-left: 0
-    &.update-core-php
-      ul
-        &.core-updates
-          & + p
-            &.s_modified
-              & > a
-                &.button
-                  &:before
-                    margin-right: auto
-                    margin-left: 5px
-    .drag-drop
-      .max-upload-size
-        float: left
-    .wp_attachment_holder
-      .imgedit-wrap
-        .imgedit-panel-content
-          padding-left: 16px
-          padding-right: initial
-        .imgedit-settings
-          float: left
-    .imgedit-submit-btn
-      margin-left: auto
-      margin-right: 20px
-    .postbox-container
-      float: right
-    #screen-meta-links
-      right: auto
-      left: 0
-    &.menu-right
-      #screen-meta-links
-        right: 0
-        left: auto
-        .show-settings
-          transform: translateX(20px)
-    &.menu-left
-      #screen-meta-links
-        .show-settings
-          transform: translateX(-20px)
-    .metabox-prefs
-      & > label
-        text-align: right
-    #edit-slug-box
-      #sample-permalink
-        margin-left: 15px
-        margin-right: auto
-      a
-        &.cancel
-          &:before
-            margin-right: auto
-            margin-left: 5px
-    table#newmeta
-      text-align: right
-    span#enternew
-      &:before
-        margin-right: auto
-        margin-left: 5px
-    td#newmetaleft
-      a
-        margin-left: auto
-        margin-right: 5px
-    .post-com-count
-      &:before
-        margin-right: auto
-        margin-left: 1px
-      span
-        margin-left: auto
-        margin-right: 5px
-    h2
-      .nav-tab
-        margin-left: 25px
-        margin-right: auto
-    .pressthis-bookmarklet-wrapper
-      & > a
-        & > span
-          &:before
-            margin-right: 0
-            margin-left: 5px
-    .alignleft
-      float: right
-    .alignright
-      float: left
-    #template
-      & > div
-        margin-right: auto
-        margin-left: 310px
-    #templateside
-      float: left
-      li
-        a
-          &:before
-            margin-right: auto
-            margin-left: 5px
-    .at-delete_image_button
-      margin-left: auto!important
-      margin-right: 230px
-    .wp-picker-container
-      input[type=text].wp-color-picker
-        text-align: right
-    .inside
-      table
-        text-align: right
-        .submit
-          input
-            margin: 0 0 0 5px
-      input#trackback_url
-        margin-left: 0
-        margin-right: auto
-    #major-publishing-actions
-      &.stuck
-        left: 55px
-        right: auto
-    .nav-tab-wrapper
-      & > a
-        & + a
-          margin-left: auto
-          margin-right: 20px
-    .appearance_page_custom-header
-      .available-headers
-        .default-header
-          float: right
-          margin: 0 0px 20px 20px
-      .random-header
-        margin: 0 0px 20px 20px
-    .wp-full-overlay-sidebar
-      &:after
-        right: auto
-        left: 0
-      .wp-full-overlay-footer
-        left: auto
-        right: 0
-    .theme-install-overlay
-      .close-full-overlay
-        &:before
-          left: auto
-          right: 13px
-      .previous-theme
-        &:before
-          left: auto
-          right: 14px
-      .next-theme
-        &:before
-          left: auto
-          right: 13px
-      .wp-full-overlay-header
-        .theme-install
-          float: left
-          margin: 8px 0px 0 10px
-      .wp-full-overlay-sidebar
-        border-left: 1px solid #ddd
-        border-right: none
-    .install-theme-info
-      .theme-install
-        float: left
-    .theme-details
-      .theme-version
-        float: right
-      .star-rating
-        float: left
-      .theme-description
-        float: right
-    #wpbody
-      left: auto
-      right: 0
-      .open-label
-        display: block
-        float: right
-        span
-          padding-right: initial
-          padding-left: 15px
-    #TB_window
-      left: auto
-      right: 50%
-      text-align: right
-      img#TB_Image
-        margin: 15px 15px 0 0px
-    #TB_caption
-      padding: 7px 25px 10px 30px
-      float: right
-    #TB_closeWindow
-      padding: 11px 0px 10px 25px
-      float: left
-    #TB_closeAjaxWindow
-      float: left
-    #TB_ajaxWindowTitle
-      float: right
-    #TB_ajaxContent
-      text-align: right
-    #TB_load
-      left: auto
-      right: 50%
-      margin: -45px -125px 0 0
-      padding: 40px 15px 15px
-    #TB_HideSelect
-      left: auto
-      right: 0
-    .tb-close-icon
-      right: auto
-      left: 0
-    #plugin-information-title
-      &.with-banner
-        margin-right: auto
-        margin-left: 0
-        div
-          &.vignette
-            float: left
-            float: left
-        h2
-          left: auto
-          right: 20px
-    #plugin-information-content
-      .fyi
-        h3
-          text-align: right
-      .contributors
-        li
-          margin-left: 15px
-          margin-right: auto
-          img
-            margin-left: 5px
-            margin-right: auto
-      #section-holder
-        h4
-          right: auto
-          left: 18px
-          text-align: left
-      span
-        &.counter-bar
-          left: auto
-          right: 0
-        &.counter-label
-          margin-right: auto
-          margin-left: 5px
-          text-align: left
-        &.counter-count
-          margin-right: 5px
-          margin-left: auto
-      .review-title-section
-        & + p
-          img
-            margin: 0 5px 0 2px
-    #plugin-information
-      .fyi
-        float: left
-        right: auto
-        left: 0
-        & > ul
-          & > li
-            & > strong
-              margin-right: auto
-              margin-left: 5px
-    #wp-auth-check-wrap
-      #wp-auth-check
-        right: 50%
-        left: auto
-        margin: 0 -190px 0 0px
-        left: auto
-        right: 0
-      .wp-auth-check-close
-        right: auto
-        left: 8px
-        &:before
-          text-align: left
-  &.iframe
-    min-width: 0
-    padding-top: 1px
-    height: 98%
-  &.content-w
-    .sod_select
-      &.open
-      .sod_option
-        &.active
-          color: rgba(255,255,255,1)
-    textarea
-      border-color: rgba(255,255,255,.05)
-      &:hover
-        border-color: rgba(255,255,255,.1)
-      &:focus
-        border-color: rgba(255,255,255,.2)
-    #post-body
-      &.columns-2
-        #postbox-container-2
-          background: rgba(255,255,255,.1)
-    #wpbody-content
-      .wrap
-        *
-          -webkit-font-smoothing: subpixel-antialiased
-    #poststuff
-      & > #post-body
-        &:before
-          background: #000
-    .wp-picker-container
-      .iris-picker
-        border-color: rgba(255,255,255,.1)
-    .postbox
-      .handlediv
-        border-left: 1px solid rgba(255,255,255,.05)
-    .misc-pub-section
-      border-top: 1px solid rgba(255,255,255,.05)
-    .tabs-panel
-      label
-        &.selectit
-          border-bottom: 1px solid rgba(255,255,255,.05)
-    #set-post-thumbnail
-      &:before
-        color: rgba(255,255,255,.2)
-    .wrap
-      & > h1
-        &:first-child
-          #sticky_filters
-            #filters-expand
-              background: rgba(0,0,0,.85)
-              &:before
-                border-bottom-color: rgba(0,0,0,.85)
-      .postbox
-        #latest-comments
-          ul
-            &.subsubsub
-              & > li
-                & > a
-                  color: rgba(255, 255, 255, .65)
-                  &:hover
-                    color: rgba(255, 255, 255, .85)
-                  &:focus
-                    color: rgba(255, 255, 255, 1)
-    .inside
-      table
-        border: 1px solid rgba(255,255,255,.05)
-        th
-          box-shadow: 0px 1px rgba(255,255,255,.05)
-    #post-formats-select
-      input[type=radio]
-        border-color: rgba(255, 255, 255, .15)!important
-      label
-        color: rgba(255, 255, 255, .65)
-        border-color: rgba(255, 255, 255, .1)!important
-      span
-        &:hover
-          label
-            color: #fff
-            border-color: rgba(255, 255, 255, .35)!important
-          input[type=radio]
-            color: #fff!important
-            border-color: rgba(255, 255, 255, .75)!important
-      input[type=radio]:checked
-        border-color: rgba(255, 255, 255, .75)!important
-        & + label
-          color: rgba(255, 255, 255, .95)!important
-          border-color: rgba(255, 255, 255, .35)!important
-        &:after
-          color: #fff!important
-    .tagcloud
-      h3
-        color: rgba(255,255,255,.9)
-      a
-        color: rgba(255,255,255,.45)
-        &:hover
-          color: rgba(255,255,255,.75)
-    div
-      &.sidebar-name
-        h3
-          color: rgba(255,255,255,.75)
-    .metabox-holder
-      .postbox-container
-        .empty-container
-          background: rgba(255,255,255,.025)
-    .media-frame
-      &.mode-grid
-        .uploader-inline
-          background: rgba(255,255,255,.05)
-          .drop-instructions
-            color: rgba(255,255,255,.95)
-          p
-            color: rgba(255,255,255,.35)
-    .drag-drop
-      #drag-drop-area
-        border: 2px dashed rgba(255,255,255,.25)
-    .drag-drop-inside
-      p
-        color: rgba(255,255,255,.35)
-        &.drag-drop-info
-          color: rgba(255,255,255,.85)
-    .popular-tags
-      a
-        color: rgba(255,255,255,.5)
-        &:hover
-          color: rgba(255,255,255,.85)
-    #post-body-content
-      border-color: rgba(255,255,255,.1) !important
-    .filter-drawer
-      color: rgba(255,255,255,.35)
-    .filter-group
-      border-color: rgba(255,255,255,.1)!important
-    .plugin-card
-      border-color: rgba(255,255,255,.1)!important
-    .plugin-card-top
-      .column-name
-        h4
-          a
-            color: rgba(255,255,255,.85)
-            &:hover
-              color: rgba(255,255,255,1)
-    .plugin-card-bottom
-      box-shadow: inset 0px 1px rgba(255,255,255,.05)
-    #templateside
-      ul
-        background: rgba(255,255,255,.05)
-        border: 1px solid rgba(255,255,255,.1)
-    .fileedit-sub
-      big
-        color: rgba(255,255,255,.9)
-    .defaultavatarpicker
-      img
-        &.avatar
-          border: 2px solid rgba(255,255,255,.1)
-    .response-links
-      & > span
-        & + a
-          &:after
-            background: rgba(255,255,255,.2)
-    #col-right
-      & > .col-wrap
-        & > #posts-filter
-          & + .form-wrap
-            background: linear-gradient(top, rgba(255,255,255,.05) 0%, transparent 5%) 0 0
-            border-color: rgba(255,255,255,.05)!important
-            &:before
-              border-left: 1px solid rgba(255,255,255,.1)
-            p
-              color: rgba(255,255,255,.65)
-    .theme-browser
-      .theme
-        &.active
-          .theme-name
-            span
-              color: #fff
-    .attachment
-      .thumbnail
-        color: #fff
-        background: #000
-    #request-filesystem-credentials-dialog
-      background: #000
-  &.content-b
-    .sod_select
-      &.open
-      .sod_option
-        &.active
-          color: rgba(0,0,0,1)
-    textarea
-      border-color: rgba(0,0,0,.05)
-      &:hover
-        border-color: rgba(0,0,0,.1)
-      &:focus
-        border-color: rgba(0,0,0,.2)
-    #post-body
-      &.columns-2
-        #postbox-container-2
-          background: rgba(0,0,0,.05)
-    #wpbody-content
-      .wrap
-        *
-          -webkit-font-smoothing: antialiased
-    #poststuff
-      & > #post-body
-        &:before
-          background: #fff
-    .wp-picker-container
-      .iris-picker
-        border-color: rgba(0,0,0,.1)
-    .postbox
-      .handlediv
-        border-left: 1px solid rgba(0,0,0,.05)
-    .tabs-panel
-      label
-        &.selectit
-          border-bottom: 1px solid rgba(0,0,0,.05)
-    #set-post-thumbnail
-      &:before
-        color: rgba(0,0,0,.2)
-    .wrap
-      & > h1
-        &:first-child
-          #sticky_filters
-            #filters-expand
-              background: rgba(0,0,0,.95)
-              &:before
-                border-bottom-color: rgba(0,0,0,.95)
-      .postbox
-        #latest-comments
-          ul
-            &.subsubsub
-              & > li
-                & > a
-                  color: rgba(0, 0, 0, .65)
-                  &:hover
-                    color: rgba(0, 0, 0, .85)
-                  &:focus
-                    color: rgba(0, 0, 0, 1)
-    .inside
-      table
-        border: 1px solid rgba(0,0,0,.05)
-        th
-          box-shadow: 0px 1px rgba(0,0,0,.05)
-    h3
-      &.hndle
-        span
-          &:before
-            color: rgba(0, 0, 0, .35)
-    #post-formats-select
-      input[type=radio]
-        border-color: rgba(0, 0, 0, .15)!important
-      label
-        color: rgba(0, 0, 0, .65)
-        border-color: rgba(0, 0, 0, .1)!important
-      span
-        &:hover
-          label
-            color: #000
-            border-color: rgba(0, 0, 0, .35)!important
-          input[type=radio]
-            color: #000!important
-            border-color: rgba(0, 0, 0, .75)!important
-      input[type=radio]:checked
-        border-color: rgba(0, 0, 0, .75)!important
-        & + label
-          color: rgba(0, 0, 0, .95)!important
-          border-color: rgba(0, 0, 0, .35)!important
-        &:after
-          color: #000!important
-    .tagcloud
-      h3
-        color: rgba(0,0,0,.9)
-      a
-        color: rgba(0,0,0,.45)
-        &:hover
-          color: rgba(0,0,0,.75)
-    div
-      &.sidebar-name
-        h3
-          color: rgba(0,0,0,.75)
-    .metabox-holder
-      .postbox-container
-        .empty-container
-          background: rgba(0,0,0,.025)
-    .media-frame
-      &.mode-grid
-        .uploader-inline
-          background: rgba(0,0,0,.05)
-          .drop-instructions
-            color: rgba(0,0,0,.95)
-          p
-            color: rgba(0,0,0,.35)
-    .drag-drop
-      #drag-drop-area
-        border: 2px dashed rgba(0,0,0,.25)
-    .drag-drop-inside
-      p
-        color: rgba(0,0,0,.35)
-        &.drag-drop-info
-          color: rgba(0,0,0,.85)
-    .popular-tags
-      a
-        color: rgba(0,0,0,.5)
-        &:hover
-          color: rgba(0,0,0,.85)
-    #post-body-content
-      border-color: rgba(0,0,0,.1) !important
-    .filter-drawer
-      color: rgba(0,0,0,.35)
-    .filter-group
-      border-color: rgba(0,0,0,.1)!important
-    .plugin-card-bottom
-      box-shadow: inset 0px 1px rgba(0,0,0,.05)
-    .plugin-card
-      border-color: rgba(0,0,0,.1)!important
-    .plugin-card-top
-      .column-name
-        h4
-          a
-            color: rgba(0,0,0,.85)
-            &:hover
-              color: rgba(0,0,0,1)
-    #templateside
-      ul
-        background: rgba(0,0,0,.05)
-        border: 1px solid rgba(0,0,0,.1)
-    .fileedit-sub
-      big
-        color: rgba(0,0,0,.9)
-    .defaultavatarpicker
-      img
-        &.avatar
-          border: 2px solid rgba(0,0,0,.1)
-    .response-links
-      & > span
-        & + a
-          &:after
-            background: rgba(0,0,0,.2)
-    #col-right
-      & > .col-wrap
-        & > #posts-filter
-          & + .form-wrap
-            background: linear-gradient(top, rgba(0,0,0,.05) 0%, transparent 5%) 0 0
-            border-color: rgba(0,0,0,.1)!important
-            &:before
-              border-left: 1px solid rgba(0,0,0,.1)
-            p
-              color: rgba(0,0,0,.65)
-    .theme-browser
-      .theme
-        &.active
-          .theme-name
-            span
-              color: #000
-    .attachment
-      .thumbnail
-        color: #000
-        background: #fff
-    #request-filesystem-credentials-dialog
-      background: #fff
-  &.header-w
-    #welcome-panel
-      .sod_select
-        .sod_option
-          &.active
-            color: rgba(255,255,255,1)
-    .wrap
-      & > h1
-        &:first-child
-          div#sticky-actions
-            border-right: 1px solid rgba(255,255,255,.1)
-            & > button
-              color: rgba(255,255,255,.85)
-              border-left: 1px solid rgba(255,255,255,.1)
-              &:hover
-                background: rgba(0,0,0,.1)
-              &.mainaction
-                color: #fff
-          .page-title-action
-            color: rgba(255,255,255,.9)
-            &:hover
-              color: #fff
-    &.update-core-php
-      ul
-        &.core-updates
-          & + p
-            &.s_modified
-              color: rgba(255,255,255,.35)
-    #screen-meta
-      input
-        &.labelauty
-          & + label
-            color: rgba(255,255,255,.15)
-          &:checked
-            & + label
-              color: rgba(255,255,255,1)
-      .mCSB_scrollTools
-        .mCSB_dragger
-          .mCSB_dragger_bar
-            background-color: rgba(0,0,0,0.15)
-          &:hover
-            .mCSB_dragger_bar
-              background-color: rgba(255,255,255,.45)
-      label
-        color: rgba(255,255,255,.65)
-      select
-        // background: transparent url("../assets/arrow-small-255-35.png") right 10px center no-repeat
-        &:hover
-          // background-image: url("../assets/arrow-small-255-75.png")
-        &:disabled
-          // background-image: url("../assets/arrow-small-255-10.png")
-      .sod_select
-        &.open
-          color: rgba(255,255,255,.75)
-          background: #000
-        .sod_list_wrapper
-          color: rgba(255,255,255,.55)
-          background: #000
-          border-color: rgba(255,255,255,.65)!important
-        .sod_option
-          &.active
-            color: rgba(255,255,255,1)
-      form
-        & > fieldset
-          &:after
-            background: rgba(255,255,255,.05)
-      fieldset
-        legend
-          color: rgba(255,255,255,.95)
-    #screen-meta-links
-      .show-settings
-        color: rgba(255,255,255,.75)
-    .header_wrap
-      input
-        &.btn
-          color: rgba(255,255,255,.75)
-          &:hover
-            color: rgba(255,255,255,1)
-    ul
-      &.core-updates
-        h3
-          &.s_modified
-            color: rgba(255,255,255,.85)
-        p
-          color: rgba(255,255,255,.5)
-    .subsubsub
-      .mCSB_scrollTools
-        &.mCSB_scrollTools_horizontal
-          .mCSB_dragger
-            .mCSB_dragger_bar
-              background: rgba(255,255,255,.25)
-  &.header-b
-    #welcome-panel
-      .sod_select
-        .sod_option
-          &.active
-            color: rgba(0,0,0,1)
-    .wrap
-      & > h1
-        &:first-child
-          div#sticky-actions
-            border-right: 1px solid rgba(0,0,0,.1)
-            & > button
-              border-left: 1px solid rgba(0,0,0,.1)
-              color: rgba(0,0,0,.85)
-              &:hover
-                background: rgba(255,255,255,.1)
-              &.mainaction
-                color: #000
-          .page-title-action
-            color: rgba(0,0,0,.9)
-            &:hover
-              color: #000
-    &.update-core-php
-      ul
-        &.core-updates
-          & + p
-            &.s_modified
-              color: rgba(0,0,0,.35)
-    #screen-meta
-      input
-        &.labelauty
-          & + label
-            color: rgba(0,0,0,.15)
-          &:checked
-            & + label
-              color: rgba(0,0,0,1)
-      .mCSB_scrollTools
-        .mCSB_dragger
-          .mCSB_dragger_bar
-            background-color: rgba(255,255,255,255.15)
-          &:hover
-            .mCSB_dragger_bar
-              background-color: rgba(0,0,0,.45)
-
-      .sod_select
-        &.open
-          color: rgba(0,0,0,.75)
-          background: #FFF
-        .sod_list_wrapper
-          color: rgba(0,0,0,.55)
-          background: #FFF
-          border-color: rgba(0,0,0,.65)!important
-        .sod_option
-          &.active
-            color: rgba(0,0,0,1)
-      form
-        & > fieldset
-          &:after
-            background: rgba(0,0,0,.05)
-      fieldset
-        legend
-          color: rgba(0,0,0,.95)
-    #screen-meta-links
-      .show-settings
-        color: rgba(0,0,0,.75)
-    .header_wrap
-      input
-        &.btn
-          color: rgba(0,0,0,.75)
-          &:hover
-            color: rgba(0,0,0,1)
-    ul
-      &.core-updates
-        h3
-          &.s_modified
-            color: rgba(0,0,0,.85)
-        p
-          color: rgba(0,0,0,.5)
-    .subsubsub
-      .mCSB_scrollTools
-        &.mCSB_scrollTools_horizontal
-          .mCSB_dragger
-            .mCSB_dragger_bar
-              background: rgba(0,0,0,.25)
-  &.header-small
-    #wpbody-content
-      &:before
-        top: 50px
-    .wrap
-      & > h1
-        &:first-child
-          div#sticky-actions
-            height: 50px
-            line-height: 50px
-          #sticky_filters
-            #filters-expand
-              top: 50px
-    #wpbody
-      #wpbody-content
-        padding-top: 50px
-  &:not(.header-small)
-    #wpbody-content
-      &:before
-        top: 68px
-    .wrap
-      & > h1
-        &:first-child
-          div#sticky-actions
-            height: 68px
-            line-height: 68px
-            & > button
-              min-width: 68px
-              &:before
-                font-size: 16px
-  &.footer-b
-    #wpfooter
-      p#footer-upgrade
-        color: rgba(0,0,0,.25)
-      a
-        color: rgba(0,0,0,.85)
-        &:hover
-          color: #000
-  &.footer-w
-    #wpfooter
-      p#footer-upgrade
-        color: rgba(255,255,255,.25)
-      a
-        color: rgba(255,255,255,.85)
-        &:hover
-          color: #fff
-  &.focus-on
-    #poststuff
-      & > #post-body
-        &:before
-          box-shadow: none
-    #wpfooter
-      display: none
-    .postbox-container
-      & > *
-        opacity: 0
-  &.wpab-minimized
-    #wpbody
-      margin-top: 4px
-  &.mobile
-    #wpwrap
-      #wpcontent
-        width: 100%
-    .row-actions
-      display: none
-      & > span
-        padding-top: 5px
-        *
-          line-height: 18px!important
-      a
-        &:before
-          font-size: 11px
-          margin-right: 0
-          line-height: 18px
-          text-align: left
-          width: 16px
-    tr
-      &.is-expanded
-        .row-actions
-          display: block
-          opacity: 1
-          transform: translateY(0)
-    &.content-w
-      .row-actions
-        a
-          border-color: rgba(255, 255, 255, .1)
-    &.content-b
-      .row-actions
-        a
-          border-color: rgba(0,0,0, .1)
-  &.bulk-open
-    #sticky_bulk_actions
-      transform: translateY(0px)
-  &:not(.mobile)
-    .row-actions
-      & > span
-        max-width: 100px
-  &.row-actions
-    & > span
-      padding-left: 5px
-      margin-right: 5px
-      border-width: 1px
-      border-style: solid
-  &.update-core-php
-    ul
-      &.core-updates
-        display: block
-        position: relative
-        overflow: hidden
-        li
-          display: inline-block
-          vertical-align: top
-          text-align: center
-          position: relative
-          form
-            margin-bottom: 0!important
-        h3
-          &.s_modified
-            max-width: 60%
-            margin: 0 auto 5px
-            font-size: 16px
-            line-height: 20px
-            letter-spacing: 0
-        ul
-          &.slick-dots
-            margin: 5px 0 0
-            line-height: 8px
-            height: 8px
-            li
-              display: inline-block
-              vertical-align: top
-              margin: 0 5px
-              & > button
-                font-size: 0
-                padding: 0
-                height: 0
-                border-width: 4px
-                border-radius: 50%
-        & + p
-          &.s_modified
-            margin-bottom: 0
-            font-size: 9px
-            font-weight: 100
-            line-height: 14px
-            font-style: italic
-            display: block
-            & > a
-              &.button
-                padding: 0
-                border: 0
-                margin: 5px 0 0
-                display: block
-                &:before
-                  content: "\ec97"
-                  display: inline-block
-                  vertical-align: middle
-                  margin-right: 5px
-                  font: 400 14px/14px streamline
-        .button
-          margin: 10px 5px 0
-    &.header-w
-      ul
-        &.core-updates
-          ul
-            &.slick-dots
-              li
-                &.slick-active
-                  & > button
-                    border-color: rgba(255,255,255,.75)!important
-    &.header-b
-      ul
-        &.core-updates
-          ul
-            &.slick-dots
-              li
-                &.slick-active
-                  & > button
-                    border-color: rgba(0,0,0,.75)!important
-    .wrap
-      & > div#update_tabs
-        padding-top: 32px
-        position: relative
-        text-align: center
-        .slick-dots
-          position: absolute
-          top: 0
-          left: 0
-          right: 0
-          text-align: center
-          width: 100%
-          li
-            display: inline-block
-            margin: 0 5px
-    div#s-update-notice-container
-      position: relative
-      text-align: center
-      ul
-        list-style-type: none
-    &.content-w
-      div#s-update-notice-container
-        & > h2
-          font-size: 16px
-          font-weight: 100
-          line-height: 22px
-  &:not(.no-js)
-    #screen-meta-links
-      display: none!important
-  &.menu-right
-    #screen-meta-links
-      right: auto
-      left: 0px
-  &.sidepanel_open
-    #screen-meta
-      z-index: 31
-      opacity: 1
-      transform: translateY( 0 )
-    &.show-settings-link
-      #screen-options-wrap
-        opacity: 1
-        visibility: visible
-        width: 100%
-        height: 100%
-      #contextual-help-wrap
-        display: none
-  &.sticky-admin
-    .wp-color-result
-      border: 0
-      border-radius: 30px
-      width: 30px
-      height: 30px
-      margin: 0
-      vertical-align: middle
-      padding: 0
-      box-shadow: none
-      &:after
-        background: #fff
-        border-left: 0
-      &:hover
-        border-color: 0
-        box-shadow: none
-  &.wp-autoresize
-    margin: 25px
-  &.press-this
-    ul
-      &.category-tabs
-        li
-          &.tabs
-            a
-              letter-spacing: 0px
-  &.wpab-sub-b
-    #adminmenu
-      .mCSB_scrollTools
-        .mCSB_dragger
-          .mCSB_dragger_bar
-            background-color: rgba(0,0,0,0.15)
-          &:hover
-            .mCSB_dragger_bar
-              background-color: rgba(0,0,0,0.45)
-    .picker_open
-      div#sticky_icon_picker
-        ul
-          li
-            color: rgba(0,0,0,.55)
-            &:hover
-              color: rgba(0,0,0,.85)
-              color: #000
-    div#sticky_icon_picker
-      .mCSB_scrollTools
-        .mCSB_dragger
-          .mCSB_dragger_bar
-            background-color: rgba(0,0,0,0.15)
-          &:hover
-            .mCSB_dragger_bar
-              background-color: rgba(0,0,0,0.45)
-  &.wpab-sub-w
-    div#sticky_icon_picker
-      ul
-        li
-          color: rgba(255,255,255,.55)
-          &:hover
-            color: rgba(255,255,255,.85)
-            color: #fff
-      .mCSB_scrollTools
-        .mCSB_dragger
-          .mCSB_dragger_bar
-            background-color: rgba(255,255,255,0.15)
-          &:hover
-            .mCSB_dragger_bar
-              background-color: rgba(255,255,255,0.45)
-  &.is_loading
-    .wrap
-      & > h1
-        &:first-child
-          & > *:not(#wp-menu-toggle):not(#sticky_icon_picker)
-            opacity: 0
-          & > *:not(#wp-menu-toggle):not(#sticky_icon_picker):nth-child(1)
-            transform: translateX(100px)
-          & > *:not(#wp-menu-toggle):not(#sticky_icon_picker):nth-child(2)
-            transform: translateX(200px)
-          & > *:not(#wp-menu-toggle):not(#sticky_icon_picker):nth-child(3)
-            transform: translateX(300px)
-          & > *:not(#wp-menu-toggle):not(#sticky_icon_picker):nth-child(4)
-            transform: translateX(400px)
-  &.cheatin
-    font-size: medium
-    height: auto
-    background: #fff
-    margin: 50px auto 2em
-    padding: 1em 2em
-    max-width: 700px
-    min-width: 0
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13)
-    p
-      font-size: 14px
-      line-height: 1.5
-      margin: 25px 0 20px
-  &.modal-open
-    overflow: hidden
-    &:not(.vc_editor)
-      #wpwrap
-        &:before
-          content: ''
-          position: fixed
-          top: 0
-          bottom: 0
-          left: 0
-          right: 0
-          z-index: 99999
-          background: rgba(0, 0, 0, .15)
-          filter: blur(5px)
-  &.vc_editor
-    .modal-backdrop
-      display: none!important
-  &.full-overlay-active
-    overflow: hidden
-  &.disconnected
-    overflow: hidden
-
-
-ul,
-ol,
-dl
-  margin-bottom: 25px
-h3
-  font-size: 14px
-  line-height: 16px
-  letter-spacing: .3px
-  font-weight: 400
-h4,
-.inside #list-table + p
-  font-size: 10px
-  line-height: 14px
-  font-weight: 600
-h5
-  font-size: 9px
-  font-weight: 600
-  line-height: 12px
-
-::-moz-selection
-  background-color: #f36d57
-  color: #fff
-::selection
-  background-color: #f36d57
-  color: #fff
 body.focus-on.content-b #wpbody,
 body.focus-on.content-b
   background: #fff
@@ -1701,50 +172,7 @@ body.content-b .sod_select.disabled
   border-color: rgba(0,0,0,.1)
   color: rgba(0,0,0,.3)
 
-.view-switch
-  display: inline-block
-  vertical-align: top
-  & > .view-list
-    &:before
-      content: '\ed35'
-  & > .view-grid
-    &:before
-      content: '\ed36'
-  & > .view-excerpt
-    &:before
-      content: '\ed34'
-  & > .switch-tmce
-    &:before
-      content: '\ed32'
-  & > .switch-html
-    &:before
-      content: '\ecbf'
-.view-switch > button,
-.view-switch > a
-  display: inline-block
-  font-size: 0
-  height: 22px
-  line-height: 22px
-  margin-right: 5px
-  border: none
-  padding: 0
-body.rtl .view-switch > button,
-body.rtl .view-switch > a
-  margin-right: auto
-  margin-left: 5px
-.view-switch > button:last-child,
-.view-switch > a:last-child
-  margin-right: 0
-body.rtl .view-switch > button:last-child,
-body.rtl .view-switch > a:last-child
-  margin-right: auto
-  margin-left: 0
-.view-switch > button:before,
-.view-switch > a:before
-  display: block
-  text-align: center
-  font: 400 18px/22px streamline
-  -moz-osx-font-smoothing: grayscale
+
 .form-field
   display: block
   position: relative
@@ -1808,18 +236,12 @@ body.header-b .filter-links,
 body.header-b .subsubsub,
 body.header-b .wrap > .nav-tab-wrapper
   box-shadow: inset 0px 1px rgba(0,0,0,.1)
-#overlay
-  &:before
-    content: ''
-    position: absolute
-    z-index: -1
-    top: 0
-    bottom: -300px
-    left: 0
-    right: 0
+
+
 #wpbody-content
   display: block
   transition: padding .15s ease-in-out
+
   &:after
     content: ''
     position: absolute
@@ -1828,181 +250,11 @@ body.header-b .wrap > .nav-tab-wrapper
     right: 0
     height: 68px
     z-index: -1
+
   #async-upload-wrap
     a
       display: none
 .wrap
-  position: relative
-  z-index: 25
-  height: 100%
-  min-height: 100%
-  transition: all .2s ease-in-out, top .15s ease-in-out
-  & > h1
-    &:first-child
-      div#sticky-actions
-        height: 100%
-        float: right
-        overflow: hidden
-        button
-          vertical-align: middle
-          position: relative
-          &:before
-            font-family: streamline
-            font-weight: 400
-            font-size: 14px
-            display: block
-            text-align: center
-          &.submitdelete
-            &:before
-              content: '\e6d9'
-        & > button
-          display: inline-block
-          vertical-align: top
-          font-size: 0
-          padding: 0 10px
-          border: none
-          min-width: 50px
-          line-height: inherit
-          min-height: 100%
-          word-break: break-word
-          white-space: normal
-          transition: all .1s ease-in-out, min-height .15s ease-in-out, min-width .15s ease-in-out, max-width .15s ease-in-out
-          &:before
-            content: '\e79f'
-        button#publish
-          &:before
-            content: '\e7a9'
-        button#save-post
-          &:before
-            content: '\e8d4'
-        button[type="reset"]:before
-          content: '\ec98'
-        &:after
-          content: none !important
-      & > .actions
-        float: none!important
-        display: inline-block
-        vertical-align: top
-        line-height: 22px
-      #sticky_filters
-        font-weight: 400
-        font-size: 10px
-        letter-spacing: .5px
-        cursor: pointer
-        & > div
-          &:first-child
-            &:before
-              content: '\e8b6'
-              font-size: 12px
-              font-weight: 400
-              font-family: streamline
-              display: inline-block
-              vertical-align: top
-              margin-right: 5px
-            &:after
-              content: '\e666'
-              font-size: 6px
-              font-weight: 400
-              font-family: streamline
-              display: inline-block
-              vertical-align: top
-              margin-left: 5px
-        #filters-expand
-          display: block
-          position: absolute
-          left: -15px
-          top: 68px
-          padding: 15px
-          border-radius: 3px
-          opacity: 0
-          box-shadow: 2px 2px 0 rgba(0, 0, 0, .1)
-          transform: translate(0, -50%) scale(.95,0)
-          transition: transform .15s, opacity .15s, top .15s ease-in-out
-          &:before
-            border: solid 8px transparent
-            content: " "
-            height: 0
-            width: 0
-            position: absolute
-            pointer-events: none
-            top: -15px
-            left: 13px
-          ul
-            display: inline-block
-            vertical-align: top
-            letter-spacing: .1px
-            height: 100%
-            max-height: 320px
-            margin-right: 35px
-            padding-left: 20px
-            padding-right: 20px
-            white-space: normal
-            min-width: 150px
-            max-width: 50%
-            overflow: hidden
-            .mCSB_scrollTools
-              width: 2px
-            .mCSB_draggerContainer
-              .mCSB_dragger_bar
-                background: rgba(255, 255, 255, .5)
-            &:nth-last-child(2)
-              margin-right: 0
-            li
-              display: block
-              margin-bottom: 0
-              position: relative
-              vertical-align: top
-              white-space: nowrap
-              cursor: pointer
-              transition: color .1s ease-in-out
-              color: rgba(255, 255, 255, .5)
-              &:hover
-                cursor: pointer
-                color: rgba(255, 255, 255, .85)
-              &.active
-                font-weight: 600
-                color: #fff
-                &:before
-                  content: '\e69c'
-                  font: 400 10px/16px streamline
-                  display: inline-block
-                  vertical-align: top
-                  margin-right: 5px
-                  position: absolute
-                  left: -20px
-                  top: 1px
-          button
-            &.sticky_filter_go
-              display: block
-              margin: 15px auto 0
-              line-height: 26px
-              color: rgba(255,255,255,.85)
-              border-color: rgba(255, 255, 255, .25)!important
-              &:hover
-                color: #fff
-                border-color: rgba(255, 255, 255, .55)!important
-              &:before
-                content: ''
-                position: absolute
-                background: rgba(255, 255, 255, .05)
-                left: 15px
-                right: 15px
-                height: 1px
-                bottom: 60px
-        &:hover
-          #filters-expand
-            display: block
-            opacity: 1
-            transform: translate(0px, 0px) scale(1)
-      & > #wp-menu-toggle
-        &.hamburger
-          svg
-            display: inline-block
-            vertical-align: top
-          #st-line-top
-            top: 13px
-          #st-line-bot
-            top: 26px
   & > .nav-tab-wrapper
     padding-bottom: 0!important
     min-height: 70px
@@ -2043,21 +295,14 @@ body.header-b .wrap > .nav-tab-wrapper
 .subsubsub li:first-child,
 .wrap > .nav-tab-wrapper a:first-child
   margin-left: 0
-body.rtl .filter-links li:first-child,
-body.rtl .subsubsub li:first-child,
-body.rtl .wrap > .nav-tab-wrapper a:first-child
-  margin-left: auto
-  margin-right: 0
+
 #activity-widget .subsubsub li a:before,
 #activity-widget .subsubsub li a:after
   display: none
 .filter-links li:last-child,
 .subsubsub li:last-child
   margin-right: 0
-body.rtl .filter-links li:last-child,
-body.rtl .subsubsub li:last-child
-  margin-right: auto
-  margin-left: 0
+
 .filter-links a,
 .subsubsub a,
 .wrap > .nav-tab-wrapper a
@@ -2089,12 +334,7 @@ body.rtl .subsubsub li:last-child
   font-size: 11px
   margin-left: 5px
   text-align: center
-body.rtl .filter-links a .count,
-body.rtl .subsubsub a .count,
-body.rtl .filter-links a.current .count,
-body.rtl .subsubsub a.current .count
-  margin-left: auto
-  margin-right: 5px
+
 .filter-links a.current,
 .subsubsub a.current,
 .wrap > .nav-tab-wrapper a.nav-tab-active
@@ -2557,10 +797,7 @@ body.no-js #post-visibility-select, body.no-js #post-status-select, body.no-js #
 .wp-filter .sod_select
   margin-right: 5px
   vertical-align: top
-body.rtl .wp-filter select,
-body.rtl .wp-filter .sod_select
-  margin-left: 5px
-  margin-right: auto
+
 .filter-group
   display: inline-block
   vertical-align: top
@@ -2698,13 +935,7 @@ body.rtl .wp-filter .sod_select
     &.collapsed
       .wp-full-overlay-sidebar
         margin-left: -300px
-  body
-    &.rtl
-      .wp-full-overlay
-        &.collapsed
-          .wp-full-overlay-sidebar
-            margin-right: -300px
-            margin-left: auto
+
   #wp-auth-check-wrap
     &.fallback
       #wp-auth-check
@@ -3050,10 +1281,7 @@ body.mobile #wpfooter
   font-size: 10px
   letter-spacing: 1px
   margin-right: 15px
-body.rtl .posttype-tabs li,
-body.rtl .taxonomy-tabs li
-  margin-right: auto
-  margin-left: 15px
+
 body.no-js #dashboard_quick_press .drafts h4,
 body.no-js .hide-if-no-js
   display: none!important
@@ -3186,11 +1414,7 @@ body.content-w .misc-pub-section:nth-child(3n-2)
 .misc-pub-section > strong,
 .misc-pub-section > input
   transition: margin .1s ease-in-out
-body.rtl .misc-pub-section > span:not(#timestamp),
-body.rtl .misc-pub-section > span > b,
-body.rtl .misc-pub-section > strong,
-body.rtl .misc-pub-section > input
-  float: left
+
 #submitpost
   margin: -20px 0
 .misc-pub-section span > p,
@@ -3426,10 +1650,7 @@ body.rtl .misc-pub-section > input
   padding: 0
   letter-spacing: .3px
   transition: all .15s ease-in-out
-body.rtl #titlediv #title-prompt-text,
-body.rtl #wp-fullscreen-title-prompt-text
-  left: auto
-  right: 0
+
 #titlediv #edit-slug-box > a,
 #edit-slug-box a.cancel,
 #titlediv span:not(#view-post-btn) a.button
@@ -3441,11 +1662,7 @@ body.rtl #wp-fullscreen-title-prompt-text
   margin-right: 15px
   height: 16px !important
   vertical-align: top
-body.rtl #titlediv #edit-slug-box > a,
-body.rtl #edit-slug-box a.cancel,
-body.rtl #titlediv span:not(#view-post-btn) a.button
-  margin-right: auto
-  margin-left: 15px
+
 #titlediv #edit-slug-box > a:before,
 a.save.button-small:before,
 #titlediv #edit-slug-buttons a.edit-slug:before
@@ -3455,11 +1672,7 @@ a.save.button-small:before,
   margin-right: 5px
   vertical-align: top
   text-transform: none
-body.rtl #titlediv #edit-slug-box > a:before,
-body.rtl a.save.button-small:before,
-body.rtl #titlediv #edit-slug-buttons a.edit-slug:before
-  margin-left: 5px
-  margin-right: auto
+
 #nt_page_meta_box .inside,
 #nt_post_meta_box .inside,
 #nt_portfolio_meta_box .inside,
@@ -3645,24 +1858,7 @@ button::-moz-focus-inner,
 input::-moz-focus-inner
   border: 0
   padding: 0
-.postbox .inside,
-.stuffbox .inside
-  position: relative
-  text-align: center
-  display: block
-  height: auto
-  padding: 20px
-  max-width: 420px
-  margin: 0 auto
-  transform: translate(0px, 0px), scale(1, 1)
-  transition: transform .3s ease-in-out, opacity .3s ease-in-out, visibility 0s
 
-body.rtl .postbox .inside:after,
-body.rtl .stuffbox .inside:after
-  float: right
-.postbox .inside hr,
-.stuffbox .inside hr
-  display: none
 .js .hide-if-js,
 .js .wp-core-ui .hide-if-js,
 .js.wp-core-ui .hide-if-js
@@ -3879,10 +2075,7 @@ body:not(.mobile) #dashboard-widgets .row-actions a:hover
   font-size: 11px
   width: auto
   padding-right: 5px
-body.rtl:not(.mobile) .row-actions a:hover,
-body.rtl:not(.mobile) #dashboard-widgets .row-actions a:hover
-  padding-right: initial
-  padding-left: 5px
+
 .row-actions .activate a:before,
 .row-actions .approve a:before
   content: '\e7a0'
@@ -4073,11 +2266,7 @@ body.content-b .wrap > .card
   right: 0
   top: 5px
   line-height: 40px
-body.rtl .media-item .edit-attachment,
-body.rtl .describe-toggle-on,
-body.rtl .describe-toggle-off
-  right: auto
-  left: 0
+
 .media-item .describe-toggle-off,
 .media-item.open .describe-toggle-on
   display: none
@@ -4145,9 +2334,7 @@ body.rtl .describe-toggle-off
 #find-posts-input,
 #find-posts-search
   float: left
-body.rtl #find-posts-input,
-body.rtl #find-posts-search
-  float: right
+
 #find-posts-input
   width: 140px
   height: 28px
@@ -4296,9 +2483,7 @@ form
 .wp_attachment_image .button,
 .A1B1 .button
   float: left
-body.rtl .wp_attachment_image .button,
-body.rtl .A1B1 .button
-  float: right
+
 .no-js
   .wp_attachment_image
     .button
@@ -4310,9 +2495,7 @@ body.rtl .A1B1 .button
   float: left
   padding: 0 0 4px 0
   vertical-align: bottom
-body.rtl .wp_attachment_image .spinner,
-body.rtl .A1B1 .spinner
-  float: right
+
 .imgedit-group-top
   h3
     a
@@ -4335,146 +2518,11 @@ body.rtl .A1B1 .spinner
 .imgedit-wrap
   .nowrap
     white-space: nowrap
-audio,
-video
-  display: inline-block
-  max-width: 100%
+
 .mejs-container
   width: 100%
   max-width: 100%
-.postbox-container
-  float: left
-  position: relative
-  width: 100%
-  & > *
-    transition: opacity .2s ease-in-out
-.metabox-holder
-  &.columns-1
-    .postbox-container
-      width: 100%
-  .postbox-container
-    .empty-container
-      border-radius: 3px
-      height: 240px
-#dashboard-widgets-wrap
-  .columns-3
-    #postbox-container-4
-      .empty-container
-        border: none !important
-.ie8
-  #wpbody-content
-    #dashboard-widgets
-      .postbox-container
-        width: 49.5%
-.ie8 #wpbody-content #dashboard-widgets #postbox-container-2,
-.ie8 #wpbody-content #dashboard-widgets #postbox-container-3,
-.ie8 #wpbody-content #dashboard-widgets #postbox-container-4
-  float: right
-  width: 50.5%
-body.rtl .ie8 #wpbody-content #dashboard-widgets #postbox-container-2,
-body.rtl .ie8 #wpbody-content #dashboard-widgets #postbox-container-3,
-body.rtl .ie8 #wpbody-content #dashboard-widgets #postbox-container-4
-  float: left
-.ie8 #dashboard-widgets #postbox-container-3 .empty-container,
-.ie8 #dashboard-widgets #postbox-container-4 .empty-container
-  border: 0 none
-  height: 0
-  min-height: 0
-#screen-meta
-  position: fixed
-  text-align: center
-  width: 100%
-  z-index: 0
-  padding: 10% 0
-  height: auto
-  overflow: hidden
-  opacity: 0
-  user-select: none
-  transform: translateY( 50% )
-  transition: transform .25s ease-in-out, opacity .25s ease-out
-  input[type="submit"]
-    border: 0
-    font-size: 12px
-    line-height: 20px
-    padding: 5px 15px
-    color: #fff!important
-  h5
-    margin: 0 0 10px
-  p
-    &.submit
-      margin-bottom: 0
-  form
-    & > fieldset
-      display: inline-block
-      position: relative
-      vertical-align: top
-      text-align: left
-      min-height: 150px
-      &:not(:first-child)
-        margin-left: 35px
-        padding-left: 35px
-      &:not(:first-child):after
-        content: ''
-        width: 1px
-        height: 50px
-        position: absolute
-        left: 0
-        top: calc( 50% - 35px )
-  label[for=edit_post_per_page]
-    margin-bottom: 10px
-    font-weight: 400
-    margin-right: 10px
-  fieldset
-    legend
-      font-weight: 400
-      display: block
-      width: 100%
-      font-size: 16px
-      line-height: 22px
-      margin-bottom: 10px
-#screen-meta-links
-  margin: 0
-  position: fixed
-  right: 0px
-  z-index: 37
-  top: 125px
-  &:hover
-    z-index: 99999!important
-  .show-settings
-    text-decoration: none
-    z-index: 5
-    padding: 0 8px
-    border: 0
-    position: relative
-    height: 32px
-    font-size: 0px
-    width: 52px
-    line-height: 32px
-    text-transform: uppercase
-    font-weight: 600
-    letter-spacing: 1px
-    display: block
-    border-radius: 2px
-    vertical-align: middle
-    opacity: .25
-    transition: color .15s ease-in-out, transform .3s ease-in-out, opacity .3s ease-in-out
-  .screen-meta-toggle
-    display: block
-    margin-bottom: 5px
-    opacity: 1
-    visibility: visible
-    transition: opacity .1s ease-in-out, visibility .1s
-    &.hide
-      opacity: 0
-      visibility: hidden
-.menu-left
-  #screen-meta-links
-    .show-settings
-      transform: translateX(20px)
-.menu-right
-  #screen-meta-links
-    .show-settings
-      transform: translateX(-20px)
+
 body.header-b #screen-meta,
 body.header-b #screen-meta p
   color: rgba(0,0,0,.5)
@@ -4664,17 +2712,11 @@ body.menu-left #screen-meta-links button:after
 body.menu-left #screen-meta-links button:after,
 body.menu-left #screen-meta-links a:after
   right: 10px
-body.rtl.menu-left #screen-meta-links button:after,
-body.rtl.menu-left #screen-meta-links a:after
-  right: auto
-  left: 10px
+
 body.menu-right #screen-meta-links button:before,
 body.menu-right #screen-meta-links a:before
   left: 10px
-body.rtl.menu-right #screen-meta-links button:before,
-body.rtl.menu-right #screen-meta-links a:before
-  right: 10px
-  left: auto
+
 body.sidepanel_open.menu-left #screen-meta-links a:after,
 body.sidepanel_open.menu-left #screen-meta-links button:after,
 body.sidepanel_open.menu-right #screen-meta-links a:before,
@@ -4700,9 +2742,7 @@ body.menu-right #screen-options-link-wrap button:after
 body.menu-right #screen-options-link-wrap a:after,
 body.menu-right #screen-options-link-wrap button:after
   float: right
-body.rtl.menu-right #screen-options-link-wrap a:after,
-body.rtl.menu-right #screen-options-link-wrap button:after
-  float: left
+
 #contextual-help-link-wrap a:before,
 #contextual-help-link-wrap button:before
   content: '\e947'
@@ -4801,10 +2841,7 @@ h3.hndle > span:before
   left: 15px
   opacity: 0
   transition: opacity .15s ease-in-out
-body.rtl h2.hndle > span:before,
-body.rtl h3.hndle > span:before
-  left: auto
-  right: 15px
+
 .ui-sortable-helper h3.hndle > span:before,
 .ui-sortable-helper h2.hndle > span:before,
 h3.hndle:hover > span:before,
@@ -4874,10 +2911,7 @@ div.updated,
   letter-spacing: 1px
   padding: 15px 0
   margin-right: 25px
-body.rtl .updated a,
-body.rtl .login .message a
-  margin-right: auto
-  margin-left: 25px
+
 div.error p,
 div.updated p
   padding: 0!important
@@ -4912,11 +2946,7 @@ td#newmetaleft
   font-family: "streamline"
   font-weight: 400
   font-size: 8px
-body.rtl #customize-info .accordion-section-title:after,
-body.rtl .control-section .accordion-section-title:after,
-body.rtl .nav-menus-php .item-edit:before,
-body.rtl .widget.open .widget-top a.widget-action:after
-  text-align: left
+
 #customize-info.open .accordion-section-title:after,
 .control-section.open .accordion-section-title:after,
 .nav-menus-php .menu-item-edit-active .item-edit:before,
@@ -4947,11 +2977,7 @@ body.rtl .widget.open .widget-top a.widget-action:after
   height: 20px
   opacity: .25
   transition: opacity .15s ease-in-out
-body.rtl .accordion-section-title:after,
-body.rtl .item-edit,
-body.rtl .sidebar-name-arrow,
-body.rtl .widget-action
-  float: left
+
 .sidebar-name-arrow
   &:before
     content: '\e666'
@@ -5011,9 +3037,7 @@ strong
   box-shadow: 0px 2px 1px rgba(0,0,0,.1)
   margin-top: -1px
   border-radius: 3px
-body.rtl .wrap > h1 > .page-title-action,
-body.rtl .wrap .add-new-h2
-  margin: 0 5px 0 0px
+
 .wrap .page-title-action:before,
 .wrap .add-new-h2:before
   content: "\e60c"
@@ -5024,10 +3048,7 @@ body.rtl .wrap .add-new-h2
   font-family: streamline
   margin-right: 5px
   vertical-align: middle
-body.rtl .wrap .page-title-action:before,
-body.rtl .wrap .add-new-h2:before
-  margin-right: auto
-  margin-left: 10px
+
 .nav-menus-php .wrap .add-new-h2:before,
 .widgets-php .wrap .add-new-h2:before
   content: '\e651'
@@ -5110,17 +3131,11 @@ h2
   text-transform: uppercase
   font-size: 10px
   font-weight: 700
-body.rtl .fileedit-sub form strong > label,
-body.rtl #template > #documentation > label
-  margin-right: auto
-  margin-left: 5px
+
 .fileedit-sub form .sod_select,
 #template > #documentation .sod_select
   margin-right: 5px
-body.rtl .fileedit-sub form .sod_select,
-body.rtl #template > #documentation .sod_select
-  margin-left: 5px
-  margin-right: auto
+
 #templateside
   float: right
   width: 275px
@@ -5187,13 +3202,7 @@ body.rtl #template > #documentation .sod_select
   border-top: 0
   max-height: 240px
   overflow: hidden
-body.rtl .wp-tab-panel,
-body.rtl .categorydiv div.tabs-panel,
-body.rtl .customlinkdiv div.tabs-panel,
-body.rtl .posttypediv div.tabs-panel,
-body.rtl .taxonomydiv div.tabs-panel
-  padding-left: 15px
-  padding-right: 0
+
 .cat-checklist
   .mCustomScrollBox
     max-height: 100%
@@ -5213,13 +3222,7 @@ body.rtl .taxonomydiv div.tabs-panel
 .col-wrap
   position: relative
   padding-right: 35px
-body.rtl .form-wrap,
-body.rtl .col-wrap
-  padding-right: initial
-  padding-right: 35px
-.theme-options
-  span
-    line-height: 23px
+
 #side-sortables
   .inside
     table
@@ -5243,10 +3246,7 @@ body.rtl .col-wrap
   font-size: 11px
   font-style: italic
   font-weight: 400
-body.rtl .postbox-container .inside > p:last-child:not(.meta-options):not(.hide-if-no-js):before,
-body.rtl #normal-sortables .inside > p:last-child:not(.meta-options):not(.hide-if-no-js):before
-  margin-right: auto
-  margin-left: 5px
+
 .inside #list-table + p > strong,
 #pageparentdiv .inside > p > strong
   display: block
@@ -5268,11 +3268,7 @@ body.rtl #normal-sortables .inside > p:last-child:not(.meta-options):not(.hide-i
   color: rgba(250, 251, 255, 0.95)
   font-size: 13px
   font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif
-body.rtl .media-upload-form div.error,
-body.rtl .wrap div.error,
-body.rtl .wrap div.updated
-  right: auto
-  left: 35px
+
 
 .nav-tab-wrapper
   & > a
@@ -5298,10 +3294,7 @@ body.wpab-sub-w div#sticky_icon_picker .mCSB_scrollTools .mCSB_dragger.mCSB_drag
   margin-left: 30px
   opacity: 1
   transform: translateX(0)
-body.rtl .wrap > h1:first-child > *:not(#wp-menu-toggle):not(#sticky_icon_picker),
-body.rtl .wrap > h2:first-child > *:not(#wp-menu-toggle):not(#sticky_icon_picker)
-  margin-left: auto
-  margin-right: 30px
+
 .wrap > h1:first-child > *:not(#wp-menu-toggle):not(#sticky_icon_picker):after,
 .wrap > h2:first-child > *:not(#wp-menu-toggle):not(#sticky_icon_picker):after
   content: ''
@@ -5310,10 +3303,7 @@ body.rtl .wrap > h2:first-child > *:not(#wp-menu-toggle):not(#sticky_icon_picker
   top: calc( 50% - 7px)
   height: 14px
   width: 1px
-body.rtl .wrap > h1:first-child > *:not(#wp-menu-toggle):not(#sticky_icon_picker):after,
-body.rtl .wrap > h2:first-child > *:not(#wp-menu-toggle):not(#sticky_icon_picker):after
-  left: auto
-  right: -15px
+
 body.header-w .wrap > h1:first-child > *:not(#wp-menu-toggle):not(#sticky_icon_picker):after,
 body.header-w .wrap > h2:first-child > *:not(#wp-menu-toggle):not(#sticky_icon_picker):after
   background: rgba(255, 255, 255, .05)
@@ -5526,19 +3516,11 @@ body.mobile.wpab-closed .wrap > h1:first-child,
 body.mobile.wpab-minimized .wrap > h2:first-child,
 body.mobile.wpab-closed .wrap > h2:first-child
   padding-left: 70px!important
-body.rtl.mobile.wpab-minimized .wrap > h1:first-child,
-body.rtl.mobile.wpab-closed .wrap > h1:first-child,
-body.rtl.mobile.wpab-minimized .wrap > h2:first-child,
-body.rtl.mobile.wpab-closed .wrap > h2:first-child
-  padding-left: initial!important
-  padding-right: 70px !important
+
 body.mobile .wrap > h1:first-child,
 body.mobile .wrap > h2:first-child
   left: 0
-body.rtl.mobile .wrap > h1:first-child,
-body.rtl.mobile .wrap > h2:first-child
-  left: auto
-  right: 0
+
 .wrap > h1:first-child .subtitle,
 .wrap > h2:first-child .subtitle
   font-size: 18px
@@ -5546,10 +3528,7 @@ body.rtl.mobile .wrap > h2:first-child
   vertical-align: middle
   line-height: 18px
   margin-left: 15px
-body.rtl .wrap > h1:first-child .subtitle,
-body.rtl .wrap > h2:first-child .subtitle
-  margin-right: 15px
-  margin-left: auto
+
 body.wpab-minimized .wrap > h1:first-child,
 body.wpab-minimized .wrap > h2:first-child
   top: 4px
@@ -5569,10 +3548,7 @@ body.wpab-closed .wrap > h2:first-child
   vertical-align: top
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased
-body.rtl .wrap > h1:first-child:before,
-body.rtl .wrap > h2:first-child:before
-  margin-right: 0
-  margin-left: 10px
+
 .wrap > h1:first-child.s_live_icon:before,
 .wrap > h2:first-child.s_live_icon:before
   content: attr(data-content)!important
@@ -5590,12 +3566,7 @@ body.mobile.rtl:not(.no-js):not(.is_loading) #wpwrap .wrap > h2:first-child
   position: absolute
   top: 0
   left: 0
-body.rtl .wrap > h1:first-child > #wp-menu-toggle:not(.hamburger),
-body.rtl .wrap > h2:first-child > #wp-menu-toggle:not(.hamburger)
-  margin-right: 0
-  margin-left: 15px
-  left: auto
-  right: 0
+
 .wrap > h1:first-child > #wp-menu-toggle:not(.hamburger):before,
 .wrap > h2:first-child > #wp-menu-toggle:not(.hamburger):before
   content: '\e96b'
@@ -5614,10 +3585,7 @@ body.rtl .wrap > h2:first-child > #wp-menu-toggle:not(.hamburger)
   right: 0
   top: 18px
   transition: top .2s ease-in-out
-body.rtl .wrap > h1:first-child > #wp-menu-toggle:not(.hamburger):after,
-body.rtl .wrap > h2:first-child > #wp-menu-toggle:not(.hamburger):after
-  right: auto
-  left: 0
+
 .wp-responsive-open .wrap > h1:first-child > #wp-menu-toggle:not(.hamburger):after,
 .wp-responsive-open .wrap > h2:first-child > #wp-menu-toggle:not(.hamburger):after
   display: none !important
@@ -5730,10 +3698,7 @@ body.header-b .wrap > h1:first-child > #wp-menu-toggle.hamburger #st-line-top
 .appearance_page_custom-header .available-headers label input,
 .appearance_page_custom-header .random-header label input
   margin-right: 10px
-body.rtl .appearance_page_custom-header .available-headers label input,
-body.rtl .appearance_page_custom-header .random-header label input
-  margin-left: 10px
-  margin-right: auto
+
 div#custom-background-image
   min-height: 100px
   border: 1px solid #dfdfdf
@@ -5803,10 +3768,7 @@ div#custom-background-image
 .wp-full-overlay.collapsed,
 .wp-full-overlay.expanded .wp-full-overlay-sidebar
   margin-left: 0 !important
-body.rtl .wp-full-overlay.collapsed,
-body.rtl .wp-full-overlay.expanded .wp-full-overlay-sidebar
-  margin-left: auto !important
-  margin-right: 0 !important
+
 .wp-full-overlay-main
   position: absolute
   left: 0
@@ -5872,10 +3834,7 @@ body.rtl .wp-full-overlay.expanded .wp-full-overlay-sidebar
   cursor: pointer
   text-decoration: none
   transition: color .1s ease-in-out, background .1s ease-in-out
-body.rtl .theme-install-overlay .close-full-overlay,
-body.rtl .theme-install-overlay .previous-theme,
-body.rtl .theme-install-overlay .next-theme
-  float: right
+
 .theme-install-overlay .close-full-overlay:hover,
 .theme-install-overlay .close-full-overlay:focus,
 .theme-install-overlay .previous-theme:hover,
@@ -5955,11 +3914,7 @@ body.mobile .wp-responsive-open p.search-box input,
 body.mobile .wp-responsive-open .wp-filter .search-form .wp-filter .search-form label,
 body.mobile .wp-responsive-open .wp-filter .search-form input
   transform: translateX(330px)
-body.rtl.mobile .wp-responsive-open p.search-box,
-body.rtl.mobile .wp-responsive-open p.search-box input,
-body.rtl.mobile .wp-responsive-open .wp-filter .search-form .wp-filter .search-form label,
-body.rtl.mobile .wp-responsive-open .wp-filter .search-form input
-  transform: translateX(-330px)
+
 body.mobile .wp-responsive-open p.search-box input[type=submit],
 body.mobile .wp-responsive-open .wp-filter .search-form label
   display: none
@@ -6905,120 +4860,8 @@ body.tip-b .qtip-default,
 body.tip-b .qtip-content,
 body.tip-b div.google-visualization-tooltip *
   color: #000
-#_selz-modal-body
-  position: relative
-  text-align: center
-  iframe
-    width: 100%
-    height: 100%
-    border: 0
-    background: 0 0
-    transform: translate3d(0, 0, 0)
-    transition: opacity .3s 2s ease
-    opacity: 0
-#_selz-modal-spinner
-  display: none
-  position: absolute
-  z-index: 20
-  top: 50%
-  left: 50%
-  width: 120px
-  padding: 10px 20px
-  transform: translate(-50%, -50%)
-  border-radius: 50px
-  background: rgba(52, 63, 74, .75)
-  color: #fff
-  text-align: center
-#_selz-modal
-  &.cssanimations
-    #_selz-modal-spinner
-      width: 42px
-      height: 42px
-      text-indent: 99em
-      text-overflow: clip
-      white-space: nowrap
-      font-size: 0
-      &:before
-        position: absolute
-        top: 50%
-        left: 50%
-        display: inline-block
-        width: 24px
-        height: 24px
-        margin: -12px 0 0 -12px
-        border-width: 1px
-        border-style: solid
-        border-color: rgba(255, 255, 255, .2)
-        border-left-color: #fff
-        animation: spin .6s infinite linear
-        border-radius: 50%
-        text-indent: 99em
-        overflow: hidden
-        white-space: nowrap
-        font-size: 0
-        content: "Loading..."
-.checkout-header
-  & > img
-    display: none!important
-  img
-    display: none!important
-.slick-list,
-.slick-slider,
-.slick-track
-  position: relative
-  display: block
-.slick-loading .slick-slide,
-.slick-loading .slick-track
-  visibility: hidden
-.slick-slider
-  user-select: none
-  touch-action: pan-y
-  -webkit-tap-highlight-color: transparent
-.slick-list
-  overflow: hidden
-  margin: 0
-  padding: 0
-  &:focus
-    outline: 0
-  &.dragging
-    cursor: pointer
-    cursor: hand
-.slick-slider .slick-list,
-.slick-slider .slick-track
-  transform: translate3d(0, 0, 0)
-.slick-track
-  top: 0
-  left: 0
-  &:after
-    clear: both
-.slick-track:after,
-.slick-track:before
-  display: table
-  content: ''
-.slick-slide
-  display: none
-  float: left
-  height: 100%
-  min-height: 1px
-  img
-    display: block
-  &.slick-loading
-    img
-      display: none
-  &.dragging
-    img
-      pointer-events: none
-body.rtl .slick-slide,
-[dir=rtl] .slick-slide
-  float: right
-.slick-initialized
-  .slick-slide
-    display: block
-.slick-vertical
-  .slick-slide
-    display: block
-    height: auto
-    border: 0
+
+
 #request-filesystem-credentials-dialog
   padding: 25px
   position: absolute

@@ -1,0 +1,112 @@
+
+#sticky_filters
+  font-weight: 400
+  font-size: 10px
+  letter-spacing: .5px
+  cursor: pointer
+  & > div
+    &:first-child
+      &:before
+        content: '\e8b6'
+        font-size: 12px
+        font-weight: 400
+        font-family: streamline
+        display: inline-block
+        vertical-align: top
+        margin-right: 5px
+      &:after
+        content: '\e666'
+        font-size: 6px
+        font-weight: 400
+        font-family: streamline
+        display: inline-block
+        vertical-align: top
+        margin-left: 5px
+  #filters-expand
+    display: block
+    position: absolute
+    left: -15px
+    top: 68px
+    padding: 15px
+    border-radius: 3px
+    opacity: 0
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, .1)
+    transform: translate(0, -50%) scale(.95,0)
+    transition: transform .15s, opacity .15s, top .15s ease-in-out
+    &:before
+      border: solid 8px transparent
+      content: " "
+      height: 0
+      width: 0
+      position: absolute
+      pointer-events: none
+      top: -15px
+      left: 13px
+    ul
+      display: inline-block
+      vertical-align: top
+      letter-spacing: .1px
+      height: 100%
+      max-height: 320px
+      margin-right: 35px
+      padding-left: 20px
+      padding-right: 20px
+      white-space: normal
+      min-width: 150px
+      max-width: 50%
+      overflow: hidden
+      .mCSB_scrollTools
+        width: 2px
+      .mCSB_draggerContainer
+        .mCSB_dragger_bar
+          background: rgba(255, 255, 255, .5)
+      &:nth-last-child(2)
+        margin-right: 0
+      li
+        display: block
+        margin-bottom: 0
+        position: relative
+        vertical-align: top
+        white-space: nowrap
+        cursor: pointer
+        transition: color .1s ease-in-out
+        color: rgba(255, 255, 255, .5)
+        &:hover
+          cursor: pointer
+          color: rgba(255, 255, 255, .85)
+        &.active
+          font-weight: 600
+          color: #fff
+          &:before
+            content: '\e69c'
+            font: 400 10px/16px streamline
+            display: inline-block
+            vertical-align: top
+            margin-right: 5px
+            position: absolute
+            left: -20px
+            top: 1px
+    button
+      &.sticky_filter_go
+        display: block
+        margin: 15px auto 0
+        line-height: 26px
+        color: rgba(255,255,255,.85)
+        border-color: rgba(255, 255, 255, .25)!important
+        &:hover
+          color: #fff
+          border-color: rgba(255, 255, 255, .55)!important
+        &:before
+          content: ''
+          position: absolute
+          background: rgba(255, 255, 255, .05)
+          left: 15px
+          right: 15px
+          height: 1px
+          bottom: 60px
+  &:hover
+    #filters-expand
+      display: block
+      opacity: 1
+      transform: translate(0px, 0px) scale(1)
+

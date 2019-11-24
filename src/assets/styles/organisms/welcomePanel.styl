@@ -1,0 +1,240 @@
+.welcome
+  &-icon
+    &:before
+      display: inline-block
+      margin-right: 5px
+      font: 400 12px/24px streamline
+      vertical-align: top
+      width: 24px
+      text-align: center
+      text-transform: none
+
+    &.welcome
+      &-edit-page:before
+        content: "\f044"
+
+      &-add-page:before
+        content: "\e1f6"
+
+      &-write-blog:before
+        content: "M"
+
+      &-view-site:before
+        content: "S"
+
+      &-comments:before
+        content: '\e05c'
+
+      &-learn-more:before
+        content: '\e141'
+
+      &-widgets-menus:before
+        content: '\e2a6'
+
+  &-panel
+    display: block
+    border-radius: 0
+    position: relative
+    user-select: none
+    transition: all .3s ease-in
+
+    &-content
+      position: relative
+      z-index: 2
+      margin-top: 0px
+
+      h2
+        &+.inside
+          &:before
+            content: ''
+            position: absolute
+            left: calc(50% - 25px)
+            top: 0
+            width: 50px
+            height: 1px
+            opacity: .1
+
+      .inside
+        display block
+        position relative
+
+    &-close
+      font-size: 0
+      box-shadow: 0 0 2px rgba(0,0,0,.1)
+      position: absolute
+      padding: 0!important
+      size 32px
+      line-height: 32px
+      text-align: center
+      bottom: -16px
+      right: calc(50% - 16px)
+      border-radius: 50%
+      overflow: hidden
+      z-index: 38
+      opacity: 0
+      transition: all .15s ease-in-out
+
+      &:before
+        position static
+        background: none!important
+        content: "\e6b2"
+        font: 400 12px/32px streamline
+        display: block
+        font-style: normal
+        text-decoration: inherit
+        margin: 0!important
+
+    &-column
+      transition: all .3s ease-out
+      opacity: 1
+      width 100%
+      max-width 300px
+      display inline-block
+      vertical-align top
+      transform: translateY(0)
+
+      ul
+        padding 0
+        list-style-type none
+        transition: opacity .3s linear
+        overflow: hidden
+
+        li
+          transition: transform .3s ease-in-out
+          display: block
+          text-align: left
+
+          &:not(:last-child)
+            margin-bottom: 10px
+
+      h4
+        &:after
+          display: block
+          height: 2px
+          content: ''
+          width: 20px
+          margin: 15px 0
+          border-radius: 20px
+
+    &:hover
+      .welcome-panel-close
+        opacity 1
+
+    &.hidden
+      opacity: 0
+      background: none
+      box-shadow: none
+      padding: 0
+      overflow: hidden
+
+      .welcome
+        &-panel
+          &-column
+            opacity 0
+
+body
+  &.header
+    &-b
+      color rgba(black,.5)
+
+    p
+      color rgba(black,.5)
+
+    h1
+    h2
+      color: #000
+
+    h3
+    h4
+    h5
+    h6
+      color rgba(black,.85)
+
+    a
+    button
+    .button
+      color rgba(black,.65)
+      border-color rgba(black,.1)
+
+      &:disabled
+        color rgba(black,.3)
+        border-color rgba(black,.05)
+
+      &:hover
+        color rgba(black,.85)
+        border-color rgba(black,.25)
+
+      &:focus
+        color rgba(black,1)
+        border-color rgba(black,.45)
+
+    input
+    textarea
+    select
+      color rgba(black,.65)
+      border-color rgba(black,.1)
+
+      &:disabled
+        color rgba(black,.3)
+        border-color rgba(black,.05)
+
+      &:hover
+        color rgba(black,.85)
+        border-color rgba(black,.25)
+
+      &:focus
+        color rgba(black,1)
+        border-color rgba(black,.45)
+
+    &-w
+      #welcome-panel
+        color rgba(white,.5)
+        p
+          color rgba(white,.5)
+
+        h1
+        h2
+          color: #fff
+
+        h3
+        h4
+        h5
+        h6
+          color rgba(white,.85)
+
+        a
+        .button
+        button
+          color rgba(white,.65)
+          border-color rgba(white,.1)
+
+          &:disabled
+            color rgba(white,.3)
+            border-color rgba(white, .05)
+
+          &:hover
+            color rgba(white,.85)
+            border-color rgba(white,.25)
+
+          &:focus
+            color rgba(white,1)
+            border-color rgba(white,.45)
+
+
+        input
+        textarea
+        select
+          color rgba(white,.65)
+          border-color rgba(white,.1)
+
+          &:disabled
+            color rgba(white,.3)
+            border-color rgba(white, .05)
+
+          &:hover
+            color rgba(white,.85)
+            border-color rgba(white,.25)
+
+          &:focus
+            color rgba(white,1)
+            border-color rgba(white,.45)
