@@ -31,9 +31,9 @@ module.exports = (env) => {
     output: {
       path: path.resolve(__dirname, distDir)
     },
-    node: {
-      fs: 'empty'
-    },
+    // node: {
+    //   fs: 'empty'
+    // },
     module: {
       rules: [
         {
@@ -55,6 +55,18 @@ module.exports = (env) => {
             'css-loader',
             'postcss-loader',
             'stylus-loader',
+          ]
+        },
+        {
+          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: 'fonts/'
+              }
+            }
           ]
         }
       ]
@@ -82,7 +94,12 @@ module.exports = (env) => {
           from: '**/*.php',
           to: './',
           context: 'src/php'
-        }
+        },
+        // {
+        //   context: 'src/assets/fonts',
+        //   to: './assets/',
+        //   from: '**/*.woff'
+        // }
       ]),
 
       new MiniCssExtractPlugin({

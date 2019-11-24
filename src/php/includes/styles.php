@@ -74,7 +74,7 @@ if ( !function_exists( 'add_action' ) )
 
         unset ( $to_deregister, $to_dequeue );
 
-        if ( StickyAdmin::$config['dev']['cache_css'] && is_writeable( STICKY_CSS_URI ) ) {
+        if ( StickyAdmin::$config['dev']['cache_css'] && is_writeable( STICKY_LIB ) ) {
             // Clone the existing object as other styles may be also enqueued by themes and plugins, direct manipulation of $wp_styles is not a viable solution.
             $sticky_styles = wp_clone( $wp_styles );
 

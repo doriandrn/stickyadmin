@@ -131,7 +131,6 @@ class StickyAdmin {
         define( 'STICKY_ASSETS_URI',    STICKY_URI . 'assets/' );
         define( 'STICKY_INCLUDES_URI',  STICKY_URI . 'includes/' );
         define( 'STICKY_CLASSES_URI',   STICKY_URI . 'classes/' );
-        define( 'STICKY_CSS_URI',       STICKY_URI . 'css/' );
         define( 'STICKY_CACHE_URI',     STICKY_URI . 'cache/' );
     }
 

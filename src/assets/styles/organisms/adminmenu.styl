@@ -56,6 +56,9 @@ adminbarHeight = 44px
         padding 5px 10px
         transition color .1s ease, border-color .1s ease, font-size .4s ease-in-out
 
+        +above(xl)
+          min-width 75%
+
       &_settings
         display block
         height: $h
@@ -128,6 +131,44 @@ adminbarHeight = 44px
       position relative
       text-decoration none
 
+      .wp-menu-image
+        &:before
+          font: 400 18px/18px streamline;
+
+    &:not(.wp-has-current-submenu)
+      .wp-submenu
+        position: absolute;
+        margin: 0 0 20px;
+        z-index: 90;
+        overflow: visible;
+        word-wrap: break-word;
+        min-width: 160px;
+        text-align: left;
+        visibility hidden
+
+    &.wp-has-submenu
+      &:hover
+        .wp-submenu
+          opacity 1
+          z-index 99999
+          visibility visible
+          transform translate(0, 0) scale(1)
+
+    &:not(.selected)
+      > .wp-submenu
+        max-height 0
+        height 0
+        overflow: hidden
+        position: relative
+        top 0
+        left 0
+        background transparent!important
+        box-shadow none
+        transform none
+        padding-top 0
+        padding-bottom 9
+        transition max-height .15s ease-in-out
+
     &#collapse-menu
       position fixed
       z-index 1
@@ -183,6 +224,7 @@ adminbarHeight = 44px
         position relative
 
         a
+          padding 10px
           &:before
             content '>'
             display inline-block
@@ -200,6 +242,7 @@ adminbarHeight = 44px
         &:last-child
           margin-bottom 0
           border-bottom 0
+
 
       a
         padding 5px 0

@@ -12,13 +12,13 @@ if ( function_exists( 'add_action' ) ) {
 	require_once( "dist/options.php" );
 
 	// PHP Unit for debugging
-    // require_once 'PHPUnit/Autoload.php';
+	// require_once 'PHPUnit/Autoload.php';
 
 	// Load StickyAdmin
 	require_once( "dist/stickyadmin.class.php" );
 
 	// Statistics
-	require_once( "dist/classes/stats.php" );
+	// require_once( "dist/classes/stats.php" );
 
 	if( class_exists( 'StickyAdmin' ) ) {
 		// Hook StickyAdmin

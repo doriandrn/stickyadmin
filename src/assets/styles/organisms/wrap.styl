@@ -1,0 +1,54 @@
+.wrap
+  padding-top 8px
+  margin-left 8px
+  margin-right 8px
+
+  +above(xl)
+    padding-top 24px
+    margin-left 24px
+    margin-right 24px
+
+  > h1:first-child,
+  > h2:first-child
+    display: block
+    text-transform: none
+    width: auto
+    user-select: none
+    line-height: 68px
+    max-height: 68px
+    z-index: 80
+    position: absolute
+    left: 0
+    top: 44px
+    margin-top 0
+    white-space: nowrap
+    transition: all .2s ease-in-out, top .15s ease-in-out, line-height .15s ease-in-out, left .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), right .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), margin .4s cubic-bezier(0.22, 0.61, 0.36, 1), padding .2s ease-in
+
+
+body
+  &.header
+    &-small
+      .wrap
+        > h1:first-child,
+        > h2:first-child
+          line-height: 50px
+          max-height: 50px
+          font-size: 20px
+          line-height: 50px
+          max-height: 50px
+          box-shadow: 0 2px rgba(black, .05)
+
+    &-sticky
+      .wrap
+        > h1:first-child,
+        > h2:first-child
+          position: fixed!important
+          right: 0
+
+body:not(.header-sticky) .wrap > h1:first-child,
+body:not(.header-sticky) .wrap > h2:first-child
+  top: -68px
+body.rtl .wrap > h1:first-child,
+body.rtl .wrap > h2:first-child
+  right: auto
+  left: 0

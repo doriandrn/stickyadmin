@@ -13,7 +13,7 @@ body
   -ms-text-size-adjust: 100%;
   cursor: default;
   font-size 14px
-  line-height 16px
+  line-height 20px
   font-family: typography.body
 
 *
@@ -21,6 +21,9 @@ body
 *:after
   margin 0
   box-sizing border-box
+
+.rtl *
+  unicode-bidi bidi-override
 
 input
 select
@@ -39,14 +42,11 @@ button
 a
 button
   cursor pointer
+  transition all .15s linear
 
-blockquote
-  margin 0
-  text-align left
-
-p
-  margin-top 0
-  text-align left
+select
+  padding-right: 35px;
+  appearance: none;
 
 dd
 li
@@ -54,3 +54,131 @@ li
 
   &:last-child
     margin-bottom 0
+
+ul
+  &.ul-disc
+    list-style: disc
+  &.ul-square
+    list-style: square
+  &.category-tabs
+    li
+      display: inline-block
+      margin: 0 5px 0 0
+      text-transform: uppercase
+      font-size: 10px
+      letter-spacing: 0px
+      font-weight: 600
+      border-top-radius 3px
+      transition: background-color .15s ease-in-out
+
+      a
+        display: block
+        border-radius: 2px
+        border-width: 1px
+        border-style: solid
+        text-transform: capitalize
+        font-weight: 400
+        letter-spacing: .5px
+        padding: 3px 10px
+        position: relative
+      &.tabs
+        a
+          font-weight: 700
+  &.post-revisions
+    display: block
+    li
+      display: block
+      line-height: 24px
+      img
+        border-radius: 50%
+        display: block
+        text-align: center
+        margin: 0 auto 10px
+ol
+  list-style-type: decimal
+  margin-left: 20px
+  &.ol-decimal
+    list-style: decimal
+
+ul ul
+ol ol
+  margin: 5px 0 10px 15px
+
+body.rtl ul ul
+body.rtl ol ol
+  margin: 5px 15px 10px 0
+
+.code
+code
+  font-family: Consolas,\ Monaco,\ monospace
+  direction: ltr
+
+code
+kbd
+  background: rgba(0, 0, 0, .07)
+  font-size: 12px
+  line-height: 20px
+  display: inline-block
+  vertical-align: top
+  overflow: auto
+  margin: 0 1px
+  padding: 0 5px
+  border-radius: 2px
+
+abbr
+  display: inline-block
+  vertical-align: top
+  font-weight: 700
+  font-size: 11px
+  line-height: 20px
+  border: none
+
+br
+  & + br
+    display: none!important
+
+blockquote
+  display: block
+  position: relative
+  font-style: italic
+  padding: 20px 25px 20px 50px
+  margin-bottom: 25px
+
+  &:before
+    content: '\ebed'
+    font: 400 24px/24px streamline
+    width: 24px
+    height: 24px
+    position: absolute
+    left: 15px
+    top: 20px
+
+  cite
+    display: block
+    text-align: right
+    margin-top: 5px
+    margin-left: 0
+
+cite
+blockquote cite
+  display: inline-block
+  font-style: normal
+  font-size: 10px
+  font-weight: 400
+  margin-left: 5px
+
+body.rtl cite
+body.rtl blockquote cite
+  margin-left: auto
+  margin-right: 5px
+
+table
+  display: table
+  border-collapse: separate
+  border-spacing: 0
+  border-color: transparent
+  margin-bottom: 25px
+
+fieldset
+  border: none
+  padding: 0

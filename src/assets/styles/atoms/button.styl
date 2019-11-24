@@ -1,5 +1,35 @@
 button
+input[type="submit"]
+input[type="reset"]
   position relative
+  cursor pointer
+  display inline-flex
+  flex-flow row nowrap
+  justify-content center
+  align-items center /* safari */
+  text-align center
+  width auto
+  outline 0
+  border-radius 5px
+  font-size 13px
+  line-height 24px
+  border 1px solid transparent
+  margin 0 auto
+  padding 6px
+  text-decoration none
+  font-weight 500
+  user-select none
+  transition all .15s ease
+  font-smoothing subpixel-antialiased
+
+  +above(m)
+    padding 8px
+
+  +above(l)
+    padding 8px 12px
+
+  +above(xl)
+    padding 8px 16px
 
   &:disabled
     cursor default

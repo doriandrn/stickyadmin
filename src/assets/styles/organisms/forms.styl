@@ -1,0 +1,213 @@
+input[type="text"]
+input[type="password"]
+textarea
+  font-size 16px
+  line-height 18px
+  border 0
+  border: 1px solid
+  border-radius 6px
+  transition all .15s ease-in-out
+  padding 8px 12px
+  width 100%
+
+  +above(l)
+    font-size 14px
+
+input[type="submit"]
+  appearance none
+
+input[type="hidden"]
+  display none
+
+label
+  font-weight 600
+  max-width 100%
+  position relative
+  display inline-block
+  vertical-align top
+  line-height 24px
+
+  > input[type="checkbox"]
+  > input[type="radio"]
+    appearance none
+    border 1px solid
+    border-radius 5px
+    size 24px
+    display inline-block
+    vertical-align top
+    margin-right 8px
+
+  // &:hover
+  //   &:before
+  //     border-color: colors.ui.primaryHover
+
+  // &:checked
+  //   &+label
+  //     &:before
+  //       background-color: colors.ui.primary
+  //       border-color: colors.ui.primary
+
+
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill
+	background: transparent
+select,
+.sod_select
+	display: inline-block
+	position: relative
+	letter-spacing: .3px
+	line-height: 26px
+	height: 28px
+	padding: 0px 10px
+	border-width: 1px
+	border-style: solid
+	font-size: 11px
+	font-weight: 400
+	text-align: left
+	outline: 0
+	outline-offset: -2px
+	cursor: default
+	border-radius: 16px
+	vertical-align: top
+	transition: all .15s ease-in-out
+body.rtl select,
+body.rtl .sod_select
+	text-align: right
+select:hover,
+.sod_select:hover,
+.sod_select.open
+	cursor: pointer
+select:focus,
+.sod_select.focus:not(.above)
+	border-bottom-left-radius: 0
+	border-bottom-right-radius: 0
+	border-bottom: 0
+.sod_select
+	&.focus
+		&.above
+			border-top-left-radius: 0
+			border-top-right-radius: 0
+			border-top: 0
+select
+	&:disabled
+		&:hover
+			cursor: default
+	option
+		font-size: 12px
+		line-height: 20px
+		color: rgba(0, 0, 0, .9)
+select + .actions,
+.sod_select + .actions
+	display: inline-block
+	vertical-align: top
+input[type="text"],
+input[type="password"],
+input[type="file"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"]
+	box-shadow: none
+	padding: 0 0 10px 0
+	border: 0
+	outline: 0
+	border-radius: 0
+	border-bottom: 1px solid
+	font-size: 12px
+	font-weight: 400
+	line-height: 20px
+	transition: border-color .15s ease-in-out, color .15s ease-in-out
+	margin-right: 15px
+	background: transparent
+body.rtl input[type="text"],
+body.rtl input[type="password"],
+body.rtl input[type="file"],
+body.rtl input[type="email"],
+body.rtl input[type="number"],
+body.rtl input[type="search"],
+body.rtl input[type="tel"],
+body.rtl input[type="url"]
+	margin-right: auto
+	margin-left: 15px
+input[type=checkbox],
+input[type=radio]
+	clear: none
+	cursor: pointer
+	display: inline-block
+	line-height: 0
+	outline: 0
+	padding: 0!important
+	text-align: center
+	vertical-align: middle
+	-webkit-appearance: none
+input[type=checkbox]
+	display: inline-block
+	width: 20px
+	height: 20px
+	line-height: 20px
+	vertical-align: top
+input[type=checkbox]:hover
+	cursor: pointer
+input[type=radio]
+	border-radius: 50%
+	size 12px
+    margin-right: 5px
+	border: 1px solid
+input[type=checkbox]:before
+	content: '\e7e9'
+	font: 400 14px/20px streamline
+	display: inline-block
+	vertical-align: top
+input[type=checkbox]:checked
+	&:before
+		content: '\e7a5'
+input[type=radio]:checked
+	&:before
+		float: left
+		display: inline-block
+		vertical-align: middle
+		width: 14px
+		speak: none
+		-moz-osx-font-smoothing: grayscale
+		-webkit-font-smoothing: antialiased
+input[type=file]
+	padding: 5px 0
+input
+	&.code
+		padding-top: 5px
+	&.hidden
+		display: none!important
+textarea
+	background: transparent
+	font-size: 12px
+	line-height: 17px
+	padding: 12px
+	resize: vertical
+	min-height: 50px
+	max-width: 100%
+	overflow: auto
+	border-radius: 3px
+	transition: border-color .15s ease-in-out, color .15s ease-in-out
+	box-shadow: none!important
+	&.code
+		width: 100%
+		margin-bottom: 25px
+input.readonly,
+input[readonly],
+textarea.readonly,
+textarea[readonly]
+	opacity: .5
+big
+	font-size: 20px
+	line-height: 28px
+	font-weight: 400
+	display: inline-block
+	vertical-align: bottom
+label
+	& > strong
+		font-weight: 400
+.clear
+	clear: both

@@ -1,0 +1,134 @@
+#overlay
+  position: fixed 112px 0 0 auto
+  z-index 26
+  opacity 0
+  transition visibility .5s ease-in-out, opacity .25s ease-in-out, background-color .25s ease-in-out, top .15s ease-in-out;
+
+  &:before
+    background-size 300% 300%
+
+  #sticky_preloader
+    display: block
+    position: absolute 0
+
+  .loader-icon
+    position: absolute;
+    size 32px
+    top 50%;
+    left 50%;
+    transform translate(-50%, -50%)
+    font-size: 32px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .3s ease-in-out, opacity .3s ease-in-out;
+
+    +above(xl)
+      size 64px
+
+    &.shrinking-cog
+      animation shrinking-cog .3s 1 ease forwards
+
+    &.spinning-cog
+      animation: spinning-cog 1.3s infinite ease;
+
+
+body.mobile #overlay
+  left: 0;
+
+body.s_nav_right #overlay
+  left:0!important
+
+body.no-js #overlay
+  display: none;
+body.modal-open #overlay
+  display: none;
+
+body.vc_editor #overlay
+  left: 0!important;
+  top: 56px!important;
+
+#overlay
+body.header-small #overlay,
+body.header-small .wrap > .theme-overlay
+  top: 94px;
+
+body.wpab-closed.header-small #overlay,
+body.wpab-closed.header-small .wrap > .theme-overlay
+  top: 50px;
+
+body.wpab-closed #overlay,
+body.wpab-closed .wrap > .theme-overlay
+  top: 0px;
+
+body.wpab-closed.header-sticky #overlay,
+body.wpab-closed.header-sticky .wrap > .theme-overlay
+  top: 68px;
+
+body.wpab-minimized #overlay,
+body.wpab-minimized .wrap > .theme-overlay
+  top: 72px;
+
+body.wpab-minimized.header-small #overlay,
+body.wpab-minimized.header-small .wrap > .theme-overlay
+  top: 54px;
+
+body.is_loading:not(.no-js)
+  overflow: hidden;
+
+body.is_loading:not(.no-js) #overlay
+  opacity: 1;
+  visibility: visible!important;
+  z-index: 30;
+
+body.is_loading #overlay:before
+  animation: sticky-load-bg 0s ease infinite;
+
+#overlay .loader-icon
+body.modal-open,
+body.sidepanel_open
+  overflow: hidden;
+  padding-right: 2px;
+
+body.sidepanel_open #overlay
+  opacity: .75;
+  visibility: visible!important;
+  display: block!important;
+  z-index: 30;
+
+body.is_loading:not(.no-js) #overlay .loader-icon
+  visibility: visible;
+  opacity: .95;
+
+body.is_loading:not(.no-js) .postbox
+  transform: translateY(25px);
+  opacity: 0;
+
+@keyframes spinning-cog {
+  0% {
+    transform: rotate(0deg)
+  }
+  20% {
+    transform: rotate(-45deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes shrinking-cog {
+  0% {
+    transform: scale(1)
+  }
+  20% {
+    transform: scale(1.2)
+  }
+  100% {
+    transform: scale(0)
+  }
+}
+
+@keyframes sticky-load-bg {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
