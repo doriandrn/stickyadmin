@@ -419,53 +419,8 @@ span
     #postbox-container-1
       float: right
       width: 270px
-#icon-index,
-#icon-options-general,
-#icon-tools,
-#icon-users,
-#icon-plugins,
-#icon-themes,
-#icon-edit,
-#icon-edit-comments,
-#icon-edit-pages,
-#icon-link-manager,
-#icon-upload,
-#icon-edit
-  display: none
-.postbox
-  transform: translateY(0)
-  transition: all .3s ease-in-out
-  .handlediv
-    width: 50px
-    position: absolute
-    right: 0
-    top: 0
-    border: none
-    border-radius: 0
-    br
-      display: none
-    &:hover
-      cursor: pointer
-    &:before
-      display: block
-      content: '-'
-      vertical-align: top
-      text-align: center
-      transition: color .15s ease-in-out
-  &.closed
-    .handlediv
-      &:before
-        content: '+'
-    .inside
-      display: none
-  &:last-child
-    margin-bottom: 0
-    padding-bottom: 0
-.closed.postbox h2.hndle,
-.closed.postbox h3.hndle
-  margin-bottom: 0!important
-  border-bottom: 0!important
-  opacity: .5
+
+
 form .textarea-wrap,
 .input-text-wrap
   font-size: 14px
@@ -477,16 +432,7 @@ form .textarea-wrap,
   input
     margin-right: 0 !important
     width: 100%
-::-webkit-scrollbar
-  width: 2px
-  height: 2px
-  position: relative
-  margin: 5px
-::-webkit-scrollbar-track
-  -webkit-box-shadow: none
-  box-shadow: none
-::-webkit-scrollbar-corner
-  background: transparent
+
 #wpwrap
   height: auto
   min-height: 100%
@@ -509,30 +455,7 @@ form .textarea-wrap,
                 transform: rotate(-45deg)
   &:before
     transition: filter 3s linear
-#wpfooter
-  text-align: center
-  z-index: 3
-  padding-top: 10px!important
-  padding-bottom: 10px!important
-  position: fixed
-  bottom: 0
-  right: 0
-  left: 0
-  display: block!important
-  p
-    font-size: 10px
-    letter-spacing: .4px
-    line-height: 14px
-    margin-bottom: 0
-    font-weight: 400
-  p#footer-left
-    font-weight: 600
-body.footer-b #wpfooter,
-body.footer-b #wpfooter p
-  color: rgba(0,0,0,.6)
-body.footer-w #wpfooter,
-body.footer-w #wpfooter p
-  color: rgba(255,255,255,.6)
+
 .inner-sidebar
   float: right
   clear: right
@@ -1071,87 +994,8 @@ p#no-comments,
     width: 260px
     margin: 0
     padding: 0
-.button,
-.button-secondary,
-.submit input,
-input[type="button"],
-input[type="submit"],
-a.button,
-a.button-secondary
-  padding: 0 12px
-a
-  &.button-primary
-    padding: 15px 30px
-    font-size: 11px!important
-    font-weight: 700!important
-  &.save
-    &.button-small
-      &:before
-        content: '\e7a0'
-  &.imgedit-help-toggle
-    text-decoration: none
-  &.button
-    &.browser
-      line-height: 32px!important
-  &.media-button-select
-    margin-bottom: 0!important
-    margin-top: 15px!important
-.button:hover,
-.button-secondary:hover,
-.submit input:hover,
-input[type="button"]:hover,
-input[type="submit"]:hover
-  text-shadow: none
-input.button-primary,
-button.button-primary,
-a.button-primary
-  text-shadow: none
-.stuffbox,
-.postbox
-  border: 0
-  border-radius: 5px
-  box-shadow: 0
-body.content-b .stuffbox,
-body.content-b .postbox
-  background: #fff
-  border: 1px solid rgba(0,0,0,.1)
-body.content-w .stuffbox,
-body.content-w .postbox
-  background: #000
-  border: 1px solid rgba(255,255,255,.1)
-h2,h3,
-.postbox h3,
-.postbox h2,
-.stuffbox h3,
-.stuffbox h2,
-h3.hndle,
-h2.hndle,
-h3 span,
-h2 span
-  transition: border-color .15s linear, color .1s linear, opacity .2s ease-in-out
 
-h3.hndle,
-h2.hndle
-  cursor: move
-h3.hndle > span,
-h2.hndle > span
-  cursor: pointer
-h2,h3
-  cursor: default
-.postbox .hndle,
-.stuffbox .hndle
-  display: block
-  margin-bottom: 0
-  padding: 10px 10px 10px 32px
-.postbox.closed .hndle,
-.stuffbox.closed .hndle
-  border-radius: 10px
-body.content-b .postbox .hndle,
-body.content-b .stuffbox .hndle
-  border-bottom: 1px solid rgba(0,0,0,.05)
-body.content-w .postbox .hndle,
-body.content-w .stuffbox .hndle
-  border-bottom: 1px solid rgba(255,255,255,.05)
+
 body.header-w .filter-links *,
 body.header-w .wrap > h1:first-child *,
 body.header-w .subsubsub *,

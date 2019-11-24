@@ -1,6 +1,6 @@
 #wpadminbar
   direction ltr
-  height 44px
+  height: adminbar.height
   position fixed
   top 0
   left 0
@@ -16,7 +16,7 @@
   *
     text-align left
     font-size 11px
-    line-height 44px
+    line-height: adminbar.height
     font-weight 100
     letter-spacing .4px
     vertical-align top
@@ -38,7 +38,7 @@
     &-root
       &-default
         > li
-          height 44px
+          height: adminbar.height
           vertical-align top
 
           > .s_live_icon.ab-item:before
@@ -167,14 +167,14 @@
 
       &:before
         content ''
-        height 44px
+        height: adminbar.height
         width 1px
         position absolute
         left -2px
         top 0px
 
       em
-        line-height 44px
+        line-height: adminbar.height
         font-size 8px
         display inline-block
         vertical-align top
@@ -185,8 +185,8 @@
 
       > a
         display inline-block
-        line-height 44px
-        height 44px
+        line-height: adminbar.height
+        height: adminbar.height
         vertical-align top
         text-align left
         position relative
@@ -303,7 +303,7 @@
       text-align left
       display inline-block
       height 100%
-      line-height 44px
+      line-height: adminbar.height
       vertical-align top
       margin 0
       white-space nowrap

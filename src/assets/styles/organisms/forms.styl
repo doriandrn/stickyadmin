@@ -53,6 +53,7 @@ input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill
 	background: transparent
+
 select,
 .sod_select
 	display: inline-block
@@ -72,18 +73,17 @@ select,
 	border-radius: 16px
 	vertical-align: top
 	transition: all .15s ease-in-out
-body.rtl select,
-body.rtl .sod_select
-	text-align: right
+
 select:hover,
 .sod_select:hover,
 .sod_select.open
 	cursor: pointer
+
 select:focus,
 .sod_select.focus:not(.above)
-	border-bottom-left-radius: 0
-	border-bottom-right-radius: 0
+	border-bottom-radius 0
 	border-bottom: 0
+
 .sod_select
 	&.focus
 		&.above
@@ -122,16 +122,7 @@ input[type="url"]
 	transition: border-color .15s ease-in-out, color .15s ease-in-out
 	margin-right: 15px
 	background: transparent
-body.rtl input[type="text"],
-body.rtl input[type="password"],
-body.rtl input[type="file"],
-body.rtl input[type="email"],
-body.rtl input[type="number"],
-body.rtl input[type="search"],
-body.rtl input[type="tel"],
-body.rtl input[type="url"]
-	margin-right: auto
-	margin-left: 15px
+
 input[type=checkbox],
 input[type=radio]
 	clear: none

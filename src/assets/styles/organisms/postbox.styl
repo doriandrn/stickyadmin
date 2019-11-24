@@ -1,6 +1,13 @@
 .postbox
 .stuffbox
-  max-width 360px
+  border: 0
+  border-radius: 5px
+  box-shadow: none
+  min-width 260px
+  max-width 480px
+  flex 1 1 360px
+  transform: translateY(0)
+  transition: all .3s ease-in-out
 
   .hndle
     cursor move
@@ -15,9 +22,39 @@
       cursor pointer
       transition: border-color .15s linear, color .1s linear, opacity .2s ease-in-out
 
+  .handlediv
+    width: 50px
+    position: absolute
+    right: 0
+    top: 0
+    border: none
+    border-radius: 0
+
+    br
+      display: none
+
+    &:hover
+      cursor: pointer
+
+    &:before
+      display: block
+      content: '-'
+      vertical-align: top
+      text-align: center
+      transition: color .15s ease-in-out
+
   &.closed
+    .inside
+      display: none
+
     .hndle
       border-radius 10px
+      border-bottom: 0!important
+      opacity: .5
+
+    .handlediv
+      &:before
+        content: '+'
 
   .inside
     position: relative
@@ -34,11 +71,17 @@ body
     &-b
       .postbox
       .stuffbox
+        background: #fff
+        border: 1px solid rgba(black, .1)
+
         .hndle
           border-bottom: 1px solid rgba(black, .05)
 
     &-w
       .postbox
       .stuffbox
+        background: #000
+        border: 1px solid rgba(255,255,255,.1)
+
         .hndle
-          border-bottom: 1px solid rgba(whitee, .1)
+          border-bottom: 1px solid rgba(white, .1)

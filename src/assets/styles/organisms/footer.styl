@@ -1,0 +1,35 @@
+m = wrapC.marginsLR
+pad = 10px
+
+#wpfooter
+  text-align: center
+  z-index: 3
+  position: fixed auto 0 0 0
+  display: block!important
+  padding: pad m.mobile
+
+  +above(l)
+    padding: pad m.tablet
+
+  +desktop()
+    padding: pad m.desktop
+
+  +hd()
+    padding: pad m.hd
+
+  p
+    font-size: 11px
+    letter-spacing: .4px
+    line-height: 14px
+    margin-bottom: 0
+    font-weight: 400
+
+    &#footer-left
+      font-weight: 500
+
+body.footer-b #wpfooter,
+body.footer-b #wpfooter p
+  color: rgba(0,0,0,.6)
+body.footer-w #wpfooter,
+body.footer-w #wpfooter p
+  color: rgba(255,255,255,.6)

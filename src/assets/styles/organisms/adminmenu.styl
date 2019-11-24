@@ -1,6 +1,3 @@
-$separatorHeight = 5px
-adminbarHeight = 44px
-
 #adminmenu
   padding-bottom 32px
   padding-left 0
@@ -38,6 +35,30 @@ adminbarHeight = 44px
       &:hover
         opacity 1
 
+    .resize_handle
+      min-width: 6px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      position: absolute;
+      border-radius: 3px;
+      z-index: 201;
+      top: 49%;
+      top: calc(50% - 12px);
+      right: -3px;
+      border-radius: 1px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity .15s ease-in-out, all .1s ease-in-out
+
+      &:before
+        font: 400 14px/24px FontAwesome
+        content: '\f142'
+
+      &:hover
+        cursor: ew-resize;
+        opacity: 1
+
   &wrap
     position absolute 0 0 32px !important
     visibility visible
@@ -47,6 +68,9 @@ adminbarHeight = 44px
     &:hover
       #collapse-menu
         transform translateY(0)
+
+      .resize_handle
+        opacity 1
 
     .menu
       $h = 32px
@@ -99,8 +123,8 @@ adminbarHeight = 44px
 
   &main
     position fixed
-    bottom 0 !important
-    top: adminbarHeight !important
+    bottom 0
+    top: adminbar.height
     z-index 3
     user-select none
     box-shadow inset -5px 0px 10px -5px rgba(black, .05)
@@ -277,7 +301,7 @@ adminbarHeight = 44px
 
       .separator
         display block
-        height: $separatorHeight
+        height: adminmenu.separator.height
 
       &+li.wp-menu-separator
         display none

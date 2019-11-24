@@ -1,6 +1,14 @@
-button
-input[type="submit"]
-input[type="reset"]
+.button,
+button,
+a.button_link,
+a.post_more_link,
+#submit,
+.wp-core-ui .button-primary,
+.wp-core-ui .button,
+.wp-core-ui .button-secondary,
+input[type="submit"],
+input[type="reset"],
+input[type="button"]
   position relative
   cursor pointer
   display inline-flex
@@ -33,3 +41,22 @@ input[type="reset"]
 
   &:disabled
     cursor default
+
+
+a
+  &.button-primary
+    padding: 15px 30px
+    font-size: 11px!important
+    font-weight: 700!important
+  &.save
+    &.button-small
+      &:before
+        content: '\e7a0'
+  &.imgedit-help-toggle
+    text-decoration: none
+  &.button
+    &.browser
+      line-height: 32px!important
+  &.media-button-select
+    margin-bottom: 0!important
+    margin-top: 15px!important
