@@ -2,14 +2,14 @@
 /**
  *
  * StickyAdmin Options Panel - Configuration
- * 
+ *
  * @since 1.0
  * @author Dorian Tudorache
  *
  */
 require_once "classes/admin-page-class/admin-page-class.php";
 $plugin_url = WP_PLUGIN_URL . '/stickyadmin';
-$options_panel = new BF_Admin_Page_Class( 
+$options_panel = new BF_Admin_Page_Class(
     array (
         'menu'           => 'settings',
         'page_title'     => __( 'Sticky Admin', '_sticky_' ),
@@ -19,12 +19,12 @@ $options_panel = new BF_Admin_Page_Class(
         'fields'         => array(),
         'local_images'   => false,
         'use_with_theme' => false
-    ) 
+    )
 );
 // Setup the container
 $options_panel->OpenTabs_container( '' );
 // Options Tabs
-$options_panel->TabsListing( 
+$options_panel->TabsListing(
     array(
         'links' => array(
             's_themes'     =>  __( 'Themes', '_sticky_' ),
@@ -39,17 +39,17 @@ $options_panel->TabsListing(
             's_devs'       =>  __( 'Developers', '_sticky_' ),
             's_credits'    =>  __( 'Credits', '_sticky_' )
         )
-    ) 
+    )
 );
 $options_panel->OpenTab( 's_themes' );
 $options_panel->h1( __( "Sticky Themes", '_sticky_' ) );
 $options_panel->AccordionArea( 's_themes_acc' );
 $options_panel->Title( __( "Themes", '_sticky_' ) );
-$options_panel->add_s_ThemeSelector( 'sticky_theme_selector', 
+$options_panel->add_s_ThemeSelector( 'sticky_theme_selector',
     array(
         'name' => __( "Choose a theme", '_sticky_' ),
         'std' => 'blue-sky-moisty',
-        'options' => array( 
+        'options' => array(
             'aruba'                 => 'Aruba',
             'back-to-basics'        => 'Back to Basics',
             'black-knight'          => 'Black Knight',
@@ -82,7 +82,7 @@ $options_panel->add_s_ThemeSelector( 'sticky_theme_selector',
             'bonus-7'                => 'Bonus 7',
             'bonus-8'                => 'Bonus 8',
         )
-    ) 
+    )
 );
 $options_panel->addHidden( 'sticky_theme', array(
     'std'  => 'blue-sky-moisty'
@@ -168,13 +168,13 @@ $options_panel->OpenTab( 's_dashboard' );
         $options_panel->Title( __( "Appearance", '_sticky_' ) );
         $options_panel->addText( 'dash_heading', array(
                 'name'  => __( 'Welcome text', '_sticky_' ),
-                'desc'  => __( 'Input a custom heading title to be displayed on the Dashboard - Welcome Screen. Only works if JavaScript is enabled.', '_sticky_' ), 
-                'std'   => __( 'Welcome to WordPress with StickyAdmin!', '_sticky_') 
+                'desc'  => __( 'Input a custom heading title to be displayed on the Dashboard - Welcome Screen. Only works if JavaScript is enabled.', '_sticky_' ),
+                'std'   => __( 'Welcome to WordPress with StickyAdmin!', '_sticky_')
         ) );
         $options_panel->addText( 'dash_subheading', array(
                 'name'  => __( 'Welcome subheading / Statistics Widget title', '_sticky_' ),
-                'desc'  => __( 'Input a custom sub-heading to be displayed on the Dashboard - Welcome Screen. Only works if JavaScript is enabled.', '_sticky_' ), 
-                'std'   => __( 'Site statistics', '_sticky_') 
+                'desc'  => __( 'Input a custom sub-heading to be displayed on the Dashboard - Welcome Screen. Only works if JavaScript is enabled.', '_sticky_' ),
+                'std'   => __( 'Site statistics', '_sticky_')
         ) );
         $options_panel->Title( __( "Statistics", '_sticky_' ) );
         $options_panel->addCheckbox( 's_stats' , array(
@@ -693,7 +693,7 @@ $options_panel->OpenTab( 's_footer' );
         $options_panel->addText( 'footer_copyright' , array(
                 'name'  => __( 'Footer Copyright Text', '_sticky_' ),
                 'desc'  => __( 'Input your own Copyright Text to be displayed in the footer.', '_sticky_' ),
-                'std'   => '&copy; StickyAdmin 2015. All Rights Reserved. Donate!'
+                'std'   => '&copy; StickyAdmin 2015 - 2020. All Rights Reserved. Donate!'
         ) );
         $options_panel->Title( __( 'Appearance', '_sticky_' ) );
         $options_panel->addColor( 'footer_bg', array(
@@ -839,7 +839,7 @@ $options_panel->OpenTab( 's_devs' );
                 'name'  => __( 'Run Minified CSS', '_sticky_' ),
                 'desc'  => __( 'When this option is enabled, Sticky Admin plugin will run all the CSS files minified for faster loading times.', '_sticky_' ),
                 'std'   => true
-        ) ); 
+        ) );
         $options_panel->addCheckbox( 's_minified_js' , array(
                 'name'  => __( 'Run Minified JS', '_sticky_' ),
                 'desc'  => __( 'When this option is enabled, Sticky Admin plugin will run all the JS files minified for faster loading times.', '_sticky_' ),

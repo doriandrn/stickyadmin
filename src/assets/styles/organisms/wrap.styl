@@ -1,12 +1,12 @@
 margins(value)
   padding-top: value
-  margin-left: value
-  margin-right: value
+  padding-left: value
+  padding-right: value
 
-m = wrapC.marginsLR
+mS = wrapC.marginsLR
 
 .wrap
-  margins(m.mobile)
+  margins(mS.mobile)
   position: relative
   z-index: 25
   height: 100%
@@ -14,13 +14,37 @@ m = wrapC.marginsLR
   transition: all .2s ease-in-out, top .15s ease-in-out
 
   +above(l)
-    margins(m.tablet)
+    margins(mS.tablet)
 
   +desktop()
-    margins(m.desktop)
+    margins(mS.desktop)
 
   +hd()
-    margins(m.hd)
+    margins(mS.hd)
+
+  > hr.wp-header-end
+    display none
+
+  > .subsubsub
+    list-style-type none
+    margin-left: -(mS.mobile)
+    margin-right: -(mS.mobile)
+    padding 4px
+
+    +above(l)
+      margin-left: -(mS.tablet)
+      margin-right: -(mS.tablet)
+
+    +desktop()
+      margin-left: -(mS.desktop)
+      margin-right: -(mS.desktop)
+
+    +hd()
+      margin-left: -(mS.hd)
+      margin-right: -(mS.hd)
+
+    a
+      font-size 12px
 
   > h1
   > h2
@@ -38,18 +62,34 @@ m = wrapC.marginsLR
       margin-top 0
       white-space: nowrap
       transition: all .2s ease-in-out, top .15s ease-in-out, line-height .15s ease-in-out, left .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), right .4s cubic-bezier(0.35, -0.35, 0.3, 1.5), margin .4s cubic-bezier(0.22, 0.61, 0.36, 1), padding .2s ease-in
-      padding: 0 m.mobile
+      padding: 0 mS.mobile
+      padding-left 64px
+
+      +above(m)
+        padding-left: mS.mobile
 
       +above(l)
-        padding: 0 m.tablet
+        padding: 0 mS.tablet
 
       +desktop()
-        padding: 0 m.desktop
+        padding: 0 mS.desktop
 
       +hd()
-        padding: 0 m.hd
+        padding: 0 mS.hd
 
+      .hamburger
+        +above(m)
+          display none
 
+  .page-title-action
+    padding 4px 8px
+    border-radius 4px
+    text-decoration none
+    position fixed
+    right: mS.mobile
+    top: adminbar.height
+    z-index 320
+    background white
 
 body
   &.header

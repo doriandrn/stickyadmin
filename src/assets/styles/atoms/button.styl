@@ -13,9 +13,6 @@ input[type="button"]
   cursor pointer
   display inline-flex
   flex-flow row nowrap
-  justify-content center
-  align-items center /* safari */
-  text-align center
   width auto
   outline 0
   border-radius 5px
@@ -41,6 +38,11 @@ input[type="button"]
 
   &:disabled
     cursor default
+
+  &:not(.components-button)
+    justify-content center
+    align-items center /* safari */
+    text-align center
 
 
 a

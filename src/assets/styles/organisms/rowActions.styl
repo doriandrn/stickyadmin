@@ -1,0 +1,103 @@
+.row-actions
+  display: block
+  position: relative
+  color: transparent
+  transition: all .3s ease-in-out
+  line-height: 20px
+
+  > span
+    display: inline-block
+    padding-right: 5px
+    line-height: 20px
+    height: 20px
+    position: relative
+    vertical-align: top
+    white-space: nowrap
+
+    &:hover
+      width: auto!important
+
+  a
+    font-size 12px
+    line-height: 20px
+    letter-spacing: .3px
+    font-weight: 400
+    border-radius: 2px
+    border 1px solid
+    padding 0 5px
+    height: 20px
+    display: inline-block
+    text-align: center
+    vertical-align: top
+    transition: all .15s ease-in-out
+
+    +desktop()
+      font-size: 0px
+
+    &:before
+      content: '\e7c9'
+      font: 400 12px/20px streamline
+      display: inline-block
+      vertical-align: top
+      width: 20px
+      margin-right: 1px
+      text-align: center
+      text-transform: none
+      transition: color .15s ease-in-out
+
+  .reply
+    a
+      &:before
+        content: '\ec10'
+  .untrash
+    a
+      &:before
+        content: '\ed0f'
+  .spam
+    a
+      &:before
+        content: '\e81c'
+  .edit-profile
+    a
+      &:before
+        content: '\eb98'
+  .remove
+    a
+      &:before
+        content: '\ec0b'
+  .edit
+    a
+      &:before
+        content: '\eb83'
+  .view
+    a
+      &:before
+        content: '\ed33'
+  .settings
+    a
+      &:before
+        content: '\e7c9'
+  .about
+    a
+      &:before
+        content: '\e96d'
+
+  .activate a:before
+  .approve a:before
+    content: '\e7a0'
+
+  .deactivate a:before
+  .unapprove a:before
+    content: '\ec0c'
+
+  .delete a:before
+  .trash a:before
+    content: '\e6d9'
+
+  .inline a:before
+  .quickedit a:before
+    content: '\eb84'
+
+.approved .row-actions > span.approve,
+.approved.unapproved .row-actions > span.unapprove
+  display: none

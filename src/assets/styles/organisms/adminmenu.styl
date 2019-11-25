@@ -534,7 +534,7 @@ body
             right: auto;
             bottom: auto;
             border: 0 none;
-            margin: 0 0 10px 23px;
+            margin: 0 0 10px 16px;
 
     &.auto-fold
       [class^="wp-menu-name"]
@@ -546,7 +546,8 @@ body
         > h1
         > h2
           &:first-child
-            left 60px
+            +above(m)
+              left 60px
 
             +desktop()
               left 200px
@@ -600,6 +601,10 @@ body
             z-index -1
             visibility hidden
 
+            +desktop()
+              z-index 2
+              visibility visible
+
         .opensub .wp-submenu
         .wp-has-current-submenu .wp-submenu.sub-open
         .wp-has-current-submenu a.menu-top:focus+.wp-submenu
@@ -616,10 +621,12 @@ body
 
       #overlay
       #wpfooter
-        left 60px
+        +above(m)
+          left 60px
 
       #wpcontent
-        margin-left 60px
+        +above(m)
+          margin-left 60px
 
   &.folded
     #adminmenu
@@ -658,6 +665,20 @@ body
     #adminmenumain
       transform: translateX(-420px);
 
+  &.wp-responsive-open
+    .wrap
+      & > h1
+        &:first-child
+          .hamburger
+            #sticky-toggle
+              stroke-dasharray: 500
+              stroke-dashoffset: 1880
+              stroke-width: 8
+            #st-line
+              &-top
+                transform: rotate(45deg)
+              &-bot
+                transform: rotate(-45deg)
   &.menu
     &-sub
       &-b

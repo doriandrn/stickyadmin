@@ -1,0 +1,469 @@
+.widefat
+  border-spacing: 0;
+  width: 100%;
+
+  thead
+  tfoot
+    th
+      white-space nowrap
+
+  td
+  th
+    border: 0;
+    box-shadow: none;
+    overflow: hidden;
+    text-align: left;
+    padding 4px 16px
+
+  th
+    &.check-column
+      cursor pointer
+      width 48px
+
+  td
+    ol
+    p
+    ul
+      font-size 12px
+      line-height 14px
+      margin 0
+
+    &.description
+      p
+        font-style italic
+
+    &.plugin-title
+      > img
+        padding: 0;
+        margin-right: 20px;
+
+        & + strong
+          margin-bottom 16px
+
+
+
+@keyframes rows_bounce {
+    0% {
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    3.2% {
+        transform: matrix3d(1, 0.046, 0, 0, 0.046, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    4.5% {
+        transform: matrix3d(1, 0.054, 0, 0, 0.054, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    6.41% {
+        transform: matrix3d(1, 0.058, 0, 0, 0.058, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    9.01% {
+        transform: matrix3d(1, 0.053, 0, 0, 0.053, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    12.71% {
+        transform: matrix3d(1, 0.037, 0, 0, 0.037, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    13.51% {
+        transform: matrix3d(1, 0.033, 0, 0, 0.033, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    17.92% {
+        transform: matrix3d(1, 0.015, 0, 0, 0.015, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    18.92% {
+        transform: matrix3d(1, 0.012, 0, 0, 0.012, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    25.23% {
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    29.03% {
+        transform: matrix3d(1, -0.002, 0, 0, -0.002, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    31.43% {
+        transform: matrix3d(1, -0.003, 0, 0, -0.003, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    34.63% {
+        transform: matrix3d(1, -0.002, 0, 0, -0.002, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    40.14% {
+        transform: matrix3d(1, -0.001, 0, 0, -0.001, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    56.46% {
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    62.36% {
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    81.48% {
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    84.68% {
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+    100% {
+        transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    }
+}
+
+body.content-w table.widefat {
+    background: #000;
+}
+body.content-b table.widefat {
+    background: #fff;
+}
+
+
+body.content-b .widefat > tbody > tr > td,
+body.content-b .widefat > tbody > tr > td ol,
+body.content-b .widefat > tbody > tr > td p,
+body.content-b .widefat > tbody > tr > td ul {
+    color: rgba(0,0,0,.35);
+}
+body.content-b .widefat > tbody tr td,
+body.content-b .widefat > tbody tr th {
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+body.content-b .widefat > tbody tr:not(.is-expanded) td,
+body.content-b .widefat > tbody tr th,
+body.content-b .widefat > tbody tr.is-expanded td:last-child {
+    border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+body.content-b .widefat > thead tr td,
+body.content-b .widefat > thead tr th {
+    border-bottom: 2px solid rgba(0,0,0,.05);
+}
+body.content-b .widefat > tfoot tr td,
+body.content-b .widefat > tfoot tr th {
+    border-top: 2px solid rgba(0,0,0,.05);
+}
+body.content-b .widefat > tbody > tr > td button,
+body.content-b .widefat > tbody > tr > td a {
+    color: rgba(0,0,0,.65);
+}
+body.content-b .widefat > tbody > tr > td button:hover,
+body.content-b .widefat > tbody > tr > td a:hover {
+    color: rgba(0,0,0,.85);
+}
+body.content-b .widefat > tbody > tr > td button:focus,
+body.content-b .widefat > tbody > tr > td a:focus {
+    color: rgba(0,0,0,1);
+}
+body.content-b .widefat > tbody #submitted-on,
+body.content-b .widefat > tbody .submitted-on,
+body.content-b .widefat > tbody #submitted-on a,
+body.content-b .widefat > tbody .submitted-on a {
+    color: rgba(0,0,0,.35)
+}
+body.content-b .widefat > tbody #submitted-on a:hover,
+body.content-b .widefat > tbody .submitted-on a:hover {
+    color: rgba(0,0,0,.75)
+}
+body.content-b .widefat > tbody tr.no-items td {
+    color: #000;
+}
+body.content-b .widefat > tbody .date {
+    color: rgba(0,0,0,.55);
+}
+body.content-b .widefat > tbody .date abbr {
+    color: rgba(0,0,0,.75);
+}
+body.content-b .widefat > tbody .post-state {
+    color: rgba(0,0,0,.35);
+}
+body.content-b .widefat > tbody .post-state.sticky_altered:before {
+    border-left: 25px solid rgba(0,0,0,.05);
+    border-bottom: 25px solid rgba(0,0,0,0);
+}
+body.content-b .widefat#update-plugins-table > tbody .plugins td p > strong:first-child {
+    color: rgba(0,0,0,.75);
+}
+body.content-b .widefat#update-plugins-table .plugins td p > strong:first-child,
+body.content-b .widefat > tbody > tr > td.post-title > strong,
+body.content-b .widefat > tbody > tr > td.column-name > strong,
+body.content-b .widefat > tbody > tr > td.theme-title > strong,
+body.content-b .widefat > tbody > tr > td.column-title > strong,
+body.content-b .widefat > tbody > tr > td.plugin-title > img + strong,
+body.content-b .widefat.users > tbody td.column-username > strong,
+body.content-b .widefat.users > tbody td.column-username > img,
+body.content-b .widefat > tbody a.row-title,
+body.content-b .widefat > tbody > tr > td.post-title > strong {
+    color: rgba(0,0,0,.75);
+}
+body.content-b .widefat > tbody a.row-title:hover,
+body.content-b .widefat > tbody > tr > td.post-title > strong:hover{
+    color: rgba(0,0,0,1);
+}
+body.content-b .widefat > tbody .row-actions a {
+    color: rgba(0,0,0,.4);
+}
+body.content-b .widefat > tbody .column-author > strong {
+    color: rgba(0,0,0,.85);
+}
+body.content-b .widefat > tbody .column-author > strong img {
+    border-color:rgba(0,0,0,.1);
+}
+body.content-b .widefat > tbody input[type=checkbox],
+body.content-b .widefat > tbody input[type=radio],
+body.content-b .widefat > tbody input.labelauty + label {
+    color: rgba(0,0,0,.25)
+}
+body.content-b .widefat > tbody input[type=checkbox]:disabled:hover,
+body.content-b .widefat > tbody input[type=radio]:disabled:hover,
+body.content-b .widefat > tbody input.labelauty:checked:not([disabled]) + label:hover {
+    color: rgba(0,0,0,1);
+}
+body.content-b .widefat > tbody input[type=checkbox]:hover,
+body.content-b .widefat > tbody input[type=radio]:hover,
+body.content-b .widefat > tbody input.labelauty:not(:checked):not([disabled]) + label:hover
+{
+    color: rgba(0,0,0,.65);
+}
+body.content-b .widefat.users > tbody td.column-username > img {
+    border-color: rgba(0,0,0,.1);
+}
+body.content-w .widefat > tbody > tr > td,
+body.content-w .widefat > tbody > tr > td ol,
+body.content-w .widefat > tbody > tr > td p,
+body.content-w .widefat > tbody > tr > td ul {
+    color: rgba(255,255,255,.35);
+}
+body.content-w .widefat > tbody tr:not(.is-expanded) td,
+body.content-w .widefat > tbody tr th,
+body.content-w .widefat > tbody tr.is-expanded td:last-child {
+    border-bottom: 1px solid rgba(255,255,255,.05);
+}
+body.content-w .widefat > thead tr td,
+body.content-w .widefat > thead tr th {
+    border-bottom: 2px solid rgba(255,255,255,.05);
+}
+body.content-w .widefat > tfoot tr td,
+body.content-w .widefat > tfoot tr th {
+    border-top: 2px solid rgba(255,255,255,.05);
+}
+body.content-w .widefat > tbody > tr > td button,
+body.content-w .widefat > tbody > tr > td a {
+    color: rgba(255,255,255,.65);
+}
+body.content-w .widefat > tbody > tr > td button:hover,
+body.content-w .widefat > tbody > tr > td a:hover {
+    color: rgba(255,255,255,.85);
+}
+body.content-w .widefat > tbody > tr > td button:focus,
+body.content-w .widefat > tbody > tr > td a:focus {
+    color: rgba(255,255,255,1);
+}
+body.content-w .widefat > tbody #submitted-on,
+body.content-w .widefat > tbody .submitted-on,
+body.content-w .widefat > tbody #submitted-on a,
+body.content-w .widefat > tbody .submitted-on a {
+    color: rgba(255,255,255,.35)
+}
+body.content-w .widefat > tbody #submitted-on a:hover,
+body.content-w .widefat > tbody .submitted-on a:hover {
+    color: rgba(255,255,255,.75)
+}
+body.content-w .widefat > tbody tr.no-items td {
+    color: #fff;
+}
+body.content-w .widefat > tbody .date {
+    color: rgba(255,255,255,.55);
+}
+body.content-w .widefat > tbody .date abbr {
+    color: rgba(255,255,255,.75);
+}
+body.content-w .widefat > tbody .post-state {
+    color: rgba(255,255,255,.35);
+}
+body.content-w .widefat > tbody .post-state.sticky_altered:before {
+    border-left: 35px solid rgba(255,255,255,.05);
+    border-bottom: 35px solid rgba(255,255,255,0);
+}
+body.content-w .widefat#update-plugins-table > tbody .plugins td p > strong:first-child {
+    color: rgba(255,255,255,.75);
+}
+body.content-w .widefat#update-plugins-table .plugins td p > strong:first-child,
+body.content-w .widefat > tbody > tr > td.post-title > strong,
+body.content-w .widefat > tbody > tr > td.column-name > strong,
+body.content-w .widefat > tbody > tr > td.column-title > strong,
+body.content-w .widefat > tbody > tr > td.theme-title > strong,
+body.content-w .widefat > tbody > tr > td.plugin-title > img + strong,
+body.content-w .widefat.users > tbody td.column-username > strong,
+body.content-w .widefat.users > tbody td.column-username > img,
+body.content-w .widefat > tbody a.row-title,
+body.content-w .widefat > tbody > tr > td.post-title > strong {
+    color: rgba(255,255,255,.75);
+}
+body.content-w .widefat > tbody a.row-title:hover,
+body.content-w .widefat > tbody > tr > td.post-title > strong:hover{
+    color: rgba(255,255,255,1);
+}
+body.content-w .widefat > tbody .row-actions a {
+    color: rgba(255,255,255,.4);
+}
+body.content-w .widefat > tbody .column-author > strong {
+    color: rgba(255,255,255,.85);
+}
+body.content-w .widefat > tbody .column-author > strong img {
+    border-color:rgba(255,255,255,.1);
+}
+body.content-w .widefat > tbody input[type=checkbox],
+body.content-w .widefat > tbody input[type=radio],
+body.content-w .widefat > tbody input.labelauty + label {
+    color: rgba(255,255,255,.25)
+}
+body.content-w .widefat > tbody input[type=checkbox]:disabled,
+body.content-w .widefat > tbody input[type=radio]:disabled,
+body.content-w .widefat > tbody input[type=checkbox]:disabled:hover,
+body.content-w .widefat > tbody input[type=radio]:disabled:hover,
+body.content-w .widefat > tbody input.labelauty:checked:not([disabled]) + label:hover {
+    color: rgba(255,255,255,1);
+}
+body.content-w .widefat > tbody input[type=checkbox]:hover,
+body.content-w .widefat > tbody input[type=radio]:hover,
+body.content-w .widefat > tbody input.labelauty:not(:checked):not([disabled]) + label:hover
+{
+    color: rgba(255,255,255,.65);
+}
+body.content-w .widefat.users > tbody td.column-username > img {
+    border-color: rgba(255,255,255,.1);
+}
+body.content-b #the-comment-list td.comment.column-comment {
+    color: rgba(0,0,0,.75);
+    border: 1px solid rgba(0,0,0,.05);
+}
+body.content-b #the-comment-list td.comment.column-comment p {
+    color: rgba(0,0,0,.75);
+}
+body.content-b #activity-widget #the-comment-list .dashboard-comment-wrap blockquote:before,
+body.content-b #the-comment-list td.comment.column-comment:before {
+    border-color: transparent rgba(0,0,0,.05) transparent transparent;
+}
+body.content-b #the-comment-list td.column-comment .comment-author > strong img,
+body.content-b #the-comment-list .column-author > strong img {
+    border-color:rgba(0,0,0,.25)!important;
+}
+body.content-b #the-comment-list td.column-comment .comment-author > strong,
+body.content-b #the-comment-list .column-author > strong {
+    color: rgba(0,0,0,.65);
+}
+body.content-b #comments-form .fixed td.column-author:after {
+    background: rgba(0,0,0,.025);
+}
+body.content-b #the-comment-list td.column-comment .comment-author .s_links > a,
+body.content-b #the-comment-list .author.column-author > a,
+body.content-b #the-comment-list .author.column-author .s_links > a {
+    color: rgba(0,0,0,.25)!important;
+}
+body.content-b #the-comment-list td.column-comment .comment-author .s_links > a:hover,
+body.content-b #the-comment-list .author.column-author > a:hover,
+body.content-b #the-comment-list .author.column-author .s_links > a:hover {
+    color: rgba(0,0,0,.85)!important;
+}
+body.content-b .widefat.comments > tbody > tr > td a,
+body.content-b .widefat.comments > tbody > tr > td button,
+body.content-b .widefat.comments > tbody .row-actions a {
+    color: rgba(0,0,0,.65);
+    border-color: rgba(0,0,0,.25);
+}
+body.content-b .widefat.comments > tbody > tr > td a:hover,
+body.content-b .widefat.comments > tbody > tr > td button:hover,
+body.content-b .widefat.comments > tbody .row-actions a:hover {
+    color: rgba(0,0,0,.95);
+    border-color: rgba(0,0,0,.5);
+}
+body.content-b .widefat.comments .response-links,
+body.content-b .widefat.comments .response-links  a {
+    color: rgba(0,0,0,.65)!important;
+}
+body.content-b .widefat.comments .response-links a:hover {
+    color: rgba(0,0,0,.95)!important;
+}
+body.content-b .widefat.comments > tbody input.labelauty + label {
+    color: rgba(0,0,0,.25)
+}
+body.content-b .widefat.comments > tbody input.labelauty + label {
+    color: rgba(0,0,0,.15);
+}
+body.content-b .widefat.comments > tbody input.labelauty:checked:not([disabled]) + label:hover {
+    color: rgba(0,0,0,1);
+}
+body.content-b .widefat.comments > tbody input.labelauty:not(:checked):not([disabled]) + label:hover,
+body.content-b .widefat.comments > tbody input.labelauty:checked + label {
+     color: rgba(0,0,0,.65);
+}
+body.content-w #the-comment-list td.comment.column-comment {
+    color: rgba(255,255,255,.75);
+    border: 1px solid rgba(255,255,255,.05);
+}
+body.content-w #the-comment-list td.comment.column-comment p {
+    color: rgba(255,255,255,.75);
+}
+body.content-w #activity-widget #the-comment-list .dashboard-comment-wrap blockquote:before,
+body.content-w #the-comment-list td.comment.column-comment:before {
+    border-color: transparent rgba(255,255,255,.05) transparent transparent;
+}
+body.content-w #the-comment-list td.column-comment .comment-author > strong img,
+body.content-w #the-comment-list .column-author > strong img {
+    border-color:rgba(255,255,255,.25)!important;
+}
+body.content-w #the-comment-list td.column-comment .comment-author > strong,
+body.content-w #the-comment-list .column-author > strong {
+    color: rgba(255,255,255,.65);
+}
+body.content-w #comments-form .fixed td.column-author:after {
+    background: rgba(255,255,255,.025);
+}
+body.content-w #the-comment-list td.column-comment .comment-author .s_links > a,
+body.content-w #the-comment-list .author.column-author > a,
+body.content-w #the-comment-list .author.column-author .s_links > a {
+    color: rgba(255,255,255,.25)!important;
+}
+body.content-w #the-comment-list td.column-comment .comment-author .s_links > a:hover,
+body.content-w #the-comment-list .author.column-author > a:hover,
+body.content-w #the-comment-list .author.column-author .s_links > a:hover {
+    color: rgba(255,255,255,.85)!important;
+}
+body.content-w .widefat.comments > tbody > tr > td a,
+body.content-w .widefat.comments > tbody > tr > td button,
+body.content-w .widefat.comments > tbody .row-actions a {
+    color: rgba(255,255,255,.65);
+    border-color: rgba(255,255,255,.25);
+}
+body.content-w .widefat.comments > tbody > tr > td a:hover,
+body.content-w .widefat.comments > tbody > tr > td button:hover,
+body.content-w .widefat.comments > tbody .row-actions a:hover {
+    color: rgba(255,255,255,.95);
+    border-color: rgba(255,255,255,.5);
+}
+body.content-w .widefat.comments .response-links,
+body.content-w .widefat.comments .response-links  a {
+    color: rgba(255,255,255,.65)!important;
+}
+body.content-w .widefat.comments .response-links a:hover {
+    color: rgba(255,255,255,.95)!important;
+}
+body.content-w .widefat.comments > tbody input.labelauty + label {
+    color: rgba(255,255,255,.25)
+}
+body.content-w .widefat.comments > tbody input.labelauty + label {
+    color: rgba(255,255,255,.15);
+}
+body.content-w .widefat.comments > tbody input.labelauty:checked:not([disabled]) + label:hover {
+    color: rgba(255,255,255,1);
+}
+body.content-w .widefat.comments > tbody input.labelauty:not(:checked):not([disabled]) + label:hover,
+body.content-w .widefat.comments > tbody input.labelauty:checked + label {
+     color: rgba(255,255,255,.65);
+}
+
+
+body.content-b .widefat th.check-column {
+    /*border-right: 1px solid rgba(0,0,0,.05);*/
+    background: rgba(0,0,0,.025);
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    box-shadow: inset -2px 0px 2px -1px rgba(0,0,0,.1);
+}
+body.content-w .widefat th.check-column {
+    /*border-right: 1px solid rgba(255,255,255,.05);*/
+    background: rgba(255,255,255,.025);
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    box-shadow: inset -2px 0px 2px -1px rgba(0,0,0,.1);
+}

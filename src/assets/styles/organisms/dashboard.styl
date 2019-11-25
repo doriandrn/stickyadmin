@@ -1,4 +1,13 @@
 #dashboard
+  &_primary
+    a
+      &.more-news
+        font-size: 10px
+        text-transform: uppercase
+        font-weight: 400
+        letter-spacing: .4px
+        display: block
+
   &-widgets
     display flex
     flex-flow row wrap
@@ -12,21 +21,6 @@
         border: none !important
 
 
-
-#dashboard_primary a.more-news {
-    font-size: 10px
-    text-transform: uppercase
-    font-weight: 400
-    letter-spacing: .4px
-    display: block
-}
-#dashboard_primary li.dashboard-news-plugin {
-    text-align: left
-}
-#dashboard_primary .s-popular-plugin:before {
-    content: none
-    display: none
-}
 body.content-w #dashboard_primary a.more-news {
     color: rgba(255,255,255,.25)
 }
@@ -150,10 +144,6 @@ a.rsswidget {
     margin-left: 10px
 }
 
-body.rtl #dashboard_quick_press .drafts h2 > .count {
-    margin-left: 0
-    margin-right: 10px
-}
 
 body.content-w #dashboard_quick_press .drafts h2 > .count {
     border: 1px solid rgba(255,255,255,.1)
@@ -227,7 +217,6 @@ body.no-js #dashboard-widgets .drafts > ul {
     display: block
     position: relative
     padding: 1px 0 0
-    margin: 0 -20px
 }
 form.initial-form.quickpress-open label.prompt {
     font-style: normal
@@ -242,11 +231,6 @@ form.initial-form.quickpress-open input#title {
     padding: 10px 0
 }
 
-body.rtl #future-posts li a,
-body.rtl #published-posts li a,
-body.rtl .drafts li a {
-    text-align: right
-}
 #future-posts li a:before {
     content: '\e8a3'
 }
@@ -261,19 +245,12 @@ body.rtl .drafts li a {
     margin-right: 10px
     opacity: .5
 }
-body.rtl #future-posts li a:before,
-body.rtl #published-posts li a:before {
-    margin-left: 10px
-    margin-right: 0
-}
+
 .drafts li a {
     margin-right: 130px
     text-align: left
 }
-body.rtl .drafts li a {
-    margin-left: 130px
-    margin-right: 0
-}
+
 #future-posts li:first-child,
 #published-posts li:first-child {
     padding-top: 0
@@ -307,14 +284,7 @@ body.rtl .drafts li a {
     text-align: right
     margin-left: 25px
 }
-body.rtl #future-posts ul span,
-body.rtl #published-posts ul span,
-body.rtl #dashboard_quick_press ul time {
-    float: left
-    text-align: left
-    margin-left: 0
-    margin-right: 25px
-}
+
 #future-posts ul span:before,
 #published-posts ul span:before,
 .rss-widget span.rss-date:before,
@@ -327,30 +297,7 @@ time:before,
     margin-right: 5px
     -moz-osx-font-smoothing: grayscale
 }
-body.rtl #future-posts ul span:before,
-body.rtl #published-posts ul span:before,
-body.rtl .rss-widget span.rss-date:before,
-body.rtl time:before,
-body.rtl .submitted-on:before {
-    margin-right: 0
-    margin-left: 5px
-}
 
-
-/*#dashboard-widgets .row-actions a {
-    text-indent: -99999px
-    position: relative
-    padding-right: 0!important
-}
-#dashboard-widgets .row-actions a:hover {
-    padding-right: 0!important
-}
-#dashboard-widgets .row-actions a:before {
-    position: absolute
-    text-indent: 0
-    left: 0
-    top: 0
-}*/
 #dashboard-widgets li.dashboard-news-plugin {
     font-size: 10px
     text-transform: uppercase
@@ -391,10 +338,7 @@ body.rtl .submitted-on:before {
     box-shadow: 0px 1px rgba(0, 0, 0, .05)
     transition: margin .15s ease-in-out
 }
-body.rtl #dashboard_quick_press .inside form {
-    padding: 24px 45px 26px 15px
-    text-align: right
-}
+
 #dashboard_quick_press .inside form.modified {
     margin-bottom: 60px
 }
@@ -406,10 +350,7 @@ body.rtl #dashboard_quick_press .inside form {
     left: 39px
     bottom: 0
 }
-body.rtl #dashboard_quick_press .inside form:before {
-    right: 39px
-    left: auto
-}
+
 #dashboard_quick_press .inside form p.submit {
     position: absolute
     bottom: -45px
@@ -417,10 +358,7 @@ body.rtl #dashboard_quick_press .inside form:before {
     margin: 0!important
     display: none
 }
-body.rtl #dashboard_quick_press .inside form p.submit {
-    left: auto
-    right: 0
-}
+
 #dashboard_quick_press .inside form.modified p.submit {
     display: block
 }
@@ -825,10 +763,7 @@ body.content-w .widget-info {
 body.content-b .widget-info {
     background: rgba(0,0,0,.05)
 }
-body.rtl .widget-info {
-    right: auto
-    left: 60px
-}
+
 
 .widget-info:before {
     content: '\f129'
@@ -1400,9 +1335,7 @@ body.is_loading .welcome-panel #dash_slick > .slick-dots li:nth-child(4) {
     outline: none
     transition: background-color .15s ease-in-out
 }
-body.rtl .welcome-panel #dash_slick > .slick-dots li button {
-    text-align: right
-}
+
 .welcome-panel #dash_slick .slick-dots li button span.icon {
     display: block
     height: 35px
@@ -1436,18 +1369,12 @@ body.rtl .welcome-panel #dash_slick > .slick-dots li button {
     top: 0
     bottom: 0
 }
-body.rtl .welcome-panel #dash_slick > .slick-dots li button:before {
-    left: auto
-    right: 0
-}
+
 .welcome-panel #dash_slick > .slick-dots li.slick-active button:before {
     width: 6px
     left: -5px
 }
-body.rtl .welcome-panel #dash_slick > .slick-dots li.slick-active button:before {
-    left: 0
-    right: 0px
-}
+
 body.header-w .welcome-panel #dash_slick > .slick-dots li.slick-active button:before {
     content: url('data:image/svg+xmlbase64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgNiA2NSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEuNDE0MjE7Ij48cGF0aCBkPSJNNiwwLjAxMTI5OTNsLTEuMDQwNzcsMGwwLDE5LjQ5OTFsLTQuOTQ0NTgsMTMuMDI0OWw0Ljk0NDU4LDEyLjk3NjZsMCwxOS40NzY4bDEuMDQwNzcsMGwwLC0xOS40NzY4bC00Ljk0NDU4LC0xMi45NzY2bDQuOTQ0NTgsLTEzLjAyNDlsMCwtMTkuNDk5MVoiIHN0eWxlPSJmaWxsOnVybCgjc3RpY2t5ZGFzaGxpbmUpOyIvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0ic3RpY2t5ZGFzaGxpbmUiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgwLjA5MTc2OCw2NC44NjkxLC02NC44NjkxLDAuMDkxNzY4LDIuNjc3OTMsMC4xODgzNikiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZmY7c3RvcC1vcGFjaXR5Oi4wNSIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmZmO3N0b3Atb3BhY2l0eTouMiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZmZjtzdG9wLW9wYWNpdHk6LjA1Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PC9zdmc+')
 }
@@ -1459,10 +1386,7 @@ body.header-b .welcome-panel #dash_slick > .slick-dots li.slick-active button:be
     background: transparent
     left: -8px
 }
-body.rtl .welcome-panel #dash_slick  > .slick-dots li.slick-active:before {
-    left: auto
-    right: -8px
-}
+
 .welcome-panel #dash_slick > .slick-dots button span.desc {
     display: none
     vertical-align: top
@@ -1475,10 +1399,7 @@ body.rtl .welcome-panel #dash_slick  > .slick-dots li.slick-active:before {
     max-width: 120px
     max-width: calc(100% - 55px)
 }
-body.rtl .welcome-panel #dash_slick > .slick-dots button span.desc {
-    text-align: right
-    margin-right: 0
-}
+
 .welcome-panel #dash_slick > .slick-dots button span {
     transition: color .15s ease-in-out
 }
@@ -2670,17 +2591,12 @@ body.rtl .instats > div:hover > strong:before {
 .instats > div:nth-child(2) > strong:before {
     float:left
 }
-body.rtl .instats > div:nth-child(2) > strong:before {
-    float: right
-}
+
 .instats > div:nth-child(2):hover > strong:before {
     margin-right: 5px
     margin-left: 0
 }
-body.rtl .instats > div:nth-child(2):hover > strong:before {
-    margin-right: 0
-    margin-left: 5px
-}
+
 body.header-w .instats > div > strong {
     color: rgba(255,255,255,.65)
 }

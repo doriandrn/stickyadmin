@@ -1,4 +1,4 @@
-m = wrapC.marginsLR
+mS = wrapC.marginsLR
 pad = 10px
 
 #wpfooter
@@ -6,26 +6,26 @@ pad = 10px
   z-index: 3
   position: fixed auto 0 0 0
   display: block!important
-  padding: pad m.mobile
+  padding: pad mS.mobile
 
   +above(l)
-    padding: pad m.tablet
+    padding: pad mS.tablet
 
   +desktop()
-    padding: pad m.desktop
+    padding: pad mS.desktop
 
   +hd()
-    padding: pad m.hd
+    padding: pad mS.hd
 
   p
-    font-size: 11px
-    letter-spacing: .4px
+    font-size: 12px
     line-height: 14px
-    margin-bottom: 0
+    margin 0
     font-weight: 400
+    font-style italic
 
     &#footer-left
-      font-weight: 500
+      font-style normal
 
 body.footer-b #wpfooter,
 body.footer-b #wpfooter p

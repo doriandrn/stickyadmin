@@ -540,7 +540,7 @@ if ( !function_exists( 'add_action' ) )
             }
             #overlay:before,
             .filter-links,
-            // .subsubsub,
+            .wrap > .subsubsub,
             .media-frame.mode-grid .uploader-inline,
             .wrap > .nav-tab-wrapper,
             body.update-core-php .wrap > #s-update-notice-container,
@@ -548,7 +548,6 @@ if ( !function_exists( 'add_action' ) )
             #category-tabs,
             #side-sortables .taxonomy-tabs,
             #side-sortables .posttype-tabs,
-            .wrap > form > .tablenav.bottom > .tablenav-pages,
             .press-this-actions {
                 background: ' . StickyAdmin::$config['colors']['header']['bg'][0] . ' ;
                 background: -webkit-linear-gradient(180deg, '. StickyAdmin::$config['colors']['header']['bg'][0] .', '. StickyAdmin::$config['colors']['header']['bg'][1] .' 100%);

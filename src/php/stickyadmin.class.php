@@ -533,7 +533,7 @@ class StickyAdmin {
             ),
             'footer'    => array(
                 'show'              =>  ( isset ( $s_ui[ 'show_footer' ] ) ? $s_ui['show_footer'] : true ),
-                'copyright'         =>  ( isset ( $s_ui[ 'footer_copyright'] ) ? esc_attr( $s_ui[ 'footer_copyright' ] ) : '&copy; StickyAdmin 2015. All Rights Reserved. Donate!' ),
+                'copyright'         =>  ( isset ( $s_ui[ 'footer_copyright'] ) ? esc_attr( $s_ui[ 'footer_copyright' ] ) : '&copy; StickyAdmin 2015 - 2020. All Rights Reserved. Donate!' ),
             ),
             'forms'     => array(
 
