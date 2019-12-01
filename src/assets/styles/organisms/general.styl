@@ -299,59 +299,7 @@ body.header-b .wrap > .nav-tab-wrapper
 #activity-widget .subsubsub li a:before,
 #activity-widget .subsubsub li a:after
   display: none
-.filter-links li:last-child,
-.subsubsub li:last-child
-  margin-right: 0
 
-.filter-links a,
-.subsubsub a,
-.wrap > .nav-tab-wrapper a
-  min-width: 25px
-  text-align: center
-  vertical-align: bottom
-  text-decoration: none
-  letter-spacing: .1px
-  display: inline-block
-  border: 1px solid
-  padding: 5px 15px
-  border-radius: 2px
-  position: relative
-  opacity: .55
-  transition: color .15s ease-in-out, opacity .15s ease-in-out, border-color .15s ease-in-out
-.filter-links a:hover,
-.subsubsub a:hover
-  opacity: 1
-  background: transparent
-.filter-links a .count,
-.subsubsub a .count,
-.filter-links a.current .count,
-.subsubsub a.current .count
-  display: inline-block
-  vertical-align: top
-  border-radius: 14px
-  line-height: 20px
-  font-weight: 700
-  font-size: 11px
-  margin-left: 5px
-  text-align: center
-
-.filter-links a.current,
-.subsubsub a.current,
-.wrap > .nav-tab-wrapper a.nav-tab-active
-  box-shadow: none
-  opacity: 1
-  cursor: default!important
-  font-weight: 700
-.subsubsub
-  .mCSB_scrollTools
-    &.mCSB_scrollTools_horizontal
-      .mCSB_dragger
-        .mCSB_dragger_bar
-          height: 2px
-          margin: 8px auto
-  & > div
-    & > div
-      margin: 0 auto !important
 .col-wrap
   padding: 0
   .form-wrap
@@ -440,19 +388,7 @@ form .textarea-wrap,
   position: relative
   overflow: hidden
   &.wp-responsive-open
-    .wrap
-      & > h1
-        &:first-child
-          & > #wp-menu-toggle
-            &.hamburger
-              #sticky-toggle
-                stroke-dasharray: 500
-                stroke-dashoffset: 1880
-                stroke-width: 8
-              #st-line-top
-                transform: rotate(45deg)
-              #st-line-bot
-                transform: rotate(-45deg)
+
   &:before
     transition: filter 3s linear
 
@@ -1819,119 +1755,7 @@ div
     display: none
   &.mce-statusbar
     border-top: 1px solid rgba(0, 0, 0, .25)
-.row-actions
-  display: block
-  position: relative
-  opacity: 0
-  color: transparent
-  transform: translateY(30px)
-  transition: all .3s ease-in-out
-  font-size: 0
-  line-height: 20px
-  & > span
-    display: inline-block
-    padding-right: 5px
-    line-height: 20px
-    height: 20px
-    position: relative
-    vertical-align: top
-    white-space: nowrap
-    &:hover
-      width: auto!important
-  a
-    &:before
-      content: '\e7c9'
-      font: 400 12px/20px streamline
-      display: inline-block
-      vertical-align: top
-      width: 20px
-      margin-right: 1px
-      text-align: center
-      text-transform: none
-      transition: color .15s ease-in-out
-  .reply
-    a
-      &:before
-        content: '\ec10'
-  .untrash
-    a
-      &:before
-        content: '\ed0f'
-  .spam
-    a
-      &:before
-        content: '\e81c'
-  .edit-profile
-    a
-      &:before
-        content: '\eb98'
-  .remove
-    a
-      &:before
-        content: '\ec0b'
-  .edit
-    a
-      &:before
-        content: '\eb83'
-  .view
-    a
-      &:before
-        content: '\ed33'
-  .settings
-    a
-      &:before
-        content: '\e7c9'
-  .about
-    a
-      &:before
-        content: '\e96d'
-.approved .row-actions > span.approve,
-.approved.unapproved .row-actions > span.unapprove
-  display: none
-.approved
-  &.unapproved
-    .row-actions
-      & > span
-        &.approve
-          display: inline-block
-.row-actions a,
-#dashboard-widgets .row-actions a
-  font-size: 0px
-  line-height: 20px
-  letter-spacing: .3px
-  font-weight: 400
-  border-radius: 2px
-  border: 0
-  height: 20px
-  display: inline-block
-  text-align: center
-  vertical-align: top
-  transition: all .15s ease-in-out
-body.mobile .row-actions a,
-body.mobile #dashboard-widgets .row-actions a
-  font-size: 10px
-  border: 1px solid
-  width: auto
-  letter-spacing: 0
-  padding: 0 5px
-body:not(.mobile) .row-actions a:hover,
-body:not(.mobile) #dashboard-widgets .row-actions a:hover
-  font-size: 11px
-  width: auto
-  padding-right: 5px
 
-.row-actions .activate a:before,
-.row-actions .approve a:before
-  content: '\e7a0'
-.row-actions .deactivate a:before,
-.row-actions .unapprove a:before
-  content: '\ec0c'
-.row-actions .delete a:before,
-.row-actions .trash a:before
-  content: '\e6d9'
-.row-actions .inline a:before,
-.row-actions .quickedit a:before
-  content: '\eb84'
 .media-item
   .describe
     border-collapse: collapse

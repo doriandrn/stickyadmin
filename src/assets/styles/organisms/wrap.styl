@@ -26,10 +26,15 @@ mS = wrapC.marginsLR
     display none
 
   > .subsubsub
+  > .filter-links
+  > .nav-tab-wrapper
     list-style-type none
     margin-left: -(mS.mobile)
     margin-right: -(mS.mobile)
     padding 4px
+    display flex
+    flex-flow row wrap
+    justify-content center
 
     +above(l)
       margin-left: -(mS.tablet)
@@ -44,7 +49,27 @@ mS = wrapC.marginsLR
       margin-right: -(mS.hd)
 
     a
+      display block
       font-size 12px
+      text-decoration: none
+      min-width: 25px
+      margin 0 2px
+      text-align: center
+      border: 1px solid transparent
+      padding: 5px 15px
+      border-radius 3px
+      transition: color .15s ease-in-out, opacity .15s ease-in-out, border-color .15s ease-in-out
+
+      &.current
+        font-weight 700
+        cursor default
+
+      .count
+        margin-left 4px
+
+    &+*
+      margin-top 32px
+      margin-bottom 32px
 
   > h1
   > h2
